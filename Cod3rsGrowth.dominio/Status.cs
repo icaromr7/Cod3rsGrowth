@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.dominio
 {
-    internal enum Status
+    public enum StatusDeExibicao
     {
         EmExibicao = 1,
         Previsto = 2,

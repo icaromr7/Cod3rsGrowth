@@ -6,24 +6,16 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.dominio
 {
-    internal class Genero
+    public class Genero
     {
-        private long id;
-        private string nome;
+        public long Id {get; set;}
+        public string Nome {get; set;}
 
         public Genero(string nome)
         {
-            this.nome = nome;
+            this.Nome = nome;
         }
-
-        public long getId() { return id; }
-        public string getNome() {  return nome; }
-
-        public void setNome(string nome) {  this.nome = nome; }
-
-        public void setId(long id) { this.id = id;}
-        
-        public string toString() { return nome; }
+        public string toString() { return Nome; }
 
     }
 }

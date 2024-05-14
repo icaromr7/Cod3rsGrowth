@@ -1,31 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.dominio
 {
-    internal class Anime
+    public class Anime
     {
-        private long id;
-        private string nome;
-        private List<Genero> generos;
-        private DateTime data_lancamento;
-        private Status status;
+        public long Id { get; set; }
+        public string Nome { get; set; }
+        public List<Genero> Generos { get; set; } = new List<Genero>();
+        public DateTime DataLancamento { get; set; }
+        public StatusDeExibicao StatusDeExibicao { get; set; }
 
-        public Anime(string nome, List<Genero> generos, DateTime data_lancamento, Status status)
+        public Anime(long id, string nome, List<Genero> generos, DateTime dataLancamento, StatusDeExibicao statusDeExibicao)
         {
-            this.nome = nome;
-            this.generos = generos;
-            this.data_lancamento = data_lancamento;
-            this.status = status;
+            this.Id = id;
+            this.Nome = nome;
+            this.Generos = generos;
+            this.DataLancamento = dataLancamento;
+            this.StatusDeExibicao = statusDeExibicao;
         }
-
-        public DateTime Data_lancamento { get => data_lancamento; set => data_lancamento = value; }
-        internal List<Genero> Generos { get => generos; set => generos = value; }
-        public string Nome { get => nome; set => nome = value; }
-        public long Id { get => id; set => id = value; }
-        internal Status Status { get => status; set => status = value; }
     }
 }
