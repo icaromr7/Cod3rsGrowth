@@ -12,18 +12,20 @@ namespace Cod3rsGrowth.dominio
         private string nome;
         private List<Genero> generos;
         private DateTime data_lancamento;
-        private enum status { };
+        private Status status;
 
-        public Anime(string nome, List<Genero> generos, DateTime data_lancamento)
+        public Anime(string nome, List<Genero> generos, DateTime data_lancamento, Status status)
         {
-            this.Nome = nome;
-            this.Generos = generos;
+            this.nome = nome;
+            this.generos = generos;
             this.data_lancamento = data_lancamento;
+            this.status = status;
         }
 
         public DateTime Data_lancamento { get => data_lancamento; set => data_lancamento = value; }
         internal List<Genero> Generos { get => generos; set => generos = value; }
         public string Nome { get => nome; set => nome = value; }
         public long Id { get => id; set => id = value; }
+        internal Status Status { get => status; set => status = value; }
     }
 }
