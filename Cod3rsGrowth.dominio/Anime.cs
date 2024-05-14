@@ -16,12 +16,13 @@ namespace Cod3rsGrowth.dominio
         public decimal Nota { get; set; }
         public StatusDeExibicao StatusDeExibicao { get; set; }
 
-        public Anime(long id, string nome, List<Genero> generos, DateTime dataLancamento, StatusDeExibicao statusDeExibicao)
+        public Anime(long id, string nome, List<Genero> generos, DateTime dataLancamento, decimal nota, StatusDeExibicao statusDeExibicao)
         {
             this.Id = id;
             this.Nome = nome;
             this.Generos = generos;
             this.DataLancamento = dataLancamento;
+            this.Nota = Nota;
             this.StatusDeExibicao = statusDeExibicao;
         }
     }
