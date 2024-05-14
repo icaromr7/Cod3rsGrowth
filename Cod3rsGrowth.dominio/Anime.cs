@@ -17,7 +17,7 @@ namespace Cod3rsGrowth.dominio
         public decimal Nota { get; set; }
         public StatusDeExibicao StatusDeExibicao { get; set; }
 
-        public Anime(long id, string nome, string sinopse, List<int> generosId, DateTime dataLancamento, decimal nota, StatusDeExibicao statusDeExibicao)
+        public Anime(int id, string nome, string sinopse, List<int> generosId, DateTime dataLancamento, decimal nota, StatusDeExibicao statusDeExibicao)
         {
             this.Id = id;
             this.Nome = nome;
