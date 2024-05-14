@@ -9,6 +9,7 @@ namespace Cod3rsGrowth.testes
 {
     public class TesteBase : IDisposable
     {
+        protected ServiceProvider FornecedorDeServicos;
         public void Dispose()
         {
             throw new NotImplementedException();
