@@ -13,6 +13,7 @@ namespace Cod3rsGrowth.dominio
         public string Nome { get; set; }
         public List<Genero> Generos { get; set; } = new List<Genero>();
         public DateTime DataLancamento { get; set; }
+        public decimal Nota { get; set; }
         public StatusDeExibicao StatusDeExibicao { get; set; }
 
         public Anime(long id, string nome, List<Genero> generos, DateTime dataLancamento, StatusDeExibicao statusDeExibicao)
