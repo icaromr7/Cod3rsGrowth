@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.testes
 {
-    public interface IAnimeServico
+    public interface IAnimeRepositorio
     {
-        Anime ObterTodos();
+        List<Anime> ObterTodos();
         Anime ObterPorId(int id);
         String Cadastrar(Anime anime);
         String Deletar(Anime anime);

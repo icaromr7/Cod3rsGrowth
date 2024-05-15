@@ -11,8 +11,8 @@ namespace Cod3rsGrowth.testes
     {
         public static IServiceCollection BindServices(IServiceCollection services)
         {
-            services.AddScoped<IAnimeServico, AnimeRepository>();
-            services.AddScoped<IGeneroServico, GeneroRepository>();
+            services.AddScoped<IAnimeRepositorio, AnimeRepositorioMock>();
+            services.AddScoped<IGeneroRepositorio, GeneroRepositorioMock>();
             return services;
         }
 

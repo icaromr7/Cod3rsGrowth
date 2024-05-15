@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.testes
 {
-    public interface IGeneroServico
+    public interface IGeneroRepositorio
     {
-        Genero ObterTodos();
+        List<Genero> ObterTodos();
         Genero ObterPorId(int id);
+
+        String Cadastrar(Genero genero);
+        String Deletar(Genero genero);
+        String Atualizar(Genero genero);
     }
 }
