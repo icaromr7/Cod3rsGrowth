@@ -7,43 +7,34 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.testes
 {
-    public class MeuServicoAnime : AnimeServico
+    public class AnimeRepository : IAnimeServico
     {
 
-        public MeuServicoAnime()
+        public AnimeRepository()
         {
         }
 
-        public string alterarAnime(Anime anime)
+        public string Atualizar(Anime anime)
         {
             throw new NotImplementedException();
         }
 
-        public Anime buscarAnime(int id)
+        public string Cadastrar(Anime anime)
         {
             throw new NotImplementedException();
         }
 
-        public Anime buscartodosAnime()
+        public string Deletar(Anime anime)
         {
             throw new NotImplementedException();
         }
 
-        public string deletarAnime(Anime anime)
+        public Anime ObterPorId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public string deletarAnimePorId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Anime GetAnime()
-        {
-            throw new NotImplementedException();
-        }
-        public string inserirAnime(Anime anime)
+        public Anime ObterTodos()
         {
             throw new NotImplementedException();
         }
