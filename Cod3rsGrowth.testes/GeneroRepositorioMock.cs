@@ -9,6 +9,21 @@ namespace Cod3rsGrowth.testes
 {
     public class GeneroRepositorioMock : IGeneroRepositorio
     {
+        public string Atualizar(Genero genero)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Cadastrar(Genero genero)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Deletar(Genero genero)
+        {
+            throw new NotImplementedException();
+        }
+
         public Genero ObterPorId(int id)
         {
             throw new NotImplementedException();

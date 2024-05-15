@@ -10,6 +10,22 @@ namespace Cod3rsGrowth.testes
     public class GeneroRepository : IGeneroRepositorio
     {
         public GeneroRepository() { }
+
+        public string Atualizar(Genero genero)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Cadastrar(Genero genero)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Deletar(Genero genero)
+        {
+            throw new NotImplementedException();
+        }
+
         public Genero ObterPorId(int id)
         {
             throw new NotImplementedException();
@@ -17,7 +33,8 @@ namespace Cod3rsGrowth.testes
 
         public List <Genero> ObterTodos()
         {
-            throw new NotImplementedException();
+            List<Genero> generos = new List<Genero>();
+            return generos;
         }
     }
 }
