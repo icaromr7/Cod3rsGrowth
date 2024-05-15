@@ -13,7 +13,8 @@ namespace Cod3rsGrowth.testes
         {
             services.AddScoped<IAnimeServico, AnimeRepository>();
             services.AddScoped<IGeneroServico, GeneroRepository>();
-            services.AddScoped<IRepositorioMock, RepositorioMock>();
+            services.AddScoped<IAnimeRepositorioMock, AnimeRepositorioMock>();
+            services.AddScoped<IGeneroRepositorioMock, GeneroRepositorioMock>();
             return services;
         }
 

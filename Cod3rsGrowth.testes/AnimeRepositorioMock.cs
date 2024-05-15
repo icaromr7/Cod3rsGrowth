@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.testes
 {
-    public class RepositorioMock : IRepositorioMock
+    public class AnimeRepositorioMock : IAnimeRepositorioMock
     {
-        public RepositorioMock()
-        {
-        }
-
+        public AnimeRepositorioMock() { }
         public List<Anime> ObterTodos()
         {
             List<Anime> animes = new List<Anime>();
