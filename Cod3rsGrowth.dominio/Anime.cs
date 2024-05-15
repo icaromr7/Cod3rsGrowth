@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
@@ -15,7 +16,16 @@ namespace Cod3rsGrowth.dominio
         public List<int> GenerosIds { get; set; } = new List<int>();
         public DateTime DataLancamento { get; set; }
         public decimal Nota { get; set; }
-        public StatusDeExibicao StatusDeExibicao { get; set; }
+        public Status StatusDeExibicao { get; set; }
+        public enum Status
+        {
+            [Description("Está exibindo episódios do anime")]
+            EmExibicao = 1,
+            [Description("O anime ainda não está em exibição, em previsão de lançamento")]
+            Previsto = 2,
+            [Description("O anime ou a temporada do anime já foi finalizada")]
+            Concluido = 3
+        }
 
         public Anime(int id, string nome, string sinopse, List<int> generosIds, DateTime dataLancamento, decimal nota, StatusDeExibicao statusDeExibicao)
         {
