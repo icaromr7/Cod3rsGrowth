@@ -9,7 +9,6 @@ namespace Cod3rsGrowth.testes
 {
     public class AnimeRepository : IAnimeServico
     {
-
         public AnimeRepository()
         {
         }
