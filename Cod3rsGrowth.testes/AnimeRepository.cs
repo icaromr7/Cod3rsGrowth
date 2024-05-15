@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.testes
 {
-    public class AnimeRepository : IAnimeServico
+    public class AnimeRepository : IAnimeRepositorio
     {
         public AnimeRepository()
         {
@@ -33,9 +33,10 @@ namespace Cod3rsGrowth.testes
             throw new NotImplementedException();
         }
 
-        public Anime ObterTodos()
+        public List<Anime> ObterTodos()
         {
-            throw new NotImplementedException();
+            List<Anime> animes = new List<Anime>();
+            return animes;
         }
     }
 }

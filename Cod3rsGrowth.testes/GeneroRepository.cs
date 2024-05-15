@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.testes
 {
-    public class GeneroRepository : IGeneroServico
+    public class GeneroRepository : IGeneroRepositorio
     {
         public GeneroRepository() { }
         public Genero ObterPorId(int id)
@@ -15,7 +15,7 @@ namespace Cod3rsGrowth.testes
             throw new NotImplementedException();
         }
 
-        public Genero ObterTodos()
+        public List <Genero> ObterTodos()
         {
             throw new NotImplementedException();
         }

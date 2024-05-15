@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.testes
 {
-    public class GeneroRepositorioMock : IGeneroRepositorioMock
+    public class GeneroRepositorioMock : IGeneroRepositorio
     {
+        public Genero ObterPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Genero> ObterTodos()
         {
             List<Genero> generos = new List<Genero>();

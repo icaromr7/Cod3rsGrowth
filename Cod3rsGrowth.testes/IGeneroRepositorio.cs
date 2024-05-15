@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.testes
 {
-    public interface IAnimeRepositorioMock
+    public interface IGeneroRepositorio
     {
-        List<Anime> ObterTodos();
+        List<Genero> ObterTodos();
+        Genero ObterPorId(int id);
     }
 }
