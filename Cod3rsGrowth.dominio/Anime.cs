@@ -27,7 +27,7 @@ namespace Cod3rsGrowth.dominio
             Concluido = 3
         }
 
-        public Anime(int id, string nome, string sinopse, List<int> generosIds, DateTime dataLancamento, decimal nota, StatusDeExibicao statusDeExibicao)
+        public Anime(int id, string nome, string sinopse, List<int> generosIds, DateTime dataLancamento, decimal nota, Status statusDeExibicao)
         {
             this.Id = id;
             this.Nome = nome;
