@@ -14,12 +14,12 @@ namespace Cod3rsGrowth.testes
         private TabelaDeGenero() { }  
         public static List<Genero> GetTabelaGenero()
         {
-            if(TabelaDeGeneros == null)
-            {
-                TabelaDeGeneros = new List<Genero>();
-                //Caso eu queria dados mocados na criação. está correto?
-                //TabelaDeGeneros.Add(new Genero(1, "Acao"));
-                //TabelaDeGeneros.Add(new Genero(2, "Aventura"));
+            if (TabelaDeGeneros == null)
+            { 
+                TabelaDeGeneros = new List<Genero>
+                {
+                    new Genero(1, "Acao")
+                };
             }
             return TabelaDeGeneros;
         }

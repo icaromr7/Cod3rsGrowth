@@ -32,6 +32,7 @@ namespace Cod3rsGrowth.testes
         public List<Genero> ObterTodos()
         {
             List<Genero> generos = new List<Genero>();
+            generos = TabelaDeGenero.GetTabelaGenero();
             return generos;
         }
     }

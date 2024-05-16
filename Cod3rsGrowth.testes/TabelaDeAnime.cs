@@ -17,6 +17,7 @@ namespace Cod3rsGrowth.testes
             if (TabelaDeAnimes == null)
             {
                 TabelaDeAnimes = new List<Anime>();
+                TabelaDeAnimes.Add(new Anime(1, "Anime1", "Sinopse1", new List<int>() { 1, 2 }, new DateTime(2024, 5, 15), 7.8m, Anime.Status.EmExibicao));
             }
             return TabelaDeAnimes;
         }
