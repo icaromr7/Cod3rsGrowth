@@ -11,8 +11,9 @@ namespace Cod3rsGrowth.dominio
         public int Id {get; set;}
         public string Nome {get; set;}
 
-        public Genero(string nome)
+        public Genero(int id,string nome)
         {
+            this.Id = id;
             this.Nome = nome;
         }
     }
