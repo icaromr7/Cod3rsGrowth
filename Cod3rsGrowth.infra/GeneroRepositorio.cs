@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.testes
 {
-    public class GeneroRepository : IGeneroRepositorio
+    public class GeneroRepositorio : IGeneroRepositorio
     {
-        public GeneroRepository() { }
+        public GeneroRepositorio() { }
 
         public string Atualizar(Genero genero)
         {
