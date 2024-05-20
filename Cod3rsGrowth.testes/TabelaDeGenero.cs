@@ -9,19 +9,14 @@ namespace Cod3rsGrowth.testes
 {
     public sealed class TabelaDeGenero
     {
-        private static List<Genero> TabelaDeGeneros = null;
-        
-        public static void ConstruirTabelaGenero() {
-            if(TabelaDeGeneros == null)
-            {
-                TabelaDeGeneros = new List<Genero>();
-                TabelaDeGeneros.Add(new Genero(1, "Acao"));
-            }
-        }  
-        public static List<Genero> GetTabelaGenero()
+        private static List<Genero> Instance = null;
+        public static List<Genero> GetInstance()
         {
-            return TabelaDeGeneros;
-        }
-        
+            if (Instance == null)
+            {
+                Instance = new List<Genero>();
+            }
+            return Instance;
+        }       
     }
 }

@@ -15,26 +15,21 @@ namespace Cod3rsGrowth.testes
         {
             throw new NotImplementedException();
         }
-
         public string Cadastrar(Genero genero)
         {
             throw new NotImplementedException();
         }
-
         public string Deletar(Genero genero)
         {
             throw new NotImplementedException();
         }
-
         public Genero ObterPorId(int id)
         {
             throw new NotImplementedException();
         }
-
         public List<Genero> ObterTodos()
         {
-            TabelaDeGenero.ConstruirTabelaGenero();
-            var generos = TabelaDeGenero.GetTabelaGenero();
+            var generos = TabelaDeGenero.GetInstance();
             return generos;
         }
     }

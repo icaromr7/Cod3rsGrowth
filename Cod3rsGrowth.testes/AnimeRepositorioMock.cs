@@ -16,26 +16,21 @@ namespace Cod3rsGrowth.testes
         {
             throw new NotImplementedException();
         }
-
         public string Cadastrar(Anime anime)
         {
             throw new NotImplementedException();
         }
-
         public string Deletar(Anime anime)
         {
             throw new NotImplementedException();
         }
-
         public Anime ObterPorId(int id)
         {
             throw new NotImplementedException();
         }
-
         public List<Anime> ObterTodos()
         {
-            TabelaDeAnime.ConstuirTabelaAnime();
-            var animes = TabelaDeAnime.GetTabelaAnime();
+            var animes = TabelaDeAnime.GetInstance();
             return animes;
         }
     }
