@@ -9,8 +9,9 @@ namespace Cod3rsGrowth.testes
 {
     public class AnimeRepositorioMock : IAnimeRepositorio
     {
-        public AnimeRepositorioMock() { }
-
+        public AnimeRepositorioMock()
+        {
+        }
         public string Atualizar(Anime anime)
         {
             throw new NotImplementedException();
@@ -33,6 +34,7 @@ namespace Cod3rsGrowth.testes
 
         public List<Anime> ObterTodos()
         {
+            TabelaDeAnime.ConstuirTabelaAnime();
             var animes = TabelaDeAnime.GetTabelaAnime();
             return animes;
         }

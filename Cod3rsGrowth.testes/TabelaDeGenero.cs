@@ -11,16 +11,15 @@ namespace Cod3rsGrowth.testes
     {
         private static List<Genero> TabelaDeGeneros = null;
         
-        private TabelaDeGenero() { }  
+        public static void ConstruirTabelaGenero() {
+            if(TabelaDeGeneros == null)
+            {
+                TabelaDeGeneros = new List<Genero>();
+                TabelaDeGeneros.Add(new Genero(1, "Acao"));
+            }
+        }  
         public static List<Genero> GetTabelaGenero()
         {
-            if (TabelaDeGeneros == null)
-            { 
-                TabelaDeGeneros = new List<Genero>
-                {
-                    new Genero(1, "Acao")
-                };
-            }
             return TabelaDeGeneros;
         }
         

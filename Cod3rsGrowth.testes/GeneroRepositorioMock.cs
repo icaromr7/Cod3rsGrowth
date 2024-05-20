@@ -9,6 +9,8 @@ namespace Cod3rsGrowth.testes
 {
     public class GeneroRepositorioMock : IGeneroRepositorio
     {
+        public GeneroRepositorioMock() {
+        }
         public string Atualizar(Genero genero)
         {
             throw new NotImplementedException();
@@ -31,6 +33,7 @@ namespace Cod3rsGrowth.testes
 
         public List<Genero> ObterTodos()
         {
+            TabelaDeGenero.ConstruirTabelaGenero();
             var generos = TabelaDeGenero.GetTabelaGenero();
             return generos;
         }
