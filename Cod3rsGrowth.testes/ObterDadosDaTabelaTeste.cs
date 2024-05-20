@@ -1,15 +1,17 @@
 using Cod3rsGrowth.dominio;
+using Cod3rsGrowth.Servico;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Cod3rsGrowth.testes
 {
-    public class ObterDadosDaTabelaTeste { 
+    public class ObterDadosDaTabelaTeste : TesteBase { 
         [Fact]
         public void ObterDadosDaTabelaGenero_1_acao()
         {
             List<Genero> tabelaDeGenerosEsperada = new List<Genero>();
             tabelaDeGenerosEsperada.Add(new Genero(1, "Acao"));
             //arrange
-            GeneroServicosTeste generoServicosTeste = new GeneroServicosTeste();
+            IGeneroServico generoServicosTeste = FornecedorDeServicos.GetService<IGeneroServico>();
 
             //act
             List<Genero> tabelaDeGenerosAtual = generoServicosTeste.ObterTodos();
@@ -27,7 +29,7 @@ namespace Cod3rsGrowth.testes
             tabelaDeAnimesEsperada.Add(new Anime(1, "Anime1", "Sinopse1", new List<int>() { 1, 2 }, new DateTime(2024, 5, 15), 7.8m, Anime.Status.EmExibicao));
 
             // arrange
-            AnimeServicosTestes animeServicosTestes = new AnimeServicosTestes();
+            IAnimeServico? animeServicosTestes = FornecedorDeServicos.GetService<IAnimeServico>();
 
             //act
             List<Anime> tabelaDeAnimesAtual = animeServicosTestes.ObterTodos();

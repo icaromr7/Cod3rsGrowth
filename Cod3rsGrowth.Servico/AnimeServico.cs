@@ -7,17 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cod3rsGrowth.dominio.Servicos
+namespace Cod3rsGrowth.Servico
 {
-    public class AnimeServicos : IAnimeServico
+    public class AnimeServico : IAnimeServico
     {
-        private ServiceProvider serviceProvider;
-        private IAnimeRepositorio animeRepositorio;
-
-        public AnimeServicos()
+        private IAnimeRepositorio _animeRepositorio;
+        public AnimeServico(IAnimeRepositorio animeRepositorio)
         {
-            var service = new ServiceCollection();
-            serviceProvider = ModuloDeInjecaoTeste.BindServices(service).BuildServiceProvider();
+            _animeRepositorio = animeRepositorio;
         }
         public string Atualizar(Anime anime)
         {
@@ -41,7 +38,7 @@ namespace Cod3rsGrowth.dominio.Servicos
 
         public List<Anime> ObterTodos()
         {
-            List<Anime> animes = new List<Anime>();
+            var animes = _animeRepositorio.ObterTodos();
             return animes;
         }
     }

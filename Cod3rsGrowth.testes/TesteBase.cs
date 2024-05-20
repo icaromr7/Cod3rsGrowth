@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.testes
         }
         public void Dispose()
         {
-            throw new NotImplementedException();
+            FornecedorDeServicos.Dispose();
         }
     }
 }

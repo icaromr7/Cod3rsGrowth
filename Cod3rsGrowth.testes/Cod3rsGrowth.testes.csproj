@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -26,6 +26,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Cod3rsGrowth.dominio\Cod3rsGrowth.dominio.csproj" />
+    <ProjectReference Include="..\Cod3rsGrowth.infra\Cod3rsGrowth.infra.csproj" />
+    <ProjectReference Include="..\Cod3rsGrowth.Servico\Cod3rsGrowth.Servico.csproj" />
   </ItemGroup>
 
 </Project>
