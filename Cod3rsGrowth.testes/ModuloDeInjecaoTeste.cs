@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Cod3rsGrowth.dominio;
+using Cod3rsGrowth.Servico;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,10 @@ namespace Cod3rsGrowth.testes
         {
             services.AddScoped<IAnimeRepositorio, AnimeRepositorioMock>();
             services.AddScoped<IGeneroRepositorio, GeneroRepositorioMock>();
+            services.AddScoped<IAnimeServico, AnimeServico>();
+            services.AddScoped<IGeneroServico, GeneroServico>();
+            services.AddSingleton<TabelaDeAnime>();
+            services.AddSingleton<TabelaDeGenero>();
             return services;
         }
 

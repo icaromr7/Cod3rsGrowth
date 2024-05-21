@@ -1,18 +1,21 @@
 ﻿using Cod3rsGrowth.dominio;
+using Cod3rsGrowth.testes;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cod3rsGrowth.testes
+namespace Cod3rsGrowth.Servico
 {
-    public class AnimeRepository : IAnimeRepositorio
+    public class AnimeServico : IAnimeServico
     {
-        public AnimeRepository()
+        private IAnimeRepositorio _animeRepositorio;
+        public AnimeServico(IAnimeRepositorio animeRepositorio)
         {
+            _animeRepositorio = animeRepositorio;
         }
-
         public string Atualizar(Anime anime)
         {
             throw new NotImplementedException();
@@ -35,7 +38,7 @@ namespace Cod3rsGrowth.testes
 
         public List<Anime> ObterTodos()
         {
-            List<Anime> animes = new List<Anime>();
+            var animes = _animeRepositorio.ObterTodos();
             return animes;
         }
     }
