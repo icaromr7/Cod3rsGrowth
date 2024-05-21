@@ -29,7 +29,7 @@ namespace Cod3rsGrowth.testes
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
             };
-            TabelaDeAnime.Instance.Add(anime1);
+            _animeServico.Cadastrar(anime1);
 
             //act
             List<Anime> animes = _animeServico.ObterTodos();
@@ -52,7 +52,7 @@ namespace Cod3rsGrowth.testes
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
             };
-            TabelaDeAnime.Instance.Add(anime1);
+            _animeServico.Cadastrar(anime1);
 
             //act
             Anime anime = _animeServico.ObterPorId(1);
@@ -65,10 +65,73 @@ namespace Cod3rsGrowth.testes
         public void Ao_obter_por_id_deve_retornar_um_anime_nullo() {
 
             //act
-            Anime anime = _animeServico.ObterPorId(1);
+            Anime anime = _animeServico.ObterPorId(2);
 
             //assert
             Assert.Null(anime);
+        }
+        [Fact]
+        public void Ao_verificar_o_anime_deve_retornar_false_por_ter_propriedade_nullo()
+        {
+            var anime1 = new Anime
+            {
+                Id = 1,
+                Nome = null,
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+
+            //act
+            bool verificadorAnime= _animeServico.ValidarAnime(anime1);
+
+            //assert
+            Assert.False(verificadorAnime);
+
+        }
+        [Fact]
+        public void Ao_Verificar_deve_retornar_false_por_nao_existir()
+        {
+            var anime1 = new Anime
+            {
+                Id = 2,
+                Nome = "Sinopse1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+
+            //act
+            bool verificadorAnime = _animeServico.VerificarSeJaExiste(anime1);
+
+            //assert
+            Assert.False(verificadorAnime);
+
+        }
+        [Fact]
+        public void Ao_cadastrar_deve_retornar_o_anime_cadastrado()
+        {
+            var anime1 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+
+            //act
+            _animeServico.Cadastrar(anime1);
+            Anime anime = _animeServico.ObterPorId(1);
+
+            //assert
+            Assert.NotNull(anime);
         }
     }
 }

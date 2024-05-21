@@ -49,10 +49,56 @@ namespace Cod3rsGrowth.testes
         public void Ao_obter_por_id_deve_retornar_um_genero_nullo()
         {
             //act
-            Genero genero = _generoServico.ObterPorId(1);
+            Genero genero = _generoServico.ObterPorId(2);
 
             //assert
             Assert.Null(genero);
+        }
+        [Fact]
+        public void Ao_verificar_o_genero_deve_retornar_false_por_ter_propriedade_nullo()
+        {
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = null
+            }; 
+
+            //act
+            bool verificadorGenero = _generoServico.ValidarGenero(genero1);
+
+            //assert
+            Assert.False(verificadorGenero);
+        }
+        [Fact]
+        public void Ao_Verificar_deve_retornar_false_por_nao_existir()
+        {
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = "Acao"
+            };
+
+            //act
+            bool verificadorGenero = _generoServico.VerificarSeJaExiste(genero1);
+
+            //assert
+            Assert.False(verificadorGenero);
+        }
+        [Fact]
+        public void Ao_cadastrar_deve_retornar_o_anime_cadastrado()
+        {
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = "Acao"
+            };
+
+            //act
+            _generoServico.Cadastrar(genero1);
+            Genero genero = _generoServico.ObterPorId(1);
+
+            //assert
+            Assert.NotNull(genero);
         }
     }  
 }
