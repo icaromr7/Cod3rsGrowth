@@ -33,7 +33,8 @@ namespace Cod3rsGrowth.Servico
 
         public Anime ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            var anime= _animeRepositorio.ObterPorId(id); 
+            return anime;
         }
 
         public List<Anime> ObterTodos()
