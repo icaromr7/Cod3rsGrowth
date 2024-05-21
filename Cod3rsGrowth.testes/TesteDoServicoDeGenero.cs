@@ -18,8 +18,9 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Acao"
             };
-            //act
             TabelaDeGenero.Instance.Add(genero1);
+
+            //act
             List<Genero> generos = _generoServico.ObterTodos();
             const int quantidadeEsperada = 1;
             int quantidadeAtual = generos.Count();
@@ -35,13 +36,23 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Acao"
             };
-            //act
             TabelaDeGenero.Instance.Add(genero1);
+
+            //act
             Genero genero = _generoServico.ObterPorId(1);
             int idEsperado = 1;
 
             //assert
             Assert.Equal(idEsperado, genero.Id);
+        }
+        [Fact]
+        public void Ao_obter_por_id_deve_retornar_um_genero_nullo()
+        {
+            //act
+            Genero genero = _generoServico.ObterPorId(1);
+
+            //assert
+            Assert.Null(genero);
         }
     }  
 }
