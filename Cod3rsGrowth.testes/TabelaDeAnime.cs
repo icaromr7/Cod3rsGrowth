@@ -9,15 +9,9 @@ namespace Cod3rsGrowth.testes
 {
     public sealed class TabelaDeAnime
     {
-        private static List<Anime> Instance = null;
+        private static List<Anime> instance = new List<Anime>();
         
-        public static List<Anime> GetInstance()
-        {
-            if (Instance == null)
-            {
-                Instance = new List<Anime>();
-            }
-            return Instance;
-        }
+        public static List<Anime> Instance { get { return instance; } }
+        
     }
 }

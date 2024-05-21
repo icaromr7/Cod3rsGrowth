@@ -30,7 +30,7 @@ namespace Cod3rsGrowth.testes
         }
         public List<Anime> ObterTodos()
         {
-            var animes = TabelaDeAnime.GetInstance();
+            var animes = TabelaDeAnime.Instance;
             return animes;
         }
     }

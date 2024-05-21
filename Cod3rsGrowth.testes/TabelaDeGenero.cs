@@ -9,14 +9,7 @@ namespace Cod3rsGrowth.testes
 {
     public sealed class TabelaDeGenero
     {
-        private static List<Genero> Instance = null;
-        public static List<Genero> GetInstance()
-        {
-            if (Instance == null)
-            {
-                Instance = new List<Genero>();
-            }
-            return Instance;
-        }       
+        private static readonly List<Genero> instance = new List<Genero>();
+        public static List<Genero> Instance {  get { return instance; } }      
     }
 }

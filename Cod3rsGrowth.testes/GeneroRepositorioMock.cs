@@ -29,7 +29,7 @@ namespace Cod3rsGrowth.testes
         }
         public List<Genero> ObterTodos()
         {
-            var generos = TabelaDeGenero.GetInstance();
+            var generos = TabelaDeGenero.Instance;
             return generos;
         }
     }

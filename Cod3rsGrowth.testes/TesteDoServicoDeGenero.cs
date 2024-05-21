@@ -13,9 +13,15 @@ namespace Cod3rsGrowth.testes
         [Fact]
         public void Ao_obter_todos_deve_retornar_uma_lista_com_generos()
         {
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = "Acao"
+            };
             //act
+            TabelaDeGenero.Instance.Add(genero1);
             List<Genero> generos = _generoServico.ObterTodos();
-            const int quantidadeEsperada = 0;
+            const int quantidadeEsperada = 1;
             int quantidadeAtual = generos.Count();
 
             //assert
