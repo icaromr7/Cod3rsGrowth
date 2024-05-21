@@ -38,5 +38,26 @@ namespace Cod3rsGrowth.testes
             //assert
             Assert.Equal(quantidadeEsperada, quantidadeAtual);
         }
+        [Fact]
+        public void Ao_Obter_por_id_deve_retornar_um_anime_com_id_especifico()
+        {
+            var anime1 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+            //act
+            TabelaDeAnime.Instance.Add(anime1);
+            Anime anime = _animeServico.ObterPorId(1);
+            int idEsperado = 1;
+
+            //assert
+            Assert.Equal(idEsperado, anime.Id);
+        }
     }
 }

@@ -27,5 +27,21 @@ namespace Cod3rsGrowth.testes
             //assert
             Assert.Equal(quantidadeEsperada, quantidadeAtual);
         }
+        [Fact]
+        public void Ao_obter_por_id_deve_retornar_um_genero_especifico()
+        {
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = "Acao"
+            };
+            //act
+            TabelaDeGenero.Instance.Add(genero1);
+            Genero genero = _generoServico.ObterPorId(1);
+            int idEsperado = 1;
+
+            //assert
+            Assert.Equal(idEsperado, genero.Id);
+        }
     }  
 }

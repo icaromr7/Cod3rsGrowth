@@ -25,7 +25,8 @@ namespace Cod3rsGrowth.testes
         }
         public Genero ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            var genero = TabelaDeGenero.Instance.Find(delegate (Genero genero1) { return genero1.Id == id; });
+            return genero;
         }
         public List<Genero> ObterTodos()
         {

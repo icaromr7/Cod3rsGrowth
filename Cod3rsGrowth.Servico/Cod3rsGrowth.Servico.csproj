@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Cod3rsGrowth.dominio\Cod3rsGrowth.dominio.csproj" />
     <ProjectReference Include="..\Cod3rsGrowth.infra\Cod3rsGrowth.infra.csproj" />
   </ItemGroup>

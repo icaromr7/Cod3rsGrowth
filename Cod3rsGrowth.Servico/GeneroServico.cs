@@ -32,7 +32,8 @@ namespace Cod3rsGrowth.Servico
 
         public Genero ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            var genero = _generoRepositorio.ObterPorId(id);
+            return genero;
         }
 
         public List<Genero> ObterTodos()

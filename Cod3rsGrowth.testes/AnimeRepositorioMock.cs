@@ -26,7 +26,8 @@ namespace Cod3rsGrowth.testes
         }
         public Anime ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            var anime = TabelaDeAnime.Instance.Find(delegate (Anime anime1){ return anime1.Id == id; });
+            return anime;
         }
         public List<Anime> ObterTodos()
         {
