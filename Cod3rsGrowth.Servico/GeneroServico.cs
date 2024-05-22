@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.dominio;
 using Cod3rsGrowth.testes;
+using FluentValidation;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -25,18 +26,9 @@ namespace Cod3rsGrowth.Servico
         }
 
         public void Cadastrar(Genero genero)
-        {
-            try
-            {
-                if (ValidarGenero(genero)==true&&VerificarSeJaExiste(genero)==false)
-                {
-                    _generoRepositorio.Cadastrar(genero);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+        {          
+                _generoValidador.ValidateAndThrow(genero);  
+                _generoRepositorio.Cadastrar(genero);
         }
 
         public string Deletar(Genero genero)
@@ -55,17 +47,6 @@ namespace Cod3rsGrowth.Servico
             var generos = _generoRepositorio.ObterTodos();
             return generos;
         }
-
-        public bool ValidarGenero(Genero genero)
-        {
-            ValidationResult result = _generoValidador.Validate(genero);
-            if (result.IsValid)
-            {
-                return true;
-            }
-            return false;
-        }
-
         public bool VerificarSeJaExiste(Genero genero)
         {
             var _genero = _generoRepositorio.ObterPorId(genero.Id);

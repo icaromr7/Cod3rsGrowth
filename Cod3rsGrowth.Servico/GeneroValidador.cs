@@ -11,8 +11,7 @@ namespace Cod3rsGrowth.Servico
     public class GeneroValidador : AbstractValidator<Genero>
     {
         public GeneroValidador() {
-            RuleFor(genero => genero.Id).NotNull();
-            RuleFor(genero => genero.Nome).NotNull();
+            RuleFor(genero => genero.Nome).NotNull().WithMessage("Nome não pode ser nullo");
         }
     }
 }

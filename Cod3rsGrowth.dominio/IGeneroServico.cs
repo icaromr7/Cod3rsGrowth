@@ -13,7 +13,6 @@ namespace Cod3rsGrowth.dominio
         void Cadastrar(Genero genero);
         String Deletar(Genero genero);
         String Atualizar(Genero genero);
-        bool ValidarGenero(Genero genero);
         bool VerificarSeJaExiste(Genero genero);
     }
 }

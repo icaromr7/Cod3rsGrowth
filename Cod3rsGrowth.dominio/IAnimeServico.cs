@@ -13,7 +13,6 @@ namespace Cod3rsGrowth.dominio
         void Cadastrar(Anime anime);
         String Deletar(Anime anime);
         String Atualizar(Anime anime);
-        bool ValidarAnime(Anime anime);
         bool VerificarSeJaExiste(Anime anime);
     }
 }

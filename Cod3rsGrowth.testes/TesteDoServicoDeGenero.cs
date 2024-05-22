@@ -1,14 +1,16 @@
 using Cod3rsGrowth.dominio;
 using Cod3rsGrowth.Servico;
 using Microsoft.Extensions.DependencyInjection;
-
+using FluentValidation;
 namespace Cod3rsGrowth.testes
 {
     public class TesteDoServicoDeGenero : TesteBase {
         private IGeneroServico _generoServico;
+        private GeneroValidador _generoValidador;
         public TesteDoServicoDeGenero()
         {
-            _generoServico = FornecedorDeServicos.GetService<IGeneroServico>(); ;
+            _generoServico = FornecedorDeServicos.GetService<IGeneroServico>();
+            _generoValidador = new GeneroValidador();
         }
         [Fact]
         public void Ao_obter_todos_deve_retornar_uma_lista_com_generos()
@@ -55,35 +57,21 @@ namespace Cod3rsGrowth.testes
             Assert.Null(genero);
         }
         [Fact]
-        public void Ao_verificar_o_genero_deve_retornar_false_por_ter_propriedade_nullo()
+        public void Ao_tentar_cadastrar_deve_retornar_um_genero_nullo()
         {
             var genero1 = new Genero
             {
                 Id = 1,
                 Nome = null
-            }; 
-
-            //act
-            bool verificadorGenero = _generoServico.ValidarGenero(genero1);
-
-            //assert
-            Assert.False(verificadorGenero);
-        }
-        [Fact]
-        public void Ao_Verificar_deve_retornar_false_por_nao_existir()
-        {
-            var genero1 = new Genero
-            {
-                Id = 1,
-                Nome = "Acao"
             };
 
             //act
-            bool verificadorGenero = _generoServico.VerificarSeJaExiste(genero1);
+            var mensagemError = _generoValidador.Validate(genero1).Errors.Single().ErrorMessage;
 
             //assert
-            Assert.False(verificadorGenero);
-        }
+            Assert.Throws<ValidationException>(() => _generoServico.Cadastrar(genero1));
+            Assert.Equal("Nome não pode ser nullo", mensagemError);
+        }     
         [Fact]
         public void Ao_cadastrar_deve_retornar_o_anime_cadastrado()
         {

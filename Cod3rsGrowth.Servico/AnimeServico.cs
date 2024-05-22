@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.dominio;
 using Cod3rsGrowth.testes;
+using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -27,16 +28,8 @@ namespace Cod3rsGrowth.Servico
 
         public void Cadastrar(Anime anime)
         {
-            try
-            {
-                if (ValidarAnime(anime)==true&&VerificarSeJaExiste(anime)==false)
-                {
-                    _animeRepositorio.Cadastrar(anime);
-                }
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-            }
+            _animeValidador.ValidateAndThrow(anime);
+            _animeRepositorio.Cadastrar(anime);
         }
 
         public string Deletar(Anime anime)
@@ -54,16 +47,6 @@ namespace Cod3rsGrowth.Servico
         {
             var animes = _animeRepositorio.ObterTodos();
             return animes;
-        }
-
-        public bool ValidarAnime(Anime anime)
-        {
-            ValidationResult result = _animeValidador.Validate(anime);
-            if (result.IsValid)
-            {
-                return true;
-            }
-            return false;
         }
         public bool VerificarSeJaExiste(Anime anime)
         {
