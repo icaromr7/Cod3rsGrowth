@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.dominio;
 using Cod3rsGrowth.Servico;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ namespace Cod3rsGrowth.testes
             services.AddScoped<IGeneroServico, GeneroServico>();
             services.AddSingleton<TabelaDeAnime>();
             services.AddSingleton<TabelaDeGenero>();
+            services.AddScoped<IValidator<Anime>, AnimeValidador>();
+            services.AddScoped<IValidator<Genero>, GeneroValidador>();
             return services;
         }
 

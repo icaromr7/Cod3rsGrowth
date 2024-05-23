@@ -6,11 +6,11 @@ namespace Cod3rsGrowth.testes
 {
     public class TesteDoServicoDeGenero : TesteBase {
         private IGeneroServico _generoServico;
-        private GeneroValidador _generoValidador;
+        private IValidator<Genero> _generoValidador;
         public TesteDoServicoDeGenero()
         {
             _generoServico = FornecedorDeServicos.GetService<IGeneroServico>();
-            _generoValidador = new GeneroValidador();
+            _generoValidador = FornecedorDeServicos.GetService<IValidator<Genero>>();
         }
         [Fact]
         public void Ao_obter_todos_deve_retornar_uma_lista_com_generos()

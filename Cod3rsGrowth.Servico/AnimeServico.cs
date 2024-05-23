@@ -15,11 +15,11 @@ namespace Cod3rsGrowth.Servico
     public class AnimeServico : IAnimeServico
     {
         private IAnimeRepositorio _animeRepositorio;
-        private AnimeValidador _animeValidador;
-        public AnimeServico(IAnimeRepositorio animeRepositorio)
+        private IValidator<Anime> _animeValidador;
+        public AnimeServico(IAnimeRepositorio animeRepositorio, IValidator<Anime> animeValidador)
         {
             _animeRepositorio = animeRepositorio;
-            _animeValidador = new AnimeValidador();
+            _animeValidador = animeValidador;
         }
         public string Atualizar(Anime anime)
         {

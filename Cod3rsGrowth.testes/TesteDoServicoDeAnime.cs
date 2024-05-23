@@ -14,11 +14,11 @@ namespace Cod3rsGrowth.testes
      public class TesteDoServicoDeAnime : TesteBase
     {
         private IAnimeServico _animeServico;
-        private AnimeValidador _animeValidador;
+        private IValidator<Anime> _animeValidador;
         public TesteDoServicoDeAnime()
         {
             _animeServico = FornecedorDeServicos.GetService<IAnimeServico>();
-            _animeValidador = new AnimeValidador();
+            _animeValidador = FornecedorDeServicos.GetService<IValidator<Anime>>();
         }
         [Fact]
         public void Ao_obter_todos_deve_retornar_uma_lista_com_animes()
@@ -69,7 +69,7 @@ namespace Cod3rsGrowth.testes
         public void Ao_obter_por_id_deve_retornar_um_anime_nullo() {
 
             //act
-            Anime anime = _animeServico.ObterPorId(2);
+            Anime anime = _animeServico.ObterPorId(1);
 
             //assert
             Assert.Null(anime);

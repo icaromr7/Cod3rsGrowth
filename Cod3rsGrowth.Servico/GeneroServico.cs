@@ -14,11 +14,11 @@ namespace Cod3rsGrowth.Servico
     public class GeneroServico : IGeneroServico
     {
         private IGeneroRepositorio _generoRepositorio;
-        private GeneroValidador _generoValidador;
-        public GeneroServico(IGeneroRepositorio generoRepositorio)
+        private IValidator<Genero> _generoValidador;
+        public GeneroServico(IGeneroRepositorio generoRepositorio, IValidator<Genero> generoValidador)
         {
             _generoRepositorio = generoRepositorio;
-            _generoValidador = new GeneroValidador();
+            _generoValidador = generoValidador;
         }
         public string Atualizar(Genero genero)
         {
