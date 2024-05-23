@@ -10,8 +10,9 @@ namespace Cod3rsGrowth.dominio
     {
         List<Genero> ObterTodos();
         Genero ObterPorId(int id);
-        String Cadastrar(Genero genero);
+        void Cadastrar(Genero genero);
         String Deletar(Genero genero);
         String Atualizar(Genero genero);
+        bool VerificarSeJaExiste(Genero genero);
     }
 }

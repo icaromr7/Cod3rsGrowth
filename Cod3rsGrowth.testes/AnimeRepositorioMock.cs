@@ -16,9 +16,9 @@ namespace Cod3rsGrowth.testes
         {
             throw new NotImplementedException();
         }
-        public string Cadastrar(Anime anime)
+        public void Cadastrar(Anime anime)
         {
-            throw new NotImplementedException();
+            TabelaDeAnime.Instance.Add(anime);
         }
         public string Deletar(Anime anime)
         {

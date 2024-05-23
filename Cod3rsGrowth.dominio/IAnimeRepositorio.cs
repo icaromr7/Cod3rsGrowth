@@ -11,7 +11,7 @@ namespace Cod3rsGrowth.testes
     {
         List<Anime> ObterTodos();
         Anime ObterPorId(int id);
-        String Cadastrar(Anime anime);
+        void Cadastrar(Anime anime);
         String Deletar(Anime anime);
         String Atualizar(Anime anime);
     }

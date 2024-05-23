@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.testes
             throw new NotImplementedException();
         }
 
-        public string Cadastrar(Genero genero)
+        public void Cadastrar(Genero genero)
         {
             throw new NotImplementedException();
         }
