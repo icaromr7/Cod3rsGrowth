@@ -14,10 +14,11 @@ namespace Cod3rsGrowth.Servico
         {
             RuleFor(anime => anime.Nome).NotNull().WithMessage("Nome não pode ser nullo");
             RuleFor(anime => anime.Sinopse).NotNull().WithMessage("Sinopse não pode ser nullo");
-            RuleFor(anime => anime.GenerosIds).NotNull().NotEmpty().WithMessage("GenerosIds não pode ser nullo e nem está vazio");
-            RuleFor(anime => anime.DataLancamento).NotNull().WithMessage("Data Lançamento não pode ser nullo");
-            RuleFor(anime => anime.Nota).NotNull().WithMessage("Nota não pode ser nullo");
-            RuleFor(anime => anime.StatusDeExibicao).NotNull().WithMessage("Status de Exibição não pode ser nullo");
+            RuleFor(anime => anime.GenerosIds).NotNull().WithMessage("GenerosIds não pode ser nullo");
+            RuleFor(anime => anime.GenerosIds).NotEmpty().WithMessage("GenerosIds não pode está vazio");
+            RuleFor(anime => anime.DataLancamento).NotEmpty().WithMessage("Data Lançamento não pode está vazia");
+            RuleFor(anime => anime.Nota).NotEmpty().WithMessage("Nota não pode está vazia");
+            RuleFor(anime => anime.StatusDeExibicao).NotEmpty().WithMessage("Status de Exibição não pode está vazio");
         }       
     }
 }

@@ -6,11 +6,11 @@ namespace Cod3rsGrowth.testes
 {
     public class TesteDoServicoDeGenero : TesteBase {
         private IGeneroServico _generoServico;
-        private IValidator<Genero> _generoValidador;
+        private IGeneroRepositorio _generoRepositorio;
         public TesteDoServicoDeGenero()
         {
             _generoServico = FornecedorDeServicos.GetService<IGeneroServico>();
-            _generoValidador = FornecedorDeServicos.GetService<IValidator<Genero>>();
+            _generoRepositorio = FornecedorDeServicos.GetService<IGeneroRepositorio>();
         }
         [Fact]
         public void Ao_obter_todos_deve_retornar_uma_lista_com_generos()
@@ -66,11 +66,10 @@ namespace Cod3rsGrowth.testes
             };
 
             //act
-            var mensagemError = _generoValidador.Validate(genero1).Errors.Single().ErrorMessage;
+            var mensagemError = Assert.Throws<ValidationException>(() => _generoServico.Cadastrar(genero1));
 
             //assert
-            Assert.Throws<ValidationException>(() => _generoServico.Cadastrar(genero1));
-            Assert.Equal("Nome não pode ser nullo", mensagemError);
+            Assert.Equal("Nome não pode ser nullo", mensagemError.Errors.Single().ErrorMessage);
         }     
         [Fact]
         public void Ao_cadastrar_deve_retornar_o_anime_cadastrado()
@@ -83,7 +82,7 @@ namespace Cod3rsGrowth.testes
 
             //act
             _generoServico.Cadastrar(genero1);
-            Genero genero = _generoServico.ObterPorId(1);
+            Genero genero = _generoRepositorio.ObterPorId(1);
 
             //assert
             Assert.NotNull(genero);
