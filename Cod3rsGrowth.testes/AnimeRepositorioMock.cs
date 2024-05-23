@@ -1,9 +1,4 @@
 ﻿using Cod3rsGrowth.dominio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.testes
 {
@@ -12,9 +7,16 @@ namespace Cod3rsGrowth.testes
         public AnimeRepositorioMock()
         {
         }
-        public string Atualizar(Anime anime)
+        public void Atualizar(Anime anime)
         {
-            throw new NotImplementedException();
+            var animeModificado = TabelaDeAnime.Instance.Find(delegate (Anime anime1) { return anime1.Id == anime.Id; });
+            animeModificado = anime;
+            animeModificado.Nome = anime.Nome;
+            animeModificado.Sinopse = anime.Sinopse;
+            animeModificado.GenerosIds = anime.GenerosIds;
+            animeModificado.DataLancamento = anime.DataLancamento;
+            animeModificado.Nota = anime.Nota;
+            animeModificado.StatusDeExibicao = anime.StatusDeExibicao;
         }
         public void Cadastrar(Anime anime)
         {

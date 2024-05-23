@@ -1,7 +1,7 @@
 using Cod3rsGrowth.dominio;
 using Cod3rsGrowth.Servico;
-using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 namespace Cod3rsGrowth.testes
 {
     public class TesteDoServicoDeGenero : TesteBase {
@@ -86,6 +86,42 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.NotNull(genero);
+        }
+        [Fact]
+        public void Ao_atualizar_deve_retornar_o_genero_nao_existe()
+        {         
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = "Aventura"
+            };
+            //act
+            var mensagemError = Assert.Throws<ValidationException>(() => _generoServico.Atualizar(genero1)); 
+            Genero genero = _generoRepositorio.ObterPorId(1);
+
+            //assert
+            Assert.Equal("O genero não existe", mensagemError.Errors.Single().ErrorMessage);
+        }
+        [Fact]
+        public void Ao_atualizar_deve_retornar_o_genero_atualizado()
+        {
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = "Acao"
+            };
+            TabelaDeGenero.Instance.Add(genero1);
+            var genero2 = new Genero
+            {
+                Id = 1,
+                Nome = "Aventura"
+            };
+            //act
+            _generoServico.Atualizar(genero2);
+            Genero genero = _generoRepositorio.ObterPorId(1);
+
+            //assert
+            Assert.Equivalent(genero2,genero);
         }
     }  
 }

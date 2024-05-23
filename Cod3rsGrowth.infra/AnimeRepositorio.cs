@@ -13,7 +13,7 @@ namespace Cod3rsGrowth.testes
         {
         }
 
-        public string Atualizar(Anime anime)
+        public void Atualizar(Anime anime)
         {
             throw new NotImplementedException();
         }

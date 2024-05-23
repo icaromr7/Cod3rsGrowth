@@ -1,17 +1,10 @@
 ﻿using Cod3rsGrowth.dominio;
-using Cod3rsGrowth.Servico;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 using FluentValidation;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit.Sdk;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Cod3rsGrowth.testes
 {
-     public class TesteDoServicoDeAnime : TesteBase
+    public class TesteDoServicoDeAnime : TesteBase
     {
         private IAnimeServico _animeServico;
         private IAnimeRepositorio _animeRepositorio;
@@ -220,6 +213,56 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.NotNull(anime);
+        }
+        [Fact]
+        public void Ao_tentar_editar_anime_deve_retornar_o_anime_nao_existe()
+        {
+            var anime1 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };         
+            //act
+            var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Atualizar(anime1));
+            //assert
+            Assert.Equal("O anime não existe", mensagemError.Errors.Single().ErrorMessage);
+        }
+        [Fact]
+        public void Ao_atualizar_deve_retornar_o_anime_atualizado()
+        {
+            var anime1 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+            TabelaDeAnime.Instance.Add(anime1);
+            var anime2 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime2",
+                Sinopse = "Sinopse2",
+                GenerosIds = new List<int>() { 3, 4 },
+                DataLancamento = new DateTime(2024, 6, 14),
+                Nota = 8.1m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+
+            //act
+            _animeServico.Atualizar(anime2);
+            Anime anime = _animeRepositorio.ObterPorId(1);
+
+            //assert
+            Assert.Equivalent(anime2, anime);
         }
     }
 }

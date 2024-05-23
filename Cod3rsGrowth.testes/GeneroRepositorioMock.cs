@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Cod3rsGrowth.testes
 {
@@ -11,9 +12,10 @@ namespace Cod3rsGrowth.testes
     {
         public GeneroRepositorioMock() {
         }
-        public string Atualizar(Genero genero)
+        public void Atualizar(Genero genero)
         {
-            throw new NotImplementedException();
+            var generoModificado = TabelaDeGenero.Instance.Find(delegate (Genero genero1) { return genero1.Id == genero.Id; });
+            generoModificado.Nome = genero.Nome;
         }
         public void Cadastrar(Genero genero)
         {

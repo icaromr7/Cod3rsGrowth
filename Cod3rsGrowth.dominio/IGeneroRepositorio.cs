@@ -14,6 +14,6 @@ namespace Cod3rsGrowth.testes
 
         void Cadastrar(Genero genero);
         String Deletar(Genero genero);
-        String Atualizar(Genero genero);
+        void Atualizar(Genero genero);
     }
 }

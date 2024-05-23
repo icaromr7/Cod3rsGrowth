@@ -20,9 +20,17 @@ namespace Cod3rsGrowth.Servico
             _generoRepositorio = generoRepositorio;
             _generoValidador = generoValidador;
         }
-        public string Atualizar(Genero genero)
+        public void Atualizar(Genero genero)
         {
-            throw new NotImplementedException();
+            ValidationResult result = _generoValidador.Validate(genero, options => options.IncludeRuleSets("Atualizar"));
+            if (result.IsValid)
+            {
+                _generoRepositorio.Atualizar(genero);
+            }
+            else
+            {
+                throw new ValidationException(result.Errors);
+            }
         }
 
         public void Cadastrar(Genero genero)
@@ -46,15 +54,6 @@ namespace Cod3rsGrowth.Servico
         {
             var generos = _generoRepositorio.ObterTodos();
             return generos;
-        }
-        public bool VerificarSeJaExiste(Genero genero)
-        {
-            var _genero = _generoRepositorio.ObterPorId(genero.Id);
-            if(_genero != null)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }
