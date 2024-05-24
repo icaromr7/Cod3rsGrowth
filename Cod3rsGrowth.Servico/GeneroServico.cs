@@ -22,7 +22,7 @@ namespace Cod3rsGrowth.Servico
         }
         public void Atualizar(Genero genero)
         {
-            ValidationResult result = _generoValidador.Validate(genero, options => options.IncludeRuleSets(Constantes.DEFAULT,Constantes.ATUALIZAR));
+            ValidationResult result = _generoValidador.Validate(genero, options => options.IncludeRuleSets(ConstantesDoValidador.DEFAULT,ConstantesDoValidador.ATUALIZAR));
             if (result.IsValid)
             {
                 _generoRepositorio.Atualizar(genero);

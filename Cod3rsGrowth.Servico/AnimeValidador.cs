@@ -17,7 +17,7 @@ namespace Cod3rsGrowth.Servico
             RuleFor(anime => anime.DataLancamento).NotEmpty().WithMessage("Data Lançamento não pode está vazia");
             RuleFor(anime => anime.Nota).NotEmpty().WithMessage("Nota não pode está vazia");
             RuleFor(anime => anime.StatusDeExibicao).NotEmpty().WithMessage("Status de Exibição não pode está vazio");
-            RuleSet("Atualizar", () =>
+            RuleSet(ConstantesDoValidador.ATUALIZAR, () =>
             {
                 RuleFor(anime => anime.Id)
             .Must(id =>

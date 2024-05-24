@@ -15,7 +15,7 @@ namespace Cod3rsGrowth.Servico
         public GeneroValidador(IGeneroRepositorio generoRepositorio) {
             _generoRepositorio = generoRepositorio;
             RuleFor(genero => genero.Nome).NotNull().WithMessage("Nome não pode ser nullo");
-            RuleSet("Atualizar", () =>
+            RuleSet(ConstantesDoValidador.ATUALIZAR, () =>
             {
                 RuleFor(genero => genero.Id)
             .Must(id =>

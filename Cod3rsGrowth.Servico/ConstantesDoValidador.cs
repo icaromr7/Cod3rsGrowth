@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.Servico
 {
-    public static class Constantes
+    public static class ConstantesDoValidador
     {
         public static string ATUALIZAR = "Atualizar";
         public static string DEFAULT = "default";
