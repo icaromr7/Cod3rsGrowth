@@ -11,7 +11,9 @@ namespace Cod3rsGrowth.Servico
         {
             _animeRepositorio = animeRepositorio;
             RuleFor(anime => anime.Nome).NotNull().WithMessage("Nome não pode ser nullo");
+            RuleFor(anime => anime.Nome).NotEmpty().WithMessage("Nome não pode está vazio");
             RuleFor(anime => anime.Sinopse).NotNull().WithMessage("Sinopse não pode ser nullo");
+            RuleFor(anime => anime.Sinopse).NotEmpty().WithMessage("Sinopse não pode está vazia");
             RuleFor(anime => anime.GenerosIds).NotNull().WithMessage("GenerosIds não pode ser nullo");
             RuleFor(anime => anime.GenerosIds).NotEmpty().WithMessage("GenerosIds não pode está vazio");
             RuleFor(anime => anime.DataLancamento).NotEmpty().WithMessage("Data Lançamento não pode está vazia");

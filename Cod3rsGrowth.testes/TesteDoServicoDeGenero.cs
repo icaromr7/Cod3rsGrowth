@@ -70,7 +70,22 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equal("Nome não pode ser nullo", mensagemError.Errors.Single().ErrorMessage);
-        }     
+        }
+        [Fact]
+        public void Ao_tentar_cadastrar_deve_retornar_nome_nao_pode_esta_vazio()
+        {
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = ""
+            };
+
+            //act
+            var mensagemError = Assert.Throws<ValidationException>(() => _generoServico.Cadastrar(genero1));
+
+            //assert
+            Assert.Equal("Nome não pode está vazio", mensagemError.Errors.Single().ErrorMessage);
+        }
         [Fact]
         public void Ao_cadastrar_deve_retornar_o_anime_cadastrado()
         {
