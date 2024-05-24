@@ -121,6 +121,7 @@ namespace Cod3rsGrowth.testes
             Genero genero = _generoRepositorio.ObterPorId(1);
 
             //assert
+            Assert.Equivalent(genero2.Nome, genero.Nome);
             Assert.Equivalent(genero2,genero);
         }
     }  

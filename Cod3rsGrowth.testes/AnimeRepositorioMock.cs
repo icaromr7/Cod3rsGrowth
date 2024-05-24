@@ -10,7 +10,6 @@ namespace Cod3rsGrowth.testes
         public void Atualizar(Anime anime)
         {
             var animeModificado = TabelaDeAnime.Instance.Find(delegate (Anime anime1) { return anime1.Id == anime.Id; });
-            animeModificado = anime;
             animeModificado.Nome = anime.Nome;
             animeModificado.Sinopse = anime.Sinopse;
             animeModificado.GenerosIds = anime.GenerosIds;

@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Servico
         }
         public void Atualizar(Anime anime)
         {
-            ValidationResult result = _animeValidador.Validate(anime, options => options.IncludeRuleSets("Atualizar"));
+            ValidationResult result = _animeValidador.Validate(anime, options => options.IncludeRuleSets(Constantes.DEFAULT,Constantes.ATUALIZAR));
             if (result.IsValid)
             {
                 _animeRepositorio.Atualizar(anime);

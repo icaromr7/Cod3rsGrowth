@@ -233,6 +233,198 @@ namespace Cod3rsGrowth.testes
             Assert.Equal("O anime não existe", mensagemError.Errors.Single().ErrorMessage);
         }
         [Fact]
+        public void Ao_atualizar_o_nome_deve_retornar_o_nome_atualizado()
+        {
+            var anime1 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+            TabelaDeAnime.Instance.Add(anime1);
+            var anime2 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime2",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+
+            //act
+            _animeServico.Atualizar(anime2);
+            Anime anime = _animeRepositorio.ObterPorId(1);
+
+            //assert
+            Assert.Equal(anime2.Nome, anime.Nome);
+        }
+        [Fact]
+        public void Ao_atualizar_a_sinopse_deve_retornar_a_sinopse_atualizada()
+        {
+            var anime1 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+            TabelaDeAnime.Instance.Add(anime1);
+            var anime2 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse2",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+
+            //act
+            _animeServico.Atualizar(anime2);
+            Anime anime = _animeRepositorio.ObterPorId(1);
+
+            //assert
+            Assert.Equal(anime2.Sinopse, anime.Sinopse);
+        }
+        [Fact]
+        public void Ao_atualizar_o_generoids_deve_retornar_o_generoids_atualizado()
+        {
+            var anime1 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+            TabelaDeAnime.Instance.Add(anime1);
+            var anime2 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 3, 4 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+
+            //act
+            _animeServico.Atualizar(anime2);
+            Anime anime = _animeRepositorio.ObterPorId(1);
+
+            //assert
+            Assert.Equivalent(anime2.GenerosIds, anime.GenerosIds);
+        }
+        [Fact]
+        public void Ao_atualizar_a_datalancamento_deve_retornar_a_datalancamento_atualizada()
+        {
+            var anime1 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+            TabelaDeAnime.Instance.Add(anime1);
+            var anime2 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2023, 3, 11),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+
+            //act
+            _animeServico.Atualizar(anime2);
+            Anime anime = _animeRepositorio.ObterPorId(1);
+
+            //assert
+            Assert.Equivalent(anime2.DataLancamento, anime.DataLancamento);
+        }
+        [Fact]
+        public void Ao_atualizar_a_nota_deve_retornar_a_nota_atualizada()
+        {
+            var anime1 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+            TabelaDeAnime.Instance.Add(anime1);
+            var anime2 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 8.3m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+
+            //act
+            _animeServico.Atualizar(anime2);
+            Anime anime = _animeRepositorio.ObterPorId(1);
+
+            //assert
+            Assert.Equivalent(anime2.Nota, anime.Nota);
+        }
+        [Fact]
+        public void Ao_atualizar_o_statusdeexibicao_deve_retornar_o_statusdeexibicao_atualizado()
+        {
+            var anime1 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+            TabelaDeAnime.Instance.Add(anime1);
+            var anime2 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.Concluido
+            };
+
+            //act
+            _animeServico.Atualizar(anime2);
+            Anime anime = _animeRepositorio.ObterPorId(1);
+
+            //assert
+            Assert.Equivalent(anime2.StatusDeExibicao, anime.StatusDeExibicao);
+        }
+        [Fact]
         public void Ao_atualizar_deve_retornar_o_anime_atualizado()
         {
             var anime1 = new Anime
@@ -254,7 +446,7 @@ namespace Cod3rsGrowth.testes
                 GenerosIds = new List<int>() { 3, 4 },
                 DataLancamento = new DateTime(2024, 6, 14),
                 Nota = 8.1m,
-                StatusDeExibicao = Anime.Status.EmExibicao
+                StatusDeExibicao = Anime.Status.Concluido
             };
 
             //act
@@ -262,6 +454,12 @@ namespace Cod3rsGrowth.testes
             Anime anime = _animeRepositorio.ObterPorId(1);
 
             //assert
+            Assert.Equal(anime2.Nome, anime.Nome);
+            Assert.Equal(anime2.Sinopse, anime.Sinopse);
+            Assert.Equivalent(anime2.GenerosIds, anime.GenerosIds);
+            Assert.Equivalent(anime2.DataLancamento, anime.DataLancamento);
+            Assert.Equivalent(anime2.Nota, anime.Nota);
+            Assert.Equivalent(anime2.StatusDeExibicao, anime.StatusDeExibicao);
             Assert.Equivalent(anime2, anime);
         }
     }

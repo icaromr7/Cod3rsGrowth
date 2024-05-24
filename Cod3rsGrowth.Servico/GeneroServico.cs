@@ -22,7 +22,7 @@ namespace Cod3rsGrowth.Servico
         }
         public void Atualizar(Genero genero)
         {
-            ValidationResult result = _generoValidador.Validate(genero, options => options.IncludeRuleSets("Atualizar"));
+            ValidationResult result = _generoValidador.Validate(genero, options => options.IncludeRuleSets(Constantes.DEFAULT,Constantes.ATUALIZAR));
             if (result.IsValid)
             {
                 _generoRepositorio.Atualizar(genero);
@@ -35,8 +35,8 @@ namespace Cod3rsGrowth.Servico
 
         public void Cadastrar(Genero genero)
         {          
-                _generoValidador.ValidateAndThrow(genero);  
-                _generoRepositorio.Cadastrar(genero);
+            _generoValidador.ValidateAndThrow(genero);  
+            _generoRepositorio.Cadastrar(genero);
         }
 
         public string Deletar(Genero genero)
