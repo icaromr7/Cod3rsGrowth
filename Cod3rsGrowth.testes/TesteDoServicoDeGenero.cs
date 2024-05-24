@@ -139,5 +139,45 @@ namespace Cod3rsGrowth.testes
             Assert.Equivalent(genero2.Nome, genero.Nome);
             Assert.Equivalent(genero2,genero);
         }
+        [Fact]
+        public void Ao_tentar_atualizar_deve_retornar_nome_nao_pode_ser_nullo()
+        {
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = "Acao"
+            };
+            TabelaDeGenero.Instance.Add(genero1);
+            var genero2 = new Genero
+            {
+                Id = 1,
+                Nome = null
+            };
+            //act
+            var mensagemError = Assert.Throws<ValidationException>(() => _generoServico.Atualizar(genero2));
+
+            //assert
+            Assert.Equal("Nome não pode ser nullo", mensagemError.Errors.Single().ErrorMessage); ;
+        }
+        [Fact]
+        public void Ao_tentar_atualizar_deve_retornar_nome_nao_pode_esta_vazio()
+        {
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = "Acao"
+            };
+            TabelaDeGenero.Instance.Add(genero1);
+            var genero2 = new Genero
+            {
+                Id = 1,
+                Nome = ""
+            };
+            //act
+            var mensagemError = Assert.Throws<ValidationException>(() => _generoServico.Atualizar(genero2));
+
+            //assert
+            Assert.Equal("Nome não pode está vazio", mensagemError.Errors.Single().ErrorMessage); ;
+        }
     }  
 }

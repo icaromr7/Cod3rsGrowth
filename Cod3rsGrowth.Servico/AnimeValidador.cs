@@ -10,12 +10,12 @@ namespace Cod3rsGrowth.Servico
         public AnimeValidador(IAnimeRepositorio animeRepositorio)
         {
             _animeRepositorio = animeRepositorio;
-            RuleFor(anime => anime.Nome).NotNull().WithMessage("Nome não pode ser nullo");
-            RuleFor(anime => anime.Nome).NotEmpty().WithMessage("Nome não pode está vazio");
-            RuleFor(anime => anime.Sinopse).NotNull().WithMessage("Sinopse não pode ser nullo");
-            RuleFor(anime => anime.Sinopse).NotEmpty().WithMessage("Sinopse não pode está vazia");
-            RuleFor(anime => anime.GenerosIds).NotNull().WithMessage("GenerosIds não pode ser nullo");
-            RuleFor(anime => anime.GenerosIds).NotEmpty().WithMessage("GenerosIds não pode está vazio");
+            RuleFor(anime => anime.Nome).Cascade(CascadeMode.Stop).NotNull().WithMessage("Nome não pode ser nullo")
+                .NotEmpty().WithMessage("Nome não pode está vazio");
+            RuleFor(anime => anime.Sinopse).Cascade(CascadeMode.Stop).NotNull().WithMessage("Sinopse não pode ser nullo")
+                .NotEmpty().WithMessage("Sinopse não pode está vazia"); ;
+            RuleFor(anime => anime.GenerosIds).Cascade(CascadeMode.Stop).NotNull().WithMessage("GenerosIds não pode ser nullo")
+                .NotEmpty().WithMessage("GenerosIds não pode está vazio");
             RuleFor(anime => anime.DataLancamento).NotEmpty().WithMessage("Data Lançamento não pode está vazia");
             RuleFor(anime => anime.Nota).NotEmpty().WithMessage("Nota não pode está vazia");
             RuleFor(anime => anime.StatusDeExibicao).NotEmpty().WithMessage("Status de Exibição não pode está vazio");
