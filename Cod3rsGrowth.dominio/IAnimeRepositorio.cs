@@ -1,9 +1,4 @@
 ﻿using Cod3rsGrowth.dominio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.testes
 {
@@ -13,6 +8,6 @@ namespace Cod3rsGrowth.testes
         Anime ObterPorId(int id);
         void Cadastrar(Anime anime);
         String Deletar(Anime anime);
-        String Atualizar(Anime anime);
+        void Atualizar(Anime anime);
     }
 }

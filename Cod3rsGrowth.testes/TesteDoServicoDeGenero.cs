@@ -1,7 +1,7 @@
 using Cod3rsGrowth.dominio;
 using Cod3rsGrowth.Servico;
-using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 namespace Cod3rsGrowth.testes
 {
     public class TesteDoServicoDeGenero : TesteBase {
@@ -29,6 +29,7 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equal(quantidadeEsperada, quantidadeAtual);
+            TabelaDeGenero.Instance.Remove(genero1);
         }
         [Fact]
         public void Ao_obter_por_id_deve_retornar_um_genero_especifico()
@@ -46,6 +47,7 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equal(idEsperado, genero.Id);
+            TabelaDeGenero.Instance.Remove(genero1);
         }
         [Fact]
         public void Ao_obter_por_id_deve_retornar_um_genero_nullo()
@@ -70,7 +72,22 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equal("Nome não pode ser nullo", mensagemError.Errors.Single().ErrorMessage);
-        }     
+        }
+        [Fact]
+        public void Ao_tentar_cadastrar_deve_retornar_nome_nao_pode_esta_vazio()
+        {
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = ""
+            };
+
+            //act
+            var mensagemError = Assert.Throws<ValidationException>(() => _generoServico.Cadastrar(genero1));
+
+            //assert
+            Assert.Equal("Nome não pode está vazio", mensagemError.Errors.Single().ErrorMessage);
+        }
         [Fact]
         public void Ao_cadastrar_deve_retornar_o_anime_cadastrado()
         {
@@ -86,6 +103,87 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.NotNull(genero);
+            TabelaDeGenero.Instance.Remove(genero1);
+        }
+        [Fact]
+        public void Ao_atualizar_deve_retornar_o_genero_nao_existe()
+        {         
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = "Aventura"
+            };
+            //act
+            var mensagemError = Assert.Throws<ValidationException>(() => _generoServico.Atualizar(genero1)); 
+            Genero genero = _generoRepositorio.ObterPorId(1);
+
+            //assert
+            Assert.Equal("O genero não existe", mensagemError.Errors.Single().ErrorMessage);
+        }
+        [Fact]
+        public void Ao_atualizar_deve_retornar_o_genero_atualizado()
+        {
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = "Acao"
+            };
+            TabelaDeGenero.Instance.Add(genero1);
+            var genero2 = new Genero
+            {
+                Id = 1,
+                Nome = "Aventura"
+            };
+            //act
+            _generoServico.Atualizar(genero2);
+            Genero genero = _generoRepositorio.ObterPorId(1);
+
+            //assert
+            Assert.Equivalent(genero2.Nome, genero.Nome);
+            Assert.Equivalent(genero2,genero);
+            TabelaDeGenero.Instance.Remove(genero1);
+        }
+        [Fact]
+        public void Ao_tentar_atualizar_deve_retornar_nome_nao_pode_ser_nullo()
+        {
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = "Acao"
+            };
+            TabelaDeGenero.Instance.Add(genero1);
+            var genero2 = new Genero
+            {
+                Id = 1,
+                Nome = null
+            };
+            //act
+            var mensagemError = Assert.Throws<ValidationException>(() => _generoServico.Atualizar(genero2));
+
+            //assert
+            Assert.Equal("Nome não pode ser nullo", mensagemError.Errors.Single().ErrorMessage);
+            TabelaDeGenero.Instance.Remove(genero1);
+        }
+        [Fact]
+        public void Ao_tentar_atualizar_deve_retornar_nome_nao_pode_esta_vazio()
+        {
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = "Acao"
+            };
+            TabelaDeGenero.Instance.Add(genero1);
+            var genero2 = new Genero
+            {
+                Id = 1,
+                Nome = ""
+            };
+            //act
+            var mensagemError = Assert.Throws<ValidationException>(() => _generoServico.Atualizar(genero2));
+
+            //assert
+            Assert.Equal("Nome não pode está vazio", mensagemError.Errors.Single().ErrorMessage);
+            TabelaDeGenero.Instance.Remove(genero1);
         }
     }  
 }

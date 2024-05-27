@@ -11,7 +11,7 @@ namespace Cod3rsGrowth.testes
     {
         public GeneroRepositorio() { }
 
-        public string Atualizar(Genero genero)
+        public void Atualizar(Genero genero)
         {
             throw new NotImplementedException();
         }

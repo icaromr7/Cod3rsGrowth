@@ -2,13 +2,6 @@
 using Cod3rsGrowth.testes;
 using FluentValidation;
 using FluentValidation.Results;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.Servico
 {
@@ -21,9 +14,17 @@ namespace Cod3rsGrowth.Servico
             _animeRepositorio = animeRepositorio;
             _animeValidador = animeValidador;
         }
-        public string Atualizar(Anime anime)
+        public void Atualizar(Anime anime)
         {
-            throw new NotImplementedException();
+            ValidationResult result = _animeValidador.Validate(anime, options => options.IncludeRuleSets(ConstantesDoValidador.DEFAULT,ConstantesDoValidador.ATUALIZAR));
+            if (result.IsValid)
+            {
+                _animeRepositorio.Atualizar(anime);
+            }
+            else
+            {
+                throw new ValidationException(result.Errors);
+            }
         }
 
         public void Cadastrar(Anime anime)
@@ -47,14 +48,6 @@ namespace Cod3rsGrowth.Servico
         {
             var animes = _animeRepositorio.ObterTodos();
             return animes;
-        }
-        public bool VerificarSeJaExiste(Anime anime)
-        {
-            var _anime =_animeRepositorio.ObterPorId(anime.Id);
-            if (_anime != null) {
-                return true;
-            }
-            return false;
-        }
+        }       
     }
 }
