@@ -33,9 +33,18 @@ namespace Cod3rsGrowth.Servico
             _animeRepositorio.Cadastrar(anime);
         }
 
-        public string Deletar(Anime anime)
+        public void Deletar(Anime anime)
         {
-            throw new NotImplementedException();
+            ValidationResult result = _animeValidador.Validate(anime, options => options.IncludeRuleSets(ConstantesDoValidador.ATUALIZAR));
+            if (result.IsValid)
+            {
+                _animeRepositorio.Deletar(anime);
+            }
+            else
+            {
+                throw new ValidationException(result.Errors);
+            }
+
         }
 
         public Anime ObterPorId(int id)
@@ -48,6 +57,15 @@ namespace Cod3rsGrowth.Servico
         {
             var animes = _animeRepositorio.ObterTodos();
             return animes;
-        }       
+        }
+        public void DeletarGeneroDeletado(int generoId)
+        {
+            _animeRepositorio.DeletarGeneroDeletado(generoId);
+        }
+        public List<Anime> ObterPorGeneroId(int generoId)
+        {
+            List<Anime> animes = _animeRepositorio.ObterPorGeneroId(generoId);
+            return animes;
+        }
     }
 }

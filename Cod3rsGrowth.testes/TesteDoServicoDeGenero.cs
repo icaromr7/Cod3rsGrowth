@@ -115,10 +115,9 @@ namespace Cod3rsGrowth.testes
             };
             //act
             var mensagemError = Assert.Throws<ValidationException>(() => _generoServico.Atualizar(genero1)); 
-            Genero genero = _generoRepositorio.ObterPorId(1);
 
             //assert
-            Assert.Equal("O genero não existe", mensagemError.Errors.Single().ErrorMessage);
+            Assert.Equal("O gênero não existe", mensagemError.Errors.Single().ErrorMessage);
         }
         [Fact]
         public void Ao_atualizar_deve_retornar_o_genero_atualizado()
@@ -142,6 +141,7 @@ namespace Cod3rsGrowth.testes
             Assert.Equivalent(genero2.Nome, genero.Nome);
             Assert.Equivalent(genero2,genero);
             TabelaDeGenero.Instance.Remove(genero1);
+            TabelaDeGenero.Instance.Remove(genero2);
         }
         [Fact]
         public void Ao_tentar_atualizar_deve_retornar_nome_nao_pode_ser_nullo()
@@ -184,6 +184,65 @@ namespace Cod3rsGrowth.testes
             //assert
             Assert.Equal("Nome não pode está vazio", mensagemError.Errors.Single().ErrorMessage);
             TabelaDeGenero.Instance.Remove(genero1);
+        }
+        [Fact]
+        public void Ao_tentar_deletar_deve_retornar_o_genero_nao_existe()
+        {
+            var genero1 = new Genero
+            {
+                Id = 1,
+            };
+            //act
+            var mensagemError = Assert.Throws<ValidationException>(() => _generoServico.Deletar(genero1));
+
+            //assert
+            Assert.Equal("O gênero não existe", mensagemError.Errors.Single().ErrorMessage);
+        }
+        [Fact]
+        public void Ao_deletar_deve_retorna_genero_null()
+        {
+            
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = "Aventura"
+            };
+            TabelaDeGenero.Instance.Add(genero1);
+            
+            //act
+            _generoServico.Deletar(genero1);
+            var generoDeletado = _generoServico.ObterPorId(1);
+
+            //assert
+            Assert.Null(generoDeletado);
+        }
+        [Fact]
+        public void Ao_deletar_deve_retornar_false_para_o_generoid_em_anime1()
+        {
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = "Aventura"
+            };
+            TabelaDeGenero.Instance.Add(genero1);
+            var anime1 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+            TabelaDeAnime.Instance.Add(anime1);
+
+            //act
+            _generoServico.Deletar(genero1);
+            var anime = anime1.GenerosIds.Contains(1);
+            //asert
+            Assert.False(anime);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
     }  
 }

@@ -1,7 +1,6 @@
 ﻿using Cod3rsGrowth.dominio;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace Cod3rsGrowth.testes
 {
@@ -778,6 +777,43 @@ namespace Cod3rsGrowth.testes
             //assert
             Assert.Equal("Status de Exibição não pode está vazio", mensagemError.Errors.Single().ErrorMessage);
             TabelaDeAnime.Instance.Remove(anime1);
+        }
+        [Fact]
+        public void Ao_tentar_deletar_deve_retornar_o_anime_nao_existe()
+        {
+            var anime1 = new Anime
+            {
+                Id = 1,
+            };
+            //act
+            var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Deletar(anime1));
+            //assert
+            Assert.Equal("O anime não existe", mensagemError.Errors.Single().ErrorMessage);
+        }
+        [Fact]
+        public void Ao_deletar_deve_retornar_anime_null()
+        {
+            var anime1 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                GenerosIds = new List<int>() { 1, 2 },
+                DataLancamento = new DateTime(2024, 5, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+            TabelaDeAnime.Instance.Add(anime1);
+            var anime2 = new Anime
+            {
+                Id = 1,
+            };
+            //act
+            _animeServico.Deletar(anime2);
+            var animeDeletado = _animeServico.ObterPorId(1);
+            
+            //assert
+            Assert.Null(animeDeletado);
         }
     }
 }

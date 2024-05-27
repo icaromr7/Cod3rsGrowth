@@ -15,10 +15,12 @@ namespace Cod3rsGrowth.Servico
     {
         private IGeneroRepositorio _generoRepositorio;
         private IValidator<Genero> _generoValidador;
-        public GeneroServico(IGeneroRepositorio generoRepositorio, IValidator<Genero> generoValidador)
+        private IAnimeServico _animeServico;
+        public GeneroServico(IGeneroRepositorio generoRepositorio, IValidator<Genero> generoValidador, IAnimeServico animeServico)
         {
             _generoRepositorio = generoRepositorio;
             _generoValidador = generoValidador;
+            _animeServico = animeServico;
         }
         public void Atualizar(Genero genero)
         {
@@ -39,9 +41,18 @@ namespace Cod3rsGrowth.Servico
             _generoRepositorio.Cadastrar(genero);
         }
 
-        public string Deletar(Genero genero)
+        public void Deletar(Genero genero)
         {
-            throw new NotImplementedException();
+            ValidationResult result = _generoValidador.Validate(genero, options => options.IncludeRuleSets(ConstantesDoValidador.ATUALIZAR));
+            if (result.IsValid)
+            {
+                _animeServico.DeletarGeneroDeletado(genero.Id);
+                _generoRepositorio.Deletar(genero);
+            }
+            else
+            {
+                throw new ValidationException(result.Errors);
+            }
         }
 
         public Genero ObterPorId(int id)
