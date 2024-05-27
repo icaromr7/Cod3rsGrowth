@@ -29,6 +29,7 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equal(quantidadeEsperada, quantidadeAtual);
+            TabelaDeGenero.Instance.Remove(genero1);
         }
         [Fact]
         public void Ao_obter_por_id_deve_retornar_um_genero_especifico()
@@ -46,6 +47,7 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equal(idEsperado, genero.Id);
+            TabelaDeGenero.Instance.Remove(genero1);
         }
         [Fact]
         public void Ao_obter_por_id_deve_retornar_um_genero_nullo()
@@ -101,6 +103,7 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.NotNull(genero);
+            TabelaDeGenero.Instance.Remove(genero1);
         }
         [Fact]
         public void Ao_atualizar_deve_retornar_o_genero_nao_existe()
@@ -138,6 +141,7 @@ namespace Cod3rsGrowth.testes
             //assert
             Assert.Equivalent(genero2.Nome, genero.Nome);
             Assert.Equivalent(genero2,genero);
+            TabelaDeGenero.Instance.Remove(genero1);
         }
         [Fact]
         public void Ao_tentar_atualizar_deve_retornar_nome_nao_pode_ser_nullo()
@@ -157,7 +161,8 @@ namespace Cod3rsGrowth.testes
             var mensagemError = Assert.Throws<ValidationException>(() => _generoServico.Atualizar(genero2));
 
             //assert
-            Assert.Equal("Nome não pode ser nullo", mensagemError.Errors.Single().ErrorMessage); ;
+            Assert.Equal("Nome não pode ser nullo", mensagemError.Errors.Single().ErrorMessage);
+            TabelaDeGenero.Instance.Remove(genero1);
         }
         [Fact]
         public void Ao_tentar_atualizar_deve_retornar_nome_nao_pode_esta_vazio()
@@ -177,7 +182,8 @@ namespace Cod3rsGrowth.testes
             var mensagemError = Assert.Throws<ValidationException>(() => _generoServico.Atualizar(genero2));
 
             //assert
-            Assert.Equal("Nome não pode está vazio", mensagemError.Errors.Single().ErrorMessage); ;
+            Assert.Equal("Nome não pode está vazio", mensagemError.Errors.Single().ErrorMessage);
+            TabelaDeGenero.Instance.Remove(genero1);
         }
     }  
 }

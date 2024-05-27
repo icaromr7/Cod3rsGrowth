@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.dominio;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Cod3rsGrowth.testes
 {
@@ -35,6 +36,7 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equal(quantidadeEsperada, quantidadeAtual);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_obter_por_id_deve_retornar_um_anime_com_id_especifico()
@@ -57,6 +59,7 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equal(idEsperado, anime.Id);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_obter_por_id_deve_retornar_um_anime_nullo() {
@@ -249,6 +252,7 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.NotNull(anime);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_tentar_editar_anime_deve_retornar_o_anime_nao_existe()
@@ -299,6 +303,7 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equal(anime2.Nome, anime.Nome);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_atualizar_a_sinopse_deve_retornar_a_sinopse_atualizada()
@@ -331,6 +336,7 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equal(anime2.Sinopse, anime.Sinopse);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_atualizar_o_generoids_deve_retornar_o_generoids_atualizado()
@@ -363,6 +369,7 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equivalent(anime2.GenerosIds, anime.GenerosIds);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_atualizar_a_datalancamento_deve_retornar_a_datalancamento_atualizada()
@@ -395,6 +402,7 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equivalent(anime2.DataLancamento, anime.DataLancamento);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_atualizar_a_nota_deve_retornar_a_nota_atualizada()
@@ -427,6 +435,7 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equivalent(anime2.Nota, anime.Nota);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_atualizar_o_statusdeexibicao_deve_retornar_o_statusdeexibicao_atualizado()
@@ -459,6 +468,7 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equivalent(anime2.StatusDeExibicao, anime.StatusDeExibicao);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_atualizar_deve_retornar_o_anime_atualizado()
@@ -497,6 +507,7 @@ namespace Cod3rsGrowth.testes
             Assert.Equivalent(anime2.Nota, anime.Nota);
             Assert.Equivalent(anime2.StatusDeExibicao, anime.StatusDeExibicao);
             Assert.Equivalent(anime2, anime);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_tentar_atualizar_deve_retornar_nome_nao_pode_ser_nullo()
@@ -526,6 +537,7 @@ namespace Cod3rsGrowth.testes
             var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Atualizar(anime2));
             //assert
             Assert.Equal("Nome não pode ser nullo", mensagemError.Errors.Single().ErrorMessage);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_tentar_atualizar_deve_retornar_nome_nao_pode_esta_vazio()
@@ -555,6 +567,7 @@ namespace Cod3rsGrowth.testes
             var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Atualizar(anime2));
             //assert
             Assert.Equal("Nome não pode está vazio", mensagemError.Errors.Single().ErrorMessage);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_tentar_atualizar_deve_retornar_sinopse_nao_pode_ser_nullo()
@@ -584,6 +597,7 @@ namespace Cod3rsGrowth.testes
             var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Atualizar(anime2));
             //assert
             Assert.Equal("Sinopse não pode ser nullo", mensagemError.Errors.Single().ErrorMessage);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_tentar_atualizar_deve_retornar_sinopse_nao_pode_esta_vazio()
@@ -613,6 +627,7 @@ namespace Cod3rsGrowth.testes
             var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Atualizar(anime2));
             //assert
             Assert.Equal("Sinopse não pode está vazia", mensagemError.Errors.Single().ErrorMessage);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_tentar_atualizar_deve_retornar_generoids_nao_pode_ser_nullo()
@@ -642,6 +657,7 @@ namespace Cod3rsGrowth.testes
             var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Atualizar(anime2));
             //assert
             Assert.Equal("GenerosIds não pode ser nullo", mensagemError.Errors.Single().ErrorMessage);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_tentar_atualizar_deve_retornar_generoids_nao_pode_esta_vazio()
@@ -671,6 +687,7 @@ namespace Cod3rsGrowth.testes
             var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Atualizar(anime2));
             //assert
             Assert.Equal("GenerosIds não pode está vazio", mensagemError.Errors.Single().ErrorMessage);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_tentar_atualizar_deve_retornar_data_lancamento_nao_pode_esta_vazia()
@@ -700,6 +717,7 @@ namespace Cod3rsGrowth.testes
             var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Atualizar(anime2));
             //assert
             Assert.Equal("Data Lançamento não pode está vazia", mensagemError.Errors.Single().ErrorMessage);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_tentar_atualizar_deve_retornar_nota_nao_pode_esta_vazia()
@@ -729,6 +747,7 @@ namespace Cod3rsGrowth.testes
             var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Atualizar(anime2));
             //assert
             Assert.Equal("Nota não pode está vazia", mensagemError.Errors.Single().ErrorMessage);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
         [Fact]
         public void Ao_tentar_atualizar_deve_retornar_status_de_exibicao_nao_pode_esta_vazio()
@@ -758,6 +777,7 @@ namespace Cod3rsGrowth.testes
             var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Atualizar(anime2));
             //assert
             Assert.Equal("Status de Exibição não pode está vazio", mensagemError.Errors.Single().ErrorMessage);
+            TabelaDeAnime.Instance.Remove(anime1);
         }
     }
 }
