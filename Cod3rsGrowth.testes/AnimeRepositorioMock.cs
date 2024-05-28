@@ -21,9 +21,10 @@ namespace Cod3rsGrowth.testes
         {
             TabelaDeAnime.Instance.Add(anime);
         }
-        public string Deletar(Anime anime)
+        public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            var animeDeletado = TabelaDeAnime.Instance.Find(delegate (Anime anime1) { return anime1.Id == id; });
+            TabelaDeAnime.Instance.Remove(animeDeletado);
         }
         public Anime ObterPorId(int id)
         {

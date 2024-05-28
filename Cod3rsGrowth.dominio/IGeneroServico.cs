@@ -11,7 +11,7 @@ namespace Cod3rsGrowth.dominio
         List<Genero> ObterTodos();
         Genero ObterPorId(int id);
         void Cadastrar(Genero genero);
-        String Deletar(Genero genero);
+        void Deletar(int id);
         void Atualizar(Genero genero);
     }
 }

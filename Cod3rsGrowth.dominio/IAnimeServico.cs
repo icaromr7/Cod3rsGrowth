@@ -11,7 +11,7 @@ namespace Cod3rsGrowth.dominio
         List<Anime> ObterTodos();
         Anime ObterPorId(int id);
         void Cadastrar(Anime anime);
-        String Deletar(Anime anime);
+        void Deletar(int id);
         void Atualizar(Anime anime);
     }
 }

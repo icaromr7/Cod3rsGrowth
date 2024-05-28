@@ -21,7 +21,7 @@ namespace Cod3rsGrowth.testes
             throw new NotImplementedException();
         }
 
-        public string Deletar(Genero genero)
+        public void Deletar(int id)
         {
             throw new NotImplementedException();
         }

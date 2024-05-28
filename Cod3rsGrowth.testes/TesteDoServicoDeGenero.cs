@@ -11,6 +11,7 @@ namespace Cod3rsGrowth.testes
         {
             _generoServico = FornecedorDeServicos.GetService<IGeneroServico>();
             _generoRepositorio = FornecedorDeServicos.GetService<IGeneroRepositorio>();
+            TabelaDeGenero.Instance.Clear();
         }
         [Fact]
         public void Ao_obter_todos_deve_retornar_uma_lista_com_generos()
@@ -29,7 +30,6 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equal(quantidadeEsperada, quantidadeAtual);
-            TabelaDeGenero.Instance.Remove(genero1);
         }
         [Fact]
         public void Ao_obter_por_id_deve_retornar_um_genero_especifico()
@@ -47,7 +47,6 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equal(idEsperado, genero.Id);
-            TabelaDeGenero.Instance.Remove(genero1);
         }
         [Fact]
         public void Ao_obter_por_id_deve_retornar_um_genero_nullo()
@@ -89,7 +88,7 @@ namespace Cod3rsGrowth.testes
             Assert.Equal("Nome não pode está vazio", mensagemError.Errors.Single().ErrorMessage);
         }
         [Fact]
-        public void Ao_cadastrar_deve_retornar_o_anime_cadastrado()
+        public void Ao_cadastrar_deve_retornar_o_genero_cadastrado()
         {
             var genero1 = new Genero
             {
@@ -99,11 +98,8 @@ namespace Cod3rsGrowth.testes
 
             //act
             _generoServico.Cadastrar(genero1);
-            Genero genero = _generoRepositorio.ObterPorId(1);
-
             //assert
-            Assert.NotNull(genero);
-            TabelaDeGenero.Instance.Remove(genero1);
+            Assert.Contains(TabelaDeGenero.Instance, genero => genero == genero1);
         }
         [Fact]
         public void Ao_atualizar_deve_retornar_o_genero_nao_existe()
@@ -115,10 +111,9 @@ namespace Cod3rsGrowth.testes
             };
             //act
             var mensagemError = Assert.Throws<ValidationException>(() => _generoServico.Atualizar(genero1)); 
-            Genero genero = _generoRepositorio.ObterPorId(1);
 
             //assert
-            Assert.Equal("O genero não existe", mensagemError.Errors.Single().ErrorMessage);
+            Assert.Equal("O gênero não existe", mensagemError.Errors.Single().ErrorMessage);
         }
         [Fact]
         public void Ao_atualizar_deve_retornar_o_genero_atualizado()
@@ -136,12 +131,9 @@ namespace Cod3rsGrowth.testes
             };
             //act
             _generoServico.Atualizar(genero2);
-            Genero genero = _generoRepositorio.ObterPorId(1);
 
             //assert
-            Assert.Equivalent(genero2.Nome, genero.Nome);
-            Assert.Equivalent(genero2,genero);
-            TabelaDeGenero.Instance.Remove(genero1);
+            Assert.Equal("Aventura",genero1.Nome);
         }
         [Fact]
         public void Ao_tentar_atualizar_deve_retornar_nome_nao_pode_ser_nullo()
@@ -162,7 +154,6 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equal("Nome não pode ser nullo", mensagemError.Errors.Single().ErrorMessage);
-            TabelaDeGenero.Instance.Remove(genero1);
         }
         [Fact]
         public void Ao_tentar_atualizar_deve_retornar_nome_nao_pode_esta_vazio()
@@ -183,7 +174,32 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.Equal("Nome não pode está vazio", mensagemError.Errors.Single().ErrorMessage);
-            TabelaDeGenero.Instance.Remove(genero1);
         }
+        [Fact]
+        public void Ao_tentar_deletar_deve_retornar_o_genero_nao_existe()
+        {
+            int id = 1;
+            //act
+            var mensagemError = Assert.Throws<ValidationException>(() => _generoServico.Deletar(id));
+
+            //assert
+            Assert.Equal("O gênero não existe", mensagemError.Errors.Single().ErrorMessage);
+        }
+        [Fact]
+        public void Deve_deletar_genero()
+        {          
+            var genero1 = new Genero
+            {
+                Id = 1,
+                Nome = "Aventura"
+            };
+            TabelaDeGenero.Instance.Add(genero1);
+            int id = 1;
+            //act
+            _generoServico.Deletar(id);
+
+            //assert
+            Assert.DoesNotContain(TabelaDeGenero.Instance, genero => genero == genero1);
+        }       
     }  
 }

@@ -23,7 +23,16 @@ namespace Cod3rsGrowth.Servico
             {
                 return !VerificarSeJaExiste(id) == false;
             })
-            .WithMessage("O genero não existe");
+            .WithMessage("O gênero não existe");
+            });
+            RuleSet(ConstantesDoValidador.DELETAR, () =>
+            {
+                RuleFor(genero => genero.Id)
+            .Must(id =>
+            {
+                return !VerificarSeJaExiste(id) == false;
+            })
+            .WithMessage("O gênero não existe");
             });
         }
         public bool VerificarSeJaExiste(int id)
