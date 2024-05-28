@@ -21,9 +21,9 @@ namespace Cod3rsGrowth.testes
         {
             TabelaDeGenero.Instance.Add(genero);
         }
-        public void Deletar(Genero genero)
+        public void Deletar(int id)
         {
-            var generoDeletado = TabelaDeGenero.Instance.Find(delegate (Genero genero1) { return genero1.Id == genero.Id; });
+            var generoDeletado = TabelaDeGenero.Instance.Find(delegate (Genero genero1) { return genero1.Id == id; });
             TabelaDeGenero.Instance.Remove(generoDeletado);
         }
         public Genero ObterPorId(int id)

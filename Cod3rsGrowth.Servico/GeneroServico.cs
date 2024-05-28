@@ -41,13 +41,16 @@ namespace Cod3rsGrowth.Servico
             _generoRepositorio.Cadastrar(genero);
         }
 
-        public void Deletar(Genero genero)
+        public void Deletar(int id)
         {
-            ValidationResult result = _generoValidador.Validate(genero, options => options.IncludeRuleSets(ConstantesDoValidador.ATUALIZAR));
+            Genero genero = new Genero
+            {
+                Id = id
+            };
+            ValidationResult result = _generoValidador.Validate(genero, options => options.IncludeRuleSets(ConstantesDoValidador.DELETAR));
             if (result.IsValid)
             {
-                _animeServico.DeletarGeneroDeletado(genero.Id);
-                _generoRepositorio.Deletar(genero);
+                _generoRepositorio.Deletar(genero.Id);
             }
             else
             {

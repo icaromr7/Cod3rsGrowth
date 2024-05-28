@@ -28,6 +28,15 @@ namespace Cod3rsGrowth.Servico
             })
             .WithMessage("O anime não existe");
             });
+            RuleSet(ConstantesDoValidador.DELETAR, () =>
+            {
+                RuleFor(anime => anime.Id)
+            .Must(id =>
+            {
+                return !VerificarSeJaExiste(id) == false;
+            })
+            .WithMessage("O anime não existe");
+            });
         }
         public bool VerificarSeJaExiste(int id)
         {

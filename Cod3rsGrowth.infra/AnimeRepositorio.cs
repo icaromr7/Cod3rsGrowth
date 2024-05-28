@@ -23,21 +23,10 @@ namespace Cod3rsGrowth.testes
             throw new NotImplementedException();
         }
 
-        public void Deletar(Anime anime)
+        public void Deletar(int id)
         {
             throw new NotImplementedException();
         }
-
-        public void DeletarGeneroDeletado(int generoId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Anime> ObterPorGeneroId(int GeneroId)
-        {
-            throw new NotImplementedException();
-        }
-
         public Anime ObterPorId(int id)
         {
             throw new NotImplementedException();

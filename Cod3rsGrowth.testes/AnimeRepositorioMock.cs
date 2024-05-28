@@ -21,9 +21,9 @@ namespace Cod3rsGrowth.testes
         {
             TabelaDeAnime.Instance.Add(anime);
         }
-        public void Deletar(Anime anime)
+        public void Deletar(int id)
         {
-            var animeDeletado = TabelaDeAnime.Instance.Find(delegate (Anime anime1) { return anime1.Id == anime.Id; });
+            var animeDeletado = TabelaDeAnime.Instance.Find(delegate (Anime anime1) { return anime1.Id == id; });
             TabelaDeAnime.Instance.Remove(animeDeletado);
         }
         public Anime ObterPorId(int id)
@@ -35,27 +35,6 @@ namespace Cod3rsGrowth.testes
         {
             var animes = TabelaDeAnime.Instance;
             return animes;
-        }
-        public List<Anime> ObterPorGeneroId(int generoId)
-        {
-            List<Anime> animes = new List<Anime>();
-            foreach (var item in TabelaDeAnime.Instance)
-            {
-                if (item.GenerosIds.Contains(generoId))
-                {
-                    animes.Add(item);
-                }
-            }
-            return animes;
-        }
-        public void DeletarGeneroDeletado(int generoId)
-        {
-            List<Anime> animes = ObterPorGeneroId(generoId);
-            
-                foreach (var item in animes)
-                {
-                    item.GenerosIds.Remove(generoId);
-                }          
         }
     }
 }
