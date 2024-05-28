@@ -11,16 +11,14 @@ using System.Xml.Linq;
 
 namespace Cod3rsGrowth.Servico
 {
-    public class GeneroServico : IGeneroServico
+    public class GeneroServico
     {
         private IGeneroRepositorio _generoRepositorio;
         private IValidator<Genero> _generoValidador;
-        private IAnimeServico _animeServico;
-        public GeneroServico(IGeneroRepositorio generoRepositorio, IValidator<Genero> generoValidador, IAnimeServico animeServico)
+        public GeneroServico(IGeneroRepositorio generoRepositorio, IValidator<Genero> generoValidador)
         {
             _generoRepositorio = generoRepositorio;
             _generoValidador = generoValidador;
-            _animeServico = animeServico;
         }
         public void Atualizar(Genero genero)
         {
