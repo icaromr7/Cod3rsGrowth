@@ -9,19 +9,9 @@ namespace Cod3rsGrowth.testes
 {
     public sealed class TabelaDeAnime
     {
-        private static List<Anime> TabelaDeAnimes = null;
-
-        private TabelaDeAnime() { }
-        public static List<Anime> GetTabelaAnime()
-        {
-            if (TabelaDeAnimes == null)
-            {
-                TabelaDeAnimes = new List<Anime>();
-            }
-            return TabelaDeAnimes;
-        }
-
-        //private static List<Anime> Animes { get { new Anime(1, "Anime1", "Sinopse1", new List<int>() { 1,2 }, new DateTime(2024, 5, 15), 7.8m, Anime.Status.EmExibicao); return Animes; } }
-       
+        private static List<Anime> instance = new List<Anime>();
+        
+        public static List<Anime> Instance { get { return instance; } }
+        
     }
 }

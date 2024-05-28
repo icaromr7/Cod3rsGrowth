@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.testes
 {
-    public class GeneroRepository : IGeneroRepositorio
+    public class GeneroRepositorio : IGeneroRepositorio
     {
-        public GeneroRepository() { }
+        public GeneroRepositorio() { }
 
-        public string Atualizar(Genero genero)
+        public void Atualizar(Genero genero)
         {
             throw new NotImplementedException();
         }
 
-        public string Cadastrar(Genero genero)
+        public void Cadastrar(Genero genero)
         {
             throw new NotImplementedException();
         }
 
-        public string Deletar(Genero genero)
+        public void Deletar(int id)
         {
             throw new NotImplementedException();
         }

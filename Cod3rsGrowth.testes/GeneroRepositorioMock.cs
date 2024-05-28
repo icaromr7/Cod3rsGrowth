@@ -4,34 +4,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Cod3rsGrowth.testes
 {
     public class GeneroRepositorioMock : IGeneroRepositorio
     {
-        public string Atualizar(Genero genero)
-        {
-            throw new NotImplementedException();
+        public GeneroRepositorioMock() {
         }
-
-        public string Cadastrar(Genero genero)
+        public void Atualizar(Genero genero)
         {
-            throw new NotImplementedException();
+            var generoModificado = TabelaDeGenero.Instance.Find(delegate (Genero genero1) { return genero1.Id == genero.Id; });
+            generoModificado.Nome = genero.Nome;
         }
-
-        public string Deletar(Genero genero)
+        public void Cadastrar(Genero genero)
         {
-            throw new NotImplementedException();
+            TabelaDeGenero.Instance.Add(genero);
         }
-
+        public void Deletar(int id)
+        {
+            var generoDeletado = TabelaDeGenero.Instance.Find(delegate (Genero genero1) { return genero1.Id == id; });
+            TabelaDeGenero.Instance.Remove(generoDeletado);
+        }
         public Genero ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            var genero = TabelaDeGenero.Instance.Find(delegate (Genero genero1) { return genero1.Id == id; });
+            return genero;
         }
-
         public List<Genero> ObterTodos()
         {
-            List<Genero> generos = new List<Genero>();
+            var generos = TabelaDeGenero.Instance;
             return generos;
         }
     }

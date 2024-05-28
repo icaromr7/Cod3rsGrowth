@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Cod3rsGrowth.dominio
 {
@@ -25,17 +19,6 @@ namespace Cod3rsGrowth.dominio
             Previsto = 2,
             [Description("O anime ou a temporada do anime já foi finalizada")]
             Concluido = 3
-        }
-
-        public Anime(int id, string nome, string sinopse, List<int> generosIds, DateTime dataLancamento, decimal nota, Status statusDeExibicao)
-        {
-            this.Id = id;
-            this.Nome = nome;
-            this.Sinopse = sinopse;
-            this.GenerosIds = generosIds;
-            this.DataLancamento = dataLancamento;
-            this.Nota = Nota;
-            this.StatusDeExibicao = statusDeExibicao;
-        }
+        }      
     }
 }
