@@ -5,11 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Cod3rsGrowth.testes
 {
     public class TesteDoServicoDeGenero : TesteBase {
-        private IGeneroServico _generoServico;
+        private GeneroServico _generoServico;
         private IGeneroRepositorio _generoRepositorio;
         public TesteDoServicoDeGenero()
         {
-            _generoServico = FornecedorDeServicos.GetService<IGeneroServico>();
+            _generoServico = FornecedorDeServicos.GetService<GeneroServico>();
             _generoRepositorio = FornecedorDeServicos.GetService<IGeneroRepositorio>();
             TabelaDeGenero.Instance.Clear();
         }

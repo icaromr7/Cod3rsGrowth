@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.dominio;
+using Cod3rsGrowth.Servico;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -6,10 +7,10 @@ namespace Cod3rsGrowth.testes
 {
     public class TesteDoServicoDeAnime : TesteBase
     {
-        private IAnimeServico _animeServico;
+        private AnimeServico _animeServico;
         public TesteDoServicoDeAnime()
         {
-            _animeServico = FornecedorDeServicos.GetService<IAnimeServico>();
+            _animeServico = FornecedorDeServicos.GetService<AnimeServico>();
             TabelaDeAnime.Instance.Clear();
         }
         [Fact]

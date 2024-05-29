@@ -5,7 +5,7 @@ using FluentValidation.Results;
 
 namespace Cod3rsGrowth.Servico
 {
-    public class AnimeServico : IAnimeServico
+    public class AnimeServico
     {
         private IAnimeRepositorio _animeRepositorio;
         private IValidator<Anime> _animeValidador;
