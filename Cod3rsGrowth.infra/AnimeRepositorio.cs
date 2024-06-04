@@ -1,16 +1,21 @@
 ﻿using Cod3rsGrowth.dominio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Cod3rsGrowth.infra;
+using LinqToDB;
+using LinqToDB.Data;
+using System.Configuration;
 
 namespace Cod3rsGrowth.testes
 {
     public class AnimeRepositorio : IAnimeRepositorio
     {
+        private readonly DataConnection dataConnection;
         public AnimeRepositorio()
         {
+            var appSettings = ConfigurationManager.AppSettings;
+            string result = appSettings[ConstantesDoRepositorio.CONNECTION_STRING];
+            dataConnection = new DataConnection(
+                new DataOptions()
+                    .UseSqlServer(result));
         }
 
         public void Atualizar(Anime anime)
