@@ -3,7 +3,7 @@ using Cod3rsGrowth.infra;
 using LinqToDB;
 using LinqToDB.Data;
 using System.Configuration;
-
+using static Cod3rsGrowth.dominio.Anime;
 namespace Cod3rsGrowth.testes
 {
     public class AnimeRepositorio : IAnimeRepositorio
@@ -37,10 +37,16 @@ namespace Cod3rsGrowth.testes
             throw new NotImplementedException();
         }
 
-        public List<Anime> ObterTodos()
+        public List<Anime> ObterTodos(Status? statusDeExibicao = null)
         {
-            List<Anime> animes = new List<Anime>();
-            return animes;
+            var animes = dataConnection.GetTable<Anime>();
+
+            if (statusDeExibicao.HasValue)
+            {
+                animes = (ITable<Anime>) animes.Where(anime => anime.StatusDeExibicao == statusDeExibicao.Value);
+            }
+
+            return animes.ToList();
         }
     }
 }

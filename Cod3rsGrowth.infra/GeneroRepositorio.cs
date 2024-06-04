@@ -39,8 +39,9 @@ namespace Cod3rsGrowth.testes
 
         public List <Genero> ObterTodos()
         {
-            List<Genero> generos = new List<Genero>();
-            return generos;
+            var generos = dataConnection.GetTable<Genero>();
+            generos = (ITable<Genero>)generos.OrderBy(g => g.Nome);
+            return generos.ToList();
         }
     }
 }
