@@ -1,40 +1,51 @@
 ﻿using Cod3rsGrowth.dominio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Cod3rsGrowth.infra;
+using LinqToDB;
+using LinqToDB.Data;
+using System.Configuration;
 
 namespace Cod3rsGrowth.testes
 {
     public class GeneroRepositorio : IGeneroRepositorio
     {
-        public GeneroRepositorio() { }
+        private readonly DataConnection dataConnection;
+        public GeneroRepositorio() {
+            var appSettings = ConfigurationManager.AppSettings;
+            string result = appSettings[ConstantesDoRepositorio.CONNECTION_STRING];
+            dataConnection = new DataConnection(
+                new DataOptions()
+                    .UseSqlServer(result));
+        }
 
         public void Atualizar(Genero genero)
         {
-            throw new NotImplementedException();
+            dataConnection.Update(genero);
         }
 
         public void Cadastrar(Genero genero)
         {
-            throw new NotImplementedException();
+            dataConnection.Insert(genero);
         }
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            dataConnection.GetTable<Genero>()
+                .Where(genero => genero.Id == id)
+                .Delete();
         }
 
         public Genero ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            var genero = dataConnection.GetTable<Genero>()
+                .FirstOrDefault(genero => genero.Id == id);
+            return genero;
         }
 
         public List <Genero> ObterTodos()
         {
-            List<Genero> generos = new List<Genero>();
-            return generos;
+            var generos = dataConnection.GetTable<Genero>();
+            generos = (ITable<Genero>)generos.OrderBy(g => g.Nome);
+            return generos.ToList();
         }
     }
 }
