@@ -10,8 +10,6 @@ namespace Cod3rsGrowth.forms
         [STAThread]
         static void Main()
         {
-            var appSettings = ConfigurationManager.AppSettings;
-            string result = appSettings["ConnectionString"];
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
         }
