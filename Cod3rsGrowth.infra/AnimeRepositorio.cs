@@ -36,7 +36,9 @@ namespace Cod3rsGrowth.testes
         }
         public Anime ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            var anime = dataConnection.GetTable<Anime>()
+                .FirstOrDefault(anime => anime.Id == id);
+            return anime;
         }
 
         public List<Anime> ObterTodos(Status? statusDeExibicao = null)

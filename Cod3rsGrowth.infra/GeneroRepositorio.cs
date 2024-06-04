@@ -36,7 +36,9 @@ namespace Cod3rsGrowth.testes
 
         public Genero ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            var genero = dataConnection.GetTable<Genero>()
+                .FirstOrDefault(genero => genero.Id == id);
+            return genero;
         }
 
         public List <Genero> ObterTodos()
