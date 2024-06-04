@@ -19,7 +19,7 @@ namespace Cod3rsGrowth.testes
 
         public void Atualizar(Genero genero)
         {
-            throw new NotImplementedException();
+            dataConnection.Update(genero);
         }
 
         public void Cadastrar(Genero genero)
