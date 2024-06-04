@@ -29,7 +29,9 @@ namespace Cod3rsGrowth.testes
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            dataConnection.GetTable<Genero>()
+                .Where(genero => genero.Id == id)
+                .Delete();
         }
 
         public Genero ObterPorId(int id)
