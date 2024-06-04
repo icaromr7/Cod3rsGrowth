@@ -25,7 +25,7 @@ namespace Cod3rsGrowth.testes
 
         public void Cadastrar(Anime anime)
         {
-            throw new NotImplementedException();
+            dataConnection.Insert(anime);
         }
 
         public void Deletar(int id)
