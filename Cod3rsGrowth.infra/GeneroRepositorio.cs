@@ -24,7 +24,7 @@ namespace Cod3rsGrowth.testes
 
         public void Cadastrar(Genero genero)
         {
-            throw new NotImplementedException();
+            dataConnection.Insert(genero);
         }
 
         public void Deletar(int id)
