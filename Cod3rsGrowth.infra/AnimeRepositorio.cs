@@ -20,7 +20,7 @@ namespace Cod3rsGrowth.testes
 
         public void Atualizar(Anime anime)
         {
-            throw new NotImplementedException();
+            dataConnection.Update(anime);
         }
 
         public void Cadastrar(Anime anime)
