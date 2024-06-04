@@ -30,7 +30,9 @@ namespace Cod3rsGrowth.testes
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            dataConnection.GetTable<Anime>()
+                .Where(anime => anime.Id == id)
+                .Delete();
         }
         public Anime ObterPorId(int id)
         {
