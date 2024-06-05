@@ -1,3 +1,4 @@
+using Cod3rsGrowth.infra;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;
@@ -20,13 +21,13 @@ namespace Cod3rsGrowth.forms
         private static ServiceProvider CreateServices()
         {
             var appSettings = ConfigurationManager.AppSettings;
-            string result = appSettings["ConnectionString"];
+            string result = appSettings[ConstantesDoRepositorio.CONNECTION_STRING];
             return new ServiceCollection()
                 .AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
                     .WithGlobalConnectionString(result)
-                    .ScanIn(typeof(AdicionarTabelas).Assembly).For.Migrations())
+                    .ScanIn(typeof(_20240605085700_CriarTabelas).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
         }

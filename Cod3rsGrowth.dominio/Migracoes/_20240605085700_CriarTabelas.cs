@@ -1,11 +1,9 @@
 ﻿using FluentMigrator;
-using System.Windows.Forms;
-using System;
 
 namespace Cod3rsGrowth.forms
 {
     [Migration(20240605085700)]
-    public class AdicionarTabelas : Migration
+    public class _20240605085700_CriarTabelas : Migration
     {
         public override void Down()
         {
@@ -17,16 +15,16 @@ namespace Cod3rsGrowth.forms
         {
             Create.Table("Anime")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("Nome").AsString()
-                .WithColumn("Sinopse").AsString()
-                .WithColumn("DataLancamento").AsDateTime()
+                .WithColumn("Nome").AsString().NotNullable()
+                .WithColumn("Sinopse").AsString().NotNullable()
+                .WithColumn("DataLancamento").AsDateTime().NotNullable()
                 .WithColumn("GenerosIds").AsInt32().NotNullable()
-                .WithColumn("Nota").AsDecimal()
-                .WithColumn("StatusDeExibicao").AsString();
+                .WithColumn("Nota").AsDecimal().NotNullable()
+                .WithColumn("StatusDeExibicao").AsString().NotNullable();
             Create.Table("Genero")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("Nome").AsString();
-            Create.ForeignKey("fk_Anime_GeneroIds_GeneroId")
+                .WithColumn("Nome").AsString().NotNullable();
+            Create.ForeignKey("fk_Anime_Genero_GeneroId")
             .FromTable("Anime").ForeignColumn("GenerosIds")
             .ToTable("Genero").PrimaryColumn("Id");
         }
