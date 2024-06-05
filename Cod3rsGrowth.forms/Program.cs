@@ -1,3 +1,4 @@
+using Cod3rsGrowth.dominio.Migracoes;
 using Cod3rsGrowth.infra;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;

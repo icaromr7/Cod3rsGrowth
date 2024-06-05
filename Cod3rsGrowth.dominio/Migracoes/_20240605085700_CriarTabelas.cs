@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace Cod3rsGrowth.forms
+namespace Cod3rsGrowth.dominio.Migracoes
 {
     [Migration(20240605085700)]
     public class _20240605085700_CriarTabelas : Migration
