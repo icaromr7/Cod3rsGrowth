@@ -1,17 +1,41 @@
+using Cod3rsGrowth.dominio.Migracoes;
+using Cod3rsGrowth.infra;
+using FluentMigrator.Runner;
+using Microsoft.Extensions.DependencyInjection;
+using System.Configuration;
+
 namespace Cod3rsGrowth.forms
 {
-    internal static class Program
+    public static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
-        static void Main()
+        public static void Main(string[] args)
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            using (var serviceProvider = CreateServices())
+            using (var scope = serviceProvider.CreateScope())
+            {
+                UpdateDatabase(scope.ServiceProvider);
+            }
+            //ApplicationConfiguration.Initialize();
+            //Application.Run(new Form1());
+        }
+        private static ServiceProvider CreateServices()
+        {
+            var appSettings = ConfigurationManager.AppSettings;
+            string result = appSettings[ConstantesDoRepositorio.CONNECTION_STRING];
+            return new ServiceCollection()
+                .AddFluentMigratorCore()
+                .ConfigureRunner(rb => rb
+                    .AddSqlServer()
+                    .WithGlobalConnectionString(result)
+                    .ScanIn(typeof(_20240605085700_CriarTabelas).Assembly).For.Migrations())
+                .AddLogging(lb => lb.AddFluentMigratorConsole())
+                .BuildServiceProvider(false);
+        }
+        private static void UpdateDatabase(IServiceProvider serviceProvider)
+        {
+            var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
+            runner.MigrateUp();
         }
     }
 }
