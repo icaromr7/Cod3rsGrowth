@@ -2,6 +2,7 @@ using Cod3rsGrowth.dominio;
 using Cod3rsGrowth.dominio.Migracoes;
 using Cod3rsGrowth.infra;
 using Cod3rsGrowth.Servico;
+using Cod3rsGrowth.testes;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
