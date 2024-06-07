@@ -1,14 +1,8 @@
 ﻿using Cod3rsGrowth.dominio;
-using LinqToDB.Data;
 using LinqToDB;
-using System;
-using System.Collections.Generic;
+using LinqToDB.Data;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Cod3rsGrowth.dominio.Anime;
-using Cod3rsGrowth.testes;
 
 namespace Cod3rsGrowth.infra
 {

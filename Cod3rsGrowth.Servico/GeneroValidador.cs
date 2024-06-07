@@ -1,5 +1,4 @@
 ﻿using Cod3rsGrowth.dominio;
-using Cod3rsGrowth.testes;
 using FluentValidation;
 using System;
 using System.Collections.Generic;

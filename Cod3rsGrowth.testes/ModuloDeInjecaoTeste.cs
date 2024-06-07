@@ -1,12 +1,8 @@
 ﻿using Cod3rsGrowth.dominio;
+using Cod3rsGrowth.infra;
 using Cod3rsGrowth.Servico;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.testes
 {

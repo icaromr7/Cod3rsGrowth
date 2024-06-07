@@ -1,7 +1,7 @@
 ﻿using Cod3rsGrowth.dominio;
 using static Cod3rsGrowth.dominio.Anime;
 
-namespace Cod3rsGrowth.testes
+namespace Cod3rsGrowth.dominio
 {
     public interface IAnimeRepositorio
     {
