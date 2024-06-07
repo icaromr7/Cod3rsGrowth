@@ -29,8 +29,10 @@
             btnRemover = new Button();
             btnEditar = new Button();
             btnAdicionar = new Button();
+            formListaBindingSource = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)dataAnime).BeginInit();
             ((System.ComponentModel.ISupportInitialize)animeBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)formListaBindingSource).BeginInit();
             SuspendLayout();
             // 
             // dataAnime
@@ -39,7 +41,7 @@
             dataAnime.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataAnime.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nomeDataGridViewTextBoxColumn, sinopseDataGridViewTextBoxColumn, notaDataGridViewTextBoxColumn, dataLancamentoDataGridViewTextBoxColumn, statusDeExibicaoDataGridViewTextBoxColumn });
             dataAnime.DataSource = animeBindingSource;
-            dataAnime.Location = new Point(218, 45);
+            dataAnime.Location = new Point(33, 36);
             dataAnime.Name = "dataAnime";
             dataAnime.RowHeadersWidth = 51;
             dataAnime.Size = new Size(656, 284);
@@ -80,7 +82,7 @@
             notaDataGridViewTextBoxColumn.HeaderText = "Nota";
             notaDataGridViewTextBoxColumn.MaxInputLength = 3;
             notaDataGridViewTextBoxColumn.MinimumWidth = 3;
-            notaDataGridViewTextBoxColumn.DefaultCellStyle = new DataGridViewCellStyle() { Format = "#.#"};
+            notaDataGridViewTextBoxColumn.DefaultCellStyle = new DataGridViewCellStyle() { Format = "#.#" };
             notaDataGridViewTextBoxColumn.Name = "notaDataGridViewTextBoxColumn";
             notaDataGridViewTextBoxColumn.Width = 71;
             // 
@@ -108,7 +110,7 @@
             // 
             // btnRemover
             // 
-            btnRemover.Location = new Point(1030, 569);
+            btnRemover.Location = new Point(595, 339);
             btnRemover.Name = "btnRemover";
             btnRemover.Size = new Size(94, 29);
             btnRemover.TabIndex = 2;
@@ -118,7 +120,7 @@
             // 
             // btnEditar
             // 
-            btnEditar.Location = new Point(930, 569);
+            btnEditar.Location = new Point(495, 339);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(94, 29);
             btnEditar.TabIndex = 3;
@@ -127,7 +129,7 @@
             // 
             // btnAdicionar
             // 
-            btnAdicionar.Location = new Point(830, 569);
+            btnAdicionar.Location = new Point(395, 339);
             btnAdicionar.Name = "btnAdicionar";
             btnAdicionar.Size = new Size(94, 29);
             btnAdicionar.TabIndex = 4;
@@ -135,11 +137,15 @@
             btnAdicionar.UseVisualStyleBackColor = true;
             btnAdicionar.Click += btnAdicionar_Click;
             // 
+            // formListaBindingSource
+            // 
+            formListaBindingSource.DataSource = typeof(FormLista);
+            // 
             // FormLista
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1147, 610);
+            ClientSize = new Size(724, 399);
             Controls.Add(btnAdicionar);
             Controls.Add(btnEditar);
             Controls.Add(btnRemover);
@@ -148,6 +154,7 @@
             Text = "FormLista";
             ((System.ComponentModel.ISupportInitialize)dataAnime).EndInit();
             ((System.ComponentModel.ISupportInitialize)animeBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)formListaBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -158,6 +165,7 @@
         private Button btnEditar;
         private Button btnAdicionar;
         private BindingSource animeBindingSource;
+        private BindingSource formListaBindingSource;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn sinopseDataGridViewTextBoxColumn;
