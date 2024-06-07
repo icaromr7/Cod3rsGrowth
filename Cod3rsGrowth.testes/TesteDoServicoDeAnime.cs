@@ -59,7 +59,8 @@ namespace Cod3rsGrowth.testes
             Assert.Equal(idEsperado, anime.Id);
         }
         [Fact]
-        public void Ao_obter_por_id_deve_retornar_um_anime_nullo() {
+        public void Ao_obter_por_id_deve_retornar_um_anime_nullo()
+        {
 
             //act
             Anime anime = _animeServico.ObterPorId(1);
@@ -183,7 +184,7 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2},
+                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -261,7 +262,7 @@ namespace Cod3rsGrowth.testes
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
-            };         
+            };
             //act
             var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Atualizar(anime1));
             //assert
@@ -682,7 +683,7 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1 , 2},
+                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao

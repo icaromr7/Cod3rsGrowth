@@ -3,6 +3,7 @@ using Cod3rsGrowth.dominio.Migracoes;
 using Cod3rsGrowth.infra;
 using Cod3rsGrowth.Servico;
 using FluentMigrator.Runner;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Configuration;
@@ -23,7 +24,7 @@ namespace Cod3rsGrowth.forms
             ApplicationConfiguration.Initialize();
             var host = CreateHostBuilder().Build();
             ServiceProvider = host.Services;
-            Application.Run(ServiceProvider.GetRequiredService<Form1>());
+            Application.Run(ServiceProvider.GetRequiredService<FormLista>());
         }
         private static ServiceProvider CreateServices()
         {
@@ -34,7 +35,7 @@ namespace Cod3rsGrowth.forms
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
                     .WithGlobalConnectionString(result)
-                    .ScanIn(typeof(_20240605085700_CriarTabelas).Assembly).For.Migrations())
+                    .ScanIn(typeof(_20240606131800_Alterar_Status_De_Exibicao).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
         }
@@ -48,9 +49,13 @@ namespace Cod3rsGrowth.forms
         {
             return Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) => {
+                    services.AddTransient<IGeneroRepositorio, GeneroRepositorio>();
+                    services.AddTransient<IAnimeRepositorio, AnimeRepositorio>();
                     services.AddTransient<AnimeServico> ();
                     services.AddTransient<GeneroServico> ();
-                    services.AddTransient<Form1>();
+                    services.AddScoped<IValidator<Anime>, AnimeValidador>();
+                    services.AddScoped<IValidator<Genero>, GeneroValidador>();
+                    services.AddTransient<FormLista>();
                 });
         }
     }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cod3rsGrowth.testes
+namespace Cod3rsGrowth.dominio
 {
     public interface IGeneroRepositorio
     {

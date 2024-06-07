@@ -1,10 +1,10 @@
 ﻿using Cod3rsGrowth.dominio;
-using Cod3rsGrowth.infra;
 using LinqToDB;
 using LinqToDB.Data;
 using System.Configuration;
 using static Cod3rsGrowth.dominio.Anime;
-namespace Cod3rsGrowth.testes
+
+namespace Cod3rsGrowth.infra
 {
     public class AnimeRepositorio : IAnimeRepositorio
     {
@@ -37,6 +37,7 @@ namespace Cod3rsGrowth.testes
         public Anime ObterPorId(int id)
         {
             var anime = dataConnection.GetTable<Anime>()
+
                 .FirstOrDefault(anime => anime.Id == id);
             return anime;
         }
@@ -47,7 +48,7 @@ namespace Cod3rsGrowth.testes
 
             if (statusDeExibicao.HasValue)
             {
-                animes = (ITable<Anime>) animes.Where(anime => anime.StatusDeExibicao == statusDeExibicao.Value);
+                animes = (ITable<Anime>)animes.Where(anime => anime.StatusDeExibicao == statusDeExibicao.Value);
             }
 
             return animes.ToList();
