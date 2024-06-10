@@ -1,5 +1,6 @@
 using Cod3rsGrowth.dominio;
 using Cod3rsGrowth.Servico;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Cod3rsGrowth.forms
 {
@@ -7,11 +8,13 @@ namespace Cod3rsGrowth.forms
     {
         private List<Anime> listaDeAnimes;
         private AnimeServico _animeServico;
-        public FormLista(AnimeServico animeServico)
+        private GeneroServico _generoServico;
+        public FormLista(AnimeServico animeServico, GeneroServico generoServico)
         {
             _animeServico = animeServico;
             InitializeComponent();
             load();
+            _generoServico = generoServico;
         }
 
         private void load()
@@ -24,12 +27,20 @@ namespace Cod3rsGrowth.forms
         {
 
         }
-        private void button1_Click(object sender, EventArgs e)
+
+        private void btnAdicionar_Click(object sender, EventArgs e)
+        {
+            FormAdicionarAnime formAdicionarAnime = new FormAdicionarAnime(_animeServico, _generoServico);
+            formAdicionarAnime.Show();
+
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btnAdicionar_Click(object sender, EventArgs e)
+        private void btnRemover_Click(object sender, EventArgs e)
         {
 
         }

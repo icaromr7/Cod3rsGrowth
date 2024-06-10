@@ -35,7 +35,7 @@ namespace Cod3rsGrowth.forms
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
                     .WithGlobalConnectionString(result)
-                    .ScanIn(typeof(_20240606131800_Alterar_Status_De_Exibicao).Assembly).For.Migrations())
+                    .ScanIn(typeof(_20240607134700_AlterarTabelas).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
         }

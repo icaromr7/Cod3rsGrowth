@@ -43,8 +43,8 @@ namespace Cod3rsGrowth.infra
 
         public List<Genero> ObterTodos()
         {
-            var generos = dataConnection.GetTable<Genero>();
-            generos = (ITable<Genero>)generos.OrderBy(g => g.Nome);
+            var generos = dataConnection.GetTable<Genero>()
+                .OrderBy(genero => genero.Nome);
             return generos.ToList();
         }
     }

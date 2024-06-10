@@ -19,17 +19,17 @@
         {
             components = new System.ComponentModel.Container();
             dataAnime = new DataGridView();
-            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            nomeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            sinopseDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            notaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            dataLancamentoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            statusDeExibicaoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             animeBindingSource = new BindingSource(components);
             btnRemover = new Button();
             btnEditar = new Button();
             btnAdicionar = new Button();
             formListaBindingSource = new BindingSource(components);
+            idColumn = new DataGridViewTextBoxColumn();
+            nomeColumn = new DataGridViewTextBoxColumn();
+            sinopseColumn = new DataGridViewTextBoxColumn();
+            notaColumn = new DataGridViewTextBoxColumn();
+            dataLancamentoColumn = new DataGridViewTextBoxColumn();
+            statusDeExibicaoColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataAnime).BeginInit();
             ((System.ComponentModel.ISupportInitialize)animeBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)formListaBindingSource).BeginInit();
@@ -39,7 +39,7 @@
             // 
             dataAnime.AutoGenerateColumns = false;
             dataAnime.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataAnime.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nomeDataGridViewTextBoxColumn, sinopseDataGridViewTextBoxColumn, notaDataGridViewTextBoxColumn, dataLancamentoDataGridViewTextBoxColumn, statusDeExibicaoDataGridViewTextBoxColumn });
+            dataAnime.Columns.AddRange(new DataGridViewColumn[] { idColumn, nomeColumn, sinopseColumn, notaColumn, dataLancamentoColumn, statusDeExibicaoColumn });
             dataAnime.DataSource = animeBindingSource;
             dataAnime.Location = new Point(33, 36);
             dataAnime.Name = "dataAnime";
@@ -47,62 +47,6 @@
             dataAnime.Size = new Size(656, 284);
             dataAnime.TabIndex = 0;
             dataAnime.CellContentClick += dataAnime_CellContentClick;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            idDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn.HeaderText = "Id";
-            idDataGridViewTextBoxColumn.MinimumWidth = 6;
-            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            idDataGridViewTextBoxColumn.Width = 51;
-            // 
-            // nomeDataGridViewTextBoxColumn
-            // 
-            nomeDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
-            nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
-            nomeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
-            nomeDataGridViewTextBoxColumn.Width = 79;
-            // 
-            // sinopseDataGridViewTextBoxColumn
-            // 
-            sinopseDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            sinopseDataGridViewTextBoxColumn.DataPropertyName = "Sinopse";
-            sinopseDataGridViewTextBoxColumn.HeaderText = "Sinopse";
-            sinopseDataGridViewTextBoxColumn.MinimumWidth = 6;
-            sinopseDataGridViewTextBoxColumn.Name = "sinopseDataGridViewTextBoxColumn";
-            sinopseDataGridViewTextBoxColumn.Width = 90;
-            // 
-            // notaDataGridViewTextBoxColumn
-            // 
-            notaDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            notaDataGridViewTextBoxColumn.DataPropertyName = "Nota";
-            notaDataGridViewTextBoxColumn.HeaderText = "Nota";
-            notaDataGridViewTextBoxColumn.MaxInputLength = 3;
-            notaDataGridViewTextBoxColumn.MinimumWidth = 3;
-            notaDataGridViewTextBoxColumn.DefaultCellStyle = new DataGridViewCellStyle() { Format = "#.#" };
-            notaDataGridViewTextBoxColumn.Name = "notaDataGridViewTextBoxColumn";
-            notaDataGridViewTextBoxColumn.Width = 71;
-            // 
-            // dataLancamentoDataGridViewTextBoxColumn
-            // 
-            dataLancamentoDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataLancamentoDataGridViewTextBoxColumn.DataPropertyName = "DataLancamento";
-            dataLancamentoDataGridViewTextBoxColumn.HeaderText = "DataLancamento";
-            dataLancamentoDataGridViewTextBoxColumn.MinimumWidth = 6;
-            dataLancamentoDataGridViewTextBoxColumn.Name = "dataLancamentoDataGridViewTextBoxColumn";
-            dataLancamentoDataGridViewTextBoxColumn.Width = 151;
-            // 
-            // statusDeExibicaoDataGridViewTextBoxColumn
-            // 
-            statusDeExibicaoDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            statusDeExibicaoDataGridViewTextBoxColumn.DataPropertyName = "StatusDeExibicao";
-            statusDeExibicaoDataGridViewTextBoxColumn.HeaderText = "StatusDeExibicao";
-            statusDeExibicaoDataGridViewTextBoxColumn.MinimumWidth = 6;
-            statusDeExibicaoDataGridViewTextBoxColumn.Name = "statusDeExibicaoDataGridViewTextBoxColumn";
-            statusDeExibicaoDataGridViewTextBoxColumn.Width = 153;
             // 
             // animeBindingSource
             // 
@@ -116,7 +60,7 @@
             btnRemover.TabIndex = 2;
             btnRemover.Text = "Remover";
             btnRemover.UseVisualStyleBackColor = true;
-            btnRemover.Click += button1_Click;
+            btnRemover.Click += btnRemover_Click;
             // 
             // btnEditar
             // 
@@ -126,6 +70,7 @@
             btnEditar.TabIndex = 3;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnAdicionar
             // 
@@ -140,6 +85,61 @@
             // formListaBindingSource
             // 
             formListaBindingSource.DataSource = typeof(FormLista);
+            // 
+            // idColumn
+            // 
+            idColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            idColumn.DataPropertyName = "Id";
+            idColumn.HeaderText = "Id";
+            idColumn.MinimumWidth = 6;
+            idColumn.Name = "idColumn";
+            idColumn.Width = 51;
+            // 
+            // nomeColumn
+            // 
+            nomeColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            nomeColumn.DataPropertyName = "Nome";
+            nomeColumn.HeaderText = "Nome";
+            nomeColumn.MinimumWidth = 6;
+            nomeColumn.Name = "nomeColumn";
+            nomeColumn.Width = 79;
+            // 
+            // sinopseColumn
+            // 
+            sinopseColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            sinopseColumn.DataPropertyName = "Sinopse";
+            sinopseColumn.HeaderText = "Sinopse";
+            sinopseColumn.MinimumWidth = 6;
+            sinopseColumn.Name = "sinopseColumn";
+            sinopseColumn.Width = 90;
+            // 
+            // notaColumn
+            // 
+            notaColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            notaColumn.DataPropertyName = "Nota";
+            notaColumn.HeaderText = "Nota";
+            notaColumn.MaxInputLength = 3;
+            notaColumn.MinimumWidth = 3;
+            notaColumn.Name = "notaColumn";
+            notaColumn.Width = 71;
+            // 
+            // dataLancamentoColumn
+            // 
+            dataLancamentoColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataLancamentoColumn.DataPropertyName = "DataLancamento";
+            dataLancamentoColumn.HeaderText = "DataLancamento";
+            dataLancamentoColumn.MinimumWidth = 6;
+            dataLancamentoColumn.Name = "dataLancamentoColumn";
+            dataLancamentoColumn.Width = 151;
+            // 
+            // statusDeExibicaoColumn
+            // 
+            statusDeExibicaoColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            statusDeExibicaoColumn.DataPropertyName = "StatusDeExibicao";
+            statusDeExibicaoColumn.HeaderText = "StatusDeExibicao";
+            statusDeExibicaoColumn.MinimumWidth = 6;
+            statusDeExibicaoColumn.Name = "statusDeExibicaoColumn";
+            statusDeExibicaoColumn.Width = 153;
             // 
             // FormLista
             // 
@@ -166,11 +166,11 @@
         private Button btnAdicionar;
         private BindingSource animeBindingSource;
         private BindingSource formListaBindingSource;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn sinopseDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn notaDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn dataLancamentoDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn statusDeExibicaoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idColumn;
+        private DataGridViewTextBoxColumn nomeColumn;
+        private DataGridViewTextBoxColumn sinopseColumn;
+        private DataGridViewTextBoxColumn notaColumn;
+        private DataGridViewTextBoxColumn dataLancamentoColumn;
+        private DataGridViewTextBoxColumn statusDeExibicaoColumn;
     }
 }
