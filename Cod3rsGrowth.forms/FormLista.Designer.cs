@@ -47,6 +47,7 @@
             dataAnime.Size = new Size(656, 284);
             dataAnime.TabIndex = 0;
             dataAnime.CellContentClick += dataAnime_CellContentClick;
+            dataAnime.CellFormatting += dataAnimeFormatting;
             // 
             // animeBindingSource
             // 

@@ -1,6 +1,5 @@
 using Cod3rsGrowth.dominio;
 using Cod3rsGrowth.Servico;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Cod3rsGrowth.forms
 {
@@ -9,12 +8,14 @@ namespace Cod3rsGrowth.forms
         private List<Anime> listaDeAnimes;
         private AnimeServico _animeServico;
         private GeneroServico _generoServico;
-        public FormLista(AnimeServico animeServico, GeneroServico generoServico)
+        private AnimeGeneroServico _animeGeneroServico;
+        public FormLista(AnimeServico animeServico, GeneroServico generoServico, AnimeGeneroServico animeGeneroServico)
         {
             _animeServico = animeServico;
             InitializeComponent();
             load();
             _generoServico = generoServico;
+            _animeGeneroServico = animeGeneroServico;
         }
 
         private void load()
@@ -30,8 +31,13 @@ namespace Cod3rsGrowth.forms
 
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
-            FormAdicionarAnime formAdicionarAnime = new FormAdicionarAnime(_animeServico, _generoServico);
-            formAdicionarAnime.Show();
+            using (FormAdicionarAnime formAdicionarAnime = new FormAdicionarAnime(_animeServico, _generoServico, _animeGeneroServico) { })
+            {
+                if(formAdicionarAnime.ShowDialog() == DialogResult.OK)
+                {
+                    load();
+                }
+            } 
 
         }
 
@@ -43,6 +49,9 @@ namespace Cod3rsGrowth.forms
         private void btnRemover_Click(object sender, EventArgs e)
         {
 
+        }
+        private void dataAnimeFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
+            dataAnime.Columns["notaColumn"].DefaultCellStyle.Format = "N1";
         }
     }
 }

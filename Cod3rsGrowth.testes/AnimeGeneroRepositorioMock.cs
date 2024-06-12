@@ -11,22 +11,31 @@ namespace Cod3rsGrowth.testes
 
         public void Cadastrar(AnimeGenero animeGenero)
         {
-            throw new NotImplementedException();
+            TabelaDeAnimeGenero.Instance.Add(animeGenero);
         }
 
-        public void Deletar(int id)
+        public void Deletar(AnimeGenero animeGenero)
         {
-            throw new NotImplementedException();
+            var animeGeneroDeletado = TabelaDeAnimeGenero.Instance.Find(delegate (AnimeGenero animeGenero1) { return animeGenero1.IdAnime == animeGenero.IdAnime && animeGenero1.IdGenero == animeGenero.IdGenero; });
+            TabelaDeAnimeGenero.Instance.Remove(animeGeneroDeletado);        
         }
 
-        public List<AnimeGenero> ObterPorId(int idAnime)
+        public AnimeGenero ObterPorId(int idAnime, int idGenero)
         {
-            throw new NotImplementedException();
+            var animeGenero = TabelaDeAnimeGenero.Instance.Find(delegate(AnimeGenero animeGenero1) {return animeGenero1.IdAnime==idAnime; });
+            return animeGenero;
+        }
+
+        public List<AnimeGenero> ObterTodos(int idAnime = 0)
+        {
+            var animeGeneros = TabelaDeAnimeGenero.Instance.FindAll(delegate(AnimeGenero animeGenero) {return animeGenero.IdAnime==idAnime; });
+            return animeGeneros;
         }
 
         public List<AnimeGenero> ObterTodos()
         {
-            throw new NotImplementedException();
+            var animesGeneros = TabelaDeAnimeGenero.Instance;
+            return animesGeneros;
         }
     }
 }

@@ -51,10 +51,13 @@ namespace Cod3rsGrowth.forms
                 .ConfigureServices((context, services) => {
                     services.AddTransient<IGeneroRepositorio, GeneroRepositorio>();
                     services.AddTransient<IAnimeRepositorio, AnimeRepositorio>();
+                    services.AddTransient<IAnimeGeneroRepositorio, AnimeGeneroRepositorio>();
                     services.AddTransient<AnimeServico> ();
                     services.AddTransient<GeneroServico> ();
+                    services.AddTransient<AnimeGeneroServico>();
                     services.AddScoped<IValidator<Anime>, AnimeValidador>();
                     services.AddScoped<IValidator<Genero>, GeneroValidador>();
+                    services.AddScoped<IValidator<AnimeGenero>, AnimeGeneroValidador>();
                     services.AddTransient<FormLista>();
                 });
         }

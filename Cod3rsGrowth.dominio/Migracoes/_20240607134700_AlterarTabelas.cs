@@ -12,6 +12,7 @@ namespace Cod3rsGrowth.dominio.Migracoes
     {
         public override void Down()
         {
+            Delete.Table("AnimeGenero");
             Delete.Table("Anime");
             Delete.Table("Genero");
         }

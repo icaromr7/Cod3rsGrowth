@@ -26,17 +26,22 @@ namespace Cod3rsGrowth.infra
             dataConnection.Insert(animeGenero);
         }
 
-        public void Deletar(int id)
+        public void Deletar(AnimeGenero animeGenero)
         {
-            dataConnection.GetTable<AnimeGenero>()
-                .Where(animeGenero => animeGenero.IdAnime == id)
-                .Delete();
+            dataConnection.Delete(animeGenero);
         }
 
-        public List<AnimeGenero> ObterPorId(int idAnime)
+        public AnimeGenero ObterPorId(int idAnime, int idGenero)
         {
-            var animeGeneros= dataConnection.GetTable<AnimeGenero>()
-                .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime);
+            var animeGeneros = dataConnection.GetTable<AnimeGenero>()
+                .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime && AnimeGenero.IdGenero== idGenero);
+            return animeGeneros.ToList().First();
+        }
+
+        public List<AnimeGenero> ObterTodos(int idAnime = 0)
+        {
+            var animeGeneros = dataConnection.GetTable<AnimeGenero>()
+                .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime); ;
             return animeGeneros.ToList();
         }
 

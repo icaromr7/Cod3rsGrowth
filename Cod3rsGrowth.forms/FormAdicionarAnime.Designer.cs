@@ -17,7 +17,7 @@
 
         #region Windows Form Designer generated code
 
-        
+
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
@@ -112,6 +112,7 @@
             dtpDataDeLancamento.Name = "dtpDataDeLancamento";
             dtpDataDeLancamento.Size = new Size(315, 27);
             dtpDataDeLancamento.TabIndex = 9;
+            dtpDataDeLancamento.Value = new DateTime(2024, 6, 12, 0, 0, 0, 0);
             // 
             // lblStatusDeExibicao
             // 
@@ -159,11 +160,14 @@
             // 
             // campoNota
             // 
+            campoNota.DecimalPlaces = 1;
             campoNota.Location = new Point(47, 258);
             campoNota.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             campoNota.Name = "campoNota";
             campoNota.Size = new Size(70, 27);
             campoNota.TabIndex = 14;
+            campoNota.ThousandsSeparator = true;
+            campoNota.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // clGeneros
             // 
@@ -176,10 +180,12 @@
             // 
             // FormAdicionarAnime
             // 
+            AcceptButton = btnSalvar;
             AccessibleRole = AccessibleRole.ScrollBar;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
+            CancelButton = btnCancelar;
             ClientSize = new Size(602, 706);
             Controls.Add(clGeneros);
             Controls.Add(campoNota);
