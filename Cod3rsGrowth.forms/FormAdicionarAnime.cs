@@ -58,16 +58,16 @@ namespace Cod3rsGrowth.forms
             catch (ValidationException ex)
             {
                 string result = "";
-                foreach(var erro  in ex.Errors)
+                foreach (var erro in ex.Errors)
                 {
-                    result += erro.ErrorMessage+"\n";
+                    result += erro.ErrorMessage + "\n";
                 }
                 MessageBox.Show(result);
             }
-            catch (Exception ex) 
-                {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message);
-                }
+            }
         }
 
         private void AoClicarEmCancelar(object sender, EventArgs e)
@@ -76,21 +76,24 @@ namespace Cod3rsGrowth.forms
         }
         private void AoClicarEmAdicionarAnime()
         {
+            bool informacoesValidas = true;
             Anime.Status status = new Anime.Status();
             if (cbStatusDeExibicao.SelectedIndex == INDEX_EM_EXIBICAO)
-                status = Anime.Status.EmExibicao;
+            {
+                status = Anime.Status.EmExibicao;                
+            }
             else if (cbStatusDeExibicao.SelectedIndex == INDEX_PREVISTO)
                 status = Anime.Status.Previsto;
             else if (cbStatusDeExibicao.SelectedIndex == INDEX_CONCLUIDO)
-                status = Anime.Status.Concluido;
-            _animeServico.Cadastrar(new Anime()
-            {
-                Nome = textNome.Text,
-                Sinopse = textSinopse.Text,
-                Nota = Convert.ToDecimal(campoNota.Value),
-                DataLancamento = dtpDataDeLancamento.Value,
-                StatusDeExibicao = status
-            });
+                status = Anime.Status.Concluido;         
+                _animeServico.Cadastrar(new Anime()
+                {
+                    Nome = textNome.Text,
+                    Sinopse = textSinopse.Text,
+                    Nota = Convert.ToDecimal(campoNota.Value),
+                    DataLancamento = dtpDataDeLancamento.Value,
+                    StatusDeExibicao = status
+                });                
         }
         private void AoClicarEmCadastrarAnimeGenero()
         {

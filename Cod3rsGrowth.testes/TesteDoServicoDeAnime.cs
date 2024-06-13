@@ -617,5 +617,25 @@ namespace Cod3rsGrowth.testes
             //assert
             Assert.DoesNotContain(TabelaDeAnime.Instance, anime => anime == anime1);
         }
+        [Fact]
+        public void Ao_cadastrar_deve_retornar_o_mensagem_de_error_data_lancamento()
+        {
+            const string mensagemEsperada = "A data de lançamento não pode ser futura quando o anime está em exibição ou concluido";
+            var anime1 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                DataLancamento = new DateTime(2024, 7, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+
+            //act
+            var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Cadastrar(anime1));
+
+            //assert
+            Assert.Equal(mensagemEsperada, mensagemError.Errors.Single().ErrorMessage);
+        }
     }
 }
