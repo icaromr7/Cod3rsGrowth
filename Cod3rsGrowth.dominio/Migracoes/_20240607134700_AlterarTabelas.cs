@@ -19,17 +19,8 @@ namespace Cod3rsGrowth.dominio.Migracoes
 
         public override void Up()
         {
-            Down();
-            Create.Table("Anime")
-                .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("Nome").AsString().NotNullable()
-                .WithColumn("Sinopse").AsString().NotNullable()
-                .WithColumn("DataLancamento").AsDateTime().NotNullable()
-                .WithColumn("Nota").AsDecimal().NotNullable()
-                .WithColumn("StatusDeExibicao").AsString().NotNullable();
-            Create.Table("Genero")
-                .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("Nome").AsString().NotNullable();
+            Delete.ForeignKey("fk_Anime_Genero_GeneroId").OnTable("Anime");
+            Delete.Column("GenerosIds").FromTable("Anime");              
             Create.Table("AnimeGenero")
                 .WithColumn("IdAnime").AsInt32().NotNullable().ForeignKey("Anime", "Id")
                 .WithColumn("IdGenero").AsInt32().NotNullable().ForeignKey("Genero", "Id");
