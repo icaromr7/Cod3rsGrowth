@@ -46,6 +46,11 @@ namespace Cod3rsGrowth.Servico
             }
 
         }
+        public void DeletarPorIdAnime(int idAnime)
+        {
+                _animeGeneroRepositorio.DeletarPorIdAnime(idAnime);
+        
+        }
         public AnimeGenero ObterPorId(int idAnime, int idGenero)
         {
             var animeGeneros = _animeGeneroRepositorio.ObterPorId(idAnime, idGenero);

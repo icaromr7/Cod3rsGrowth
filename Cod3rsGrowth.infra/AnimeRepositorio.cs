@@ -29,10 +29,8 @@ namespace Cod3rsGrowth.infra
         }
 
         public void Deletar(int id)
-        {
-            dataConnection.GetTable<Anime>()
-                .Where(anime => anime.Id == id)
-                .Delete();
+        {          
+            dataConnection.Delete(dataConnection.GetTable<Anime>().Where(anime => anime.Id == id));
         }
         public Anime ObterPorId(int id)
         {

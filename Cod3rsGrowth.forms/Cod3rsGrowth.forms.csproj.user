@@ -4,6 +4,9 @@
     <Compile Update="FormAdicionarAnime.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormConfirmarDelecao.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormLista.cs">
       <SubType>Form</SubType>
     </Compile>

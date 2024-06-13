@@ -30,6 +30,10 @@ namespace Cod3rsGrowth.infra
         {
             dataConnection.Delete(animeGenero);
         }
+        public void DeletarPorIdAnime(int idAnime)
+        {
+            dataConnection.Delete(dataConnection.GetTable<AnimeGenero>().Where(animeGenero => animeGenero.IdAnime == idAnime));
+        }
 
         public AnimeGenero ObterPorId(int idAnime, int idGenero)
         {

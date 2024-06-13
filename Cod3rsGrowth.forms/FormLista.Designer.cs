@@ -19,17 +19,17 @@
         {
             components = new System.ComponentModel.Container();
             dataAnime = new DataGridView();
-            animeBindingSource = new BindingSource(components);
-            btnRemover = new Button();
-            btnEditar = new Button();
-            btnAdicionar = new Button();
-            formListaBindingSource = new BindingSource(components);
             idColumn = new DataGridViewTextBoxColumn();
             nomeColumn = new DataGridViewTextBoxColumn();
             sinopseColumn = new DataGridViewTextBoxColumn();
             notaColumn = new DataGridViewTextBoxColumn();
             dataLancamentoColumn = new DataGridViewTextBoxColumn();
             statusDeExibicaoColumn = new DataGridViewTextBoxColumn();
+            animeBindingSource = new BindingSource(components);
+            btnRemover = new Button();
+            btnEditar = new Button();
+            btnAdicionar = new Button();
+            formListaBindingSource = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)dataAnime).BeginInit();
             ((System.ComponentModel.ISupportInitialize)animeBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)formListaBindingSource).BeginInit();
@@ -48,44 +48,7 @@
             dataAnime.TabIndex = 0;
             dataAnime.CellContentClick += dataAnime_CellContentClick;
             dataAnime.CellFormatting += dataAnimeFormatting;
-            // 
-            // animeBindingSource
-            // 
-            animeBindingSource.DataSource = typeof(dominio.Anime);
-            // 
-            // btnRemover
-            // 
-            btnRemover.Location = new Point(595, 339);
-            btnRemover.Name = "btnRemover";
-            btnRemover.Size = new Size(94, 29);
-            btnRemover.TabIndex = 2;
-            btnRemover.Text = "Remover";
-            btnRemover.UseVisualStyleBackColor = true;
-            btnRemover.Click += AoClicarEmRemover;
-            // 
-            // btnEditar
-            // 
-            btnEditar.Location = new Point(495, 339);
-            btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(94, 29);
-            btnEditar.TabIndex = 3;
-            btnEditar.Text = "Editar";
-            btnEditar.UseVisualStyleBackColor = true;
-            btnEditar.Click += AoClicarEmEditar;
-            // 
-            // btnAdicionar
-            // 
-            btnAdicionar.Location = new Point(395, 339);
-            btnAdicionar.Name = "btnAdicionar";
-            btnAdicionar.Size = new Size(94, 29);
-            btnAdicionar.TabIndex = 4;
-            btnAdicionar.Text = "Adicionar";
-            btnAdicionar.UseVisualStyleBackColor = true;
-            btnAdicionar.Click += AoClicarEmAdicionar;
-            // 
-            // formListaBindingSource
-            // 
-            formListaBindingSource.DataSource = typeof(FormLista);
+            dataAnime.CellMouseDown += AoClicarNoAnime;
             // 
             // idColumn
             // 
@@ -141,6 +104,44 @@
             statusDeExibicaoColumn.MinimumWidth = 6;
             statusDeExibicaoColumn.Name = "statusDeExibicaoColumn";
             statusDeExibicaoColumn.Width = 153;
+            // 
+            // animeBindingSource
+            // 
+            animeBindingSource.DataSource = typeof(dominio.Anime);
+            // 
+            // btnRemover
+            // 
+            btnRemover.Location = new Point(595, 339);
+            btnRemover.Name = "btnRemover";
+            btnRemover.Size = new Size(94, 29);
+            btnRemover.TabIndex = 2;
+            btnRemover.Text = "Remover";
+            btnRemover.UseVisualStyleBackColor = true;
+            btnRemover.Click += AoClicarEmRemover;
+            // 
+            // btnEditar
+            // 
+            btnEditar.Location = new Point(495, 339);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(94, 29);
+            btnEditar.TabIndex = 3;
+            btnEditar.Text = "Editar";
+            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += AoClicarEmEditar;
+            // 
+            // btnAdicionar
+            // 
+            btnAdicionar.Location = new Point(395, 339);
+            btnAdicionar.Name = "btnAdicionar";
+            btnAdicionar.Size = new Size(94, 29);
+            btnAdicionar.TabIndex = 4;
+            btnAdicionar.Text = "Adicionar";
+            btnAdicionar.UseVisualStyleBackColor = true;
+            btnAdicionar.Click += AoClicarEmAdicionar;
+            // 
+            // formListaBindingSource
+            // 
+            formListaBindingSource.DataSource = typeof(FormLista);
             // 
             // FormLista
             // 
