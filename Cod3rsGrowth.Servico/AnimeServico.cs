@@ -60,5 +60,6 @@ namespace Cod3rsGrowth.Servico
             var animes = _animeRepositorio.ObterTodos();
             return animes;
         }
+
     }
 }

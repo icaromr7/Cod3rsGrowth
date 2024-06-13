@@ -35,7 +35,7 @@ namespace Cod3rsGrowth.forms
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
                     .WithGlobalConnectionString(result)
-                    .ScanIn(typeof(_20240606131800_Alterar_Status_De_Exibicao).Assembly).For.Migrations())
+                    .ScanIn(typeof(_20240605085700_CriarTabelas).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
         }
@@ -51,10 +51,13 @@ namespace Cod3rsGrowth.forms
                 .ConfigureServices((context, services) => {
                     services.AddTransient<IGeneroRepositorio, GeneroRepositorio>();
                     services.AddTransient<IAnimeRepositorio, AnimeRepositorio>();
+                    services.AddTransient<IAnimeGeneroRepositorio, AnimeGeneroRepositorio>();
                     services.AddTransient<AnimeServico> ();
                     services.AddTransient<GeneroServico> ();
+                    services.AddTransient<AnimeGeneroServico>();
                     services.AddScoped<IValidator<Anime>, AnimeValidador>();
                     services.AddScoped<IValidator<Genero>, GeneroValidador>();
+                    services.AddScoped<IValidator<AnimeGenero>, AnimeGeneroValidador>();
                     services.AddTransient<FormLista>();
                 });
         }
