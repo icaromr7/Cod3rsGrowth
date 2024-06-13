@@ -29,7 +29,7 @@ namespace Cod3rsGrowth.forms
 
         }
 
-        private void btnAdicionar_Click(object sender, EventArgs e)
+        private void AoClicarEmAdicionar(object sender, EventArgs e)
         {
             using (FormAdicionarAnime formAdicionarAnime = new FormAdicionarAnime(_animeServico, _generoServico, _animeGeneroServico) { })
             {
@@ -41,12 +41,12 @@ namespace Cod3rsGrowth.forms
 
         }
 
-        private void btnEditar_Click(object sender, EventArgs e)
+        private void AoClicarEmEditar(object sender, EventArgs e)
         {
 
         }
 
-        private void btnRemover_Click(object sender, EventArgs e)
+        private void AoClicarEmRemover(object sender, EventArgs e)
         {
 
         }

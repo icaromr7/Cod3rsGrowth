@@ -108,6 +108,7 @@
             // 
             // dtpDataDeLancamento
             // 
+            dtpDataDeLancamento.CustomFormat = "";
             dtpDataDeLancamento.Location = new Point(48, 514);
             dtpDataDeLancamento.Name = "dtpDataDeLancamento";
             dtpDataDeLancamento.Size = new Size(315, 27);
@@ -146,7 +147,7 @@
             btnSalvar.TabIndex = 12;
             btnSalvar.Text = "Adicionar Anime";
             btnSalvar.UseVisualStyleBackColor = true;
-            btnSalvar.Click += btnSalvar_Click;
+            btnSalvar.Click += AoClicarEmSalvar;
             // 
             // btnCancelar
             // 
@@ -156,7 +157,7 @@
             btnCancelar.TabIndex = 13;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
-            btnCancelar.Click += btnCancelar_Click;
+            btnCancelar.Click += AoClicarEmCancelar;
             // 
             // campoNota
             // 

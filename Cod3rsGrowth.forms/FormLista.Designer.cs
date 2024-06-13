@@ -61,7 +61,7 @@
             btnRemover.TabIndex = 2;
             btnRemover.Text = "Remover";
             btnRemover.UseVisualStyleBackColor = true;
-            btnRemover.Click += btnRemover_Click;
+            btnRemover.Click += AoClicarEmRemover;
             // 
             // btnEditar
             // 
@@ -71,7 +71,7 @@
             btnEditar.TabIndex = 3;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
-            btnEditar.Click += btnEditar_Click;
+            btnEditar.Click += AoClicarEmEditar;
             // 
             // btnAdicionar
             // 
@@ -81,7 +81,7 @@
             btnAdicionar.TabIndex = 4;
             btnAdicionar.Text = "Adicionar";
             btnAdicionar.UseVisualStyleBackColor = true;
-            btnAdicionar.Click += btnAdicionar_Click;
+            btnAdicionar.Click += AoClicarEmAdicionar;
             // 
             // formListaBindingSource
             // 
