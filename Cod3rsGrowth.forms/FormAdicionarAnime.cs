@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.forms
         const int INDEX_EM_EXIBICAO = 0;
         const int INDEX_PREVISTO = 1;
         const int INDEX_CONCLUIDO = 2;
-        const int QUANTIDADE_MINIMA_DE_VERIFICADOS = 1;
+        const int QUANTIDADE_MINIMA_DE_GENEROS_SELECIONADOS = 1;
         const int POSICAO_INICIAL_NA_LISTA = 0;
 
         public FormAdicionarAnime(AnimeServico animeServico, GeneroServico generoServico, AnimeGeneroServico animeGeneroServico)
@@ -96,7 +96,7 @@ namespace Cod3rsGrowth.forms
         {
                 int idAnime = ObtreIdDoUltimoIdCadastrado();
                 var listaGeneros = _generoServico.ObterTodos();
-                if (clGeneros.CheckedItems.Count >= QUANTIDADE_MINIMA_DE_VERIFICADOS)
+                if (clGeneros.CheckedItems.Count >= QUANTIDADE_MINIMA_DE_GENEROS_SELECIONADOS)
                 {
                 var listaGenerosChecked = clGeneros.CheckedItems;
                 foreach (var item in clGeneros.CheckedItems)
