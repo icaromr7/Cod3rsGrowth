@@ -57,7 +57,7 @@ namespace Cod3rsGrowth.forms
                 }
                 else
                 {
-                    using (FormConfirmarDelecao formConfirmarDelecao = new FormConfirmarDelecao(anime.Nome) { })
+                    using (FormConfirmarDelecao formConfirmarDelecao = new FormConfirmarDelecao(anime.Id,anime.Nome) { })
                     {
                         if (formConfirmarDelecao.ShowDialog() == DialogResult.OK)
                         {

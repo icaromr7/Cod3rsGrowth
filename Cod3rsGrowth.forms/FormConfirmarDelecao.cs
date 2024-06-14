@@ -13,10 +13,10 @@ namespace Cod3rsGrowth.forms
 {
     public partial class FormConfirmarDelecao : Form
     {
-        public FormConfirmarDelecao(String nome)
+        public FormConfirmarDelecao(int id, String nome)
         {
             InitializeComponent();
-            lblMensagemConfirmacao.Text = "Deseja mesmo excluir o anime:\n" + nome;
+            lblMensagemConfirmacao.Text = "Deseja mesmo excluir o anime:\nId: " + id+ "\n"+ nome;
         }
 
         private void FormConfirmarDelecao_Load(object sender, EventArgs e)
