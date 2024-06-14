@@ -88,10 +88,17 @@ namespace Cod3rsGrowth.forms
         }
         private void AoClicarNoAnime(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Left)
+            try
             {
-                anime = listaDeAnimes[e.RowIndex];
+                if (e.Button == MouseButtons.Left)
+                {
+                    anime = listaDeAnimes[e.RowIndex];
+                }
             }
+            catch (Exception ex)
+            {
+            }
+            
         }
     }
 }
