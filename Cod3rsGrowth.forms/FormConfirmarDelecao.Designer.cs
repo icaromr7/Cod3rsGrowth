@@ -36,7 +36,7 @@
             // lblMensagemConfirmacao
             // 
             lblMensagemConfirmacao.AutoSize = true;
-            lblMensagemConfirmacao.Location = new Point(201, 87);
+            lblMensagemConfirmacao.Location = new Point(156, 79);
             lblMensagemConfirmacao.Name = "lblMensagemConfirmacao";
             lblMensagemConfirmacao.Size = new Size(215, 20);
             lblMensagemConfirmacao.TabIndex = 0;
@@ -44,7 +44,7 @@
             // 
             // btnConfirmar
             // 
-            btnConfirmar.Location = new Point(84, 224);
+            btnConfirmar.Location = new Point(33, 200);
             btnConfirmar.Name = "btnConfirmar";
             btnConfirmar.Size = new Size(137, 41);
             btnConfirmar.TabIndex = 1;
@@ -54,7 +54,7 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(435, 224);
+            btnCancelar.Location = new Point(346, 200);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(137, 41);
             btnCancelar.TabIndex = 2;
@@ -68,7 +68,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = btnCancelar;
-            ClientSize = new Size(638, 281);
+            ClientSize = new Size(538, 255);
             Controls.Add(btnCancelar);
             Controls.Add(btnConfirmar);
             Controls.Add(lblMensagemConfirmacao);
