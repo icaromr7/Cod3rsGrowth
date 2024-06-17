@@ -44,7 +44,7 @@ namespace Cod3rsGrowth.testes
             int idAnime = 1;
             int idGenero = 1;
             //act
-            var animeGeneroAtual = _animeGeneroServico.ObterPorId(idAnime, idGenero);
+            var animeGeneroAtual = _animeGeneroServico.ObterPorId(idAnime);
 
             //assert
             Assert.Equivalent(animeGenero, animeGeneroAtual);
@@ -53,7 +53,7 @@ namespace Cod3rsGrowth.testes
         public void Ao_obter_por_id_deve_returnar_um_animegenero_nullo()
         {
             //act
-            var animegenero = _animeGeneroServico.ObterPorId(1, 1);
+            var animegenero = _animeGeneroServico.ObterPorId(1);
 
             //asset
             Assert.Null(animegenero);
@@ -110,7 +110,7 @@ namespace Cod3rsGrowth.testes
                 IdGenero = 1,
             };
             //act
-            var mensagemError = Assert.Throws<ValidationException>(() => _animeGeneroServico.Deletar(animeGenero));
+            var mensagemError = Assert.Throws<ValidationException>(() => _animeGeneroServico.Deletar(animeGenero.IdAnime));
 
             //assert
             Assert.Equal("O animeGenero não existe", mensagemError.Errors.Single().ErrorMessage);
@@ -129,7 +129,7 @@ namespace Cod3rsGrowth.testes
                 IdGenero = 1,
             };
             //act
-            _animeGeneroServico.Deletar(animeGeneroDeletado);
+            _animeGeneroServico.Deletar(animeGeneroDeletado.IdAnime);
 
             //assert
             Assert.DoesNotContain(TabelaDeAnimeGenero.Instance, animeGenero1 => animeGenero1==animeGenero);

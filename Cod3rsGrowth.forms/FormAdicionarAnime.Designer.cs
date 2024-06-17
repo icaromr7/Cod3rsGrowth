@@ -202,6 +202,7 @@
             Controls.Add(lblSinopse);
             Controls.Add(textNome);
             Controls.Add(lblNome);
+            MaximizeBox = false;
             Name = "FormAdicionarAnime";
             Text = "Cadastro de Anime";
             Load += FormAdicionarAnime_Load;

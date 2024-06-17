@@ -76,7 +76,6 @@ namespace Cod3rsGrowth.forms
         }
         private void AoClicarEmAdicionarAnime()
         {
-            bool informacoesValidas = true;
             Anime.Status status = new Anime.Status();
             if (cbStatusDeExibicao.SelectedIndex == INDEX_EM_EXIBICAO)
             {

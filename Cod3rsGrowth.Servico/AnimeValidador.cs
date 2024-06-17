@@ -1,7 +1,5 @@
 ﻿using Cod3rsGrowth.dominio;
 using FluentValidation;
-using System.Reflection.Metadata.Ecma335;
-using System.Xml.Linq;
 
 namespace Cod3rsGrowth.Servico
 {

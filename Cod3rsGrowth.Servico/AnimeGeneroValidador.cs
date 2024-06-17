@@ -12,27 +12,27 @@ namespace Cod3rsGrowth.Servico
             RuleFor(animeGenero => animeGenero.IdGenero).NotEmpty().WithMessage("IdGenero não pode está vazio");
             RuleSet(ConstantesDoValidador.ATUALIZAR, () =>
             {
-                RuleFor(animeGenero => animeGenero)
-            .Must(animeGenero =>
+                RuleFor(animeGenero => animeGenero.IdAnime)
+            .Must(id =>
             {
-                return !VerificarSeJaExiste(animeGenero) == false;
+                return !VerificarSeJaExiste(id) == false;
             })
             .WithMessage("O animeGenero não existe");
             });
             RuleSet(ConstantesDoValidador.DELETAR, () =>
             {
-                RuleFor(animeGenero => animeGenero)
-            .Must(animeGenero =>
+                RuleFor(animeGenero => animeGenero.IdAnime)
+            .Must(id =>
             {
-                return !VerificarSeJaExiste(animeGenero) == false;
+                return !VerificarSeJaExiste(id) == false;
             })
             .WithMessage("O animeGenero não existe");
             });
         }
 
-        public bool VerificarSeJaExiste(AnimeGenero animeGenero)
+        public bool VerificarSeJaExiste(int idAnime)
         {
-            var animeGenero1 = _animeGeneroRepositorio.ObterPorId(animeGenero.IdAnime, animeGenero.IdGenero);
+            var animeGenero1 = _animeGeneroRepositorio.ObterPorId(idAnime);
             if (animeGenero1 != null)
             {
                 return true;

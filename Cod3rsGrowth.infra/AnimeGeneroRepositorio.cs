@@ -24,17 +24,18 @@ namespace Cod3rsGrowth.infra
         public void Cadastrar(AnimeGenero animeGenero)
         {
             dataConnection.Insert(animeGenero);
-        }
-
-        public void Deletar(AnimeGenero animeGenero)
+        }       
+        public void Deletar(int idAnime)
         {
-            dataConnection.Delete(animeGenero);
+            dataConnection.GetTable<AnimeGenero>()
+                .Where(animeGenero=> animeGenero.IdAnime == idAnime)
+                .Delete();
         }
 
-        public AnimeGenero ObterPorId(int idAnime, int idGenero)
+        public AnimeGenero ObterPorId(int idAnime)
         {
             var animeGeneros = dataConnection.GetTable<AnimeGenero>()
-                .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime && AnimeGenero.IdGenero== idGenero);
+                .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime);
             return animeGeneros.ToList().First();
         }
 
