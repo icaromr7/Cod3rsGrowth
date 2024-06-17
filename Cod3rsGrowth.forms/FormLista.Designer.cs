@@ -44,6 +44,7 @@
             dataAnime.Location = new Point(33, 36);
             dataAnime.Name = "dataAnime";
             dataAnime.RowHeadersWidth = 51;
+            dataAnime.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataAnime.Size = new Size(656, 284);
             dataAnime.TabIndex = 0;
             dataAnime.CellContentClick += dataAnime_CellContentClick;
@@ -152,8 +153,9 @@
             Controls.Add(btnEditar);
             Controls.Add(btnRemover);
             Controls.Add(dataAnime);
+            MaximizeBox = false;
             Name = "FormLista";
-            Text = "FormLista";
+            Text = "Lista de Anime";
             ((System.ComponentModel.ISupportInitialize)dataAnime).EndInit();
             ((System.ComponentModel.ISupportInitialize)animeBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)formListaBindingSource).EndInit();

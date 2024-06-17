@@ -35,11 +35,11 @@ namespace Cod3rsGrowth.forms
         {
             using (FormAdicionarAnime formAdicionarAnime = new FormAdicionarAnime(_animeServico, _generoServico, _animeGeneroServico) { })
             {
-                if(formAdicionarAnime.ShowDialog() == DialogResult.OK)
+                if (formAdicionarAnime.ShowDialog() == DialogResult.OK)
                 {
                     load();
                 }
-            } 
+            }
 
         }
 
@@ -51,21 +51,19 @@ namespace Cod3rsGrowth.forms
         {
             try
             {
-                if(anime == null)
+                if (anime == null)
                 {
                     MessageBox.Show("Nenhum anime selecionado!!");
                 }
                 else
                 {
-                    using (FormConfirmarDelecao formConfirmarDelecao = new FormConfirmarDelecao(anime.Id,anime.Nome) { })
+                    var result = MessageBox.Show(this, "Você tem certeza que deseja excluir o anime?", "Confirmação", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
                     {
-                        if (formConfirmarDelecao.ShowDialog() == DialogResult.OK)
-                        {
-                            _animeGeneroServico.DeletarPorIdAnime(anime.Id);
-                            _animeServico.Deletar(anime.Id);
-                            load();
-                        }
-                    }
+                        _animeGeneroServico.Deletar(anime.Id);
+                        _animeServico.Deletar(anime.Id);
+                        load();
+                    }                   
                 }
             }
             catch (ValidationException ex)
@@ -77,13 +75,15 @@ namespace Cod3rsGrowth.forms
                 }
                 MessageBox.Show(result);
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show("Erro ao deletar o anime!!");
             }
-            
+
 
         }
-        private void dataAnimeFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
+        private void dataAnimeFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
             dataAnime.Columns["notaColumn"].DefaultCellStyle.Format = "N1";
         }
         private void AoClicarNoAnime(object sender, DataGridViewCellMouseEventArgs e)
@@ -98,7 +98,7 @@ namespace Cod3rsGrowth.forms
             catch (Exception ex)
             {
             }
-            
-        }
+
+        }      
     }
 }
