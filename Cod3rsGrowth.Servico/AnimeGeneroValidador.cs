@@ -18,16 +18,7 @@ namespace Cod3rsGrowth.Servico
                 return !VerificarSeJaExiste(id) == false;
             })
             .WithMessage("O animeGenero não existe");
-            });
-            RuleSet(ConstantesDoValidador.DELETAR, () =>
-            {
-                RuleFor(animeGenero => animeGenero.IdAnime)
-            .Must(id =>
-            {
-                return !VerificarSeJaExiste(id) == false;
-            })
-            .WithMessage("O animeGenero não existe");
-            });
+            });           
         }
 
         public bool VerificarSeJaExiste(int idAnime)

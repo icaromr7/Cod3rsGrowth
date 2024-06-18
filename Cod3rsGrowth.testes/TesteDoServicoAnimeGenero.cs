@@ -25,7 +25,7 @@ namespace Cod3rsGrowth.testes
             TabelaDeAnimeGenero.Instance.Add(animeGenero);
 
             //act
-            List<AnimeGenero> animeGeneros = _animeGeneroServico.ObterTodos();
+            List<AnimeGenero> animeGeneros = _animeGeneroServico.ObterTodos(1);
             const int quantidadeEsperada = 1;
             int quantidadeAtual = animeGeneros.Count;
 

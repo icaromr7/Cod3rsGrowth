@@ -42,16 +42,23 @@ namespace Cod3rsGrowth.infra
             return anime;
         }
 
-        public List<Anime> ObterTodos(Status? statusDeExibicao = null)
+        public List<Anime> ObterTodos(Status? statusDeExibicao = null, string nome = null, DateTime? dateTime = null)
         {
             var animes = dataConnection.GetTable<Anime>();
-
+            var listaAnimes = animes.AsQueryable();
             if (statusDeExibicao.HasValue)
             {
-                animes = (ITable<Anime>)animes.Where(anime => anime.StatusDeExibicao == statusDeExibicao.Value);
+                listaAnimes = listaAnimes.Where(anime => anime.StatusDeExibicao == statusDeExibicao.Value);
             }
-
-            return animes.ToList();
+            if (dateTime.HasValue)
+            {
+                listaAnimes = listaAnimes.Where(anime => anime.DataLancamento == dateTime);
+            }
+            if ( nome != null)
+            {
+                listaAnimes = listaAnimes.Where(anime => anime.Nome.Contains(nome));
+            }
+            return listaAnimes.ToList();
         }
     }
 }

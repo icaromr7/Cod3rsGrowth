@@ -26,7 +26,7 @@ namespace Cod3rsGrowth.testes
             return animeGenero;
         }
 
-        public List<AnimeGenero> ObterTodos(int idAnime = 0)
+        public List<AnimeGenero> ObterTodos(int? idAnime = 0)
         {
             var animeGeneros = TabelaDeAnimeGenero.Instance.FindAll(delegate(AnimeGenero animeGenero) {return animeGenero.IdAnime==idAnime; });
             return animeGeneros;

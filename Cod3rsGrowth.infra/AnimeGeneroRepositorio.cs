@@ -35,11 +35,11 @@ namespace Cod3rsGrowth.infra
         public AnimeGenero ObterPorId(int idAnime)
         {
             var animeGeneros = dataConnection.GetTable<AnimeGenero>()
-                .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime);
+                .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime);         
             return animeGeneros.ToList().First();
         }
 
-        public List<AnimeGenero> ObterTodos(int idAnime = 0)
+        public List<AnimeGenero> ObterTodos(int? idAnime = 0)
         {
             var animeGeneros = dataConnection.GetTable<AnimeGenero>()
                 .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime); ;
