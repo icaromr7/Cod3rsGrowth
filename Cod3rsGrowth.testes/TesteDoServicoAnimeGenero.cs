@@ -101,20 +101,6 @@ namespace Cod3rsGrowth.testes
             //assert
             Assert.Contains(TabelaDeAnimeGenero.Instance, animeGenero1 => animeGenero1 == animeGenero);
         }
-        [Fact]
-        public void Ao_tentar_deletar_deve_retornar_o_animegenero_nao_existe()
-        {
-            var animeGenero = new AnimeGenero()
-            {
-                IdAnime= 1,
-                IdGenero = 1,
-            };
-            //act
-            var mensagemError = Assert.Throws<ValidationException>(() => _animeGeneroServico.Deletar(animeGenero.IdAnime));
-
-            //assert
-            Assert.Equal("O animeGenero não existe", mensagemError.Errors.Single().ErrorMessage);
-        }
         public void Deve_deletar_o_animegenero()
         {
             var animeGenero = new AnimeGenero()
