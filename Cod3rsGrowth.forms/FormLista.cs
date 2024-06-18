@@ -19,6 +19,7 @@ namespace Cod3rsGrowth.forms
         const int INDEX_PREVISTO = 2;
         const int INDEX_CONCLUIDO = 3;
         const int QUANTIDADE_MINIMA_DE_GENEROS_SELECIONADOS = 1;
+        const int INDICA_PRIMEIRA_POSICAO = 0;
         public FormLista(AnimeServico animeServico, GeneroServico generoServico, AnimeGeneroServico animeGeneroServico)
         {
             _animeServico = animeServico;
@@ -155,7 +156,12 @@ namespace Cod3rsGrowth.forms
             {
                 if (e.Button == MouseButtons.Left)
                 {
-                    anime = listaDeAnimes[e.RowIndex];
+                    if(e.RowIndex >= INDICA_PRIMEIRA_POSICAO)
+                    {
+                        DataGridViewRow row = dataAnime.Rows[e.RowIndex];
+                        int idAnime = (int)row.Cells[idColumn.Index].Value;
+                        anime = _animeServico.ObterPorId(idAnime);                        
+                    }
                 }
             }
             catch (Exception ex)
