@@ -157,7 +157,7 @@
             btnSalvar.TabIndex = 12;
             btnSalvar.Text = "Atualizar Anime";
             btnSalvar.UseVisualStyleBackColor = true;
-            btnSalvar.Click += AoClicarEmSalvar;
+            btnSalvar.Click += AoClicarEmAtualizarAnime;
             // 
             // btnCancelar
             // 

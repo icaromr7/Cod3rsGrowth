@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.dominio;
 using Cod3rsGrowth.Servico;
 using FluentValidation;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Cod3rsGrowth.forms
 {
@@ -10,6 +11,8 @@ namespace Cod3rsGrowth.forms
         GeneroServico _generoServico;
         AnimeGeneroServico _animeGeneroServico;
         Anime _animeModificado;
+        List<Genero> GenerosAntigos = new List<Genero>();
+        List<Genero> GenerosAtuais = new List<Genero>();
         const int INDEX_EM_EXIBICAO = 0;
         const int INDEX_PREVISTO = 1;
         const int INDEX_CONCLUIDO = 2;
@@ -43,12 +46,13 @@ namespace Cod3rsGrowth.forms
 
             for (int i = POSICAO_INICIAL_NA_LISTA; i < listaAnimeGeneros.Count; i++)
             {
-                var genero = _generoServico.ObterPorId(listaAnimeGeneros[i].IdGenero);
+                Genero genero = _generoServico.ObterPorId(listaAnimeGeneros[i].IdGenero);
                 for (int j = POSICAO_INICIAL_NA_LISTA; j < clGeneros.Items.Count; j++)
                 {                 
                     if (genero.Nome.Equals(clGeneros.Items[j]))
                     {
                         clGeneros.SetItemChecked(j, true);
+                        GenerosAntigos.Add(genero);
                     }
                 }
             }
@@ -57,14 +61,20 @@ namespace Cod3rsGrowth.forms
         {
             cbStatusDeExibicao.DataSource = new List<string>() { "EmExibição", "Previsto", "Concluído" };
         }
-        private void AoClicarEmSalvar(object sender, EventArgs e)
+        private void AoClicarEmAtualizarAnime(object sender, EventArgs e)
         {
             try
             {
-                AoClicarEmAtualizarAnime();
-                AoClicarEmEditarAnimeGenero();
-                DialogResult = DialogResult.OK;
-                this.Close();
+                if (clGeneros.CheckedItems.Count < QUANTIDADE_MINIMA_DE_GENEROS_SELECIONADOS){
+                    MessageBox.Show("Necessário ter ao menos 1 genero selecionado");
+                }
+                else{
+                    AoClicarEmAtualizar();
+                    AoClicarEmEditarAnimeGenero();
+                    DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                
             }
             catch (ValidationException ex)
             {
@@ -85,7 +95,7 @@ namespace Cod3rsGrowth.forms
         {
             this.Close();
         }
-        private void AoClicarEmAtualizarAnime()
+        private void AoClicarEmAtualizar()
         {
             Anime.Status status = new Anime.Status();
             if (cbStatusDeExibicao.SelectedIndex == INDEX_EM_EXIBICAO)
@@ -107,9 +117,32 @@ namespace Cod3rsGrowth.forms
             });
         }
         private void AoClicarEmEditarAnimeGenero()
-        {          
+        {
+            PreencherListaDosGenerosAtuais();
+            var listaGenerosRetirados = retonarOsGenerosDiferentesEntreAsListas(GenerosAtuais, GenerosAntigos);
+            var listaGenerosAdicionados = retonarOsGenerosDiferentesEntreAsListas(GenerosAntigos, GenerosAtuais);
+            for (int i = POSICAO_INICIAL_NA_LISTA; i< listaGenerosRetirados.Count; i++ )
+            {
+                var animeGenero = new AnimeGenero()
+                {
+                    IdAnime = _animeModificado.Id,
+                    IdGenero = listaGenerosRetirados[i].Id,
+                };
+                _animeGeneroServico.Deletar(animeGenero);
+            }
+            foreach (var adicionado  in listaGenerosAdicionados)
+            {
+                var animeGenero = new AnimeGenero()
+                {
+                    IdAnime = _animeModificado.Id,
+                    IdGenero = adicionado.Id,
+                };
+                _animeGeneroServico.Cadastrar(animeGenero);
+            }
+        }
+        private void PreencherListaDosGenerosAtuais()
+        {
             int idAnime = _animeModificado.Id;
-            _animeGeneroServico.Deletar(idAnime);
             var listaGeneros = _generoServico.ObterTodos();
             if (clGeneros.CheckedItems.Count >= QUANTIDADE_MINIMA_DE_GENEROS_SELECIONADOS)
             {
@@ -121,16 +154,24 @@ namespace Cod3rsGrowth.forms
                         var text = item;
                         if (listaGeneros[i].Nome.Equals(item))
                         {
-                            var animeGenero = new AnimeGenero()
-                            {
-                                IdAnime = idAnime,
-                                IdGenero = listaGeneros[i].Id
-                            };
-                            _animeGeneroServico.Cadastrar(animeGenero);
+                            GenerosAtuais.Add(listaGeneros[i]);
                         }
                     }
                 }
             }
-        }       
+
+        }
+        private List<Genero> retonarOsGenerosDiferentesEntreAsListas(List<Genero> lista1, List<Genero> lista2)
+        {
+            List<Genero> listaDiferença = new List<Genero>();
+            foreach (var item in lista2)
+            {
+                if (lista1.Contains(item)==false)
+                {
+                    listaDiferença.Add(item);
+                }
+            }
+            return listaDiferença;
+        }
     }
 }

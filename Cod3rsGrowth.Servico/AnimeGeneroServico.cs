@@ -33,9 +33,9 @@ namespace Cod3rsGrowth.Servico
             _animeGeneroRepositorio.Cadastrar(animeGenero);
         }
 
-        public void Deletar(int idAnime)
+        public void Deletar(AnimeGenero animeGenero)
         {                             
-            _animeGeneroRepositorio.Deletar(idAnime);        
+            _animeGeneroRepositorio.Deletar(animeGenero);        
         }       
         public AnimeGenero ObterPorId(int idAnime)
         {
