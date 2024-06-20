@@ -40,31 +40,29 @@ namespace Cod3rsGrowth.forms
             lblStatusDeExibicao = new Label();
             animeBindingSource = new BindingSource(components);
             lblId = new Label();
-            textID = new Label();
-            textNome = new Label();
-            campoNota = new Label();
-            dtpDataDeLancamento = new Label();
-            textStatus = new Label();
             textSinopse = new RichTextBox();
             listGeneros = new RichTextBox();
+            textID = new TextBox();
+            textNome = new TextBox();
+            campoNota = new TextBox();
+            dtpDataDeLancamento = new TextBox();
+            textStatus = new TextBox();
             ((System.ComponentModel.ISupportInitialize)generoBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)animeBindingSource).BeginInit();
             SuspendLayout();
             // 
             // lblNome
             // 
-            lblNome.Anchor = AnchorStyles.Top;
-            lblNome.Location = new Point(12, 94);
+            lblNome.Location = new Point(18, 53);
             lblNome.Name = "lblNome";
-            lblNome.Size = new Size(571, 26);
+            lblNome.Size = new Size(63, 26);
             lblNome.TabIndex = 0;
-            lblNome.Text = "Anime ";
+            lblNome.Text = "Anime :";
             lblNome.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblSinopse
             // 
-            lblSinopse.Anchor = AnchorStyles.Top;
-            lblSinopse.Location = new Point(12, 163);
+            lblSinopse.Location = new Point(21, 147);
             lblSinopse.Name = "lblSinopse";
             lblSinopse.Size = new Size(571, 26);
             lblSinopse.TabIndex = 2;
@@ -73,18 +71,16 @@ namespace Cod3rsGrowth.forms
             // 
             // lblNota
             // 
-            lblNota.Anchor = AnchorStyles.Top;
-            lblNota.Location = new Point(12, 312);
+            lblNota.Location = new Point(479, 22);
             lblNota.Name = "lblNota";
-            lblNota.Size = new Size(571, 26);
+            lblNota.Size = new Size(53, 26);
             lblNota.TabIndex = 4;
-            lblNota.Text = "Nota ";
+            lblNota.Text = "Nota :";
             lblNota.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblGenero
             // 
-            lblGenero.Anchor = AnchorStyles.Top;
-            lblGenero.Location = new Point(12, 385);
+            lblGenero.Location = new Point(21, 302);
             lblGenero.Name = "lblGenero";
             lblGenero.Size = new Size(571, 26);
             lblGenero.TabIndex = 6;
@@ -97,20 +93,20 @@ namespace Cod3rsGrowth.forms
             // 
             // lblDataDeLancamento
             // 
-            lblDataDeLancamento.Location = new Point(12, 524);
+            lblDataDeLancamento.Location = new Point(310, 102);
             lblDataDeLancamento.Name = "lblDataDeLancamento";
-            lblDataDeLancamento.Size = new Size(571, 26);
+            lblDataDeLancamento.Size = new Size(157, 26);
             lblDataDeLancamento.TabIndex = 8;
-            lblDataDeLancamento.Text = "Data de Lançamento ";
+            lblDataDeLancamento.Text = "Data de Lançamento :";
             lblDataDeLancamento.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblStatusDeExibicao
             // 
-            lblStatusDeExibicao.Location = new Point(12, 603);
+            lblStatusDeExibicao.Location = new Point(18, 102);
             lblStatusDeExibicao.Name = "lblStatusDeExibicao";
-            lblStatusDeExibicao.Size = new Size(571, 26);
+            lblStatusDeExibicao.Size = new Size(139, 26);
             lblStatusDeExibicao.TabIndex = 10;
-            lblStatusDeExibicao.Text = "Status de Exibição ";
+            lblStatusDeExibicao.Text = "Status de Exibição :";
             lblStatusDeExibicao.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // animeBindingSource
@@ -119,81 +115,75 @@ namespace Cod3rsGrowth.forms
             // 
             // lblId
             // 
-            lblId.Anchor = AnchorStyles.Top;
-            lblId.Location = new Point(12, 23);
+            lblId.Location = new Point(47, 23);
             lblId.Name = "lblId";
-            lblId.Size = new Size(571, 26);
+            lblId.Size = new Size(34, 26);
             lblId.TabIndex = 16;
-            lblId.Text = "ID ";
+            lblId.Text = "ID :";
             lblId.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // textID
-            // 
-            textID.Anchor = AnchorStyles.Top;
-            textID.Location = new Point(12, 52);
-            textID.Name = "textID";
-            textID.Size = new Size(571, 26);
-            textID.TabIndex = 17;
-            textID.Text = "Id";
-            textID.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // textNome
-            // 
-            textNome.Anchor = AnchorStyles.Top;
-            textNome.Location = new Point(12, 120);
-            textNome.Name = "textNome";
-            textNome.Size = new Size(571, 26);
-            textNome.TabIndex = 18;
-            textNome.Text = "Nome";
-            textNome.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // campoNota
-            // 
-            campoNota.Anchor = AnchorStyles.Top;
-            campoNota.Location = new Point(12, 346);
-            campoNota.Name = "campoNota";
-            campoNota.Size = new Size(571, 26);
-            campoNota.TabIndex = 20;
-            campoNota.Text = "Nota";
-            campoNota.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // dtpDataDeLancamento
-            // 
-            dtpDataDeLancamento.Location = new Point(12, 562);
-            dtpDataDeLancamento.Name = "dtpDataDeLancamento";
-            dtpDataDeLancamento.Size = new Size(571, 26);
-            dtpDataDeLancamento.TabIndex = 22;
-            dtpDataDeLancamento.Text = "Data Lançamento";
-            dtpDataDeLancamento.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // textStatus
-            // 
-            textStatus.Location = new Point(12, 636);
-            textStatus.Name = "textStatus";
-            textStatus.Size = new Size(571, 26);
-            textStatus.TabIndex = 23;
-            textStatus.Text = "Status Exibição";
-            textStatus.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textSinopse
             // 
-            textSinopse.Anchor = AnchorStyles.Top;
-            textSinopse.Location = new Point(12, 192);
+            textSinopse.Location = new Point(21, 176);
             textSinopse.Name = "textSinopse";
             textSinopse.ReadOnly = true;
-            textSinopse.Size = new Size(571, 112);
+            textSinopse.Size = new Size(562, 112);
             textSinopse.TabIndex = 24;
             textSinopse.Text = "";
             // 
             // listGeneros
             // 
             listGeneros.BackColor = SystemColors.Control;
-            listGeneros.Location = new Point(169, 414);
+            listGeneros.Location = new Point(206, 341);
             listGeneros.Name = "listGeneros";
             listGeneros.ReadOnly = true;
-            listGeneros.Size = new Size(250, 82);
+            listGeneros.Size = new Size(199, 82);
             listGeneros.TabIndex = 25;
             listGeneros.Text = "";
+            // 
+            // textID
+            // 
+            textID.Location = new Point(81, 23);
+            textID.Name = "textID";
+            textID.ReadOnly = true;
+            textID.Size = new Size(48, 27);
+            textID.TabIndex = 26;
+            textID.TextAlign = HorizontalAlignment.Center;
+            // 
+            // textNome
+            // 
+            textNome.Location = new Point(81, 56);
+            textNome.Name = "textNome";
+            textNome.ReadOnly = true;
+            textNome.Size = new Size(502, 27);
+            textNome.TabIndex = 27;
+            // 
+            // campoNota
+            // 
+            campoNota.Location = new Point(538, 22);
+            campoNota.Name = "campoNota";
+            campoNota.ReadOnly = true;
+            campoNota.Size = new Size(45, 27);
+            campoNota.TabIndex = 28;
+            campoNota.TextAlign = HorizontalAlignment.Center;
+            // 
+            // dtpDataDeLancamento
+            // 
+            dtpDataDeLancamento.Location = new Point(479, 101);
+            dtpDataDeLancamento.Name = "dtpDataDeLancamento";
+            dtpDataDeLancamento.ReadOnly = true;
+            dtpDataDeLancamento.Size = new Size(104, 27);
+            dtpDataDeLancamento.TabIndex = 29;
+            dtpDataDeLancamento.TextAlign = HorizontalAlignment.Center;
+            // 
+            // textStatus
+            // 
+            textStatus.Location = new Point(166, 102);
+            textStatus.Name = "textStatus";
+            textStatus.ReadOnly = true;
+            textStatus.Size = new Size(125, 27);
+            textStatus.TabIndex = 30;
+            textStatus.TextAlign = HorizontalAlignment.Center;
             // 
             // FormAnimeDetalhes
             // 
@@ -202,14 +192,14 @@ namespace Cod3rsGrowth.forms
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(602, 685);
-            Controls.Add(listGeneros);
-            Controls.Add(textSinopse);
+            ClientSize = new Size(604, 450);
             Controls.Add(textStatus);
             Controls.Add(dtpDataDeLancamento);
             Controls.Add(campoNota);
             Controls.Add(textNome);
             Controls.Add(textID);
+            Controls.Add(listGeneros);
+            Controls.Add(textSinopse);
             Controls.Add(lblId);
             Controls.Add(lblStatusDeExibicao);
             Controls.Add(lblDataDeLancamento);
@@ -223,6 +213,7 @@ namespace Cod3rsGrowth.forms
             ((System.ComponentModel.ISupportInitialize)generoBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)animeBindingSource).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -236,12 +227,12 @@ namespace Cod3rsGrowth.forms
         private Label lblStatusDeExibicao;
         private BindingSource animeBindingSource;
         private Label lblId;
-        private Label textID;
-        private Label textNome;
-        private Label campoNota;
-        private Label dtpDataDeLancamento;
-        private Label textStatus;
         private RichTextBox textSinopse;
         private RichTextBox listGeneros;
+        private TextBox textID;
+        private TextBox textNome;
+        private TextBox campoNota;
+        private TextBox dtpDataDeLancamento;
+        private TextBox textStatus;
     }
 }
