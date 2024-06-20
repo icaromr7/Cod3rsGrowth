@@ -1,4 +1,6 @@
-﻿namespace Cod3rsGrowth.forms
+﻿using Microsoft.SqlServer.Server;
+
+namespace Cod3rsGrowth.forms
 {
     partial class FormAnimeDetalhes
     {
@@ -51,41 +53,43 @@
             // 
             // lblNome
             // 
-            lblNome.AutoSize = true;
-            lblNome.Location = new Point(43, 55);
+            lblNome.Anchor = AnchorStyles.Top;
+            lblNome.Location = new Point(12, 94);
             lblNome.Name = "lblNome";
-            lblNome.Size = new Size(59, 20);
+            lblNome.Size = new Size(571, 26);
             lblNome.TabIndex = 0;
-            lblNome.Text = "Anime :";
+            lblNome.Text = "Anime ";
+            lblNome.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblSinopse
             // 
-            lblSinopse.AutoSize = true;
-            lblSinopse.Location = new Point(43, 85);
+            lblSinopse.Anchor = AnchorStyles.Top;
+            lblSinopse.Location = new Point(12, 163);
             lblSinopse.Name = "lblSinopse";
-            lblSinopse.Size = new Size(68, 20);
+            lblSinopse.Size = new Size(571, 26);
             lblSinopse.TabIndex = 2;
-            lblSinopse.Text = "Sinopse :";
+            lblSinopse.Text = "Sinopse ";
+            lblSinopse.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblNota
             // 
-            lblNota.AutoEllipsis = true;
-            lblNota.AutoSize = true;
-            lblNota.Location = new Point(43, 235);
-            lblNota.Margin = new Padding(2);
+            lblNota.Anchor = AnchorStyles.Top;
+            lblNota.Location = new Point(12, 312);
             lblNota.Name = "lblNota";
-            lblNota.Size = new Size(49, 20);
+            lblNota.Size = new Size(571, 26);
             lblNota.TabIndex = 4;
-            lblNota.Text = "Nota :";
+            lblNota.Text = "Nota ";
+            lblNota.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblGenero
             // 
-            lblGenero.AutoSize = true;
-            lblGenero.Location = new Point(43, 257);
+            lblGenero.Anchor = AnchorStyles.Top;
+            lblGenero.Location = new Point(12, 385);
             lblGenero.Name = "lblGenero";
-            lblGenero.Size = new Size(64, 20);
+            lblGenero.Size = new Size(571, 26);
             lblGenero.TabIndex = 6;
-            lblGenero.Text = "Genero :";
+            lblGenero.Text = "Genero ";
+            lblGenero.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // generoBindingSource
             // 
@@ -93,21 +97,21 @@
             // 
             // lblDataDeLancamento
             // 
-            lblDataDeLancamento.AutoSize = true;
-            lblDataDeLancamento.Location = new Point(43, 375);
+            lblDataDeLancamento.Location = new Point(12, 524);
             lblDataDeLancamento.Name = "lblDataDeLancamento";
-            lblDataDeLancamento.Size = new Size(154, 20);
+            lblDataDeLancamento.Size = new Size(571, 26);
             lblDataDeLancamento.TabIndex = 8;
-            lblDataDeLancamento.Text = "Data de Lançamento :";
+            lblDataDeLancamento.Text = "Data de Lançamento ";
+            lblDataDeLancamento.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblStatusDeExibicao
             // 
-            lblStatusDeExibicao.AutoSize = true;
-            lblStatusDeExibicao.Location = new Point(43, 408);
+            lblStatusDeExibicao.Location = new Point(12, 603);
             lblStatusDeExibicao.Name = "lblStatusDeExibicao";
-            lblStatusDeExibicao.Size = new Size(137, 20);
+            lblStatusDeExibicao.Size = new Size(571, 26);
             lblStatusDeExibicao.TabIndex = 10;
-            lblStatusDeExibicao.Text = "Status de Exibição :";
+            lblStatusDeExibicao.Text = "Status de Exibição ";
+            lblStatusDeExibicao.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // animeBindingSource
             // 
@@ -115,74 +119,79 @@
             // 
             // lblId
             // 
-            lblId.AutoSize = true;
-            lblId.Location = new Point(43, 22);
+            lblId.Anchor = AnchorStyles.Top;
+            lblId.Location = new Point(12, 23);
             lblId.Name = "lblId";
-            lblId.Size = new Size(31, 20);
+            lblId.Size = new Size(571, 26);
             lblId.TabIndex = 16;
-            lblId.Text = "ID :";
+            lblId.Text = "ID ";
+            lblId.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textID
             // 
-            textID.AutoSize = true;
-            textID.Location = new Point(83, 22);
+            textID.Anchor = AnchorStyles.Top;
+            textID.Location = new Point(12, 52);
             textID.Name = "textID";
-            textID.Size = new Size(22, 20);
+            textID.Size = new Size(571, 26);
             textID.TabIndex = 17;
             textID.Text = "Id";
+            textID.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textNome
             // 
-            textNome.AutoSize = true;
-            textNome.Location = new Point(108, 55);
+            textNome.Anchor = AnchorStyles.Top;
+            textNome.Location = new Point(12, 120);
             textNome.Name = "textNome";
-            textNome.Size = new Size(50, 20);
+            textNome.Size = new Size(571, 26);
             textNome.TabIndex = 18;
             textNome.Text = "Nome";
+            textNome.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // campoNota
             // 
-            campoNota.AutoSize = true;
-            campoNota.Location = new Point(97, 235);
+            campoNota.Anchor = AnchorStyles.Top;
+            campoNota.Location = new Point(12, 346);
             campoNota.Name = "campoNota";
-            campoNota.Size = new Size(39, 20);
+            campoNota.Size = new Size(571, 26);
             campoNota.TabIndex = 20;
-            campoNota.Text = "nota";
+            campoNota.Text = "Nota";
+            campoNota.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // dtpDataDeLancamento
             // 
-            dtpDataDeLancamento.AutoSize = true;
-            dtpDataDeLancamento.Location = new Point(203, 375);
+            dtpDataDeLancamento.Location = new Point(12, 562);
             dtpDataDeLancamento.Name = "dtpDataDeLancamento";
-            dtpDataDeLancamento.Size = new Size(126, 20);
+            dtpDataDeLancamento.Size = new Size(571, 26);
             dtpDataDeLancamento.TabIndex = 22;
             dtpDataDeLancamento.Text = "Data Lançamento";
+            dtpDataDeLancamento.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textStatus
             // 
-            textStatus.AutoSize = true;
-            textStatus.Location = new Point(186, 408);
+            textStatus.Location = new Point(12, 636);
             textStatus.Name = "textStatus";
-            textStatus.Size = new Size(109, 20);
+            textStatus.Size = new Size(571, 26);
             textStatus.TabIndex = 23;
             textStatus.Text = "Status Exibição";
+            textStatus.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textSinopse
             // 
-            textSinopse.Location = new Point(56, 110);
+            textSinopse.Anchor = AnchorStyles.Top;
+            textSinopse.Location = new Point(12, 192);
             textSinopse.Name = "textSinopse";
             textSinopse.ReadOnly = true;
-            textSinopse.Size = new Size(534, 112);
+            textSinopse.Size = new Size(571, 112);
             textSinopse.TabIndex = 24;
             textSinopse.Text = "";
             // 
             // listGeneros
             // 
             listGeneros.BackColor = SystemColors.Control;
-            listGeneros.Location = new Point(56, 280);
+            listGeneros.Location = new Point(169, 414);
             listGeneros.Name = "listGeneros";
             listGeneros.ReadOnly = true;
-            listGeneros.Size = new Size(141, 82);
+            listGeneros.Size = new Size(250, 82);
             listGeneros.TabIndex = 25;
             listGeneros.Text = "";
             // 
@@ -193,7 +202,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(602, 458);
+            ClientSize = new Size(602, 685);
             Controls.Add(listGeneros);
             Controls.Add(textSinopse);
             Controls.Add(textStatus);
@@ -214,7 +223,6 @@
             ((System.ComponentModel.ISupportInitialize)generoBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)animeBindingSource).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
