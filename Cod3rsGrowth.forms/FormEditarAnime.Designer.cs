@@ -234,7 +234,7 @@
             Controls.Add(lblNome);
             MaximizeBox = false;
             Name = "FormEditarAnime";
-            Text = "Cadastro de Anime";
+            Text = "Atualização de Anime";
             ((System.ComponentModel.ISupportInitialize)generoBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)animeBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)campoNota).EndInit();

@@ -39,7 +39,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(34, 35);
+            label1.Location = new Point(59, 35);
             label1.Name = "label1";
             label1.Size = new Size(27, 20);
             label1.TabIndex = 0;
@@ -48,7 +48,7 @@
             // txtId
             // 
             txtId.Enabled = false;
-            txtId.Location = new Point(67, 32);
+            txtId.Location = new Point(92, 32);
             txtId.Name = "txtId";
             txtId.Size = new Size(67, 27);
             txtId.TabIndex = 1;
@@ -81,7 +81,7 @@
             // 
             // btnAtualizar
             // 
-            btnAtualizar.Location = new Point(21, 171);
+            btnAtualizar.Location = new Point(33, 171);
             btnAtualizar.Name = "btnAtualizar";
             btnAtualizar.Size = new Size(138, 29);
             btnAtualizar.TabIndex = 5;
@@ -103,7 +103,7 @@
             Controls.Add(txtId);
             Controls.Add(label1);
             Name = "FormEditarGenero";
-            Text = "FormEditarGenero";
+            Text = "Atualização de Gênero";
             ResumeLayout(false);
             PerformLayout();
         }
