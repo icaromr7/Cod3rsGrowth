@@ -1,7 +1,6 @@
 ﻿using Cod3rsGrowth.dominio;
 using Cod3rsGrowth.Servico;
 using FluentValidation;
-using System.Diagnostics.Eventing.Reader;
 
 namespace Cod3rsGrowth.forms
 {
@@ -18,13 +17,15 @@ namespace Cod3rsGrowth.forms
         const int INDEX_CONCLUIDO = 2;
         const int QUANTIDADE_MINIMA_DE_GENEROS_SELECIONADOS = 1;
         const int POSICAO_INICIAL_NA_LISTA = 0;
-        public FormEditarAnime(AnimeServico animeServico, GeneroServico generoServico, AnimeGeneroServico animeGeneroServico, Anime animeModificado)
+        const string NECESSARIO_TER_UM_GENERO = "Necessário ter ao menos 1 genero selecionado";
+        const string ERRO_AO_ATUALIZAR = "Erro ao atualizar o anime!";
+        public FormEditarAnime(AnimeServico animeServico, GeneroServico generoServico, AnimeGeneroServico animeGeneroServico, int idAnime)
         {
             InitializeComponent();
             _generoServico = generoServico;
             _animeServico = animeServico;
             _animeGeneroServico = animeGeneroServico;
-            _animeModificado = animeModificado;
+            _animeModificado = _animeServico.ObterPorId(idAnime);
             textID.Text = Convert.ToString(_animeModificado.Id);
             textNome.Text = Convert.ToString(_animeModificado.Nome);
             textSinopse.Text = Convert.ToString(_animeModificado.Sinopse);
@@ -66,7 +67,7 @@ namespace Cod3rsGrowth.forms
             try
             {
                 if (clGeneros.CheckedItems.Count < QUANTIDADE_MINIMA_DE_GENEROS_SELECIONADOS){
-                    MessageBox.Show("Necessário ter ao menos 1 genero selecionado");
+                    MessageBox.Show(NECESSARIO_TER_UM_GENERO);
                 }
                 else{
                     AoClicarEmAtualizar();
@@ -74,7 +75,6 @@ namespace Cod3rsGrowth.forms
                     DialogResult = DialogResult.OK;
                     this.Close();
                 }
-                
             }
             catch (ValidationException ex)
             {
@@ -87,10 +87,9 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ERRO_AO_ATUALIZAR);
             }
         }
-
         private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             this.Close();

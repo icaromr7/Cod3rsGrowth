@@ -1,6 +1,7 @@
 using Cod3rsGrowth.dominio;
 using Cod3rsGrowth.Servico;
 using FluentValidation;
+using System.Security.Cryptography;
 
 namespace Cod3rsGrowth.forms
 {
@@ -8,12 +9,14 @@ namespace Cod3rsGrowth.forms
     {
         private List<Anime> listaDeAnimes;
         private List<Genero> listaDeGeneros;
+        private FiltroAnime _filtroAnime = null;
         private Anime anime = null;
         private Genero genero = null;
         private AnimeServico _animeServico;
         private GeneroServico _generoServico;
         private AnimeGeneroServico _animeGeneroServico;
         private string _animeNome = null;
+        private string _generoNome = null;
         private Anime.Status? _status = null;
         private DateTime? _date = null;
         const int QUANTIDADE_NA_LISTA = 0;
@@ -24,6 +27,10 @@ namespace Cod3rsGrowth.forms
         const int QUANTIDADE_MINIMA_DE_GENEROS_SELECIONADOS = 1;
         const int INDICA_PRIMEIRA_POSICAO = 0;
         const string NECESSARIO_UM_GENERO_CADASTRADO = "É necessário ter ao menos um gênero cadastrado";
+        const string NENHUM_ANIME_SELECIONADO = "Nenhum anime selecionado!!";
+        const string ERRO_AO_EDITAR_ANIME = "Erro ao editar o anime!!";
+        const string NENHUM_GENERO_SELECIONADO = "Nenhum Gênero selecionado!!";
+        const string ERRO_AO_EDITAR_GENERO = "Erro ao editar o anime!!";
         public FormLista(AnimeServico animeServico, GeneroServico generoServico, AnimeGeneroServico animeGeneroServico)
         {
             _animeServico = animeServico;
@@ -34,7 +41,7 @@ namespace Cod3rsGrowth.forms
         private void PreencherDataAnime()
         {
             listaDeAnimes = new List<Anime>();
-            listaDeAnimes = _animeServico.ObterTodos();
+            listaDeAnimes = _animeServico.ObterTodos(_filtroAnime);
             dataAnime.DataSource = listaDeAnimes;
         }
         private void dataAnime_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -42,10 +49,15 @@ namespace Cod3rsGrowth.forms
 
         }
         private void AoFiltrarPorNomeAnime(object sender, EventArgs e)
-        {
-
+        {          
             _animeNome = txtNomeAnime.Text.Trim();
-            dataAnime.DataSource = _animeServico.ObterTodos(_status, _animeNome, _date);
+            AlocarValorNoFiltro(_animeNome,_date, _status);
+            dataAnime.DataSource = _animeServico.ObterTodos(_filtroAnime);
+        }
+        private void AoFiltrarPorNomeGenero(object sender, EventArgs e)
+        {
+            _generoNome = textNomeGenero.Text.Trim();
+            dataGenero.DataSource = _generoServico.ObterTodos(_generoNome);
         }
         private void AoSelecionarUmStatusDeExibicao(object sender, EventArgs e)
         {
@@ -53,12 +65,14 @@ namespace Cod3rsGrowth.forms
             else if (cbStatusDeExibicao.SelectedIndex == INDEX_PREVISTO) _status = Anime.Status.Previsto;
             else if (cbStatusDeExibicao.SelectedIndex == INDEX_CONCLUIDO) _status = Anime.Status.Concluido;
             else _status = null;
-            dataAnime.DataSource = _animeServico.ObterTodos(_status, _animeNome, _date);
+            AlocarValorNoFiltro(_animeNome, _date, _status);
+            dataAnime.DataSource = _animeServico.ObterTodos(_filtroAnime);
         }
         private void AoSelecionarUmaData(object sender, EventArgs e)
         {
             _date = dtpDataLancamento.Value;
-            dataAnime.DataSource = _animeServico.ObterTodos(_status, _animeNome, _date);
+            AlocarValorNoFiltro(_animeNome, _date, _status);
+            dataAnime.DataSource = _animeServico.ObterTodos(_filtroAnime);
         }
         private void AoClicarEmLimparFiltroAnime(object sender, EventArgs e)
         {
@@ -68,7 +82,8 @@ namespace Cod3rsGrowth.forms
             _animeNome = null;
             _date = null;
             _status = null;
-            dataAnime.DataSource = _animeServico.ObterTodos(_status, _animeNome, _date);
+            AlocarValorNoFiltro(_animeNome, _date, _status);
+            dataAnime.DataSource = _animeServico.ObterTodos(_filtroAnime);
         }
         private void AoClicarEmAdicionarAnime(object sender, EventArgs e)
         {
@@ -97,11 +112,11 @@ namespace Cod3rsGrowth.forms
                 }
                 else if (anime == null)
                 {
-                    MessageBox.Show("Nenhum anime selecionado!!");
+                    MessageBox.Show(NENHUM_ANIME_SELECIONADO);
                 }
                 else
                 {
-                    using (FormEditarAnime formEditarAnime = new FormEditarAnime(_animeServico, _generoServico, _animeGeneroServico, anime) { })
+                    using (FormEditarAnime formEditarAnime = new FormEditarAnime(_animeServico, _generoServico, _animeGeneroServico, anime.Id) { })
                     {
                         if (formEditarAnime.ShowDialog() == DialogResult.OK)
                         {
@@ -121,7 +136,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao editar o anime!!");
+                MessageBox.Show(ERRO_AO_EDITAR_ANIME);
             }
         }
         private void AoClicarEmRemoverAnime(object sender, EventArgs e)
@@ -130,7 +145,7 @@ namespace Cod3rsGrowth.forms
             {
                 if (anime == null)
                 {
-                    MessageBox.Show("Nenhum anime selecionado!!");
+                    MessageBox.Show(NENHUM_ANIME_SELECIONADO);
                 }
                 else
                 {
@@ -164,7 +179,6 @@ namespace Cod3rsGrowth.forms
         }
         private void dataAnimeFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            //dataAnime.Columns["notaColumn"].DefaultCellStyle.Format = "N1";
             notaColumnAnime.DefaultCellStyle.Format = "N1";
         }
         private void PreencherComboBoxStatus()
@@ -203,11 +217,11 @@ namespace Cod3rsGrowth.forms
         {
             if (anime == null)
             {
-                MessageBox.Show("Nenhum anime selecionado!!");
+                MessageBox.Show(NENHUM_ANIME_SELECIONADO);
             }
             else
             {
-                using (FormAnimeDetalhes formAnimeDetalhes = new FormAnimeDetalhes(anime, _generoServico, _animeGeneroServico) { })
+                using (FormAnimeDetalhes formAnimeDetalhes = new FormAnimeDetalhes(anime.Id, _generoServico, _animeGeneroServico,_animeServico) { })
                 {
                     formAnimeDetalhes.ShowDialog();
                 }
@@ -226,7 +240,7 @@ namespace Cod3rsGrowth.forms
             {
                 if (genero == null)
                 {
-                    MessageBox.Show("Nenhum Gênero selecionado!!");
+                    MessageBox.Show(NENHUM_GENERO_SELECIONADO);
                 }
                 else
                 {
@@ -265,7 +279,7 @@ namespace Cod3rsGrowth.forms
             {
                 if (genero == null)
                 {
-                    MessageBox.Show("Nenhum gênero selecionado!!");
+                    MessageBox.Show(NENHUM_GENERO_SELECIONADO);
                 }
                 else
                 {
@@ -289,7 +303,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao editar o anime!!");
+                MessageBox.Show(ERRO_AO_EDITAR_GENERO);
             }
         }
 
@@ -308,13 +322,29 @@ namespace Cod3rsGrowth.forms
 
         private void AoClicarEmAdicionarGenero(object sender, MouseEventArgs e)
         {
-            using (FormAdicionarGenero formAdicionarGenero = new FormAdicionarGenero( _generoServico) { })
+            using (FormAdicionarGenero formAdicionarGenero = new FormAdicionarGenero(_generoServico) { })
             {
                 if (formAdicionarGenero.ShowDialog() == DialogResult.OK)
                 {
                     PreencherDataGenero();
                 }
             }
-        }  
+        }
+
+        private void AoClicarEmLimparFiltroGenero(object sender, EventArgs e)
+        {
+            textNomeGenero.Text = "";
+            _generoNome = null;
+            dataGenero.DataSource = _generoServico.ObterTodos(_generoNome);
+        }
+        private void AlocarValorNoFiltro(string? nome, DateTime? dataLancamento, Anime.Status? status)
+        {
+            _filtroAnime = new FiltroAnime()
+            {
+                Nome = nome,
+                DataLancamento = dataLancamento,
+                StatusExibicao = status
+            };
+        }
     }
 }

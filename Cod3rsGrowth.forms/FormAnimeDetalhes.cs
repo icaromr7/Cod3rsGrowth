@@ -7,11 +7,12 @@ namespace Cod3rsGrowth.forms
     {
         GeneroServico _generoServico;
         AnimeGeneroServico _animeGeneroServico;
-        public FormAnimeDetalhes(Anime anime, GeneroServico generoServico, AnimeGeneroServico animeGeneroServico)
+        public FormAnimeDetalhes(int idAnime, GeneroServico generoServico, AnimeGeneroServico animeGeneroServico, AnimeServico animeServico)
         {
             InitializeComponent();
             _generoServico = generoServico;
             _animeGeneroServico = animeGeneroServico;
+            var anime = animeServico.ObterPorId(idAnime);
             textID.Text = anime.Id.ToString();
             textNome.Text = anime.Nome.ToString();
             textSinopse.Text = anime.Sinopse.ToString();

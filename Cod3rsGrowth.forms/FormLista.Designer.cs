@@ -66,7 +66,7 @@
             dataAnime.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataAnime.Columns.AddRange(new DataGridViewColumn[] { idColumnAnime, nomeColumnAnime, sinopseColumnAnime, notaColumnAnime, dataLancamentoColumnAnime, statusDeExibicaoColumnAnime });
             dataAnime.DataSource = animeBindingSource;
-            dataAnime.Location = new Point(35, 119);
+            dataAnime.Location = new Point(27, 119);
             dataAnime.MultiSelect = false;
             dataAnime.Name = "dataAnime";
             dataAnime.ReadOnly = true;
@@ -146,7 +146,7 @@
             // 
             // btnRemoverAnime
             // 
-            btnRemoverAnime.Location = new Point(542, 426);
+            btnRemoverAnime.Location = new Point(534, 426);
             btnRemoverAnime.Name = "btnRemoverAnime";
             btnRemoverAnime.Size = new Size(94, 29);
             btnRemoverAnime.TabIndex = 2;
@@ -156,7 +156,7 @@
             // 
             // btnEditarAnime
             // 
-            btnEditarAnime.Location = new Point(442, 426);
+            btnEditarAnime.Location = new Point(434, 426);
             btnEditarAnime.Name = "btnEditarAnime";
             btnEditarAnime.Size = new Size(94, 29);
             btnEditarAnime.TabIndex = 3;
@@ -166,7 +166,7 @@
             // 
             // btnAdicionarAnime
             // 
-            btnAdicionarAnime.Location = new Point(342, 426);
+            btnAdicionarAnime.Location = new Point(334, 426);
             btnAdicionarAnime.Name = "btnAdicionarAnime";
             btnAdicionarAnime.Size = new Size(94, 29);
             btnAdicionarAnime.TabIndex = 4;
@@ -180,7 +180,7 @@
             // 
             // btnDetalhes
             // 
-            btnDetalhes.Location = new Point(530, 84);
+            btnDetalhes.Location = new Point(522, 84);
             btnDetalhes.Name = "btnDetalhes";
             btnDetalhes.Size = new Size(106, 29);
             btnDetalhes.TabIndex = 5;
@@ -190,16 +190,17 @@
             // 
             // txtNomeAnime
             // 
-            txtNomeAnime.Location = new Point(3, 37);
+            txtNomeAnime.Location = new Point(27, 37);
             txtNomeAnime.Name = "txtNomeAnime";
-            txtNomeAnime.Size = new Size(416, 27);
+            txtNomeAnime.PlaceholderText = "Digite o nome";
+            txtNomeAnime.Size = new Size(334, 27);
             txtNomeAnime.TabIndex = 6;
             txtNomeAnime.TextChanged += AoFiltrarPorNomeAnime;
             // 
             // dtpDataLancamento
             // 
             dtpDataLancamento.Format = DateTimePickerFormat.Short;
-            dtpDataLancamento.Location = new Point(425, 37);
+            dtpDataLancamento.Location = new Point(377, 37);
             dtpDataLancamento.Name = "dtpDataLancamento";
             dtpDataLancamento.Size = new Size(118, 27);
             dtpDataLancamento.TabIndex = 7;
@@ -210,7 +211,7 @@
             // 
             cbStatusDeExibicao.DropDownStyle = ComboBoxStyle.DropDownList;
             cbStatusDeExibicao.FormattingEnabled = true;
-            cbStatusDeExibicao.Location = new Point(549, 36);
+            cbStatusDeExibicao.Location = new Point(510, 37);
             cbStatusDeExibicao.Name = "cbStatusDeExibicao";
             cbStatusDeExibicao.Size = new Size(118, 28);
             cbStatusDeExibicao.TabIndex = 8;
@@ -218,7 +219,7 @@
             // 
             // btnLimparFiltroAnime
             // 
-            btnLimparFiltroAnime.Location = new Point(35, 84);
+            btnLimparFiltroAnime.Location = new Point(27, 84);
             btnLimparFiltroAnime.Name = "btnLimparFiltroAnime";
             btnLimparFiltroAnime.Size = new Size(120, 29);
             btnLimparFiltroAnime.TabIndex = 9;
@@ -251,7 +252,7 @@
             tabLista.Location = new Point(2, 1);
             tabLista.Name = "tabLista";
             tabLista.SelectedIndex = 0;
-            tabLista.Size = new Size(690, 500);
+            tabLista.Size = new Size(659, 500);
             tabLista.TabIndex = 13;
             tabLista.SelectedIndexChanged += AoTrocarDePagina;
             // 
@@ -269,7 +270,7 @@
             pagAnime.Location = new Point(4, 29);
             pagAnime.Name = "pagAnime";
             pagAnime.Padding = new Padding(3);
-            pagAnime.Size = new Size(682, 467);
+            pagAnime.Size = new Size(651, 467);
             pagAnime.TabIndex = 0;
             pagAnime.Text = "Anime";
             pagAnime.UseVisualStyleBackColor = true;
@@ -285,30 +286,33 @@
             pagGenero.Location = new Point(4, 29);
             pagGenero.Name = "pagGenero";
             pagGenero.Padding = new Padding(3);
-            pagGenero.Size = new Size(682, 467);
+            pagGenero.Size = new Size(651, 467);
             pagGenero.TabIndex = 1;
             pagGenero.Text = "Gênero";
             pagGenero.UseVisualStyleBackColor = true;
             // 
             // textNomeGenero
             // 
-            textNomeGenero.Location = new Point(53, 20);
+            textNomeGenero.Location = new Point(43, 21);
             textNomeGenero.Name = "textNomeGenero";
+            textNomeGenero.PlaceholderText = "Digite o nome";
             textNomeGenero.Size = new Size(571, 27);
             textNomeGenero.TabIndex = 5;
+            textNomeGenero.TextChanged += AoFiltrarPorNomeGenero;
             // 
             // btnLimparFiltroGenero
             // 
-            btnLimparFiltroGenero.Location = new Point(53, 66);
+            btnLimparFiltroGenero.Location = new Point(43, 67);
             btnLimparFiltroGenero.Name = "btnLimparFiltroGenero";
             btnLimparFiltroGenero.Size = new Size(105, 29);
             btnLimparFiltroGenero.TabIndex = 4;
             btnLimparFiltroGenero.Text = "Limpar Filtro";
             btnLimparFiltroGenero.UseVisualStyleBackColor = true;
+            btnLimparFiltroGenero.Click += AoClicarEmLimparFiltroGenero;
             // 
             // btnAdicionarGenero
             // 
-            btnAdicionarGenero.Location = new Point(366, 423);
+            btnAdicionarGenero.Location = new Point(320, 424);
             btnAdicionarGenero.Name = "btnAdicionarGenero";
             btnAdicionarGenero.Size = new Size(94, 29);
             btnAdicionarGenero.TabIndex = 3;
@@ -318,7 +322,7 @@
             // 
             // btnEditarGenero
             // 
-            btnEditarGenero.Location = new Point(466, 423);
+            btnEditarGenero.Location = new Point(420, 424);
             btnEditarGenero.Name = "btnEditarGenero";
             btnEditarGenero.Size = new Size(94, 29);
             btnEditarGenero.TabIndex = 2;
@@ -328,7 +332,7 @@
             // 
             // btnRemoverGenero
             // 
-            btnRemoverGenero.Location = new Point(566, 423);
+            btnRemoverGenero.Location = new Point(520, 424);
             btnRemoverGenero.Name = "btnRemoverGenero";
             btnRemoverGenero.Size = new Size(94, 29);
             btnRemoverGenero.TabIndex = 1;
@@ -342,7 +346,7 @@
             dataGenero.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGenero.Columns.AddRange(new DataGridViewColumn[] { idColumnGenero, nomeColumnGenero });
             dataGenero.DataSource = generoBindingSource;
-            dataGenero.Location = new Point(53, 101);
+            dataGenero.Location = new Point(43, 102);
             dataGenero.Name = "dataGenero";
             dataGenero.ReadOnly = true;
             dataGenero.RowHeadersVisible = false;
@@ -378,7 +382,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(690, 494);
+            ClientSize = new Size(661, 494);
             Controls.Add(tabLista);
             MaximizeBox = false;
             Name = "FormLista";

@@ -45,7 +45,6 @@ namespace Cod3rsGrowth.forms
         {
             _genero.Nome = txtId.Text;
         }
-
         private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             this.Close();

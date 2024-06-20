@@ -4,6 +4,7 @@ using Cod3rsGrowth.Servico;
 using FluentValidation;
 using LinqToDB;
 using LinqToDB.Data;
+using System.CodeDom;
 using System.Configuration;
 
 namespace Cod3rsGrowth.forms
@@ -18,6 +19,8 @@ namespace Cod3rsGrowth.forms
         const int INDEX_CONCLUIDO = 2;
         const int QUANTIDADE_MINIMA_DE_GENEROS_SELECIONADOS = 1;
         const int POSICAO_INICIAL_NA_LISTA = 0;
+        const string NECESSARIO_TER_UM_GENERO = "Necessário ter ao menos 1 genero selecionado";
+        const string ERRO_AO_ADICIONAR = "Erro ao adicionar anime!";
 
         public FormAdicionarAnime(AnimeServico animeServico, GeneroServico generoServico, AnimeGeneroServico animeGeneroServico)
         {
@@ -50,10 +53,17 @@ namespace Cod3rsGrowth.forms
         {
             try
             {
-                AoClicarEmAdicionarAnime();
-                AoClicarEmCadastrarAnimeGenero();
-                DialogResult = DialogResult.OK;
-                this.Close();
+                if (clGeneros.CheckedItems.Count < QUANTIDADE_MINIMA_DE_GENEROS_SELECIONADOS)
+                {
+                    MessageBox.Show(NECESSARIO_TER_UM_GENERO);
+                }
+                else
+                {
+                    AoClicarEmAdicionarAnime();
+                    AoClicarEmCadastrarAnimeGenero();
+                    DialogResult = DialogResult.OK;
+                    this.Close();
+                }
             }
             catch (ValidationException ex)
             {
@@ -66,7 +76,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ERRO_AO_ADICIONAR);
             }
         }
         private void AoClicarEmCancelar(object sender, EventArgs e)

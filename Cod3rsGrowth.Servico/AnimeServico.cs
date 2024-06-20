@@ -56,9 +56,9 @@ namespace Cod3rsGrowth.Servico
             return anime;
         }
 
-        public List<Anime> ObterTodos(Status? statusDeExibicao = null, string nome = null, DateTime? dateTime = null)
+        public List<Anime> ObterTodos(FiltroAnime? filtro)
         {
-            var animes = _animeRepositorio.ObterTodos(statusDeExibicao,nome,dateTime);
+            var animes = _animeRepositorio.ObterTodos(filtro);
             return animes;
         }
 

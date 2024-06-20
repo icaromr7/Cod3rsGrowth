@@ -16,6 +16,7 @@ namespace Cod3rsGrowth.forms
     public partial class FormAdicionarGenero : Form
     {
         private GeneroServico _generoServico;
+        const string ERRO_AO_ADICIONAR = "Erro ao adicionar o gênero";
         public FormAdicionarGenero(GeneroServico generoServico)
         {
             _generoServico = generoServico;
@@ -45,7 +46,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ERRO_AO_ADICIONAR);
             }
         }
         private string RetornaNomeFormatado(string nomeGenero)
@@ -54,7 +55,7 @@ namespace Cod3rsGrowth.forms
             var nomeGeneroFormatado = "";
             foreach (var nome in nomes)
             {
-                nomeGeneroFormatado += nome.Substring(0, 1).ToUpper() + nome.Substring(1)+" ";
+                nomeGeneroFormatado += nome.Substring(0, 1).ToUpper() + nome.Substring(1).ToLower()+" ";
             }
             return nomeGeneroFormatado.Trim();
         }
