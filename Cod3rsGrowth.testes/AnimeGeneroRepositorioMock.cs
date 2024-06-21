@@ -14,9 +14,9 @@ namespace Cod3rsGrowth.testes
             TabelaDeAnimeGenero.Instance.Add(animeGenero);
         }
 
-        public void Deletar(int idAnime)
+        public void Deletar(AnimeGenero animeGenero)
         {
-            var animeGeneroDeletado = TabelaDeAnimeGenero.Instance.Find(delegate (AnimeGenero animeGenero1) { return animeGenero1.IdAnime == idAnime; });
+            var animeGeneroDeletado = TabelaDeAnimeGenero.Instance.Find(delegate (AnimeGenero animeGenero1) { return animeGenero1.IdAnime == animeGenero.IdAnime; });
             TabelaDeAnimeGenero.Instance.Remove(animeGeneroDeletado);        
         }
 

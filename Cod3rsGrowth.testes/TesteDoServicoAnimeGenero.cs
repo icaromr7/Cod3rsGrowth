@@ -115,7 +115,7 @@ namespace Cod3rsGrowth.testes
                 IdGenero = 1,
             };
             //act
-            _animeGeneroServico.Deletar(animeGeneroDeletado.IdAnime);
+            _animeGeneroServico.Deletar(animeGeneroDeletado);
 
             //assert
             Assert.DoesNotContain(TabelaDeAnimeGenero.Instance, animeGenero1 => animeGenero1==animeGenero);

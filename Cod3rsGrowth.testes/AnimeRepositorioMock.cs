@@ -31,7 +31,7 @@ namespace Cod3rsGrowth.testes
             var anime = TabelaDeAnime.Instance.Find(delegate (Anime anime1){ return anime1.Id == id; });
             return anime;
         }
-        public List<Anime> ObterTodos(Status? statusDeExibicao = null, string nome = null, DateTime? dateTime = null)
+        public List<Anime> ObterTodos(FiltroAnime? filtroAnime)
         {
             var animes = TabelaDeAnime.Instance;
             return animes;
