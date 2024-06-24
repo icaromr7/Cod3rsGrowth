@@ -2,12 +2,15 @@
 using LinqToDB;
 using LinqToDB.Data;
 using System.Configuration;
+using System.Reflection;
 
 namespace Cod3rsGrowth.infra
 {
     public class AnimeGeneroRepositorio : IAnimeGeneroRepositorio
     {
         private readonly DataConnection dataConnection;
+        const int ID_DEFAULT = 0;
+        const int POSICAO_INICIAL_DA_LISTA = 0;
         public AnimeGeneroRepositorio()
         {
             var appSettings = ConfigurationManager.AppSettings;
@@ -25,29 +28,31 @@ namespace Cod3rsGrowth.infra
         {
             dataConnection.Insert(animeGenero);
         }       
-        public void Deletar(AnimeGenero animeGenero)
+        public void Deletar(List<AnimeGenero> animeGeneros)
         {
-            int idAnime = animeGenero.IdAnime;
-            int idGenero = animeGenero.IdGenero;
-            if(idAnime!= 0 && idGenero != 0)
+            string sqlQuery = string.Empty;
+            for( int i = POSICAO_INICIAL_DA_LISTA; i < animeGeneros.Count; i++)
             {
-                dataConnection.GetTable<AnimeGenero>()
-                .Where(animeGenero => animeGenero.IdAnime == idAnime && animeGenero.IdGenero== idGenero)
-                .Delete();
+                sqlQuery += "DELETE FROM dbo.AnimeGenero WHERE IdAnime =" + animeGeneros[i].IdAnime 
+                    + "AND IdGenero = " + animeGeneros[i].IdGenero + ";";
             }
-            else if (idAnime != 0)
-            {
-                dataConnection.GetTable<AnimeGenero>()
+            dataConnection.Execute(sqlQuery);                     
+        }
+
+        public void DeletarPorAnime(int idAnime)
+        {
+            dataConnection.GetTable<AnimeGenero>()
                 .Where(animeGenero => animeGenero.IdAnime == idAnime)
                 .Delete();
-            }
-            else if (idGenero != 0)
-            {
-                dataConnection.GetTable<AnimeGenero>()
+        }
+
+        public void DeletarPorGenero(int idGenero)
+        {
+            dataConnection.GetTable<AnimeGenero>()
                 .Where(animeGenero => animeGenero.IdGenero == idGenero)
                 .Delete();
-            }
         }
+
         public AnimeGenero ObterPorId(int idAnime)
         {
             var animeGeneros = dataConnection.GetTable<AnimeGenero>()
@@ -55,7 +60,7 @@ namespace Cod3rsGrowth.infra
             return animeGeneros.ToList().First();
         }
 
-        public List<AnimeGenero> ObterTodos(int? idAnime = 0)
+        public List<AnimeGenero> ObterTodos(int? idAnime = ID_DEFAULT)
         {
             var animeGeneros = dataConnection.GetTable<AnimeGenero>()
                 .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime); ;

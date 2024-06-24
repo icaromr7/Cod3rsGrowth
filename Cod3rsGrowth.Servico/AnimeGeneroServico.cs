@@ -33,10 +33,21 @@ namespace Cod3rsGrowth.Servico
             _animeGeneroRepositorio.Cadastrar(animeGenero);
         }
 
-        public void Deletar(AnimeGenero animeGenero)
+        public void Deletar(List<AnimeGenero> animeGeneros)
         {                             
-            _animeGeneroRepositorio.Deletar(animeGenero);        
-        }       
+            _animeGeneroRepositorio.Deletar(animeGeneros);        
+        }
+
+        public void DeletarPorAnime(int idAnime)
+        {
+            _animeGeneroRepositorio.DeletarPorAnime(idAnime);
+        }
+
+        public void DeletarPorGenero(int idGenero)
+        {
+            _animeGeneroRepositorio.DeletarPorGenero(idGenero);
+        }
+
         public AnimeGenero ObterPorId(int idAnime)
         {
             var animeGeneros = _animeGeneroRepositorio.ObterPorId(idAnime);

@@ -11,7 +11,6 @@ namespace Cod3rsGrowth.forms
         AnimeGeneroServico _animeGeneroServico;
         Anime _animeModificado;
         List<Genero> GenerosAntigos = new List<Genero>();
-        List<Genero> GenerosAtuais = new List<Genero>();
         const int INDEX_EM_EXIBICAO = 0;
         const int INDEX_PREVISTO = 1;
         const int INDEX_CONCLUIDO = 2;
@@ -35,6 +34,7 @@ namespace Cod3rsGrowth.forms
             PreencherComboBoxStatus();
             cbStatusDeExibicao.Text = _animeModificado.StatusDeExibicao.ToString();
         }
+
         private void PreencherCheckListBoxGenero()
         {
             var listaGeneros = _generoServico.ObterTodos();
@@ -58,6 +58,7 @@ namespace Cod3rsGrowth.forms
                 }
             }
         }
+
         private void PreencherComboBoxStatus()
         {
             cbStatusDeExibicao.DataSource = new List<string>() { "EmExibição", "Previsto", "Concluído" };
@@ -71,7 +72,7 @@ namespace Cod3rsGrowth.forms
                 }
                 else{
                     AoClicarEmAtualizar();
-                    AoClicarEmEditarAnimeGenero();
+                    AoClicarEmAtualizarAnimeGenero();
                     DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -115,21 +116,33 @@ namespace Cod3rsGrowth.forms
                 StatusDeExibicao = status
             });
         }
-        private void AoClicarEmEditarAnimeGenero()
+        private void AoClicarEmAtualizarAnimeGenero()
         {
-            PreencherListaDosGenerosAtuais();
-            var listaGenerosRetirados = retonarOsGenerosDiferentesEntreAsListas(GenerosAtuais, GenerosAntigos);
-            var listaGenerosAdicionados = retonarOsGenerosDiferentesEntreAsListas(GenerosAntigos, GenerosAtuais);
-            for (int i = POSICAO_INICIAL_NA_LISTA; i< listaGenerosRetirados.Count; i++ )
+            var generosAtuais = PreencherListaDosGenerosAtuais();
+            var listaGenerosRetirados = ObterOsGenerosDiferentesEntreAsListas(generosAtuais, GenerosAntigos);
+            ExcluirRelacaoAnimeGenero(generosAtuais);
+            AdicionarRelacaoAnimeGenero(generosAtuais);
+        }
+
+        public void ExcluirRelacaoAnimeGenero(List<Genero> generosAtuais)
+        {
+            var listaGenerosRetirados = ObterOsGenerosDiferentesEntreAsListas(generosAtuais, GenerosAntigos);
+            var listaAnimeGenerosRetorados = new List<AnimeGenero>();
+            for (int i = POSICAO_INICIAL_NA_LISTA; i < listaGenerosRetirados.Count; i++)
             {
                 var animeGenero = new AnimeGenero()
                 {
                     IdAnime = _animeModificado.Id,
                     IdGenero = listaGenerosRetirados[i].Id,
                 };
-                _animeGeneroServico.Deletar(animeGenero);
+                listaAnimeGenerosRetorados.Add(animeGenero);
             }
-            foreach (var adicionado  in listaGenerosAdicionados)
+            _animeGeneroServico.Deletar(listaAnimeGenerosRetorados);
+        }
+        public void AdicionarRelacaoAnimeGenero(List<Genero> generosAtuais)
+        {
+            var listaGenerosAdicionados = ObterOsGenerosDiferentesEntreAsListas(GenerosAntigos, generosAtuais);
+            foreach (var adicionado in listaGenerosAdicionados)
             {
                 var animeGenero = new AnimeGenero()
                 {
@@ -139,9 +152,11 @@ namespace Cod3rsGrowth.forms
                 _animeGeneroServico.Cadastrar(animeGenero);
             }
         }
-        private void PreencherListaDosGenerosAtuais()
+
+        private List<Genero> PreencherListaDosGenerosAtuais()
         {
-            int idAnime = _animeModificado.Id;
+            var generosAtuais = new List<Genero>();
+            var idAnime = _animeModificado.Id;
             var listaGeneros = _generoServico.ObterTodos();
             if (clGeneros.CheckedItems.Count >= QUANTIDADE_MINIMA_DE_GENEROS_SELECIONADOS)
             {
@@ -153,16 +168,17 @@ namespace Cod3rsGrowth.forms
                         var text = item;
                         if (listaGeneros[i].Nome.Equals(item))
                         {
-                            GenerosAtuais.Add(listaGeneros[i]);
+                            generosAtuais.Add(listaGeneros[i]);
                         }
                     }
                 }
             }
-
+            return generosAtuais;
         }
-        private List<Genero> retonarOsGenerosDiferentesEntreAsListas(List<Genero> lista1, List<Genero> lista2)
+
+        private List<Genero> ObterOsGenerosDiferentesEntreAsListas(List<Genero> lista1, List<Genero> lista2)
         {
-            List<Genero> listaDiferença = new List<Genero>();
+            var listaDiferença = new List<Genero>();
             foreach (var item in lista2)
             {
                 if (lista1.Contains(item)==false)

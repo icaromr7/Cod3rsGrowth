@@ -7,6 +7,7 @@ namespace Cod3rsGrowth.forms
     {
         GeneroServico _generoServico;
         AnimeGeneroServico _animeGeneroServico;
+        const int POSICAO_INICIAL_NA_LISTA = 0;
         public FormAnimeDetalhes(int idAnime, GeneroServico generoServico, AnimeGeneroServico animeGeneroServico, AnimeServico animeServico)
         {
             InitializeComponent();
@@ -25,7 +26,7 @@ namespace Cod3rsGrowth.forms
         {
             List<AnimeGenero> listAnimeGenero = _animeGeneroServico.ObterTodos(idAnime);
             listGeneros.Text = "";
-            for (int i = 0; i < listAnimeGenero.Count; i++)
+            for (int i = POSICAO_INICIAL_NA_LISTA; i < listAnimeGenero.Count; i++)
             {
                 var genero = _generoServico.ObterPorId(listAnimeGenero[i].IdGenero);
                 listGeneros.Text += genero.Nome + "\n";

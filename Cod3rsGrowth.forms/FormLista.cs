@@ -76,7 +76,7 @@ namespace Cod3rsGrowth.forms
         }
         private void AoClicarEmLimparFiltroAnime(object sender, EventArgs e)
         {
-            txtNomeAnime.Text = "";
+            txtNomeAnime.Text = string.Empty;
             cbStatusDeExibicao.SelectedIndex = INDEX_TODOS;
             dtpDataLancamento.Value = DateTime.Now;
             _animeNome = null;
@@ -151,13 +151,8 @@ namespace Cod3rsGrowth.forms
                 {
                     var result = MessageBox.Show(this, "Você tem certeza que deseja excluir o anime?", "Confirmação", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
-                    {
-                        var animeGenero = new AnimeGenero()
-                        {
-                            IdAnime = anime.Id,
-                            IdGenero = 0
-                        };
-                        _animeGeneroServico.Deletar(animeGenero);
+                    {                       
+                        _animeGeneroServico.DeletarPorAnime(anime.Id);
                         _animeServico.Deletar(anime.Id);
                         PreencherDataAnime();
                     }
@@ -227,13 +222,11 @@ namespace Cod3rsGrowth.forms
                 }
             }
         }
-
         private void FormLista_Load(object sender, EventArgs e)
         {
             PreencherDataAnime();
             PreencherComboBoxStatus();
         }
-
         private void AoClicarEmRemoverGenero(object sender, MouseEventArgs e)
         {
             try
@@ -247,12 +240,7 @@ namespace Cod3rsGrowth.forms
                     var result = MessageBox.Show(this, "Você tem certeza que deseja excluir o Gênero?", "Confirmação", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
-                        var animeGenero = new AnimeGenero()
-                        {
-                            IdAnime = 0,
-                            IdGenero = genero.Id
-                        };
-                        _animeGeneroServico.Deletar(animeGenero);
+                        _animeGeneroServico.DeletarPorGenero(genero.Id);
                         _generoServico.Deletar(genero.Id);
                         PreencherDataGenero();
                     }
@@ -272,7 +260,6 @@ namespace Cod3rsGrowth.forms
                 MessageBox.Show("Erro ao deletar o gênero!!");
             }
         }
-
         private void AoClicarEmEditarGenero(object sender, MouseEventArgs e)
         {
             try
@@ -306,7 +293,6 @@ namespace Cod3rsGrowth.forms
                 MessageBox.Show(ERRO_AO_EDITAR_GENERO);
             }
         }
-
         private void AoTrocarDePagina(object sender, EventArgs e)
         {
             if (tabLista.SelectedTab == pagAnime)
@@ -319,7 +305,6 @@ namespace Cod3rsGrowth.forms
             listaDeGeneros = _generoServico.ObterTodos();
             dataGenero.DataSource = listaDeGeneros;
         }
-
         private void AoClicarEmAdicionarGenero(object sender, MouseEventArgs e)
         {
             using (FormAdicionarGenero formAdicionarGenero = new FormAdicionarGenero(_generoServico) { })
@@ -330,10 +315,9 @@ namespace Cod3rsGrowth.forms
                 }
             }
         }
-
         private void AoClicarEmLimparFiltroGenero(object sender, EventArgs e)
         {
-            textNomeGenero.Text = "";
+            textNomeGenero.Text = string.Empty;
             _generoNome = null;
             dataGenero.DataSource = _generoServico.ObterTodos(_generoNome);
         }
