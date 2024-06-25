@@ -1,15 +1,15 @@
 ﻿using Cod3rsGrowth.dominio;
-using Cod3rsGrowth.infra;
 using LinqToDB;
 using LinqToDB.Data;
 using System.Configuration;
 
-namespace Cod3rsGrowth.testes
+namespace Cod3rsGrowth.infra
 {
     public class GeneroRepositorio : IGeneroRepositorio
     {
         private readonly DataConnection dataConnection;
-        public GeneroRepositorio() {
+        public GeneroRepositorio()
+        {
             var appSettings = ConfigurationManager.AppSettings;
             string result = appSettings[ConstantesDoRepositorio.CONNECTION_STRING];
             dataConnection = new DataConnection(
@@ -41,11 +41,16 @@ namespace Cod3rsGrowth.testes
             return genero;
         }
 
-        public List <Genero> ObterTodos()
+        public List<Genero> ObterTodos(string nome = null)
         {
-            var generos = dataConnection.GetTable<Genero>();
-            generos = (ITable<Genero>)generos.OrderBy(g => g.Nome);
-            return generos.ToList();
+            var generos = dataConnection.GetTable<Genero>()
+                .OrderBy(genero => genero.Nome);
+            var listaGeneros = generos.AsQueryable();
+            if(nome != null)
+            {
+                listaGeneros = listaGeneros.Where(genero => genero.Nome.Contains(nome));
+            }
+            return listaGeneros.ToList();
         }
     }
 }

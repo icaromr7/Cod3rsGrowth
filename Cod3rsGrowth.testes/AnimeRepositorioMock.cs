@@ -1,10 +1,9 @@
 ﻿using Cod3rsGrowth.dominio;
-using static Cod3rsGrowth.dominio.Anime;
 
 namespace Cod3rsGrowth.testes
 {
     public class AnimeRepositorioMock : IAnimeRepositorio
-    {
+    {       
         public AnimeRepositorioMock()
         {
         }
@@ -13,7 +12,6 @@ namespace Cod3rsGrowth.testes
             var animeModificado = TabelaDeAnime.Instance.Find(delegate (Anime anime1) { return anime1.Id == anime.Id; });
             animeModificado.Nome = anime.Nome;
             animeModificado.Sinopse = anime.Sinopse;
-            animeModificado.GenerosIds = anime.GenerosIds;
             animeModificado.DataLancamento = anime.DataLancamento;
             animeModificado.Nota = anime.Nota;
             animeModificado.StatusDeExibicao = anime.StatusDeExibicao;
@@ -32,7 +30,7 @@ namespace Cod3rsGrowth.testes
             var anime = TabelaDeAnime.Instance.Find(delegate (Anime anime1){ return anime1.Id == id; });
             return anime;
         }
-        public List<Anime> ObterTodos(Status? statusDeExibicao = null)
+        public List<Anime> ObterTodos(FiltroAnime? filtroAnime)
         {
             var animes = TabelaDeAnime.Instance;
             return animes;

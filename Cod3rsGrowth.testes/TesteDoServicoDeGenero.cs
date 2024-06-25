@@ -138,13 +138,13 @@ namespace Cod3rsGrowth.testes
         [Fact]
         public void Ao_tentar_atualizar_deve_retornar_nome_nao_pode_ser_nullo()
         {
-            var genero1 = new Genero
+            var genero1 = new Genero()
             {
                 Id = 1,
                 Nome = "Acao"
             };
             TabelaDeGenero.Instance.Add(genero1);
-            var genero2 = new Genero
+            var genero2 = new Genero()
             {
                 Id = 1,
                 Nome = null

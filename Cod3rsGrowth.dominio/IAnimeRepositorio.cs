@@ -1,11 +1,11 @@
 ﻿using Cod3rsGrowth.dominio;
 using static Cod3rsGrowth.dominio.Anime;
 
-namespace Cod3rsGrowth.testes
+namespace Cod3rsGrowth.dominio
 {
     public interface IAnimeRepositorio
     {
-        List<Anime> ObterTodos(Status? statusDeExibicao = null);
+        List<Anime> ObterTodos(FiltroAnime? filtro);
         Anime ObterPorId(int id);
         void Cadastrar(Anime anime);
         void Deletar(int id);

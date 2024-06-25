@@ -31,7 +31,7 @@ namespace Cod3rsGrowth.testes
             var genero = TabelaDeGenero.Instance.Find(delegate (Genero genero1) { return genero1.Id == id; });
             return genero;
         }
-        public List<Genero> ObterTodos()
+        public List<Genero> ObterTodos(string nome = null)
         {
             var generos = TabelaDeGenero.Instance;
             return generos;
