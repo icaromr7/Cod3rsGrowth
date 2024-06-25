@@ -2,7 +2,9 @@
 using LinqToDB;
 using LinqToDB.Data;
 using System.Configuration;
-using System.Reflection;
+using System.Linq;
+using static LinqToDB.Reflection.Methods.LinqToDB;
+using static LinqToDB.Sql;
 
 namespace Cod3rsGrowth.infra
 {
@@ -27,16 +29,20 @@ namespace Cod3rsGrowth.infra
         public void Cadastrar(AnimeGenero animeGenero)
         {
             dataConnection.Insert(animeGenero);
-        }       
+        }
         public void Deletar(List<AnimeGenero> animeGeneros)
-        {
-            string sqlQuery = string.Empty;
-            for( int i = POSICAO_INICIAL_DA_LISTA; i < animeGeneros.Count; i++)
+        {         
+            string sqlQuery = "DELETE FROM dbo.AnimeGenero WHERE ";
+            for (int i = POSICAO_INICIAL_DA_LISTA; i < animeGeneros.Count; i++)
             {
-                sqlQuery += "DELETE FROM dbo.AnimeGenero WHERE IdAnime =" + animeGeneros[i].IdAnime 
-                    + "AND IdGenero = " + animeGeneros[i].IdGenero + ";";
+                sqlQuery += "IdAnime =" + animeGeneros[i].IdAnime
+                    + "AND IdGenero = " + animeGeneros[i].IdGenero;
+                if (i < animeGeneros.Count - 1)
+                {
+                    sqlQuery += " or ";
+                }
             }
-            dataConnection.Execute(sqlQuery);                     
+            dataConnection.Execute(sqlQuery);
         }
 
         public void DeletarPorAnime(int idAnime)
