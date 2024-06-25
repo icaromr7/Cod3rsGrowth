@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.dominio;
 using FluentValidation;
 using FluentValidation.Results;
+using LinqToDB.Data;
 using static Cod3rsGrowth.dominio.Anime;
 
 namespace Cod3rsGrowth.Servico
@@ -60,7 +61,6 @@ namespace Cod3rsGrowth.Servico
         {
             var animes = _animeRepositorio.ObterTodos(filtro);
             return animes;
-        }
-
+        }       
     }
 }
