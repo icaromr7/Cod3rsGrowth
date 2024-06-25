@@ -21,15 +21,14 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
             };
             TabelaDeAnime.Instance.Add(anime1);
-
+            FiltroAnime filtro = new FiltroAnime() { };
             //act
-            List<Anime> animes = _animeServico.ObterTodos();
+            List<Anime> animes = _animeServico.ObterTodos(filtro);
             const int quantidadeEsperada = 1;
             int quantidadeAtual = animes.Count();
 
@@ -44,7 +43,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -59,7 +57,8 @@ namespace Cod3rsGrowth.testes
             Assert.Equal(idEsperado, anime.Id);
         }
         [Fact]
-        public void Ao_obter_por_id_deve_retornar_um_anime_nullo() {
+        public void Ao_obter_por_id_deve_retornar_um_anime_nullo()
+        {
 
             //act
             Anime anime = _animeServico.ObterPorId(1);
@@ -75,7 +74,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = null,
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -93,7 +91,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -111,7 +108,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = null,
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -129,7 +125,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -138,43 +133,7 @@ namespace Cod3rsGrowth.testes
             var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Cadastrar(anime1));
             //assert
             Assert.Equal("Sinopse não pode está vazia", mensagemError.Errors.Single().ErrorMessage);
-        }
-        [Fact]
-        public void Ao_tentar_cadastrar_deve_retornar_generosids_nao_pode_ser_nullo()
-        {
-            var anime1 = new Anime
-            {
-                Id = 1,
-                Nome = "Anime1",
-                Sinopse = "Sinopse1",
-                GenerosIds = null,
-                DataLancamento = new DateTime(2024, 5, 15),
-                Nota = 7.8m,
-                StatusDeExibicao = Anime.Status.EmExibicao
-            };
-            //act
-            var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Cadastrar(anime1));
-            //assert
-            Assert.Equal("GenerosIds não pode ser nullo", mensagemError.Errors.Single().ErrorMessage);
-        }
-        [Fact]
-        public void Ao_tentar_cadastrar_deve_retornar_generosids_nao_pode_esta_vazio()
-        {
-            var anime1 = new Anime
-            {
-                Id = 1,
-                Nome = "Anime1",
-                Sinopse = "Sinopse1",
-                GenerosIds = new List<int>(),
-                DataLancamento = new DateTime(2024, 5, 15),
-                Nota = 7.8m,
-                StatusDeExibicao = Anime.Status.EmExibicao
-            };
-            //act
-            var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Cadastrar(anime1));
-            //assert
-            Assert.Equal("GenerosIds não pode está vazio", mensagemError.Errors.Single().ErrorMessage);
-        }
+        }  
         [Fact]
         public void Ao_tentar_cadastrar_deve_retornar_data_lancamento_nao_pode_esta_vazio()
         {
@@ -183,7 +142,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2},
                 DataLancamento = new DateTime(),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -201,7 +159,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = new decimal(),
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -219,7 +176,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = new Anime.Status() { }
@@ -237,7 +193,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -257,11 +212,10 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
-            };         
+            };
             //act
             var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Atualizar(anime1));
             //assert
@@ -275,7 +229,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -286,7 +239,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime2",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -306,7 +258,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -317,7 +268,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse2",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -330,37 +280,6 @@ namespace Cod3rsGrowth.testes
             Assert.Equal("Sinopse2", anime1.Sinopse);
         }
         [Fact]
-        public void Ao_atualizar_o_generoids_deve_retornar_o_generoids_atualizado()
-        {
-            var anime1 = new Anime
-            {
-                Id = 1,
-                Nome = "Anime1",
-                Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
-                DataLancamento = new DateTime(2024, 5, 15),
-                Nota = 7.8m,
-                StatusDeExibicao = Anime.Status.EmExibicao
-            };
-            TabelaDeAnime.Instance.Add(anime1);
-            var anime2 = new Anime
-            {
-                Id = 1,
-                Nome = "Anime1",
-                Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 3, 4 },
-                DataLancamento = new DateTime(2024, 5, 15),
-                Nota = 7.8m,
-                StatusDeExibicao = Anime.Status.EmExibicao
-            };
-
-            //act
-            _animeServico.Atualizar(anime2);
-
-            //assert
-            Assert.Equivalent(new List<int>() { 3, 4 }, anime1.GenerosIds);
-        }
-        [Fact]
         public void Ao_atualizar_a_datalancamento_deve_retornar_a_datalancamento_atualizada()
         {
             var anime1 = new Anime
@@ -368,7 +287,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -379,7 +297,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2023, 3, 11),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -399,7 +316,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -410,7 +326,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 8.3m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -430,7 +345,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -441,7 +355,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.Concluido
@@ -461,7 +374,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -472,7 +384,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime2",
                 Sinopse = "Sinopse2",
-                GenerosIds = new List<int>() { 3, 4 },
                 DataLancamento = new DateTime(2024, 6, 14),
                 Nota = 8.1m,
                 StatusDeExibicao = Anime.Status.Concluido
@@ -484,7 +395,6 @@ namespace Cod3rsGrowth.testes
             //assert
             Assert.Equal("Anime2", anime1.Nome);
             Assert.Equal("Sinopse2", anime1.Sinopse);
-            Assert.Equivalent(new List<int>() { 3, 4 }, anime1.GenerosIds);
             Assert.Equivalent(new DateTime(2024, 6, 14), anime1.DataLancamento);
             Assert.Equivalent(8.1m, anime1.Nota);
             Assert.Equivalent(Anime.Status.Concluido, anime1.StatusDeExibicao);
@@ -497,7 +407,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -508,7 +417,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = null,
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -526,7 +434,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -537,7 +444,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -555,7 +461,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -566,7 +471,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = null,
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -584,7 +488,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -595,7 +498,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -606,64 +508,6 @@ namespace Cod3rsGrowth.testes
             Assert.Equal("Sinopse não pode está vazia", mensagemError.Errors.Single().ErrorMessage);
         }
         [Fact]
-        public void Ao_tentar_atualizar_deve_retornar_generoids_nao_pode_ser_nullo()
-        {
-            var anime1 = new Anime
-            {
-                Id = 1,
-                Nome = "Anime1",
-                Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
-                DataLancamento = new DateTime(2024, 5, 15),
-                Nota = 7.8m,
-                StatusDeExibicao = Anime.Status.EmExibicao
-            };
-            TabelaDeAnime.Instance.Add(anime1);
-            var anime2 = new Anime
-            {
-                Id = 1,
-                Nome = "Anime1",
-                Sinopse = "Sinopse1",
-                GenerosIds = null,
-                DataLancamento = new DateTime(2024, 5, 15),
-                Nota = 7.8m,
-                StatusDeExibicao = Anime.Status.EmExibicao
-            };
-            //act
-            var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Atualizar(anime2));
-            //assert
-            Assert.Equal("GenerosIds não pode ser nullo", mensagemError.Errors.Single().ErrorMessage);
-        }
-        [Fact]
-        public void Ao_tentar_atualizar_deve_retornar_generoids_nao_pode_esta_vazio()
-        {
-            var anime1 = new Anime
-            {
-                Id = 1,
-                Nome = "Anime1",
-                Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
-                DataLancamento = new DateTime(2024, 5, 15),
-                Nota = 7.8m,
-                StatusDeExibicao = Anime.Status.EmExibicao
-            };
-            TabelaDeAnime.Instance.Add(anime1);
-            var anime2 = new Anime
-            {
-                Id = 1,
-                Nome = "Anime1",
-                Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { },
-                DataLancamento = new DateTime(2024, 5, 15),
-                Nota = 7.8m,
-                StatusDeExibicao = Anime.Status.EmExibicao
-            };
-            //act
-            var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Atualizar(anime2));
-            //assert
-            Assert.Equal("GenerosIds não pode está vazio", mensagemError.Errors.Single().ErrorMessage);
-        }
-        [Fact]
         public void Ao_tentar_atualizar_deve_retornar_data_lancamento_nao_pode_esta_vazia()
         {
             var anime1 = new Anime
@@ -671,7 +515,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -682,7 +525,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1 , 2},
                 DataLancamento = new DateTime(),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -700,7 +542,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -711,7 +552,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = new decimal(),
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -729,7 +569,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -740,7 +579,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = new Anime.Status() { }
@@ -767,7 +605,6 @@ namespace Cod3rsGrowth.testes
                 Id = 1,
                 Nome = "Anime1",
                 Sinopse = "Sinopse1",
-                GenerosIds = new List<int>() { 1, 2 },
                 DataLancamento = new DateTime(2024, 5, 15),
                 Nota = 7.8m,
                 StatusDeExibicao = Anime.Status.EmExibicao
@@ -779,6 +616,26 @@ namespace Cod3rsGrowth.testes
 
             //assert
             Assert.DoesNotContain(TabelaDeAnime.Instance, anime => anime == anime1);
+        }
+        [Fact]
+        public void Ao_cadastrar_deve_retornar_o_mensagem_de_error_data_lancamento()
+        {
+            const string mensagemEsperada = "A data de lançamento não pode ser futura quando o anime está em exibição ou concluido";
+            var anime1 = new Anime
+            {
+                Id = 1,
+                Nome = "Anime1",
+                Sinopse = "Sinopse1",
+                DataLancamento = new DateTime(2024, 7, 15),
+                Nota = 7.8m,
+                StatusDeExibicao = Anime.Status.EmExibicao
+            };
+
+            //act
+            var mensagemError = Assert.Throws<ValidationException>(() => _animeServico.Cadastrar(anime1));
+
+            //assert
+            Assert.Equal(mensagemEsperada, mensagemError.Errors.Single().ErrorMessage);
         }
     }
 }

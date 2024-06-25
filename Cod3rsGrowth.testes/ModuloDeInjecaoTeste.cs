@@ -2,11 +2,6 @@
 using Cod3rsGrowth.Servico;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.testes
 {
@@ -16,12 +11,15 @@ namespace Cod3rsGrowth.testes
         {
             services.AddScoped<IAnimeRepositorio, AnimeRepositorioMock>();
             services.AddScoped<IGeneroRepositorio, GeneroRepositorioMock>();
+            services.AddScoped<IAnimeGeneroRepositorio, AnimeGeneroRepositorioMock>();
             services.AddScoped<AnimeServico>();
             services.AddScoped<GeneroServico>();
+            services.AddScoped<AnimeGeneroServico>();
             services.AddSingleton<TabelaDeAnime>();
             services.AddSingleton<TabelaDeGenero>();
             services.AddScoped<IValidator<Anime>, AnimeValidador>();
             services.AddScoped<IValidator<Genero>, GeneroValidador>();
+            services.AddScoped<IValidator<AnimeGenero>, AnimeGeneroValidador>();
             return services;
         }
 

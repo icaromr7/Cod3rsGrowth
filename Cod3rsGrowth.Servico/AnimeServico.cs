@@ -1,7 +1,7 @@
 ﻿using Cod3rsGrowth.dominio;
-using Cod3rsGrowth.testes;
 using FluentValidation;
 using FluentValidation.Results;
+using static Cod3rsGrowth.dominio.Anime;
 
 namespace Cod3rsGrowth.Servico
 {
@@ -56,10 +56,11 @@ namespace Cod3rsGrowth.Servico
             return anime;
         }
 
-        public List<Anime> ObterTodos()
+        public List<Anime> ObterTodos(FiltroAnime? filtro)
         {
-            var animes = _animeRepositorio.ObterTodos();
+            var animes = _animeRepositorio.ObterTodos(filtro);
             return animes;
         }
+
     }
 }

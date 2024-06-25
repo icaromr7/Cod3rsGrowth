@@ -1,5 +1,4 @@
 ﻿using Cod3rsGrowth.dominio;
-using Cod3rsGrowth.testes;
 using FluentValidation;
 using FluentValidation.Results;
 using System;
@@ -62,9 +61,9 @@ namespace Cod3rsGrowth.Servico
             return genero;
         }
 
-        public List<Genero> ObterTodos()
+        public List<Genero> ObterTodos(string nome = null)
         {
-            var generos = _generoRepositorio.ObterTodos();
+            var generos = _generoRepositorio.ObterTodos(nome);
             return generos;
         }
     }
