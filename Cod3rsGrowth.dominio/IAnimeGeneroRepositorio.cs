@@ -3,10 +3,12 @@
     public interface IAnimeGeneroRepositorio
     {
         List<AnimeGenero> ObterTodos();
-        List<AnimeGenero> ObterTodos(int idAnime = 0);
+        List<AnimeGenero> ObterTodos(int? idAnime);
         AnimeGenero ObterPorId(int idAnime);
         void Cadastrar(AnimeGenero animeGenero);
-        void Deletar(int idAnime);
+        void Deletar(List<AnimeGenero> animeGeneros);
+        void DeletarPorAnime(int idAnime);
+        void DeletarPorGenero(int idGenero);
         void Atualizar(AnimeGenero animeGenero);
     }
 }

@@ -26,9 +26,9 @@ namespace Cod3rsGrowth.testes
                 StatusDeExibicao = Anime.Status.EmExibicao
             };
             TabelaDeAnime.Instance.Add(anime1);
-
+            FiltroAnime filtro = new FiltroAnime() { };
             //act
-            List<Anime> animes = _animeServico.ObterTodos();
+            List<Anime> animes = _animeServico.ObterTodos(filtro);
             const int quantidadeEsperada = 1;
             int quantidadeAtual = animes.Count();
 

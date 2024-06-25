@@ -5,7 +5,7 @@ namespace Cod3rsGrowth.dominio
 {
     public interface IAnimeRepositorio
     {
-        List<Anime> ObterTodos(Status? statusDeExibicao = null);
+        List<Anime> ObterTodos(FiltroAnime? filtro);
         Anime ObterPorId(int id);
         void Cadastrar(Anime anime);
         void Deletar(int id);

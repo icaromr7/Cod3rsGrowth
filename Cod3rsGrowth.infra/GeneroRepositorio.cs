@@ -41,11 +41,16 @@ namespace Cod3rsGrowth.infra
             return genero;
         }
 
-        public List<Genero> ObterTodos()
+        public List<Genero> ObterTodos(string nome = null)
         {
             var generos = dataConnection.GetTable<Genero>()
                 .OrderBy(genero => genero.Nome);
-            return generos.ToList();
+            var listaGeneros = generos.AsQueryable();
+            if(nome != null)
+            {
+                listaGeneros = listaGeneros.Where(genero => genero.Nome.Contains(nome));
+            }
+            return listaGeneros.ToList();
         }
     }
 }

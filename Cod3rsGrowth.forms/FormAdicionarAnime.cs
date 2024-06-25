@@ -4,6 +4,7 @@ using Cod3rsGrowth.Servico;
 using FluentValidation;
 using LinqToDB;
 using LinqToDB.Data;
+using System.CodeDom;
 using System.Configuration;
 
 namespace Cod3rsGrowth.forms
@@ -12,12 +13,14 @@ namespace Cod3rsGrowth.forms
     {
         AnimeServico _animeServico;
         GeneroServico _generoServico;
-        AnimeGeneroServico _animeGeneroServico;
+        AnimeGeneroServico _animeGeneroServico;    
         const int INDEX_EM_EXIBICAO = 0;
         const int INDEX_PREVISTO = 1;
         const int INDEX_CONCLUIDO = 2;
         const int QUANTIDADE_MINIMA_DE_GENEROS_SELECIONADOS = 1;
         const int POSICAO_INICIAL_NA_LISTA = 0;
+        const string NECESSARIO_TER_UM_GENERO = "Necessário ter ao menos 1 genero selecionado";
+        const string ERRO_AO_ADICIONAR = "Erro ao adicionar anime!";
 
         public FormAdicionarAnime(AnimeServico animeServico, GeneroServico generoServico, AnimeGeneroServico animeGeneroServico)
         {
@@ -43,17 +46,24 @@ namespace Cod3rsGrowth.forms
         }
         private void PreencherComboBoxStatus()
         {
-            cbStatusDeExibicao.DataSource = new List<string>() { "EmExibição", "Previsto", "Concluído" };
+            cbStatusDeExibicao.DataSource = new List<string>() {"EmExibição", "Previsto", "Concluído" };
         }
 
         private void AoClicarEmSalvar(object sender, EventArgs e)
         {
             try
             {
-                AoClicarEmAdicionarAnime();
-                AoClicarEmCadastrarAnimeGenero();
-                DialogResult = DialogResult.OK;
-                this.Close();
+                if (clGeneros.CheckedItems.Count < QUANTIDADE_MINIMA_DE_GENEROS_SELECIONADOS)
+                {
+                    MessageBox.Show(NECESSARIO_TER_UM_GENERO);
+                }
+                else
+                {
+                    AoClicarEmAdicionarAnime();
+                    AoClicarEmCadastrarAnimeGenero();
+                    DialogResult = DialogResult.OK;
+                    this.Close();
+                }
             }
             catch (ValidationException ex)
             {
@@ -66,10 +76,9 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ERRO_AO_ADICIONAR);
             }
         }
-
         private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             this.Close();

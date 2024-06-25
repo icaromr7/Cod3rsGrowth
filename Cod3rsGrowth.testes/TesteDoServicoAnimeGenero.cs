@@ -25,7 +25,7 @@ namespace Cod3rsGrowth.testes
             TabelaDeAnimeGenero.Instance.Add(animeGenero);
 
             //act
-            List<AnimeGenero> animeGeneros = _animeGeneroServico.ObterTodos();
+            List<AnimeGenero> animeGeneros = _animeGeneroServico.ObterTodos(1);
             const int quantidadeEsperada = 1;
             int quantidadeAtual = animeGeneros.Count;
 
@@ -101,20 +101,6 @@ namespace Cod3rsGrowth.testes
             //assert
             Assert.Contains(TabelaDeAnimeGenero.Instance, animeGenero1 => animeGenero1 == animeGenero);
         }
-        [Fact]
-        public void Ao_tentar_deletar_deve_retornar_o_animegenero_nao_existe()
-        {
-            var animeGenero = new AnimeGenero()
-            {
-                IdAnime= 1,
-                IdGenero = 1,
-            };
-            //act
-            var mensagemError = Assert.Throws<ValidationException>(() => _animeGeneroServico.Deletar(animeGenero.IdAnime));
-
-            //assert
-            Assert.Equal("O animeGenero não existe", mensagemError.Errors.Single().ErrorMessage);
-        }
         public void Deve_deletar_o_animegenero()
         {
             var animeGenero = new AnimeGenero()
@@ -129,7 +115,7 @@ namespace Cod3rsGrowth.testes
                 IdGenero = 1,
             };
             //act
-            _animeGeneroServico.Deletar(animeGeneroDeletado.IdAnime);
+            _animeGeneroServico.Deletar(animeGeneroDeletado);
 
             //assert
             Assert.DoesNotContain(TabelaDeAnimeGenero.Instance, animeGenero1 => animeGenero1==animeGenero);
