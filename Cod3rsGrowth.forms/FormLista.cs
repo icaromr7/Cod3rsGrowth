@@ -182,30 +182,23 @@ namespace Cod3rsGrowth.forms
         }
         private void AoClicarEmUmItemNoDataGrid(object sender, DataGridViewCellMouseEventArgs e)
         {
-            try
+            if (e.Button == MouseButtons.Left)
             {
-                if (e.Button == MouseButtons.Left)
+                if (e.RowIndex >= INDICA_PRIMEIRA_POSICAO)
                 {
-                    if (e.RowIndex >= INDICA_PRIMEIRA_POSICAO)
+                    if (tabLista.SelectedTab == pagGenero)
                     {
-                        if (tabLista.SelectedTab == pagGenero)
-                        {
-                            DataGridViewRow row = dataGenero.Rows[e.RowIndex];
-                            int idGenero = (int)row.Cells[idColumnGenero.Index].Value;
-                            genero = _generoServico.ObterPorId(idGenero);
-                        }
-                        else if (tabLista.SelectedTab == pagAnime)
-                        {
-                            DataGridViewRow row = dataAnime.Rows[e.RowIndex];
-                            int idAnime = (int)row.Cells[idColumnAnime.Index].Value;
-                            anime = _animeServico.ObterPorId(idAnime);
-                        }
-
+                        DataGridViewRow row = dataGenero.Rows[e.RowIndex];
+                        int idGenero = (int)row.Cells[idColumnGenero.Index].Value;
+                        genero = _generoServico.ObterPorId(idGenero);
+                    }
+                    else if (tabLista.SelectedTab == pagAnime)
+                    {
+                        DataGridViewRow row = dataAnime.Rows[e.RowIndex];
+                        int idAnime = (int)row.Cells[idColumnAnime.Index].Value;
+                        anime = _animeServico.ObterPorId(idAnime);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
             }
         }
         private void AoClicarEmVerDetalhes(object sender, EventArgs e)

@@ -1,10 +1,5 @@
 ﻿using Cod3rsGrowth.dominio;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cod3rsGrowth.Servico
 {
@@ -22,7 +17,7 @@ namespace Cod3rsGrowth.Servico
                 RuleFor(genero => genero.Id)
             .Must(id =>
             {
-                return !VerificarSeJaExiste(id) == false;
+                return VerificarSeJaExiste(id);
             })
             .WithMessage("O gênero não existe");
             });
@@ -31,7 +26,7 @@ namespace Cod3rsGrowth.Servico
                 RuleFor(genero => genero.Id)
             .Must(id =>
             {
-                return !VerificarSeJaExiste(id) == false;
+                return VerificarSeJaExiste(id);
             })
             .WithMessage("O gênero não existe");
             });

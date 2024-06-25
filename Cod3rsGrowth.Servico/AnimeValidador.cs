@@ -19,7 +19,7 @@ namespace Cod3rsGrowth.Servico
                 .NotEmpty().WithMessage("Data Lançamento não pode está vazia")
                 .Must(dataLancamento =>
                 {
-                    return VerificarSeNaoEDataFutura(dataLancamento) == true;
+                    return VerificarSeNaoEDataFutura(dataLancamento);
                 }
                 )
                 .When(anime => anime.StatusDeExibicao == Anime.Status.EmExibicao || anime.StatusDeExibicao == Anime.Status.Concluido)
@@ -27,7 +27,7 @@ namespace Cod3rsGrowth.Servico
                 RuleFor(anime => anime.DataLancamento)
                 .Must(dataLancamento =>
                 {
-                    return VerificarSeNaoEDataFutura(dataLancamento) == false;
+                    return !VerificarSeNaoEDataFutura(dataLancamento);
                 }
                 )
                 .When(anime => anime.StatusDeExibicao == Anime.Status.Previsto)
@@ -41,7 +41,7 @@ namespace Cod3rsGrowth.Servico
                 RuleFor(anime => anime.Id)
             .Must(id =>
             {
-                return !VerificarSeJaExiste(id) == false;
+                return VerificarSeJaExiste(id);
             })
             .WithMessage("O anime não existe");
             });
@@ -50,7 +50,7 @@ namespace Cod3rsGrowth.Servico
                 RuleFor(anime => anime.Id)
             .Must(id =>
             {
-                return !VerificarSeJaExiste(id) == false;
+                return VerificarSeJaExiste(id);
             })
             .WithMessage("O anime não existe");
             });
