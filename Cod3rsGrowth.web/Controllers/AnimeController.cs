@@ -49,8 +49,8 @@ namespace Cod3rsGrowth.web.Controllers
             anime = _animeServico.ObterPorId(anime.Id);
             return Created($"anime/{anime.Id}", anime);
         }
-        [HttpDelete(ConstantesController.DELETAR + "/"+ConstantesController.ID)]
-        public IActionResult Deletar(int id)
+        [HttpDelete(ConstantesController.DELETAR)]
+        public IActionResult Deletar([FromQuery] int id)
         {
             if ( id ==0) { return BadRequest(); }
             _animeGeneroServico.DeletarPorAnime(id);
