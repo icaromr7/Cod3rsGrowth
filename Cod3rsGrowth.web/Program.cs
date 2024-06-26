@@ -4,11 +4,19 @@ using Cod3rsGrowth.infra;
 using Cod3rsGrowth.Servico;
 using FluentMigrator.Runner;
 using FluentValidation;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
+using ConfigurationManager = System.Configuration.ConfigurationManager;
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var appSettings = ConfigurationManager.AppSettings;
+string result = appSettings[ConstantesDoRepositorio.CONNECTION_STRING];
+
+builder.Services.AddFluentMigratorCore()
+    .ConfigureRunner(rb => rb
+        .AddSqlServer()
+        .WithGlobalConnectionString(result)
+        .ScanIn(typeof(_20240605085700_CriarTabelas).Assembly).For.Migrations())
+    .AddLogging(lb => lb.AddFluentMigratorConsole());
+
 builder.Services.AddControllers();
 builder.Services.AddScoped<IGeneroRepositorio, GeneroRepositorio>();
 builder.Services.AddScoped<IAnimeRepositorio, AnimeRepositorio>();
@@ -19,25 +27,21 @@ builder.Services.AddScoped<AnimeGeneroServico>();
 builder.Services.AddScoped<IValidator<Anime>, AnimeValidador>();
 builder.Services.AddScoped<IValidator<Genero>, GeneroValidador>();
 builder.Services.AddScoped<IValidator<AnimeGenero>, AnimeGeneroValidador>();
-builder.Services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-builder.Services.AddFluentMigratorCore()
-    .ConfigureRunner(rb => rb
-        .AddSqlServer()
-        .WithGlobalConnectionString(ConstantesDoRepositorio.CONNECTION_STRING)
-        .ScanIn(typeof(_20240605085700_CriarTabelas).Assembly).For.Migrations())
-    .AddLogging(lb => lb.AddFluentMigratorConsole());
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-var runner = builder.Services.BuildServiceProvider().GetRequiredService<IMigrationRunner>();
-runner.MigrateUp();
 var app = builder.Build();
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+using (var scope = app.Services.CreateScope())
+{
+    var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
+    runner.MigrateUp();
+}
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
