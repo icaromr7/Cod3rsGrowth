@@ -2,8 +2,10 @@ using Cod3rsGrowth.dominio;
 using Cod3rsGrowth.dominio.Migracoes;
 using Cod3rsGrowth.infra;
 using Cod3rsGrowth.Servico;
+using Cod3rsGrowth.web;
 using FluentMigrator.Runner;
 using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,6 @@ builder.Services.AddFluentMigratorCore()
         .WithGlobalConnectionString(result)
         .ScanIn(typeof(_20240605085700_CriarTabelas).Assembly).For.Migrations())
     .AddLogging(lb => lb.AddFluentMigratorConsole());
-
 builder.Services.AddControllers();
 builder.Services.AddScoped<IGeneroRepositorio, GeneroRepositorio>();
 builder.Services.AddScoped<IAnimeRepositorio, AnimeRepositorio>();
@@ -27,10 +28,10 @@ builder.Services.AddScoped<AnimeGeneroServico>();
 builder.Services.AddScoped<IValidator<Anime>, AnimeValidador>();
 builder.Services.AddScoped<IValidator<Genero>, GeneroValidador>();
 builder.Services.AddScoped<IValidator<AnimeGenero>, AnimeGeneroValidador>();
-
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+builder.Services.ConfigureProblemDetailsModelState();
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
