@@ -28,8 +28,8 @@ namespace Cod3rsGrowth.web.Controllers
         public IActionResult Adicionar([FromBody] Anime anime)
         {
             if (anime == null) { return BadRequest(); }
-            _animeServico.Cadastrar(anime);
-            anime.Id = _animeServico.ObterTodos(null).Last().Id;
+            int idAnime = _animeServico.Cadastrar(anime);
+            anime.Id = idAnime;
             return Created($"anime/{anime.Id}", anime);
         }
 
@@ -46,15 +46,21 @@ namespace Cod3rsGrowth.web.Controllers
             if (anime == null) { return BadRequest(); }
             _animeServico.Atualizar(anime);
             anime = _animeServico.ObterPorId(anime.Id);
-            return Created($"anime/{anime.Id}", anime);
+            return Ok(anime);
         }
         [HttpDelete(ConstantesController.DELETAR)]
         public IActionResult Deletar([FromQuery] int id)
         {
-            if ( id ==0) { return BadRequest(); }
-            _animeGeneroServico.DeletarPorAnime(id);
-            _animeServico.Deletar(id);
-            return Ok();
+            try
+            {
+                _animeGeneroServico.DeletarPorAnime(id);
+                _animeServico.Deletar(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
     }
 

@@ -28,10 +28,11 @@ namespace Cod3rsGrowth.Servico
             }
         }
 
-        public void Cadastrar(Anime anime)
+        public int Cadastrar(Anime anime)
         {
             _animeValidador.ValidateAndThrow(anime);
-            _animeRepositorio.Cadastrar(anime);
+            int idAnime = _animeRepositorio.Cadastrar(anime);
+            return idAnime;
         }
 
         public void Deletar(int id)

@@ -32,10 +32,11 @@ namespace Cod3rsGrowth.Servico
             }
         }
 
-        public void Cadastrar(Genero genero)
+        public int Cadastrar(Genero genero)
         {          
             _generoValidador.ValidateAndThrow(genero);  
-            _generoRepositorio.Cadastrar(genero);
+            int idGenero = _generoRepositorio.Cadastrar(genero);
+            return idGenero;
         }
 
         public void Deletar(int id)

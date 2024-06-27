@@ -26,8 +26,8 @@ namespace Cod3rsGrowth.web.Controllers
         public IActionResult Adicionar([FromBody] Genero genero)
         {
             if (genero == null) { return BadRequest(); }
-            _generoServico.Cadastrar(genero);
-            genero.Id = _generoServico.ObterTodos().Last().Id;
+            int idGenero = _generoServico.Cadastrar(genero);
+            genero.Id = idGenero;
             return Created($"genero/{genero.Id}", genero);
         }
         [HttpGet(ConstantesController.ID)]
@@ -42,16 +42,23 @@ namespace Cod3rsGrowth.web.Controllers
         {
             if (genero == null) { return BadRequest(); }
             _generoServico.Atualizar(genero);
-            genero = _generoServico.ObterTodos().Last();
-            return Created($"genero/{genero.Id}", genero);
+            genero = _generoServico.ObterPorId(genero.Id);
+            return Ok(genero);
         }
         [HttpDelete(ConstantesController.DELETAR)]
         public IActionResult Deletar([FromQuery]int id)
         {
-            if (id == 0) { return BadRequest(); }
-            _animeGeneroServico.DeletarPorAnime(id);
-            _generoServico.Deletar(id);
-            return Ok();
+            try
+            {
+                _animeGeneroServico.DeletarPorAnime(id);
+                _generoServico.Deletar(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+            
         }
     }
 }
