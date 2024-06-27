@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.dominio;
 using FluentValidation;
 using FluentValidation.Results;
+using LinqToDB.Data;
 using static Cod3rsGrowth.dominio.Anime;
 
 namespace Cod3rsGrowth.Servico
@@ -27,10 +28,11 @@ namespace Cod3rsGrowth.Servico
             }
         }
 
-        public void Cadastrar(Anime anime)
+        public int Cadastrar(Anime anime)
         {
             _animeValidador.ValidateAndThrow(anime);
-            _animeRepositorio.Cadastrar(anime);
+            int idAnime = _animeRepositorio.Cadastrar(anime);
+            return idAnime;
         }
 
         public void Deletar(int id)
@@ -60,7 +62,6 @@ namespace Cod3rsGrowth.Servico
         {
             var animes = _animeRepositorio.ObterTodos(filtro);
             return animes;
-        }
-
+        }       
     }
 }

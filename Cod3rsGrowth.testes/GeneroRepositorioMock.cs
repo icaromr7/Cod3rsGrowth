@@ -17,9 +17,10 @@ namespace Cod3rsGrowth.testes
             var generoModificado = TabelaDeGenero.Instance.Find(delegate (Genero genero1) { return genero1.Id == genero.Id; });
             generoModificado.Nome = genero.Nome;
         }
-        public void Cadastrar(Genero genero)
+        public int Cadastrar(Genero genero)
         {
             TabelaDeGenero.Instance.Add(genero);
+            return genero.Id;
         }
         public void Deletar(int id)
         {

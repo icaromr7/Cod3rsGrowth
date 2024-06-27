@@ -22,9 +22,10 @@ namespace Cod3rsGrowth.infra
             dataConnection.Update(genero);
         }
 
-        public void Cadastrar(Genero genero)
+        public int Cadastrar(Genero genero)
         {
-            dataConnection.Insert(genero);
+            int idGenero = dataConnection.InsertWithInt32Identity(genero);
+            return idGenero;
         }
 
         public void Deletar(int id)
