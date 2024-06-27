@@ -34,7 +34,7 @@ namespace Cod3rsGrowth.web.Controllers
         public IActionResult ObterPorId(int id)
         {
             var genero = _generoServico.ObterPorId(id);
-            if (genero == null) { return NotFound(); }
+            if (genero == null) { return BadRequest(); }
             return Ok(genero);
         }
         [HttpPut(ConstantesController.ATUALIZAR)]

@@ -21,7 +21,6 @@ namespace Cod3rsGrowth.web.Controllers
         [HttpGet()]
         public IActionResult Get([FromQuery] FiltroAnime filtro)
         {
-            //if (filtro == null) { return BadRequest(); }
             var animes = _animeServico.ObterTodos(filtro);
             return Ok(animes);
         }
@@ -38,7 +37,7 @@ namespace Cod3rsGrowth.web.Controllers
         public IActionResult ObterPorId(int id)
         {
             var anime = _animeServico.ObterPorId(id);
-            if (anime == null) { return NotFound(); }
+            if (anime == null) { return BadRequest(); }
             return Ok(anime);
         }
         [HttpPut (ConstantesController.ATUALIZAR)]
