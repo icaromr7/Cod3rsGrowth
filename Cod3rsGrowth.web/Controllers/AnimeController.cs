@@ -10,12 +10,10 @@ namespace Cod3rsGrowth.web.Controllers
     {
         private AnimeServico _animeServico;
         private AnimeGeneroServico _animeGeneroServico;
-        private FiltroAnime _filtro = null;
 
         public AnimeController(AnimeServico animeServico, AnimeGeneroServico animeGeneroServico)
         {
             _animeServico = animeServico;
-            _filtro = new FiltroAnime();
             _animeGeneroServico = animeGeneroServico;
         }
         [HttpGet()]
@@ -45,8 +43,7 @@ namespace Cod3rsGrowth.web.Controllers
         {
             if (anime == null) { return BadRequest(); }
             _animeServico.Atualizar(anime);
-            anime = _animeServico.ObterPorId(anime.Id);
-            return Ok(anime);
+            return Ok();
         }
         [HttpDelete(ConstantesController.DELETAR)]
         public IActionResult Deletar([FromQuery] int id)

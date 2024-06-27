@@ -42,8 +42,7 @@ namespace Cod3rsGrowth.web.Controllers
         {
             if (genero == null) { return BadRequest(); }
             _generoServico.Atualizar(genero);
-            genero = _generoServico.ObterPorId(genero.Id);
-            return Ok(genero);
+            return Ok();
         }
         [HttpDelete(ConstantesController.DELETAR)]
         public IActionResult Deletar([FromQuery]int id)
