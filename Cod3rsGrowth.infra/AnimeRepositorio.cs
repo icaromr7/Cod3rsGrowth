@@ -23,9 +23,10 @@ namespace Cod3rsGrowth.infra
             dataConnection.Update(anime);
         }
 
-        public void Cadastrar(Anime anime)
+        public int Cadastrar(Anime anime)
         {
-            dataConnection.Insert(anime);
+            int idAnime = dataConnection.InsertWithInt32Identity(anime);
+            return idAnime;
         }
 
         public void Deletar(int id)

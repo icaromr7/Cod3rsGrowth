@@ -7,7 +7,7 @@ namespace Cod3rsGrowth.dominio
     {
         List<Anime> ObterTodos(FiltroAnime? filtro);
         Anime ObterPorId(int id);
-        void Cadastrar(Anime anime);
+        int Cadastrar(Anime anime);
         void Deletar(int id);
         void Atualizar(Anime anime);
     }
