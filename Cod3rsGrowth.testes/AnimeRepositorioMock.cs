@@ -16,9 +16,10 @@ namespace Cod3rsGrowth.testes
             animeModificado.Nota = anime.Nota;
             animeModificado.StatusDeExibicao = anime.StatusDeExibicao;
         }
-        public void Cadastrar(Anime anime)
+        public int Cadastrar(Anime anime)
         {
             TabelaDeAnime.Instance.Add(anime);
+            return anime.Id;
         }
         public void Deletar(int id)
         {

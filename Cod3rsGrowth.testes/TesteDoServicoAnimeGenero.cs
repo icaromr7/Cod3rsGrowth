@@ -114,8 +114,10 @@ namespace Cod3rsGrowth.testes
                 IdAnime = 1,
                 IdGenero = 1,
             };
+            var animeGenerosDeletados = new List<AnimeGenero>();
+            animeGenerosDeletados.Add(animeGeneroDeletado);
             //act
-            _animeGeneroServico.Deletar(animeGeneroDeletado);
+            _animeGeneroServico.Deletar(animeGenerosDeletados);
 
             //assert
             Assert.DoesNotContain(TabelaDeAnimeGenero.Instance, animeGenero1 => animeGenero1==animeGenero);
