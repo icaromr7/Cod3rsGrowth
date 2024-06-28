@@ -4,7 +4,7 @@
     {
         public const string ADICIONAR = "adicionar";
         public const string ATUALIZAR = "atualizar";
-        public const string DELETAR = "deletar";
+        public const string DELETAR = "deletar/{id}";
         public const string ID = "{id}";
         public const string ROTA_ANIME = "api/anime";
         public const string ROTA_GENERO = "api/genero";

@@ -47,17 +47,9 @@ namespace Cod3rsGrowth.web.Controllers
         [HttpDelete(ConstantesController.DELETAR)]
         public IActionResult Deletar([FromQuery]int id)
         {
-            try
-            {
-                _animeGeneroServico.DeletarPorAnime(id);
-                _generoServico.Deletar(id);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest();
-            }
-            
+            _animeGeneroServico.DeletarPorAnime(id);
+            _generoServico.Deletar(id);
+            return Ok();
         }
     }
 }
