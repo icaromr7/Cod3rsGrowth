@@ -4,7 +4,7 @@ sap.ui.define([
 ], (Controller, ResourceModel) => {
 "use strict";
 
-return Controller.extend("ui5.anime.controller.App", {
+return Controller.extend("ui5.anime.appcontrollerview.App", {
     onInit(){
         const i18nModel = new ResourceModel({
             bundleName: "ui5.anime.i18n.i18n"
@@ -12,9 +12,16 @@ return Controller.extend("ui5.anime.controller.App", {
         this.getView().setModel(i18nModel, "i18n");
     },
 
-    onBemVindo() {
-        var msg = this.getView().getModel("i18n").getResourceBundle().getText("bemVindoMsg");
-        alert(msg);
+    async onBemVindo() {
+        this.oDialogo ??= await this.loadFragment({
+            name: "ui5.anime.appcontrollerview.BemVindoDialogo"
+        });
+
+        this.oDialogo.open();
+    },
+
+    onFecharDialogo(){
+        this.byId("bemVindoDialogo").close();
     }
 });
 });
