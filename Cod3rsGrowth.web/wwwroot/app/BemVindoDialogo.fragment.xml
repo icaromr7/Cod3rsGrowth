@@ -1,0 +1,13 @@
+<core:FragmentDefinition
+xmlns="sap.m"
+xmlns:core="sap.ui.core">
+<Dialog
+    id="bemVindoDialogo"
+    title ="{i18n>bemVindoMsg}">
+    <beginButton>
+        <Button
+        text="{i18n>btnFecharDialogo}"
+        press=".onFecharDialogo"/>
+    </beginButton>
+</Dialog>
+</core:FragmentDefinition>
