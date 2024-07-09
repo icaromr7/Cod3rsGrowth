@@ -39,7 +39,7 @@
         }
       },
       "rootView": {
-        "viewName": "ui5.anime.appcontrollerview.App",
+        "viewName": "ui5.anime.app.App",
         "type": "XML",
         "id": "app"
       },
@@ -48,7 +48,7 @@
           "routerClass": "sap.m.routing.Router",
           "type": "View",
           "viewType": "XML",
-          "path": "ui5.anime.appcontrollerview",
+          "path": "ui5.anime.app",
           "controlId": "app",
           "controlAggregation": "pages"
         },

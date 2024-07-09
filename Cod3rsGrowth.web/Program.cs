@@ -6,8 +6,6 @@ using Cod3rsGrowth.web;
 using FluentMigrator.Runner;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +33,7 @@ builder.Services.ConfigureProblemDetailsModelState();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddFluentValidation();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDirectoryBrowser();
 
 
 var app = builder.Build();
@@ -51,17 +50,18 @@ using (var scope = app.Services.CreateScope())
     runner.MigrateUp();
 }
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
-app.UseAuthorization();
+app.UseStaticFiles(new StaticFileOptions {ServeUnknownFileTypes = true});
 
-app.UseStaticFiles(new StaticFileOptions
+app.UseFileServer(new FileServerOptions
 {
     FileProvider = new PhysicalFileProvider(
-           Path.Combine(builder.Environment.ContentRootPath, "wwwroot/webapp")),
-    RequestPath = "/webapp",
-    ServeUnknownFileTypes = true
+           Path.Combine(builder.Environment.ContentRootPath, "wwwroot")),
+    EnableDirectoryBrowsing = true
 });
+app.UseAuthorization();
+
+
 
 app.MapControllers();
 

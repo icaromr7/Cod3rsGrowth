@@ -4,7 +4,7 @@ sap.ui.define([
 ], (Controller, ResourceModel) => {
 "use strict";
 
-return Controller.extend("ui5.anime.appcontrollerview.App", {
+return Controller.extend("ui5.anime.app.App", {
     onInit(){
         const i18nModel = new ResourceModel({
             bundleName: "ui5.anime.i18n.i18n"
@@ -14,7 +14,7 @@ return Controller.extend("ui5.anime.appcontrollerview.App", {
 
     async onBemVindo() {
         this.oDialogo ??= await this.loadFragment({
-            name: "ui5.anime.appcontrollerview.BemVindoDialogo"
+            name: "ui5.anime.app.BemVindoDialogo"
         });
 
         this.oDialogo.open();

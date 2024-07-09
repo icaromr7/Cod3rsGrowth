@@ -4,6 +4,6 @@ sap.ui.define([
 	"use strict";
 
 	XMLView.create({
-		viewName: "ui5.anime.appcontrollerview.App"
+		viewName: "ui5.anime.app.App"
 	}).then((oView) => oView.placeAt("content"));
 });
