@@ -8,6 +8,15 @@
 				id = "btnBemVindo"
 				text="{i18n>btnbemVindo}"
 				press=".onBemVindo"/>
+				<List headerText="Lista de animes" items = "{path: '/'}">
+					<CustomListItem>
+						<HBox>
+							<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+								<Label text="{nome}"/>
+							</VBox>
+						</HBox>
+					</CustomListItem>
+				</List>
 		</content>
 	</Page>
 </mvc:View>

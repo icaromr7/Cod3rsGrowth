@@ -8,6 +8,15 @@
 				""
 			],
 			"fallbackLocale": ""
+		},
+		"dataSources": {
+			"listaAnime": {
+				"uri": "https://localhost:7118/api/anime",
+				"type": "JSON",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
 		}
     },
     "sap.ui": {
@@ -36,7 +45,10 @@
             ],
             "fallbackLocale": ""
           }
-        }
+        },
+        "listanime": {
+				"dataSource": "listaAnime"
+			}
       },
       "rootView": {
         "viewName": "ui5.anime.app.App",

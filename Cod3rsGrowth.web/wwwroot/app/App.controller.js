@@ -6,7 +6,7 @@ sap.ui.define([
 	return Controller.extend("ui5.anime.app.App", {
 
 		onInit: function () {
-
+            
 		}
 
 	});
