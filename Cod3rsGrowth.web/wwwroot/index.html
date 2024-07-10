@@ -10,12 +10,13 @@
 		data-sap-ui-libs="sap.m"
 		data-sap-ui-compat-version="edge"
 		data-sap-ui-async="true"
-		data-sap-ui-on-init="module:ui5/anime/index"
+		data-sap-ui-on-init="module:sap/ui/core/ComponentSupport"
 		data-sap-ui-resource-roots='{
 			"ui5.anime": "./"
 		}'>
 	</script>
 </head>
 <body class="indexBody" id="content">
+	<div data-sap-ui-component data-name="ui5.anime" data-id="container" data-settings='{"id" : "anime"}'></div>
 </body>
 </html>

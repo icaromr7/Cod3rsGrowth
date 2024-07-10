@@ -9,7 +9,7 @@ sap.ui.define([
 			manifest: "json"
 		},
 
-		init() {
+		init: function(){
 			UIComponent.prototype.init.apply(this, arguments);
 			this.getRouter().initialize();
 		}

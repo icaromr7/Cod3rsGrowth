@@ -41,6 +41,7 @@
       "rootView": {
         "viewName": "ui5.anime.app.App",
         "type": "XML",
+        "async": true,
         "id": "app"
       },
       "routing": {
@@ -50,20 +51,31 @@
           "viewType": "XML",
           "path": "ui5.anime.app",
           "controlId": "app",
-          "controlAggregation": "pages"
+          "controlAggregation": "pages",
+          "bypassed": {
+              "target": "notFound"
+            },
+            "async": true
         },
         "routes": [
           {
             "pattern": "",
-            "name": "app",
-            "target": "app"
+            "name": "lista",
+            "target": "lista"
           }
         ],
         "targets": {
-          "overview": {
-            "id": "app",
-            "name": "App",
-            "level": 0
+          "lista": {
+            "id": "lista",
+            "path": "ui5.anime.app.lista",
+            "name": "Lista",
+            "level": 1
+          },
+          "notFound": {
+            "id": "notFound",
+            "path":"ui5.anime.app.notFound",
+            "name": "NotFound",
+            "transition": "show"
           }
         }
       }
