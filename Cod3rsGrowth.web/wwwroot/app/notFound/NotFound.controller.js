@@ -12,7 +12,7 @@ return Controller.extend("ui5.anime.app.notfound.NotFound", {
         return UIComponent.getRouterFor(this);
     },
 
-    onNavBack: function () {
+    aoClicarEmVoltar: function () {
         var oHistory, sPreviousHash;
 
         oHistory = History.getInstance();
@@ -21,7 +21,7 @@ return Controller.extend("ui5.anime.app.notfound.NotFound", {
         if (sPreviousHash !== undefined) {
             window.history.go(-1);
         } else {
-            this.getRouter().navTo("appLista", {}, true);
+            this.getRouter().navTo("lista", {}, true);
         }
     }
 });

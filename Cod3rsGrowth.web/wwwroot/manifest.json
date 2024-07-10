@@ -60,7 +60,7 @@
         "routes": [
           {
             "pattern": "",
-            "name": "appLista",
+            "name": "lista",
             "target": "lista"
           }
         ],
