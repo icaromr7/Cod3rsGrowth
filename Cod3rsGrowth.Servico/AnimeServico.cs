@@ -1,7 +1,12 @@
 ﻿using Cod3rsGrowth.dominio;
+using EnumsNET;
 using FluentValidation;
 using FluentValidation.Results;
 using LinqToDB.Data;
+using System;
+using System.ComponentModel;
+using System.Reflection.Metadata.Ecma335;
+using System.Security.Cryptography;
 using static Cod3rsGrowth.dominio.Anime;
 
 namespace Cod3rsGrowth.Servico
@@ -17,7 +22,7 @@ namespace Cod3rsGrowth.Servico
         }
         public void Atualizar(Anime anime)
         {
-            ValidationResult result = _animeValidador.Validate(anime, options => options.IncludeRuleSets(ConstantesDoValidador.DEFAULT,ConstantesDoValidador.ATUALIZAR));
+            ValidationResult result = _animeValidador.Validate(anime, options => options.IncludeRuleSets(ConstantesDoValidador.DEFAULT, ConstantesDoValidador.ATUALIZAR));
             if (result.IsValid)
             {
                 _animeRepositorio.Atualizar(anime);
@@ -54,7 +59,7 @@ namespace Cod3rsGrowth.Servico
         }
         public Anime ObterPorId(int id)
         {
-            var anime= _animeRepositorio.ObterPorId(id); 
+            var anime = _animeRepositorio.ObterPorId(id);
             return anime;
         }
 
@@ -62,6 +67,29 @@ namespace Cod3rsGrowth.Servico
         {
             var animes = _animeRepositorio.ObterTodos(filtro);
             return animes;
-        }       
+        }
+        public List<StatusExibicao> getDescricaoEnum() {
+            List<StatusExibicao> statusDeExibicao = new List<StatusExibicao>();
+            Array? status = Enum.GetValues(typeof(Anime.Status));
+            int i = 0;
+            var statusExibicao = new StatusExibicao
+            {
+                id = i,
+                descricao = "Todos"
+            };
+            statusDeExibicao.Add(statusExibicao);
+            i++;
+            foreach (var item in status)
+            {            
+                statusExibicao = new StatusExibicao
+                {
+                    id = i,
+                    descricao = ((Anime.Status)item).AsString(EnumFormat.Description)
+                };
+                statusDeExibicao.Add(statusExibicao);
+                i++;
+            }
+            return statusDeExibicao;
+        }
     }
 }

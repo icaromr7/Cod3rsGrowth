@@ -1,44 +1,148 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	'sap/ui/model/json/JSONModel'
-], function (Controller, JSONModel) {
+	'sap/ui/model/json/JSONModel',
+	'../model/formatter',
+	'sap/m/MessageBox'
+], function (Controller, JSONModel, formatter, MessageBox) {
 	"use strict";
+	let _filtroNome = "";
+	let _filtroData = null;
+	let _filtroStatus = null;
+	let _filtro = {};
+
+	const PARAMETRO_FILTRO_POR_NOME = "nome";
+	const PARAMETRO_FILTRO_POR_DATA = "datalancamento";
+	const PARAMETRO_FILTRO_POR_STATUS = "statusexibicao";
+	const CAMINHO_PARA_API = "/api/anime?";
+	const CAMINHO_PARA_API_STATUS = "/api/anime/status"
+	const NOME_DA_ROTA = "lista";
+	const ID_CAMPO_DE_BUSCA = "CampoDeBusca";
+	const NOME_DO_MODELO_DA_LISTA_DE_ANIME = "animes";
+	const NOME_DO_MODELO_DA_LISTA_DE_STATUS = "status"
+	const ID_DA_LISTA_DE_ANIMES = "listaDeAnimes";
+	const MESSAGEM_DE_ERRO = "Ocorreu um erro: ";
+	const INDEX_STATUS_TODOS = 0;
 
 	return Controller.extend("ui5.anime.app.lista.Lista", {
-		onInit: async function() {
+		formatter: formatter,
 
-				try{
-				const response = await fetch("https://localhost:7118/api/anime", {
+		onInit: async function() {
+			const aRota = this.getOwnerComponent().getRouter();
+			aRota.getRoute(NOME_DA_ROTA).attachPatternMatched(this._preencherLista, this);
+			this._getStatus(CAMINHO_PARA_API_STATUS);
+		},
+
+		_filtrarPorRota: function(){
+			const aRota = this.getOwnerComponent().getRouter();
+			const oHash = aRota.getHashChanger().getHash();
+			_filtro = new URLSearchParams(oHash);
+
+			_filtroNome = _filtro.get(PARAMETRO_FILTRO_POR_NOME);
+			_filtroData = _filtro.get(PARAMETRO_FILTRO_POR_DATA);
+			_filtroStatus = _filtro.get(PARAMETRO_FILTRO_POR_STATUS);
+
+			const CampoDeBusca = this.byId(ID_CAMPO_DE_BUSCA).setValue(_filtroNome);
+
+		},
+
+		aoFiltrarAnime: function (oEvent) {
+			this._exibirEspera(async () => {
+				let sNome = oEvent.getSource().getValue();
+				_filtroNome = sNome;
+				this._adicionarParametrosNaRota();
+			});
+		},
+
+		aoSelecionarData: function (oEvent){
+			this._exibirEspera(async () => {
+				_filtroData = oEvent.getParameter("value");
+				this._adicionarParametrosNaRota();
+			});
+		},
+
+		aoSelecionarStatus: function (oEvent){
+			this._exibirEspera(async () => {
+				_filtroStatus = oEvent.getParameters().selectedItem.mProperties.key;
+				this._adicionarParametrosNaRota();
+			});
+			
+		},
+		
+
+		_modeloLista: function(oModel, oNomeModelo){
+			this.getView().setModel(oModel,oNomeModelo);
+		},
+
+		_get: async function(url){
+			this._exibirEspera(async () => {
+				let urlFinal = url + _filtro;
+
+				const response = await fetch (urlFinal,{
 					method: "GET",
 					headers: {
-						"Content-Type": "application/json",
-					},
-					});
-			
-					if (response.ok) {
-					const data = await response.json();
-
-				const oModel = new JSONModel(data);
-				this.getView().setModel(oModel);
-					
-					console.log("data", data);
+						"Content-Typer": "application/json"
 					}
-				}catch(error){
-					console.log(error);			
-				}					
+				});
+				if(response.ok){
+					const data = await response.json();
+					const oModel = new JSONModel(data);
+					return this._modeloLista(oModel, NOME_DO_MODELO_DA_LISTA_DE_ANIME);
+				}
+			});
 		},
 
-		async onBemVindo() {
-			this.oDialogo ??= await this.loadFragment({
-				name: "ui5.anime.app.BemVindoDialogo"
+		_getStatus: async function(url){
+			this._exibirEspera(async () => {
+				const response = await fetch (url,{
+					method: "GET",
+					headers: {
+						"Content-Typer": "application/json"
+					}
+				});
+				if(response.ok){
+					const data = await response.json();
+					const oModel = new JSONModel(data);
+
+					return this._modeloLista(oModel, NOME_DO_MODELO_DA_LISTA_DE_STATUS);
+				}
 			});
-	
-			this.oDialogo.open();
+
 		},
-	
-		onFecharDialogo(){
-			this.byId("bemVindoDialogo").close();
+
+		_preencherLista: async function(){
+			this._filtrarPorRota();
+			this._get(CAMINHO_PARA_API);
+		},
+		
+		_exibirEspera: function(funcao){
+			var aLista = this.byId(ID_DA_LISTA_DE_ANIMES);
+			aLista.setBusy(true);
+
+			try{
+				funcao();
+			}catch(error){
+				MessageBox.error(MESSAGEM_DE_ERRO + error.message);
+			}
+			finally{
+				aLista.setBusy(false);
+			}
+		},
+
+		_adicionarParametrosNaRota: function(){
+			const aRota = this.getOwnerComponent().getRouter();
+			let query = {};
+			if(_filtroNome){
+				query.nome = _filtroNome;
+			}
+			if(_filtroData !== null && _filtroData!= ""){
+				query.datalancamento = _filtroData;
+			}
+			if(_filtroStatus!== null && _filtroStatus != INDEX_STATUS_TODOS){
+				query.statusexibicao= _filtroStatus;
+			}
+			aRota.navTo(NOME_DA_ROTA, {"?query":query});
 		}
-	});
+		
+	});		
 
 });

@@ -4,10 +4,7 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("ui5.anime.app.App", {
-
-		onInit: function () {
-            
-		}
+	
 
 	});
 

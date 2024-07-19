@@ -45,16 +45,20 @@
             ],
             "fallbackLocale": ""
           }
-        },
-        "listanime": {
-				"dataSource": "listaAnime"
-			}
+        }
       },
       "rootView": {
         "viewName": "ui5.anime.app.App",
         "type": "XML",
         "async": true,
         "id": "app"
+      },
+      "resources": {
+        "css": [
+        {
+          "uri": "app/css/styles.css"
+        }
+        ]
       },
       "routing": {
         "config": {
@@ -71,7 +75,7 @@
         },
         "routes": [
           {
-            "pattern": "",
+            "pattern": ":?query:",
             "name": "lista",
             "target": "lista"
           }
