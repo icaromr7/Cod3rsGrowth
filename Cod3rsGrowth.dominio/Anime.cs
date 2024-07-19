@@ -19,11 +19,11 @@ namespace Cod3rsGrowth.dominio
         public Status StatusDeExibicao { get; set; }
         public enum Status
         {
-            [Description("Está exibindo episódios do anime")]
+            [Description("Em Exibição")]
             EmExibicao = 1,
-            [Description("O anime ainda não está em exibição, em previsão de lançamento")]
-            Previsto = 2,
-            [Description("O anime ou a temporada do anime já foi finalizada")]
+            [Description("Previsto")]
+            Previsto =2 ,
+            [Description("Concluído")]
             Concluido = 3
         }      
     }

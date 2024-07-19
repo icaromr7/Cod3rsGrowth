@@ -8,6 +8,15 @@
 				""
 			],
 			"fallbackLocale": ""
+		},
+		"dataSources": {
+			"listaAnime": {
+				"uri": "https://localhost:7118/api/anime",
+				"type": "JSON",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
 		}
     },
     "sap.ui": {
@@ -44,6 +53,13 @@
         "async": true,
         "id": "app"
       },
+      "resources": {
+        "css": [
+        {
+          "uri": "app/css/styles.css"
+        }
+        ]
+      },
       "routing": {
         "config": {
           "routerClass": "sap.m.routing.Router",
@@ -59,7 +75,7 @@
         },
         "routes": [
           {
-            "pattern": "",
+            "pattern": ":?query:",
             "name": "lista",
             "target": "lista"
           }

@@ -1,0 +1,96 @@
+
+.listaDeAnimes {
+    width: 100%;
+    border-radius: 12px;
+    
+    .toolbar {
+        --start: 15%;
+        height: 130px;
+        background-image: repeating-radial-gradient(circle at var(--start), transparent 0%, transparent 10%, rgba(54, 89, 219, .33) 10%, rgba(54, 89, 219, .33) 17%), linear-gradient(to right, #5b7cfa, #3659db);
+        color: #fff;
+        position: relative;
+        border-radius: 12px 12px 0 0;
+        overflow: hidden;
+        .tituloListaAnime {
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        transform: translateY(-50%);
+        text-transform: uppercase;
+        margin: 0;
+        color: #fff;
+        }     
+    }
+    .sapMBtn{
+        background-color: #fff;
+        border-radius: 10px;
+        padding-bottom: 40px;
+        height: 2rem;
+    }
+    .ListaCustomizada {
+        background-color: #fff;
+        border-radius: 0 0 12px 12px;
+        padding: 15px 15px 20px;
+        display: grid;
+        row-gap: 8px;
+    }
+    
+    .vBoxAnime {
+        display: grid;
+        grid-template-columns: 4.5fr 4.5fr 0fr;
+        align-items: center;
+        padding: 10px 30px 10px 10px;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 5px 7px -1px rgba(51, 51, 51, 0.23);
+        cursor: pointer;
+        margin: 0.1rem;
+        transition: transform .25s cubic-bezier(.7,.98,.86,.98), box-shadow .25s cubic-bezier(.7,.98,.86,.98);
+        background-color: #fff;
+        
+        &:hover {
+        transform: scale(0.95);
+        box-shadow: 0 9px 47px 11px rgba(51, 51, 51, 0.18);
+        }
+    }
+    
+    
+    .nomeAnime {
+        color: #979cb0;
+        font-weight: 600;
+        font-size: 20px;
+        letter-spacing: 0.64px;
+        margin-left: 12px;
+    }
+    
+    .dataAnime{
+        color:#5b7cfa;
+        font-weight: 600;
+        position: center;
+        font-size: 20px;
+        letter-spacing: 0.64px;
+        margin-left: 12px;
+    }
+    
+    .statusAnime {
+        color: #35d8ac;
+        font-weight: 700;
+        font-size: 20px;
+        width: 150px;
+    }
+    
+    }
+    body {
+    margin: 0;
+    background-color: #eaeaea;
+    height: 100vh;
+    place-items: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    }
+    
+    .listaDeAnimes {
+    box-shadow: 0 0 40px -10px rgba(0, 0, 0, .4);
+    }
+    .sapUiResponsiveContentPadding{
+        background-image: url(image/background_page_inicial.jpg);
+    }

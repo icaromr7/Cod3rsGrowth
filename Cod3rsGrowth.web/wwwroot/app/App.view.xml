@@ -1,11 +1,18 @@
 <mvc:View
       controllerName="ui5.anime.app.App"
+      displayBlock="true"
       xmlns="sap.m"
+      xmlns:f= "sap.f"
       xmlns:mvc="sap.ui.core.mvc">
-      <Shell>
             <App
-                  id="app"/>
-      </Shell>
-
-      
+                  id="app"
+                  busy= "{/busy}"
+                  busyIndicatorDelay="{/delay}">
+                  <f:FlexibleColumnLayout
+                  id="layout"
+                  layout="{/layout}"
+                  backgroundDesign="Translucent">
+                  </f:FlexibleColumnLayout>
+            
+            </App>
 </mvc:View>

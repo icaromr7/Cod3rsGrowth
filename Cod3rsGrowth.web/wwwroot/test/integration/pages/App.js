@@ -4,7 +4,7 @@ sap.ui.define([
 ], (Opa5, Press) => {
 	"use strict";
 
-	const sNomeDaTela = "ui5.anime.appcontrollerview.App";
+	const sNomeDaTela = "ui5.anime.app.App";
 
 	Opa5.createPageObjects({
 		onAppPagina: {

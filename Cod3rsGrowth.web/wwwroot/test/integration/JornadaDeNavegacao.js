@@ -1,12 +1,12 @@
 sap.ui.define([
 	"sap/ui/test/opaQunit",
-	"./pages/App"
+	"./pages/Lista"
 ], (opaTest) => {
 	"use strict";
 
 	QUnit.module("Navigation");
-
-	opaTest("Mostrar o dialogo de bem vindo", (Given, When, Then) => {
+	
+	opaTest("Deve ser capaz de mostrar todos os itens", (Given, When, Then) => {
 		// Arrangements
 		Given.iStartMyUIComponent({
 			componentConfig: {
@@ -15,12 +15,42 @@ sap.ui.define([
 		});
 
 		//Actions
-		When.onAppPagina.AoPressionarBotaoBemVindo();
+		When.onPaginaListaAnime.aoApertarEmMais();
+
+		//Assertions
+		Then.onPaginaListaAnime.aListaDeveMostrarTodosAnimes();
+	})
+	opaTest("Deve ser capaz de pesquisar itens", (Given, When, Then) => {
+		
+		//Actions
+		When.onPaginaListaAnime.aoPesquisarPorNome("One");
 
 		// Assertions
-		Then.onAppPagina.AoMostarDialogoBemVindo();
+		Then.onPaginaListaAnime.aListaTemUmAnime();
+	});
+	opaTest("Deve ser capaz de filtrar itens pela data", (Given,When, Then) =>{
+		//Arrangements
+		When.onPaginaListaAnime.aoPesquisarPorNome("");
+
+		//Actions
+		When.onPaginaListaAnime.aoSelecionarData("16/06/2023");
+
+		//Assertions
+		Then.onPaginaListaAnime.aListaTemUmAnime();
+	});
+	opaTest("Deve ser capaz de filtrar itens pelo status", (Given,When, Then) => {
+		//Arrangements
+		When.onPaginaListaAnime.aoSelecionarData("");
+
+		//Actions
+		When.onPaginaListaAnime.aoClicarNoFiltroStatus();
+		When.onPaginaListaAnime.aoSelecionarStatus();
+
+		//Assertions
+		Then.onPaginaListaAnime.aListaTemDoisAnimes();
 
 		// Cleanup
 		Then.iTeardownMyApp();
 	});
+	
 });

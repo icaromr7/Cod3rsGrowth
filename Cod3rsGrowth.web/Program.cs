@@ -28,7 +28,7 @@ builder.Services.AddScoped<AnimeGeneroServico>();
 builder.Services.AddScoped<IValidator<Anime>, AnimeValidador>();
 builder.Services.AddScoped<IValidator<Genero>, GeneroValidador>();
 builder.Services.AddScoped<IValidator<AnimeGenero>, AnimeGeneroValidador>();
-builder.Services.AddMvc();
+builder.Services.AddMvc().AddJsonOptions(x => { x.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter()); });
 builder.Services.ConfigureProblemDetailsModelState();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddFluentValidation();
