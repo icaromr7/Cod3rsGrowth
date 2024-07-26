@@ -69,6 +69,7 @@ sap.ui.define([
 			const _generos = this.byId(ID_DA_LISTA_DE_GENEROS);
 			if(_generos.getSelectedItems().length == 0){
 				MessageBox.show(MESSAGEM_PRECISA_SELECIONAR_GENERO);
+				verificacao = false
 			}
 			
 			return verificacao;
