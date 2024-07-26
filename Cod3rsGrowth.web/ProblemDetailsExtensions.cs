@@ -53,9 +53,10 @@ namespace Cod3rsGrowth.web
                 {
                     var problemDetails = new ValidationProblemDetails(context.ModelState)
                     {
+                        Title = "Um ou mais erros foram encontrados.",
                         Instance = context.HttpContext.Request.Path,
                         Status = StatusCodes.Status400BadRequest,
-                        Detail = "Consulte a propriedade errors para obter detalhes adicionais"
+                        Detail = "Consulte a propriedade erros para obter detalhes adicionais"
                     };
                     return new BadRequestObjectResult(problemDetails)
                     {

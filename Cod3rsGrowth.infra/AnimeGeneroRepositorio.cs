@@ -42,6 +42,7 @@ namespace Cod3rsGrowth.infra
                     sqlQuery += " or ";
                 }
             }
+            if(animeGeneros.Any())
             dataConnection.Execute(sqlQuery);
         }
 
