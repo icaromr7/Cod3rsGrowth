@@ -62,21 +62,27 @@ sap.ui.define([
 		},
 
 		aoClicarEmSalvar: function () {
-			if (this._VerificarCampos()) {
-				let anime = {
-					nome: this.byId(ID_INPUT_NOME).getValue(),
-					sinopse: this.byId(ID_INPUT_SINOPSE).getValue(),
-					dataLancamento: this.byId(ID_INPUT_DATA_LANCAMENTO).getValue(),
-					nota: this.byId(ID_INPUT_NOTA).getValue(),
-					statusDeExibicao: parseInt(this.byId(ID_INPUT_STATUS).getSelectedItem().getKey()),
-					idGeneros: this._preencherAListaDeGenerosSelecionados()
+			this._exibirEspera(async () => {
+				if (this._VerificarCampos()) {
+					let anime = {
+						nome: this.byId(ID_INPUT_NOME).getValue(),
+						sinopse: this.byId(ID_INPUT_SINOPSE).getValue(),
+						dataLancamento: this.byId(ID_INPUT_DATA_LANCAMENTO).getValue(),
+						nota: this.byId(ID_INPUT_NOTA).getValue(),
+						statusDeExibicao: parseInt(this.byId(ID_INPUT_STATUS).getSelectedItem().getKey()),
+						idGeneros: this._preencherAListaDeGenerosSelecionados()
+					}
+					this._postAnime(CAMINHO_PARA_API_ADICIONAR_ANIME, anime);
 				}
-				this._postAnime(CAMINHO_PARA_API_ADICIONAR_ANIME, anime);
-			}
+			})
+			
 		},
 
 		aoDigitarNoInput: function (oEvent) {
-			oEvent.getSource().setValueState(VALUE_STATE_NONE);
+			this._exibirEspera(async () => {
+				oEvent.getSource().setValueState(VALUE_STATE_NONE);
+			})
+			
 		},
 
 		_postAnime: async function (url, anime) {

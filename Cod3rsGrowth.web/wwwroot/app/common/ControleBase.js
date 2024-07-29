@@ -30,16 +30,19 @@ sap.ui.define([
         },
 
         aoClicarEmVoltar: function () {
-            var oHistory, sPreviousHash;
+            this._exibirEspera(async () => {
+                var oHistory, sPreviousHash;
 
-            oHistory = History.getInstance();
-            sPreviousHash = oHistory.getPreviousHash();
+                oHistory = History.getInstance();
+                sPreviousHash = oHistory.getPreviousHash();
 
-            if (sPreviousHash !== undefined) {
-                window.history.go(-1);
-            } else {
-                this._getRota().navTo(ROTA_PARA_LISTA, {}, true);
-            }
+                if (sPreviousHash !== undefined) {
+                    window.history.go(-1);
+                } else {
+                    this._getRota().navTo(ROTA_PARA_LISTA, {}, true);
+                }
+			})
+            
         },
         _modeloLista: function (oModel, oNomeModelo) {
             this.getView().setModel(oModel, oNomeModelo);

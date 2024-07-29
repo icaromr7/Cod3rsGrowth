@@ -22,7 +22,6 @@ sap.ui.define([
 	const NOME_DO_MODELO_DA_LISTA_DE_ANIME = "animes";
 	const NOME_DO_MODELO_DA_LISTA_DE_STATUS = "status"
 	const ID_DA_LISTA_DE_ANIMES = "listaDeAnimes";
-	const MESSAGEM_DE_ERRO = "Ocorreu um erro: ";
 	const INDEX_STATUS_TODOS = 0;
 	const ROTA_PARA_CADASTRO_ANIME = "cadastroAnime"
 
@@ -71,10 +70,6 @@ sap.ui.define([
 
 		},
 
-		_modeloLista: function (oModel, oNomeModelo) {
-			this.getView().setModel(oModel, oNomeModelo);
-		},
-
 		_get: async function (url) {
 			this._exibirEspera(async () => {
 				let urlFinal = url + _filtro;
@@ -120,20 +115,6 @@ sap.ui.define([
 			this._get(CAMINHO_PARA_API);
 		},
 
-		_exibirEspera: function (funcao) {
-			let aPagina = this.getView();
-			aPagina.setBusy(true);
-
-			try {
-				funcao();
-			} catch (error) {
-				MessageBox.error(MESSAGEM_DE_ERRO + error.message);
-			}
-			finally {
-				aPagina.setBusy(false);
-			}
-		},
-
 		_adicionarParametrosNaRota: function () {
 			const aRota = this.getOwnerComponent().getRouter();
 			let query = {};
@@ -150,8 +131,11 @@ sap.ui.define([
 		},
 
 		aoClicarEmAdicionarAnime: function () {
-			const aRota = this.getOwnerComponent().getRouter();
-			aRota.navTo(ROTA_PARA_CADASTRO_ANIME);
+			this._exibirEspera(async () => {
+				const aRota = this.getOwnerComponent().getRouter();
+				aRota.navTo(ROTA_PARA_CADASTRO_ANIME);
+			})
+			
 		}
 
 	});
