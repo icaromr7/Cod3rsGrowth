@@ -28,13 +28,8 @@ namespace Cod3rsGrowth.web.Controllers
             if (anime == null) { return BadRequest(); }
             int idAnime = _animeServico.Cadastrar(anime);
             anime.Id = idAnime;
-            return Created($"anime/{anime.Id}", anime);
-        }
-        [HttpPost(ConstantesController.ADICIONAR_ANIME_GENERO)]
-        public IActionResult AdicionarAnimeGeneros([FromBody] List<int> idGeneros)
-        {
-            int idAnime = _animeServico.ObterTodos(null).Last().Id;
-            foreach (int id in idGeneros) {
+            foreach (int id in anime.IdGeneros)
+            {
                 var animeGenero = new AnimeGenero()
                 {
                     IdAnime = idAnime,
@@ -42,9 +37,8 @@ namespace Cod3rsGrowth.web.Controllers
                 };
                 _animeGeneroServico.Cadastrar(animeGenero);
             }
-            return Ok();
-        }
-
+            return Created($"anime/{anime.Id}", anime);
+        }     
         [HttpGet(ConstantesController.ID)]
         public IActionResult ObterPorId(int id)
         {
