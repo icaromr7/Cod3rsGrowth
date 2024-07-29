@@ -86,7 +86,6 @@ sap.ui.define([
 		},
 
 		_postAnime: async function (url, anime) {
-			this._exibirEspera(async () => {
 				const response = await fetch(url, {
 					method: "POST",
 					headers: {
@@ -102,7 +101,6 @@ sap.ui.define([
 				else {
 					this._falhaNaRequicaoPost(data);
 				}
-			})
 		},
 
 		_sucessoNoPost: function () {

@@ -71,7 +71,6 @@ sap.ui.define([
 		},
 
 		_get: async function (url) {
-			this._exibirEspera(async () => {
 				let urlFinal = url + _filtro;
 
 				const response = await fetch(urlFinal, {
@@ -85,11 +84,9 @@ sap.ui.define([
 					const oModel = new JSONModel(data);
 					return this._modeloLista(oModel, NOME_DO_MODELO_DA_LISTA_DE_ANIME);
 				}
-			});
 		},
 
 		_getStatus: async function (url) {
-			this._exibirEspera(async () => {
 				const response = await fetch(url, {
 					method: "GET",
 					headers: {
@@ -107,7 +104,6 @@ sap.ui.define([
 					const oModel = new JSONModel(data);
 					return this._modeloLista(oModel, NOME_DO_MODELO_DA_LISTA_DE_STATUS);
 				}
-			});
 		},
 
 		_preencherLista: async function () {

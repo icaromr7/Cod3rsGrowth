@@ -48,7 +48,6 @@ sap.ui.define([
             this.getView().setModel(oModel, oNomeModelo);
         },
         _get: async function (url, oNomeModelo) {
-            this._exibirEspera(async () => {
                 const response = await fetch(url, {
                     method: "GET",
                     headers: {
@@ -60,7 +59,6 @@ sap.ui.define([
                     const oModel = new JSONModel(data);
                     return this._modeloLista(oModel, oNomeModelo);
                 }
-            });
 
         }
 
