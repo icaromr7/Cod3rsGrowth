@@ -23,6 +23,7 @@
     }
     .sapMBtn{
         background-color: #fff;
+        nav-left: auto;
         border-radius: 10px;
         padding-bottom: 40px;
         height: 2rem;
@@ -92,5 +93,9 @@
     box-shadow: 0 0 40px -10px rgba(0, 0, 0, .4);
     }
     .sapUiResponsiveContentPadding{
-        background-image: url(image/background_page_inicial.jpg);
+        background-image: url(image/background_page_inicial.jpg) !important;
+    }
+    .lblCadastro{
+        color: #fff;
+        margin-top: 0.5rem;
     }

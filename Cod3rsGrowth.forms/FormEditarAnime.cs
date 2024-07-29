@@ -88,7 +88,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ERRO_AO_ATUALIZAR);
+                MessageBox.Show(ex.Message);
             }
         }
         private void AoClicarEmCancelar(object sender, EventArgs e)

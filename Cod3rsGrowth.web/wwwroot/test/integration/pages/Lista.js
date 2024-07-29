@@ -9,7 +9,7 @@ sap.ui.define([
 ], function (Opa5, Properties, Press,EnterText, AggregationLengthEquals,Ancestor,PropertyStrictEquals) {
 	"use strict";
     
-		var sNomeDaTela = "ui5.anime.app.lista.Lista";
+		var sNomeDaTela = "lista.Lista";
         var sListaId = "listaDeAnimes"
         Opa5.createPageObjects({
                 onPaginaListaAnime: {
@@ -57,11 +57,19 @@ sap.ui.define([
                                 matchers: 
                                     new PropertyStrictEquals ({
                                         name: "id",
-                                        value: "__item0-__component0---lista--selectStatus-3"})
+                                        value: "__item0-__component0---lista--selectStatus-2"})
                                 ,
                                 actions: new Press(),
                                 errorMessage: "selectStatus não foi encontrado"
                             })
+                        },
+                        aoApertarEmAdicionarAnime: function(){
+                            return this.waitFor({
+                                id: "btnAdicionar",
+                                viewName: sNomeDaTela,
+                                actions: new Press(),
+                                errorMessage: "Não foi possível pressionar o botão de adicionar."
+                            });
                         }
                     },
                     assertions:{

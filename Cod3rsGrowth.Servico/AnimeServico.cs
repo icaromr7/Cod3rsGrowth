@@ -71,17 +71,10 @@ namespace Cod3rsGrowth.Servico
         public List<StatusExibicao> getDescricaoEnum() {
             List<StatusExibicao> statusDeExibicao = new List<StatusExibicao>();
             Array? status = Enum.GetValues(typeof(Anime.Status));
-            int i = 0;
-            var statusExibicao = new StatusExibicao
-            {
-                id = i,
-                descricao = "Todos"
-            };
-            statusDeExibicao.Add(statusExibicao);
-            i++;
+            int i = 1;
             foreach (var item in status)
             {            
-                statusExibicao = new StatusExibicao
+                var statusExibicao = new StatusExibicao
                 {
                     id = i,
                     descricao = ((Anime.Status)item).AsString(EnumFormat.Description)

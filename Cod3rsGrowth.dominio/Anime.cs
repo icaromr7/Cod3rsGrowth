@@ -17,6 +17,8 @@ namespace Cod3rsGrowth.dominio
         public decimal Nota { get; set; }
         [Column]
         public Status StatusDeExibicao { get; set; }
+
+        public List<int> IdGeneros { get; set; }
         public enum Status
         {
             [Description("Em Exibição")]

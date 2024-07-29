@@ -1,9 +1,9 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
+	"ui5/anime/app/common/ControleBase",
 	'sap/ui/model/json/JSONModel',
 	'../model/formatter',
 	'sap/m/MessageBox'
-], function (Controller, JSONModel, formatter, MessageBox) {
+], function (ControleBase, JSONModel, formatter, MessageBox) {
 	"use strict";
 	let _filtroNome = "";
 	let _filtroData = null;
@@ -17,22 +17,24 @@ sap.ui.define([
 	const CAMINHO_PARA_API_STATUS = "/api/anime/status"
 	const NOME_DA_ROTA = "lista";
 	const ID_CAMPO_DE_BUSCA = "CampoDeBusca";
+	const PARAMETRO_VALUE = "value"
+	const PARAMETRO_SELECTED_ITEM = "selectedItem"
 	const NOME_DO_MODELO_DA_LISTA_DE_ANIME = "animes";
 	const NOME_DO_MODELO_DA_LISTA_DE_STATUS = "status"
 	const ID_DA_LISTA_DE_ANIMES = "listaDeAnimes";
-	const MESSAGEM_DE_ERRO = "Ocorreu um erro: ";
 	const INDEX_STATUS_TODOS = 0;
+	const ROTA_PARA_CADASTRO_ANIME = "cadastroAnime"
 
-	return Controller.extend("ui5.anime.app.lista.Lista", {
+	return ControleBase.extend("ui5.anime.app.lista.Lista", {
 		formatter: formatter,
 
-		onInit: async function() {
+		onInit: async function () {
 			const aRota = this.getOwnerComponent().getRouter();
 			aRota.getRoute(NOME_DA_ROTA).attachPatternMatched(this._preencherLista, this);
 			this._getStatus(CAMINHO_PARA_API_STATUS);
 		},
 
-		_filtrarPorRota: function(){
+		_filtrarPorRota: function () {
 			const aRota = this.getOwnerComponent().getRouter();
 			const oHash = aRota.getHashChanger().getHash();
 			_filtro = new URLSearchParams(oHash);
@@ -53,96 +55,85 @@ sap.ui.define([
 			});
 		},
 
-		aoSelecionarData: function (oEvent){
+		aoSelecionarData: function (oEvent) {
 			this._exibirEspera(async () => {
-				_filtroData = oEvent.getParameter("value");
+				_filtroData = oEvent.getParameter(PARAMETRO_VALUE);
 				this._adicionarParametrosNaRota();
 			});
 		},
 
-		aoSelecionarStatus: function (oEvent){
+		aoSelecionarStatus: function (oEvent) {
 			this._exibirEspera(async () => {
-				_filtroStatus = oEvent.getParameters().selectedItem.mProperties.key;
+				_filtroStatus = oEvent.getParameter(PARAMETRO_SELECTED_ITEM).getKey();
 				this._adicionarParametrosNaRota();
 			});
-			
-		},
-		
 
-		_modeloLista: function(oModel, oNomeModelo){
-			this.getView().setModel(oModel,oNomeModelo);
 		},
 
-		_get: async function(url){
-			this._exibirEspera(async () => {
+		_get: async function (url) {
 				let urlFinal = url + _filtro;
 
-				const response = await fetch (urlFinal,{
+				const response = await fetch(urlFinal, {
 					method: "GET",
 					headers: {
-						"Content-Typer": "application/json"
+						"Content-Type": "application/json"
 					}
 				});
-				if(response.ok){
+				if (response.ok) {
 					const data = await response.json();
 					const oModel = new JSONModel(data);
 					return this._modeloLista(oModel, NOME_DO_MODELO_DA_LISTA_DE_ANIME);
 				}
-			});
 		},
 
-		_getStatus: async function(url){
-			this._exibirEspera(async () => {
-				const response = await fetch (url,{
+		_getStatus: async function (url) {
+				const response = await fetch(url, {
 					method: "GET",
 					headers: {
-						"Content-Typer": "application/json"
+						"Content-Type": "application/json"
 					}
 				});
-				if(response.ok){
+				if (response.ok) {
 					const data = await response.json();
+					var todos =
+					{
+						id: 0,
+						descricao: "Todos"
+					}
+					data.push(todos);
 					const oModel = new JSONModel(data);
-
 					return this._modeloLista(oModel, NOME_DO_MODELO_DA_LISTA_DE_STATUS);
 				}
-			});
-
 		},
 
-		_preencherLista: async function(){
+		_preencherLista: async function () {
 			this._filtrarPorRota();
 			this._get(CAMINHO_PARA_API);
 		},
-		
-		_exibirEspera: function(funcao){
-			var aLista = this.byId(ID_DA_LISTA_DE_ANIMES);
-			aLista.setBusy(true);
 
-			try{
-				funcao();
-			}catch(error){
-				MessageBox.error(MESSAGEM_DE_ERRO + error.message);
-			}
-			finally{
-				aLista.setBusy(false);
-			}
-		},
-
-		_adicionarParametrosNaRota: function(){
+		_adicionarParametrosNaRota: function () {
 			const aRota = this.getOwnerComponent().getRouter();
 			let query = {};
-			if(_filtroNome){
+			if (_filtroNome) {
 				query.nome = _filtroNome;
 			}
-			if(_filtroData !== null && _filtroData!= ""){
+			if (_filtroData !== null && _filtroData != "") {
 				query.datalancamento = _filtroData;
 			}
-			if(_filtroStatus!== null && _filtroStatus != INDEX_STATUS_TODOS){
-				query.statusexibicao= _filtroStatus;
+			if (_filtroStatus !== null && _filtroStatus != INDEX_STATUS_TODOS) {
+				query.statusexibicao = _filtroStatus;
 			}
-			aRota.navTo(NOME_DA_ROTA, {"?query":query});
+			aRota.navTo(NOME_DA_ROTA, { "?query": query });
+		},
+
+		aoClicarEmAdicionarAnime: function () {
+			this._exibirEspera(async () => {
+				const aRota = this.getOwnerComponent().getRouter();
+				aRota.navTo(ROTA_PARA_CADASTRO_ANIME);
+			})
+			
 		}
-		
-	});		
+
+	});
 
 });

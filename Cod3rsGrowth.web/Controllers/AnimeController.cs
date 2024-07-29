@@ -28,9 +28,17 @@ namespace Cod3rsGrowth.web.Controllers
             if (anime == null) { return BadRequest(); }
             int idAnime = _animeServico.Cadastrar(anime);
             anime.Id = idAnime;
+            foreach (int id in anime.IdGeneros)
+            {
+                var animeGenero = new AnimeGenero()
+                {
+                    IdAnime = idAnime,
+                    IdGenero = id
+                };
+                _animeGeneroServico.Cadastrar(animeGenero);
+            }
             return Created($"anime/{anime.Id}", anime);
-        }
-
+        }     
         [HttpGet(ConstantesController.ID)]
         public IActionResult ObterPorId(int id)
         {
