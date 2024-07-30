@@ -37,7 +37,20 @@ namespace Cod3rsGrowth.web.Controllers
             if (genero == null) { return BadRequest(); }
             return Ok(genero);
         }
-        [HttpPut(ConstantesController.ATUALIZAR)]
+        [HttpGet(ConstantesController.ANIME_GENERO)]
+        public IActionResult ObterGenerosPorIdAnime(int id)
+        {
+            List<AnimeGenero> listAnimeGenero = _animeGeneroServico.ObterTodos(id);
+            var listaGeneros = new List<Genero>();
+            foreach(var item in listAnimeGenero)
+            {
+                var genero = _generoServico.ObterPorId(item.IdGenero);
+                listaGeneros.Add(genero);
+            }
+            return Ok(listaGeneros);
+        }
+        
+    [HttpPut(ConstantesController.ATUALIZAR)]
         public IActionResult Atualizar([FromBody] Genero genero)
         {
             if (genero == null) { return BadRequest(); }

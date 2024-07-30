@@ -28,8 +28,8 @@ sap.ui.define([
 	return ControleBase.extend("ui5.anime.app.lista.Lista", {
 		formatter: formatter,
 
-		onInit: async function () {
-			const aRota = this.getOwnerComponent().getRouter();
+		onInit: function () {
+			const aRota = this._getRota();
 			aRota.getRoute(NOME_DA_ROTA).attachPatternMatched(this._preencherLista, this);
 			this._getStatus(CAMINHO_PARA_API_STATUS);
 		},
@@ -38,11 +38,9 @@ sap.ui.define([
 			const aRota = this.getOwnerComponent().getRouter();
 			const oHash = aRota.getHashChanger().getHash();
 			_filtro = new URLSearchParams(oHash);
-
 			_filtroNome = _filtro.get(PARAMETRO_FILTRO_POR_NOME);
 			_filtroData = _filtro.get(PARAMETRO_FILTRO_POR_DATA);
 			_filtroStatus = _filtro.get(PARAMETRO_FILTRO_POR_STATUS);
-
 			const CampoDeBusca = this.byId(ID_CAMPO_DE_BUSCA).setValue(_filtroNome);
 
 		},
@@ -132,8 +130,21 @@ sap.ui.define([
 				aRota.navTo(ROTA_PARA_CADASTRO_ANIME);
 			})
 			
-		}
+		},
 
+		aoClicarNoAnime: function(oEvent){
+			this._exibirEspera(async () => {
+				let _idAnime = oEvent.getSource().getBindingContext(NOME_DO_MODELO_DA_LISTA_DE_ANIME).getProperty("id");
+				this._getRota().navTo("detalhesAnime",{
+					id : _idAnime
+				});
+			})
+		},
+		aoClicarEmListaDeGeneros: function(oEvent){
+			this._exibirEspera(async () => {
+				this._getRota().navTo("listaGenero");
+			})
+		}
 	});
 
 });

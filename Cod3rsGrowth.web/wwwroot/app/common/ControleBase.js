@@ -26,7 +26,7 @@ sap.ui.define([
         },
 
         _getRota: function () {
-            return UIComponent.getRouterFor(this);
+            return this.getOwnerComponent().getRouter();
         },
 
         aoClicarEmVoltar: function () {

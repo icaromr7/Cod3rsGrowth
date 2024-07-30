@@ -6,18 +6,23 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout"
 	>
-	<Page title="{i18n>TituloPaginaInicial}" class="sapUiResponsiveContentPadding" >	
+	<Page title="{i18n>TituloPaginaInicial}" class="sapUiResponsiveContentPadding" titleAlignment="Center">	
 		<content>
 				<List items = "{path: 'animes>/'}" class= "listaDeAnimes" id = "listaDeAnimes" growing="true" growingThreshold="10">
 					<headerToolbar >
 						<Toolbar class= "toolbar">
 							<Title text="{i18n>listaDeAnimeTitulo}" class="tituloListaAnime"/>
 							<ToolbarSpacer/>
+							<Button 
+								id= "btnListaDeGeneros" 
+								text="{i18n>btnListaDeGeneros}" 
+								press = "aoClicarEmListaDeGeneros"
+							/>
 							<Button
 								id = "btnAdicionar"
 								text="{i18n>btnAdicionar}"
 								press= "aoClicarEmAdicionarAnime"
-								/>
+							/>
 							<Select
 								id = "selectStatus"
 								change="aoSelecionarStatus"
@@ -45,9 +50,10 @@
 							/>
 						</Toolbar>
 					</headerToolbar>
-					<CustomListItem id = "listaDosAnimes" class = "ListaCustomizada">						
-							<VBox class="vBoxAnime">
-								<Label text="{animes>nome}" class = "nomeAnime"/>
+					<CustomListItem id = "listaDosAnimes" class = "ListaCustomizada" type="Navigation" press="aoClicarNoAnime" 
+				>						
+							<VBox class="vBoxAnime" >
+								<Label text="{animes>nome}" class = "nomeAnime" />
 									<Label text="{
 										path: 'animes>dataLancamento',
 										type: 'sap.ca.ui.model.type.Date',
