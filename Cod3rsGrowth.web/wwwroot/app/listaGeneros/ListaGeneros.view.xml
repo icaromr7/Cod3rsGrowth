@@ -12,6 +12,7 @@
 						<Toolbar class= "toolbar">
 							<Title text="{i18n>listaDeGeneroTitulo}" class="tituloListaGenero"/>
 							<ToolbarSpacer/>
+							<Button text="{i18n>btnAdicionarGenero}" press="aoClicarAdicionarGenero"></Button>
 							<SearchField
 								id = "CampoDeBusca" 
 								width="30%" 

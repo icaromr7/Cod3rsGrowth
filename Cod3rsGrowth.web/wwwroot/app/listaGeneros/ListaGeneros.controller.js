@@ -11,8 +11,10 @@ sap.ui.define([
 	const PARAMETRO_FILTRO_POR_NOME = "generos?nome";
 	const CAMINHO_PARA_API = "/api/genero?";
 	const NOME_DA_ROTA = "listaGenero";
+	const ROTA_ADICIONAR_GENERO = "cadastroGenero"
 	const ID_CAMPO_DE_BUSCA = "CampoDeBusca";
 	const NOME_DO_MODELO_DA_LISTA_DE_GENEROS = "generos";
+	const ROTA_DETALHES_GENERO = "detalhesGenero"
 
 	return ControleBase.extend("ui5.anime.app.listaGeneros.ListaGeneros", {
 		formatter: formatter,
@@ -66,15 +68,18 @@ sap.ui.define([
 			}
 			aRota.navTo(NOME_DA_ROTA, { "?query": query });
 		},
-
-		// aoClicarNoGenero: function(oEvent){
-		// 	this._exibirEspera(async () => {
-		// 		let _idAnime = oEvent.getSource().getBindingContext(NOME_DO_MODELO_DA_LISTA_DE_ANIME).getProperty("id");
-		// 		this._getRota().navTo("detalhesAnime",{
-		// 			id : _idAnime
-		// 		});
-		// 	})
-		// }
+		aoClicarAdicionarGenero: function(){
+			const aRota = this.getOwnerComponent().getRouter();
+			aRota.navTo(ROTA_ADICIONAR_GENERO);
+		},
+		aoClicarNoGenero: function(oEvent){
+			this._exibirEspera(async () => {
+				let _idGenero = oEvent.getSource().getBindingContext(NOME_DO_MODELO_DA_LISTA_DE_GENEROS).getProperty("id");
+				this._getRota().navTo(ROTA_DETALHES_GENERO,{
+					id : _idGenero
+				});
+			})
+		}
 	});
 
 });
