@@ -5,14 +5,18 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout"
 	>
-	<Page title="{i18n>TituloPaginaInicial}" class="sapUiResponsiveContentPadding" titleAlignment="Center">	
+	<Page title="{i18n>TituloPaginaInicial}" 
+		class="sapUiResponsiveContentPadding"
+		showNavButton="true"
+        navButtonPress="aoClicarEmVoltar" 
+		titleAlignment="Center">	
 		<content>
 				<List items = "{path: 'generos>/'}" class= "listaDeGeneros" id = "listaDeGeneros" growing="true" growingThreshold="10">
 					<headerToolbar >
 						<Toolbar class= "toolbar">
 							<Title text="{i18n>listaDeGeneroTitulo}" class="tituloListaGenero"/>
 							<ToolbarSpacer/>
-							<Button text="{i18n>btnAdicionarGenero}" press="aoClicarAdicionarGenero"></Button>
+							<Button text="{i18n>btnAdicionarGenero}" press="aoClicarAdicionarGenero" id= "btnAdicionar"></Button>
 							<SearchField
 								id = "CampoDeBusca" 
 								width="30%" 

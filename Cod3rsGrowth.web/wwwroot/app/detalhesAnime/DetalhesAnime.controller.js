@@ -15,19 +15,19 @@ sap.ui.define([
         formatter: formatter,
 
         onInit: function () {
-			var oRouter = this._getRota();
+			let oRouter = this._getRota();
 			oRouter.getRoute(NOME_DA_ROTA).attachMatched(this._PegarDadosPorId, this);
 		},
         _PegarDadosPorId : function () {
             this._exibirEspera(async () => {               
-                var obterParametro = this._getRota().getHashChanger().getHash().split("/");
+                let obterParametro = this._getRota().getHashChanger().getHash().split("/");
                 this._getAnime(CAMINHO_PARA_API,obterParametro[POSICAO_ID_DO_ANIME]);
                 this._getGeneros(CAMINHO_PARA_API_GENEROS_DO_ANIME,obterParametro[POSICAO_ID_DO_ANIME]);
 			})
 			
 		},
         _getAnime: async function(url, idAnime){
-            var urlFinal = url + idAnime;
+            let urlFinal = url + idAnime;
             const response = await fetch(urlFinal, {
                 method: "GET",
                 headers: {
@@ -41,7 +41,7 @@ sap.ui.define([
             }
         },
         _getGeneros: async function(url, idAnime){
-            var urlFinal = url + idAnime;
+            let urlFinal = url + idAnime;
             const response = await fetch(urlFinal, {
                 method: "GET",
                 headers: {

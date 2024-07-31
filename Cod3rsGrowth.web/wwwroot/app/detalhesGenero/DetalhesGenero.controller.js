@@ -13,7 +13,7 @@ sap.ui.define([
         formatter: formatter,
 
         onInit: function () {
-			var oRouter = this._getRota();
+			let oRouter = this._getRota();
 			oRouter.getRoute(NOME_DA_ROTA).attachMatched(this._PegarDadosPorId, this);
 		},
         _PegarDadosPorId : function () {
@@ -24,7 +24,7 @@ sap.ui.define([
 			
 		},
         _getGenero: async function(url, idGenero){
-            var urlFinal = url + idGenero;
+            let urlFinal = url + idGenero;
             const response = await fetch(urlFinal, {
                 method: "GET",
                 headers: {

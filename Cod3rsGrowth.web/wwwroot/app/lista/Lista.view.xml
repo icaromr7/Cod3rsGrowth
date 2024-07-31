@@ -53,7 +53,7 @@
 					<CustomListItem id = "listaDosAnimes" class = "ListaCustomizada" type="Navigation" press="aoClicarNoAnime" 
 				>						
 							<VBox class="vBoxAnime" >
-								<Label text="{animes>nome}" class = "nomeAnime" />
+								<Label text="{animes>nome}" class = "nomeAnime"/>
 									<Label text="{
 										path: 'animes>dataLancamento',
 										type: 'sap.ca.ui.model.type.Date',

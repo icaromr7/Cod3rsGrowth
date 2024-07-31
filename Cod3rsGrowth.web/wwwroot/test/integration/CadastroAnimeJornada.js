@@ -32,7 +32,6 @@ sap.ui.define([
 
 		// Assertions
 		Then.onPaginaCadastroAnime.deveAperecerUmaMessageBoxDe("Erro");
-		// Assertions
 		Then.onPaginaCadastroAnime.deveFecharMessageBoxAoApertarEmOk("Fechar");
 	});
     opaTest("Ao tentar cadastrar um anime válido deve aparecer uma message box de êxito", function(Given, When, Then){
@@ -49,6 +48,9 @@ sap.ui.define([
 		// Assertions
 		Then.onPaginaCadastroAnime.deveAperecerUmaMessageBoxDe("Êxito");
 		Then.onPaginaCadastroAnime.deveFecharMessageBoxAoApertarEmOk("Voltar a lista de anime");
+
+        // Cleanup
+		Then.iTeardownMyApp();
 	});
 }
 );

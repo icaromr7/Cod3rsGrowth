@@ -7,6 +7,7 @@
     xmlns:core="sap.ui.core"
     >
     <Page title="{i18n>TituloPaginaDetalhesAnime}" class="sapUiResponsiveContentPadding"
+        id = "pagina"
         showNavButton="true"
         navButtonPress="aoClicarEmVoltar"
         titleAlignment="Center"
@@ -14,17 +15,23 @@
     <content >
         <layout:VerticalLayout width="100%">
             <Label text="{i18n>labelId}" class= "lblDetalhes"></Label>
-            <Input editable="false" value="{path: 'anime>/id'}" width="3%" textAlign="Center"></Input>
+            <Input id= "inputId" 
+                editable="false" value="{path: 'anime>/id'}" width="3%" textAlign="Center" ></Input>
             <Label text="{i18n>labelNome}" class= "lblDetalhes"></Label>
-            <Input editable="false" value="{path: 'anime>/nome'}" width="30%"></Input>
+            <Input id= "inputNome" 
+                editable="false" value="{path: 'anime>/nome'}" width="30%" ></Input>
             <Label text="{i18n>labelNota}" class= "lblDetalhes" ></Label>
-            <Input editable="false" value="{path: 'anime>/nota'}" width="3%" textAlign="Center"></Input>
+            <Input id= "inputNota" 
+                editable="false" value="{path: 'anime>/nota'}" width="3%" textAlign="Center" ></Input>
             <Label text="{i18n>labelDataLancamento}" class= "lblDetalhes"></Label>
-            <Input editable="false" value="{path: 'anime>/dataLancamento', type: 'sap.ca.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/YYYY'}}" width="10%" textAlign="Center"></Input>
+            <Input id= "inputDataLancamento" 
+                editable="false" value="{path: 'anime>/dataLancamento', type: 'sap.ca.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/YYYY'}}" width="10%" textAlign="Center"></Input>
             <Label text="{i18n>labelStatusExibicao}" class= "lblDetalhes"></Label>
-            <Input editable="false" value="{path: 'anime>/statusDeExibicao', formatter: '.formatter.enum'}" width="10%" textAlign="Center"></Input>
+            <Input id= "inputStatusExibicao" 
+                editable="false" value="{path: 'anime>/statusDeExibicao', formatter: '.formatter.enum'}" width="10%" textAlign="Center"></Input>
             <Label text="{i18n>labelSinopse}" class= "lblDetalhes"></Label>
-            <TextArea value="{path: 'anime>/sinopse'}" editable="false" width="50%" height="100px"></TextArea>
+            <TextArea id= "inputSinopse" 
+                value="{path: 'anime>/sinopse'}" editable="false" width="50%" height="100px"></TextArea>
             <Label text="{i18n>labelGeneros}" class= "lblDetalhes"></Label>          
             <Panel width="25%">
                 <List

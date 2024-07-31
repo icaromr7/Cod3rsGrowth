@@ -24,7 +24,7 @@ sap.ui.define([
 		},
 
 		_VerificarCampos: function () {
-			var verificacao = true;
+			let verificacao = true;
 			const _nome = this.byId(ID_INPUT_NOME);
 			if (_nome.getValue() == "") {
 				_nome.setValueState(VALUE_STATE_ERROR);
@@ -36,9 +36,9 @@ sap.ui.define([
 		aoClicarEmSalvar: function () {
 			this._exibirEspera(async () => {
 				if (this._VerificarCampos()) {
-                    var _generoNome = this.byId(ID_INPUT_NOME).getValue().split();
-                    var _nome = "";
-                    for (var i =POSICAO_INICIAL_DA_LISTA; i<_generoNome.length; i++){
+                    let _generoNome = this.byId(ID_INPUT_NOME).getValue().split();
+                    let _nome = "";
+                    for (let i =POSICAO_INICIAL_DA_LISTA; i<_generoNome.length; i++){
                         _nome+= _generoNome[i].substring(POSICAO_PRIMEIRA_LETRA,POSICAO_SEGUNDA_LETRA).toUpperCase() + _generoNome[i].substring(POSICAO_SEGUNDA_LETRA).toLowerCase() + " ";
                     }
 					let genero = {
@@ -93,8 +93,8 @@ sap.ui.define([
 			let arrayErrors = Object.keys(detalhesDoErro);
 			arrayErrors = arrayErrors.map(x => detalhesDoErro[x]);
 			detalhesDoErro = '\n';
-			for (var i = POSICAO_INICIAL_DA_LISTA; i < arrayErrors.length; i++) {
-				for (var j = POSICAO_INICIAL_DA_LISTA; j < arrayErrors[i].length; j++)
+			for (let i = POSICAO_INICIAL_DA_LISTA; i < arrayErrors.length; i++) {
+				for (let j = POSICAO_INICIAL_DA_LISTA; j < arrayErrors[i].length; j++)
 					detalhesDoErro += arrayErrors[i][j] + '\n';
 			};
 			const mensagemErro = `
