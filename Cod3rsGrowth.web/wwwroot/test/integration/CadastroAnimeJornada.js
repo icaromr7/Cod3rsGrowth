@@ -24,10 +24,10 @@ sap.ui.define([
         When.onPaginaCadastroAnime.aoDigitarSinopse("Teste");
         When.onPaginaCadastroAnime.aoDigitarNota(2);
         When.onPaginaCadastroAnime.aoClicarNaLista();
-        When.onPaginaCadastroAnime.aoPressionarUmItem();
+        When.onPaginaCadastroAnime.aoPressionarUmItem("Aventura");
         When.onPaginaCadastroAnime.aoSelecionarData("20/07/2024");
         When.onPaginaCadastroAnime.aoClicarNoSelectStatus();
-        When.onPaginaCadastroAnime.aoSelecionarStatus();
+        When.onPaginaCadastroAnime.aoSelecionarStatus("Previsto");
         When.onPaginaCadastroAnime.aoClicarEmSalvar();
 
 		// Assertions
@@ -40,9 +40,11 @@ sap.ui.define([
         When.onPaginaCadastroAnime.aoDigitarNome("Teste");
         When.onPaginaCadastroAnime.aoDigitarSinopse("Teste");
         When.onPaginaCadastroAnime.aoDigitarNota(2);
+        When.onPaginaCadastroAnime.aoClicarNaLista();
+        When.onPaginaCadastroAnime.aoPressionarUmItem("Drama");
         When.onPaginaCadastroAnime.aoSelecionarData("20/11/2024");
         When.onPaginaCadastroAnime.aoClicarNoSelectStatus();
-        When.onPaginaCadastroAnime.aoSelecionarStatus();
+        When.onPaginaCadastroAnime.aoSelecionarStatus("Previsto");
         When.onPaginaCadastroAnime.aoClicarEmSalvar();
 
 		// Assertions

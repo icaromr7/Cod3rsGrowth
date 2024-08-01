@@ -40,7 +40,7 @@ sap.ui.define([
 
 		//Actions
 		When.onPaginaListaAnime.aoClicarNoFiltroStatus();
-		When.onPaginaListaAnime.aoSelecionarStatus();
+		When.onPaginaListaAnime.aoSelecionarStatus("Concluído");
 
 		//Assertions
 		Then.onPaginaListaAnime.aListaTemDoisAnimes();

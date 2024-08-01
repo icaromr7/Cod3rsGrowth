@@ -52,17 +52,15 @@ sap.ui.define([
                     })
                 }
                 ,
-                aoPressionarUmItem: function () {
-                    return this.waitFor({ 
-                        controlType: "sap.m.CustomListItem",
+                aoPressionarUmItem: function (sNome) {
+                    return this.waitFor({
+                        controlType: "sap.m.Label",
                         viewName: sNomeDaTela,
-                        matchers: 
-                            new PropertyStrictEquals ({
-                                name: "id",
-                                value: "__item2-__component1---cadastroAnime--listaDeGeneros-5"})
-                        ,                        
+                        matchers:  new Properties({
+                            text: sNome
+                        }),
                         actions: new Press(),
-                        errorMessage: "Nenhum item da lista com o nome foi encontrado."
+                        errorMessage: "A lista não contém o gênero "
                     });
                 },
                 aoSelecionarData: function(sDataDigitada){
@@ -84,16 +82,16 @@ sap.ui.define([
                         errorMessage: "inputStatus não foi encontrado"
                     })
                 },
-                aoSelecionarStatus: function(){
+                aoSelecionarStatus: function(sStatus){
                     return this.waitFor({
                         controlType: "sap.ui.core.Item",
                         matchers: 
                             new PropertyStrictEquals ({
-                                name: "id",
-                                value: "__item3-__component1---cadastroAnime--inputStatus-1"})
+                                name: "text",
+                                value: sStatus})
                         ,
                         actions: new Press(),
-                        errorMessage: "status não foi encontrado"
+                        errorMessage: "Status não foi encontrado"
                     })
                 },
                 aoClicarEmSalvar: function(){

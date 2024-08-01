@@ -51,16 +51,16 @@ sap.ui.define([
                                 errorMessage: "selectStatus não foi encontrado"
                             })
                         },
-                        aoSelecionarStatus: function(){
+                        aoSelecionarStatus: function(sStatus){
                             return this.waitFor({
                                 controlType: "sap.ui.core.Item",
                                 matchers: 
                                     new PropertyStrictEquals ({
-                                        name: "id",
-                                        value: "__item0-__component0---lista--selectStatus-2"})
+                                        name: "text",
+                                        value: sStatus})
                                 ,
                                 actions: new Press(),
-                                errorMessage: "selectStatus não foi encontrado"
+                                errorMessage: "Status não foi encontrado"
                             })
                         },
                         aoApertarEmAdicionarAnime: function(){
