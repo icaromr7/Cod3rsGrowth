@@ -44,10 +44,11 @@ sap.ui.define([
 			})
             
         },
-        _modeloLista: function (oModel, oNomeModelo) {
+        _modeloLista: function (oData, oNomeModelo) {
+            const oModel = new JSONModel(oData);
             this.getView().setModel(oModel, oNomeModelo);
         },
-        _get: async function (url, oNomeModelo) {
+        _get: async function (url) {
                 const response = await fetch(url, {
                     method: "GET",
                     headers: {
@@ -56,10 +57,22 @@ sap.ui.define([
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    const oModel = new JSONModel(data);
-                    return this._modeloLista(oModel, oNomeModelo);
+                    return data;
                 }
 
+        },
+        _getPorParametro: async function(url, parametro){
+            let urlFinal = url + parametro;
+            const response = await fetch(urlFinal, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            if (response.ok) {
+                const data = await response.json();
+                return data;
+            }
         }
 
     });

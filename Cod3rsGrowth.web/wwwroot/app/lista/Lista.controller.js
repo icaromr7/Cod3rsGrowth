@@ -28,10 +28,14 @@ sap.ui.define([
 	return ControleBase.extend("ui5.anime.app.lista.Lista", {
 		formatter: formatter,
 
-		onInit: function () {
+		onInit: async function () {
 			const aRota = this._getRota();
-			aRota.getRoute(NOME_DA_ROTA).attachPatternMatched(this._preencherLista, this);
-			this._getStatus(CAMINHO_PARA_API_STATUS);
+			aRota.getRoute(NOME_DA_ROTA).attachPatternMatched(this._aoCoincidirRota, this);
+			this._modeloLista(await this._getStatus(CAMINHO_PARA_API_STATUS), NOME_DO_MODELO_DA_LISTA_DE_STATUS);
+		},
+
+		_aoCoincidirRota: function(){
+			this._preencherLista();
 		},
 
 		_filtrarPorRota: function () {
@@ -45,45 +49,28 @@ sap.ui.define([
 
 		},
 
-		aoFiltrarAnime: function (oEvent) {
-			this._exibirEspera(async () => {
+		aoFiltrarAnime: async function (oEvent) {
+			this._exibirEspera(() => {
 				let sNome = oEvent.getSource().getValue();
 				_filtroNome = sNome;
 				this._adicionarParametrosNaRota();
 			});
 		},
 
-		aoSelecionarData: function (oEvent) {
-			this._exibirEspera(async () => {
+		aoSelecionarData: async function (oEvent) {
+			this._exibirEspera(() => {
 				_filtroData = oEvent.getParameter(PARAMETRO_VALUE);
 				this._adicionarParametrosNaRota();
 			});
 		},
 
-		aoSelecionarStatus: function (oEvent) {
-			this._exibirEspera(async () => {
+		aoSelecionarStatus: async function (oEvent) {
+			this._exibirEspera(() => {
 				_filtroStatus = oEvent.getParameter(PARAMETRO_SELECTED_ITEM).getKey();
 				this._adicionarParametrosNaRota();
 			});
 
 		},
-
-		_get: async function (url) {
-				let urlFinal = url + _filtro;
-
-				const response = await fetch(urlFinal, {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json"
-					}
-				});
-				if (response.ok) {
-					const data = await response.json();
-					const oModel = new JSONModel(data);
-					return this._modeloLista(oModel, NOME_DO_MODELO_DA_LISTA_DE_ANIME);
-				}
-		},
-
 		_getStatus: async function (url) {
 				const response = await fetch(url, {
 					method: "GET",
@@ -99,14 +86,13 @@ sap.ui.define([
 						descricao: "Todos"
 					}
 					data.push(todos);
-					const oModel = new JSONModel(data);
-					return this._modeloLista(oModel, NOME_DO_MODELO_DA_LISTA_DE_STATUS);
+					return data;
 				}
 		},
 
 		_preencherLista: async function () {
 			this._filtrarPorRota();
-			this._get(CAMINHO_PARA_API);
+			this._modeloLista(await this._getPorParametro(CAMINHO_PARA_API,_filtro),NOME_DO_MODELO_DA_LISTA_DE_ANIME);
 		},
 
 		_adicionarParametrosNaRota: function () {

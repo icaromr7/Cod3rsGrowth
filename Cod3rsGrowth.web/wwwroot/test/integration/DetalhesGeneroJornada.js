@@ -7,18 +7,11 @@ sap.ui.define([
 
 	QUnit.module("Detalhes gênero");
 
-    opaTest("Ao clicar no gênero deve navegar para tela de detalhes", function (Given, When, Then) {
-		// Arrangements
-		Given.iStartMyApp();
-
-        //Actions
-		When.onPaginaListaAnime.aoApertarEmListaDeGeneros();
-        When.onPaginaListaGeneros.aoClicarEmUmGenero("Aventura");
-
-		// Assertions
-		Then.onPaginaDetalhesGenero.deveNavegarParaTelaDeDetalhes();
-	});
     opaTest("Na tela deve conter as informações corretas do item clicado", function (Given, When, Then) {
+		// Arrangements
+		Given.iStartMyApp({
+			hash: "genero/33"
+		});
 
 		// Assertions
         Then.onPaginaDetalhesGenero.deveTerOIdDoItemSelecionado("33");

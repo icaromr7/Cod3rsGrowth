@@ -31,11 +31,12 @@ sap.ui.define([
 	const OPCAO_VOLTAR_PARA_LISTA_DE_ANIME = "Voltar a lista de anime";
 
 	return ControleBase.extend("ui5.anime.app.cadastroAnime.CadastroAnime", {
-		onInit: function () {
+		onInit: async function () {
 			const oRota = this.getOwnerComponent().getRouter();
 			oRota.getRoute(ROTA_ADICIONAR_ANIME);
-			this._get(CAMINHO_PARA_API_GENEROS, NOME_DO_MODELO_LISTA_DE_GENEROS);
-			this._get(CAMINHO_PARA_API_STATUS, NOME_DO_MODELO_DA_LISTA_DE_STATUS);
+			this._modeloLista(await this._get(CAMINHO_PARA_API_GENEROS), NOME_DO_MODELO_LISTA_DE_GENEROS);
+			this._modeloLista(await this._get(CAMINHO_PARA_API_STATUS),NOME_DO_MODELO_DA_LISTA_DE_STATUS);
+			
 		},
 
 		_VerificarCampos: function () {

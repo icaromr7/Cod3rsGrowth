@@ -16,44 +16,19 @@ sap.ui.define([
 
         onInit: function () {
 			let oRouter = this._getRota();
-			oRouter.getRoute(NOME_DA_ROTA).attachMatched(this._PegarDadosPorId, this);
+			oRouter.getRoute(NOME_DA_ROTA).attachMatched(this._aoCoincidirRota, this);
 		},
-        _PegarDadosPorId : function () {
-            this._exibirEspera(async () => {               
-                let obterParametro = this._getRota().getHashChanger().getHash().split("/");
-                this._getAnime(CAMINHO_PARA_API,obterParametro[POSICAO_ID_DO_ANIME]);
-                this._getGeneros(CAMINHO_PARA_API_GENEROS_DO_ANIME,obterParametro[POSICAO_ID_DO_ANIME]);
-			})
-			
-		},
-        _getAnime: async function(url, idAnime){
-            let urlFinal = url + idAnime;
-            const response = await fetch(urlFinal, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
-            if (response.ok) {
-                const data = await response.json();
-                const oModel = new JSONModel(data);
-                return this._modeloLista(oModel, NOME_DO_MODELO_DO_DETALHES_DO_ANIME);
-            }
+        _aoCoincidirRota: function(){
+            this._exibirEspera(async () => {
+                this._obterEDefinirDados();
+            })
         },
-        _getGeneros: async function(url, idAnime){
-            let urlFinal = url + idAnime;
-            const response = await fetch(urlFinal, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
-            if (response.ok) {
-                const data = await response.json();
-                const oModel = new JSONModel(data);
-                return this._modeloLista(oModel, NOME_DO_MODELO_GENEROS_DO_ANIME);
-            }
-        }
+        
+        _obterEDefinirDados : async function () {
+            let obterParametro = this._getRota().getHashChanger().getHash().split("/");
+            this._modeloLista(await this._getPorParametro(CAMINHO_PARA_API,obterParametro[POSICAO_ID_DO_ANIME]),NOME_DO_MODELO_DO_DETALHES_DO_ANIME);
+            this._modeloLista(await this._getPorParametro(CAMINHO_PARA_API_GENEROS_DO_ANIME,obterParametro[POSICAO_ID_DO_ANIME]),NOME_DO_MODELO_GENEROS_DO_ANIME);
+		},
 
 	});
 

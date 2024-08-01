@@ -14,29 +14,19 @@ sap.ui.define([
 
         onInit: function () {
 			let oRouter = this._getRota();
-			oRouter.getRoute(NOME_DA_ROTA).attachMatched(this._PegarDadosPorId, this);
+			oRouter.getRoute(NOME_DA_ROTA).attachMatched(this._aoCoincidirRota, this);
 		},
-        _PegarDadosPorId : function () {
+        _aoCoincidirRota: function(){
             this._exibirEspera(async () => {               
-                var obterParametro = this._getRota().getHashChanger().getHash().split("/");
-                this._getGenero(CAMINHO_PARA_API,obterParametro[POSICAO_ID_DO_GENERO]);
+                this._obterEDefinirDados();
 			})
+
+        },
+        _obterEDefinirDados : async function () {
+            var obterParametro = this._getRota().getHashChanger().getHash().split("/");
+            this._modeloLista(await this._getPorParametro(CAMINHO_PARA_API,obterParametro[POSICAO_ID_DO_GENERO]),NOME_DO_MODELO_DO_DETALHES_DO_GENERO);
 			
 		},
-        _getGenero: async function(url, idGenero){
-            let urlFinal = url + idGenero;
-            const response = await fetch(urlFinal, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
-            if (response.ok) {
-                const data = await response.json();
-                const oModel = new JSONModel(data);
-                return this._modeloLista(oModel, NOME_DO_MODELO_DO_DETALHES_DO_GENERO);
-            }
-        }
 	});
 
 });

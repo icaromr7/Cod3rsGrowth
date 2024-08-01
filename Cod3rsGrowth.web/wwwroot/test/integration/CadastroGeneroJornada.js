@@ -8,18 +8,12 @@ sap.ui.define([
 
 	QUnit.module("Cadastro gênero");
 
-    opaTest("Ao clicar em adicionar gênero deve navegar para tela de cadastro", function (Given, When, Then) {
-		// Arrangements
-		Given.iStartMyApp();
-
-        //Actions
-		When.onPaginaListaAnime.aoApertarEmListaDeGeneros();
-        When.onPaginaListaGeneros.aoApertarEmAdicionarGênero();
-
-		// Assertions
-		Then.onPaginaCadastroGenero.deveNavegarParaTelaDeCadastro();
-	});
+    
     opaTest("Ao tentar cadastrar um gêneroinvalido deve aparecer uma message box de erro", function(Given, When, Then){
+		// Arrangements
+		Given.iStartMyApp({
+			hash: "genero/cadastro"
+		});
 
 		//Actions
         When.onPaginaCadastroGenero.aoDigitarNome("Drama");

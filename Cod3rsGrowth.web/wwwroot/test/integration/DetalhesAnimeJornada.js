@@ -7,17 +7,11 @@ sap.ui.define([
 
 	QUnit.module("Detalhes anime");
 
-    opaTest("Ao clicar no anime deve navegar para tela de detalhes", function (Given, When, Then) {
-		// Arrangements
-		Given.iStartMyApp();
-
-        //Actions
-        When.onPaginaListaAnime.aoClicarEmUmAnime("One Piece");
-
-		// Assertions
-		Then.onPaginaDetalhesoAnime.deveNavegarParaTelaDeDetalhes();
-	});
     opaTest("Na tela deve conter as informações corretas do item clicado", function (Given, When, Then) {
+        // Arrangements
+        Given.iStartMyApp({
+            hash: "anime/7"
+        });
 
 		// Assertions
         Then.onPaginaDetalhesoAnime.deveTerOIdDoItemSelecionado("7");

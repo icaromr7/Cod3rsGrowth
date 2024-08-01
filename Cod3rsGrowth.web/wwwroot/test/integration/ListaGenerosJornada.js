@@ -7,18 +7,11 @@ sap.ui.define([
 
 	QUnit.module("Lista de gêneros");
 
-    opaTest("Ao clicar em lista de gêneros deve navegar para tela de lista de gêneros", function (Given, When, Then) {
-		// Arrangements
-		Given.iStartMyApp();
-
-        //Actions
-        When.onPaginaListaAnime.aoApertarEmListaDeGeneros();
-
-		// Assertions
-		Then.onPaginaListaGeneros.deveNavegarParaTelaDeListaDeGeneros();
-	})
-	
 	opaTest("Deve ser capaz de mostrar todos os itens",  function(Given, When, Then) {
+		//Arrangements
+        Given.iStartMyApp({
+            hash: "generos"
+        });
 		//Actions
 		When.onPaginaListaGeneros.aoApertarEmMais();
 
@@ -32,6 +25,32 @@ sap.ui.define([
 
 		// Assertions
 		Then.onPaginaListaGeneros.aListaTemUmGenero();
+
+	});
+
+	opaTest("Ao clicar em adicionar gênero deve navegar para tela de cadastro", function (Given, When, Then) {
+        
+		//Actions
+        When.onPaginaListaGeneros.aoApertarEmAdicionarGênero();
+
+		// Assertions
+		Then.onPaginaCadastroGenero.deveNavegarParaTelaDeCadastro();
+		
+		// Cleanup
+		Then.iTeardownMyApp();
+	});
+
+	opaTest("Ao clicar no gênero deve navegar para tela de detalhes", function (Given, When, Then) {
+		// Arrangements
+		Given.iStartMyApp({
+            hash: "generos"
+        });
+
+        //Actions
+        When.onPaginaListaGeneros.aoClicarEmUmGenero("Aventura");
+
+		// Assertions
+		Then.onPaginaDetalhesGenero.deveNavegarParaTelaDeDetalhes();
 
 		// Cleanup
 		Then.iTeardownMyApp();

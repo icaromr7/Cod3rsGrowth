@@ -12,6 +12,7 @@ namespace Cod3rsGrowth.web.Controllers
         private GeneroServico _generoServico;
         private AnimeGeneroServico _animeGeneroServico;
 
+
         public GeneroController(GeneroServico generoServico, AnimeGeneroServico animeGeneroServico) { 
             _generoServico = generoServico;
             _animeGeneroServico = animeGeneroServico;

@@ -21,7 +21,11 @@ sap.ui.define([
 
 		onInit: function () {
 			const aRota = this._getRota();
-			aRota.getRoute(NOME_DA_ROTA).attachPatternMatched(this._preencherLista, this);
+			aRota.getRoute(NOME_DA_ROTA).attachPatternMatched(this._aoCoincidirRota, this);
+		},
+
+		_aoCoincidirRota: function(){
+			this._preencherLista();
 		},
 
 		_filtrarPorRota: function () {
@@ -50,14 +54,13 @@ sap.ui.define([
 				});
 				if (response.ok) {
 					const data = await response.json();
-					const oModel = new JSONModel(data);
-					return this._modeloLista(oModel, NOME_DO_MODELO_DA_LISTA_DE_GENEROS);
+					return data
 				}
 		},
 
 		_preencherLista: async function () {
 			this._filtrarPorRota();
-			this._get(CAMINHO_PARA_API);
+			this._modeloLista(await this._get(CAMINHO_PARA_API),NOME_DO_MODELO_DA_LISTA_DE_GENEROS);
 		},
 
 		_adicionarParametrosNaRota: function () {

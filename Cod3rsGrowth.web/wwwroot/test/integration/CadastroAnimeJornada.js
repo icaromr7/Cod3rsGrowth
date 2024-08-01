@@ -7,17 +7,11 @@ sap.ui.define([
 
 	QUnit.module("Cadastro anime");
 
-    opaTest("Ao clicar em cadastrar anime deve navegar para tela de cadastro", function (Given, When, Then) {
-		// Arrangements
-		Given.iStartMyApp();
-
-        //Actions
-        When.onPaginaListaAnime.aoApertarEmAdicionarAnime();
-
-		// Assertions
-		Then.onPaginaCadastroAnime.deveNavegarParaTelaDeCadastro();
-	});
     opaTest("Ao tentar cadastrar um anime invalido deve aparecer uma message box de erro", function(Given, When, Then){
+        //Arrangements
+        Given.iStartMyApp({
+            hash: "cadastro"
+        });
 
 		//Actions
         When.onPaginaCadastroAnime.aoDigitarNome("Teste");
