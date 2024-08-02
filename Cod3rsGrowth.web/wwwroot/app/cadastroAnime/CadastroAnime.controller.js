@@ -1,7 +1,8 @@
 sap.ui.define([
+	"ui5/anime/app/common/HttpRequest",
 	"ui5/anime/app/common/ControleBase",
 	'sap/m/MessageBox',
-], function (ControleBase, MessageBox) {
+], function ( HttpRequest,ControleBase, MessageBox) {
 
 	const ROTA_PARA_LISTA = "lista";
 	const ROTA_ADICIONAR_ANIME = "cadastroAnime";
@@ -29,16 +30,18 @@ sap.ui.define([
 	const MESSAGEM_SUCESSO_CADASTRO = "Sucesso ao cadastrar o anime!";
 	const CAMINHO_PARA_API_ADICIONAR_ANIME = "/api/anime/adicionar";
 	const OPCAO_VOLTAR_PARA_LISTA_DE_ANIME = "Voltar a lista de anime";
+	const POST = 'POST';
 
 	return ControleBase.extend("ui5.anime.app.cadastroAnime.CadastroAnime", {
+
 		onInit: async function () {
 			const oRota = this.getOwnerComponent().getRouter();
 			oRota.getRoute(ROTA_ADICIONAR_ANIME);
-			this._modeloLista(await this._get(CAMINHO_PARA_API_GENEROS), NOME_DO_MODELO_LISTA_DE_GENEROS);
-			this._modeloLista(await this._get(CAMINHO_PARA_API_STATUS),NOME_DO_MODELO_DA_LISTA_DE_STATUS);
+			this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API_GENEROS), NOME_DO_MODELO_LISTA_DE_GENEROS);
+			this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API_STATUS),NOME_DO_MODELO_DA_LISTA_DE_STATUS);
 			
 		},
-
+	
 		_VerificarCampos: function () {
 			var verificacao = true;
 			const _nome = this.byId(ID_INPUT_NOME);
@@ -73,7 +76,8 @@ sap.ui.define([
 						statusDeExibicao: parseInt(this.byId(ID_INPUT_STATUS).getSelectedItem().getKey()),
 						idGeneros: this._preencherAListaDeGenerosSelecionados()
 					}
-					this._postAnime(CAMINHO_PARA_API_ADICIONAR_ANIME, anime);
+					await HttpRequest._request(CAMINHO_PARA_API_ADICIONAR_ANIME, POST, anime);
+					this._sucessoNoPost();
 				}
 			})
 			
@@ -84,24 +88,6 @@ sap.ui.define([
 				oEvent.getSource().setValueState(VALUE_STATE_NONE);
 			})
 			
-		},
-
-		_postAnime: async function (url, anime) {
-				const response = await fetch(url, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify(anime)
-				});
-				const data = await response.json();
-
-				if (response.ok) {
-					this._sucessoNoPost();
-				}
-				else {
-					this._falhaNaRequicaoPost(data);
-				}
 		},
 
 		_sucessoNoPost: function () {
@@ -116,25 +102,7 @@ sap.ui.define([
 				}
 			});
 		},
-		_falhaNaRequicaoPost: function (data) {
-			let detalhesDoErro = data.errors;
-			let arrayErrors = Object.keys(detalhesDoErro);
-			arrayErrors = arrayErrors.map(x => detalhesDoErro[x]);
-			detalhesDoErro = '\n';
-			for (var i = POSICAO_INICIAL_DA_LISTA; i < arrayErrors.length; i++) {
-				for (var j = POSICAO_INICIAL_DA_LISTA; j < arrayErrors[i].length; j++)
-					detalhesDoErro += arrayErrors[i][j] + '\n';
-			};
-			const mensagemErro = `
-				Título: ${data.title}
-				Status: ${data.status}
-				Detalhes: ${data.detail}
-				Erros: ${detalhesDoErro}
-			`;
-
-			MessageBox.error(`${FALHA_NA_REQUISIÇÃO}\n${mensagemErro}`);
-		},
-
+		
 		_limparCampos: function () {
 			this.byId(ID_INPUT_NOME).setValue(undefined);
 			this.byId(ID_INPUT_SINOPSE).setValue(undefined);

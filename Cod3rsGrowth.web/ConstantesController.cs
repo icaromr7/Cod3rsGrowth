@@ -10,5 +10,6 @@
         public const string ROTA_GENERO = "api/genero";
         public const string FILTRO_NOME_GENERO = "{nome}";
         public const string ANIME_GENERO = "animeGenero/{id}";
+        public const string STATUS = "status";
     }
 }

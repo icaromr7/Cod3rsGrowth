@@ -26,7 +26,6 @@ namespace Cod3rsGrowth.web.Controllers
         [HttpPost(ConstantesController.ADICIONAR)]
         public IActionResult Adicionar([FromBody] Genero genero)
         {
-            if (genero == null) { return BadRequest(); }
             int idGenero = _generoServico.Cadastrar(genero);
             genero.Id = idGenero;
             return Created($"genero/{genero.Id}", genero);

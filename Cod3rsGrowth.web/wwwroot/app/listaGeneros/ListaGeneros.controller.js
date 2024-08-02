@@ -2,14 +2,15 @@ sap.ui.define([
 	"ui5/anime/app/common/ControleBase",
 	'sap/ui/model/json/JSONModel',
 	'../model/formatter',
-	'sap/m/MessageBox'
-], function (ControleBase, JSONModel, formatter, MessageBox) {
+	'sap/m/MessageBox',
+	"ui5/anime/app/common/HttpRequest"
+], function (ControleBase, JSONModel, formatter, MessageBox, HttpRequest) {
 	"use strict";
 	let _filtroNome = "";
 	let _filtro = {};
 
 	const PARAMETRO_FILTRO_POR_NOME = "generos?nome";
-	const CAMINHO_PARA_API = "/api/genero?";
+	const CAMINHO_PARA_API = "/api/genero?nome=";
 	const NOME_DA_ROTA = "listaGenero";
 	const ROTA_ADICIONAR_GENERO = "cadastroGenero"
 	const ID_CAMPO_DE_BUSCA = "CampoDeBusca";
@@ -44,23 +45,9 @@ sap.ui.define([
 			});
 		},
 
-		_get: async function (url) {
-				let urlFinal = url + "nome=" + _filtroNome;
-				const response = await fetch(urlFinal, {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json"
-					}
-				});
-				if (response.ok) {
-					const data = await response.json();
-					return data
-				}
-		},
-
 		_preencherLista: async function () {
 			this._filtrarPorRota();
-			this._modeloLista(await this._get(CAMINHO_PARA_API),NOME_DO_MODELO_DA_LISTA_DE_GENEROS);
+			this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API+_filtroNome),NOME_DO_MODELO_DA_LISTA_DE_GENEROS);
 		},
 
 		_adicionarParametrosNaRota: function () {
@@ -71,10 +58,12 @@ sap.ui.define([
 			}
 			aRota.navTo(NOME_DA_ROTA, { "?query": query });
 		},
+
 		aoClicarAdicionarGenero: function(){
 			const aRota = this.getOwnerComponent().getRouter();
 			aRota.navTo(ROTA_ADICIONAR_GENERO);
 		},
+		
 		aoClicarNoGenero: function(oEvent){
 			this._exibirEspera(async () => {
 				let _idGenero = oEvent.getSource().getBindingContext(NOME_DO_MODELO_DA_LISTA_DE_GENEROS).getProperty("id");

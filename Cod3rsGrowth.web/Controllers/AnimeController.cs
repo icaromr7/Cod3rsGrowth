@@ -61,7 +61,7 @@ namespace Cod3rsGrowth.web.Controllers
             _animeServico.Deletar(id);
             return Ok();          
         }
-        [HttpGet("status")]
+        [HttpGet(ConstantesController.STATUS)]
         public IActionResult GetStatus()
         {
             var status = _animeServico.getDescricaoEnum();

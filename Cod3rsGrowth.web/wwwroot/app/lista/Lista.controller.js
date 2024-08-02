@@ -2,8 +2,9 @@ sap.ui.define([
 	"ui5/anime/app/common/ControleBase",
 	'sap/ui/model/json/JSONModel',
 	'../model/formatter',
-	'sap/m/MessageBox'
-], function (ControleBase, JSONModel, formatter, MessageBox) {
+	'sap/m/MessageBox',
+	"ui5/anime/app/common/HttpRequest"
+], function (ControleBase, JSONModel, formatter, MessageBox, HttpRequest) {
 	"use strict";
 	let _filtroNome = "";
 	let _filtroData = null;
@@ -31,7 +32,7 @@ sap.ui.define([
 		onInit: async function () {
 			const aRota = this._getRota();
 			aRota.getRoute(NOME_DA_ROTA).attachPatternMatched(this._aoCoincidirRota, this);
-			this._modeloLista(await this._getStatus(CAMINHO_PARA_API_STATUS), NOME_DO_MODELO_DA_LISTA_DE_STATUS);
+			this._modeloLista(await this._obterEPreencherSelectStatus(CAMINHO_PARA_API_STATUS), NOME_DO_MODELO_DA_LISTA_DE_STATUS);
 		},
 
 		_aoCoincidirRota: function(){
@@ -71,28 +72,20 @@ sap.ui.define([
 			});
 
 		},
-		_getStatus: async function (url) {
-				const response = await fetch(url, {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json"
-					}
-				});
-				if (response.ok) {
-					const data = await response.json();
-					var todos =
-					{
-						id: 0,
-						descricao: "Todos"
-					}
-					data.push(todos);
-					return data;
+		_obterEPreencherSelectStatus: async function (url) {
+				let data = await HttpRequest._request(CAMINHO_PARA_API_STATUS);
+				var todos =
+				{
+					id: 0,
+					descricao: "Todos"
 				}
+				data.push(todos);
+				return data;
 		},
 
 		_preencherLista: async function () {
 			this._filtrarPorRota();
-			this._modeloLista(await this._getPorParametro(CAMINHO_PARA_API,_filtro),NOME_DO_MODELO_DA_LISTA_DE_ANIME);
+			this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API+_filtro),NOME_DO_MODELO_DA_LISTA_DE_ANIME);
 		},
 
 		_adicionarParametrosNaRota: function () {

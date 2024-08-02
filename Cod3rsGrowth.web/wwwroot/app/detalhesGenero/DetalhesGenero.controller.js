@@ -1,8 +1,9 @@
 sap.ui.define([
 	"ui5/anime/app/common/ControleBase",
 	'sap/ui/model/json/JSONModel',
-	'../model/formatter'
-], function (ControleBase, JSONModel, formatter) {
+	'../model/formatter',
+    "ui5/anime/app/common/HttpRequest"
+], function (ControleBase, JSONModel, formatter, HttpRequest) {
 	"use strict";
     const NOME_DO_MODELO_DO_DETALHES_DO_GENERO = "genero";
     const CAMINHO_PARA_API = "/api/genero/";
@@ -24,7 +25,7 @@ sap.ui.define([
         },
         _obterEDefinirDados : async function () {
             var obterParametro = this._getRota().getHashChanger().getHash().split("/");
-            this._modeloLista(await this._getPorParametro(CAMINHO_PARA_API,obterParametro[POSICAO_ID_DO_GENERO]),NOME_DO_MODELO_DO_DETALHES_DO_GENERO);
+            this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API + obterParametro[POSICAO_ID_DO_GENERO]),NOME_DO_MODELO_DO_DETALHES_DO_GENERO);
 			
 		},
 	});

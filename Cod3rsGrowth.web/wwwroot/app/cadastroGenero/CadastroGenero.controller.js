@@ -1,7 +1,8 @@
 sap.ui.define([
 	"ui5/anime/app/common/ControleBase",
 	'sap/m/MessageBox',
-], function (ControleBase, MessageBox) {
+	"ui5/anime/app/common/HttpRequest"
+], function (ControleBase, MessageBox, HttpRequest) {
 
 	const ROTA_PARA_LISTA_GENERO = "listaGenero";
 	const ROTA_ADICIONAR_GENERO = "cadastroGenero";
@@ -16,6 +17,7 @@ sap.ui.define([
 	const OPCAO_VOLTAR_PARA_LISTA_DE_GENEROS = "Voltar a lista de gêneros";
     const POSICAO_PRIMEIRA_LETRA = 0;
     const POSICAO_SEGUNDA_LETRA = 1;
+	const POST = 'POST';
 	return ControleBase.extend("ui5.anime.app.cadastroGenero.CadastroGenero", {
 
 		onInit: async function () {
@@ -44,7 +46,8 @@ sap.ui.define([
 					let genero = {
 						nome: _nome.trim()
 					}
-					this._postGenero(CAMINHO_PARA_API_ADICIONAR_GENERO, genero);
+					await HttpRequest._request(CAMINHO_PARA_API_ADICIONAR_GENERO, POST, genero);
+					this._sucessoNoPost();
 				}
 			})
 			
@@ -55,24 +58,6 @@ sap.ui.define([
 				oEvent.getSource().setValueState(VALUE_STATE_NONE);
 			})
 			
-		},
-
-		_postGenero: async function (url, genero) {
-				const response = await fetch(url, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify(genero)
-				});
-				const data = await response.json();
-
-				if (response.ok) {
-					this._sucessoNoPost();
-				}
-				else {
-					this._falhaNaRequicaoPost(data);
-				}
 		},
 
 		_sucessoNoPost: function () {
@@ -86,25 +71,6 @@ sap.ui.define([
 					}
 				}
 			});
-		},
-
-		_falhaNaRequicaoPost: function (data) {
-			let detalhesDoErro = data.errors;
-			let arrayErrors = Object.keys(detalhesDoErro);
-			arrayErrors = arrayErrors.map(x => detalhesDoErro[x]);
-			detalhesDoErro = '\n';
-			for (let i = POSICAO_INICIAL_DA_LISTA; i < arrayErrors.length; i++) {
-				for (let j = POSICAO_INICIAL_DA_LISTA; j < arrayErrors[i].length; j++)
-					detalhesDoErro += arrayErrors[i][j] + '\n';
-			};
-			const mensagemErro = `
-				Título: ${data.title}
-				Status: ${data.status}
-				Detalhes: ${data.detail}
-				Erros: ${detalhesDoErro}
-			`;
-
-			MessageBox.error(`${FALHA_NA_REQUISIÇÃO}\n${mensagemErro}`);
 		},
 
 		_limparCampos: function () {
