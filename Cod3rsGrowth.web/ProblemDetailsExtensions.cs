@@ -35,7 +35,7 @@ namespace Cod3rsGrowth.web
                             logger.LogError($"Unexpected error: {exceptionHandlerFeature.Error}");
                             problemDetails.Title = exception.Message;
                             problemDetails.Status = StatusCodes.Status500InternalServerError;
-                            problemDetails.Detail = exception.HelpLink;
+                            problemDetails.Detail = exception.StackTrace;
                         }
                         context.Response.StatusCode = problemDetails.Status.Value;
                         context.Response.ContentType = "application/problem+json";
@@ -56,7 +56,7 @@ namespace Cod3rsGrowth.web
                         Title = "Um ou mais erros foram encontrados.",
                         Instance = context.HttpContext.Request.Path,
                         Status = StatusCodes.Status400BadRequest,
-                        Detail = "Consulte a propriedade erros para obter detalhes adicionais"
+                        Detail = "Consulte os erros para obter mais detalhes"
                     };
                     return new BadRequestObjectResult(problemDetails)
                     {

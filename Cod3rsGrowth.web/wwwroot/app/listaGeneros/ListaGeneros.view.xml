@@ -1,0 +1,37 @@
+<mvc:View xmlns:cards="sap.f.cards"
+	controllerName="ui5.anime.app.listaGeneros.ListaGeneros"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	>
+	<Page 
+		id = "pagina"
+		title="{i18n>listaDeGeneroTitulo}" 
+		class="sapUiResponsiveContentPadding"
+		showNavButton="true"
+        navButtonPress="aoClicarEmVoltar" 
+		titleAlignment="Center">	
+		<content>
+				<List items = "{path: 'generos>/'}" class= "listaDeGeneros" id = "listaDeGeneros" growing="true" growingThreshold="10">
+					<headerToolbar >
+						<Toolbar class= "toolbar">
+							<ToolbarSpacer/>
+							<Button text="{i18n>btnAdicionarGenero}" press="aoClicarAdicionarGenero" id= "btnAdicionar" class = "sapMBtnInner"></Button>
+							<SearchField
+								id = "CampoDeBusca" 
+								width="30%" 
+								liveChange="aoFiltrarGenero"
+								placeholder="{i18n>placeholderPesquisa}"
+							/>
+						</Toolbar>
+					</headerToolbar>
+					<CustomListItem id = "listaDosGeneros" class = "ListaCustomizada" type="Navigation" press="aoClicarNoGenero" >						
+							<VBox class="vBoxGenero" >
+								<Label text="{generos>nome}" class = "nomeGenero" />
+			                </VBox>						
+					</CustomListItem>
+				</List>
+		</content>
+	</Page>
+</mvc:View>

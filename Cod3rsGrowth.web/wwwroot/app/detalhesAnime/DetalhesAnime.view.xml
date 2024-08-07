@@ -1,0 +1,50 @@
+<mvc:View xmlns:tnt="sap.tnt" xmlns:smartmultiedit="sap.ui.comp.smartmultiedit" xmlns:macros="sap.fe.macros" 
+    xmlns:layout="sap.ui.layout" 
+    controllerName="ui5.anime.app.detalhesAnime.DetalhesAnime"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    >
+    <Page title="{i18n>TituloPaginaDetalhesAnime}" class="sapUiResponsiveContentPadding"
+        id = "pagina"
+        showNavButton="true"
+        navButtonPress="aoClicarEmVoltar"
+        titleAlignment="Center"
+        
+    >
+    <content >
+        <layout:VerticalLayout width="100%">
+            <Label text="{i18n>labelId}" class= "lblDetalhes"></Label>
+            <Input id= "inputId" 
+                editable="false" value="{path: 'anime>/id'}" width="3%" textAlign="Center" ></Input>
+            <Label text="{i18n>labelNome}" class= "lblDetalhes"></Label>
+            <Input id= "inputNome" 
+                editable="false" value="{path: 'anime>/nome'}" width="30%" ></Input>
+            <Label text="{i18n>labelNota}" class= "lblDetalhes" ></Label>
+            <Input id= "inputNota" 
+                editable="false" value="{path: 'anime>/nota'}" width="3%" textAlign="Center" ></Input>
+            <Label text="{i18n>labelDataLancamento}" class= "lblDetalhes"></Label>
+            <Input id= "inputDataLancamento" 
+                editable="false" value="{path: 'anime>/dataLancamento', type: 'sap.ca.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/YYYY'}}" width="10%" textAlign="Center"></Input>
+            <Label text="{i18n>labelStatusExibicao}" class= "lblDetalhes"></Label>
+            <Input id= "inputStatusExibicao" 
+                editable="false" value="{path: 'anime>/statusDeExibicao', formatter: '.formatter.enum'}" width="10%" textAlign="Center"></Input>
+            <Label text="{i18n>labelSinopse}" class= "lblDetalhes"></Label>
+            <TextArea id= "inputSinopse" 
+                value="{path: 'anime>/sinopse'}" editable="false" width="50%" height="100px"></TextArea>
+            <Label text="{i18n>labelGeneros}" class= "lblDetalhes"></Label>          
+            <Panel width="25%">
+                <List
+                id ="listaDeGeneros"
+                items= "{path: 'generos>/'}"
+                >
+                    <CustomListItem >
+                    <Label text="{path: 'generos>nome'}"></Label>
+                    </CustomListItem> 
+            </List>
+            </Panel>
+        </layout:VerticalLayout>
+    </content>
+    </Page>
+</mvc:View>

@@ -83,6 +83,26 @@
             "pattern": "cadastro",
             "name": "cadastroAnime",
             "target": "cadastroAnime"
+          },
+          {
+            "pattern": "anime/{id}",
+            "name": "detalhesAnime",
+            "target": "detalhesAnime"
+          },
+          {
+            "pattern": "generos:?query:",
+            "name": "listaGenero",
+            "target": "listaGenero"
+          },
+          {
+            "pattern": "genero/cadastro",
+            "name": "cadastroGenero",
+            "target": "cadastroGenero"
+          },
+          {
+            "pattern":"genero/{id}",
+            "name": "detalhesGenero",
+            "target": "detalhesGenero"
           }
         ],
         "targets": {
@@ -103,6 +123,30 @@
             "path": "ui5.anime.app.cadastroAnime",
             "name": "CadastroAnime",
             "level": 2
+          },
+          "detalhesAnime":{
+            "id": "detalhesAnime",
+            "path": "ui5.anime.app.detalhesAnime",
+            "name": "DetalhesAnime",
+            "level": 3
+          },
+          "listaGenero":{
+            "id": "listaGenero",
+            "path":"ui5.anime.app.listaGeneros",
+            "name": "ListaGeneros",
+            "level": 4
+          },
+          "cadastroGenero":{
+            "id": "cadastroGenero",
+            "path":"ui5.anime.app.cadastroGenero",
+            "name": "CadastroGenero",
+            "level": 5
+          },
+          "detalhesGenero":{
+            "id": "detalhesGenero",
+            "path":"ui5.anime.app.detalhesGenero",
+            "name": "DetalhesGenero",
+            "level": 6
           }
         }
       }

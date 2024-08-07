@@ -8,11 +8,10 @@ sap.ui.define([
 ], function (Opa5, Press, EnterText, PropertyStrictEquals ,Properties ,Ancestor) {
     "use strict";
 
-    var sNomeDaTela = "cadastroAnime.CadastroAnime";
+    var sNomeDaTela = "cadastroGenero.CadastroGenero";
     const sUrlCadastro = Opa5.getWindow().location.href;
-
     Opa5.createPageObjects({
-        onPaginaCadastroAnime : {
+        onPaginaCadastroGenero : {
             actions: {
                 aoClicarEmVoltar: function () {
                     return this.waitFor({
@@ -31,77 +30,6 @@ sap.ui.define([
                         }),
                         errorMessage: "inputNome não foi encontrado."
                     });
-                },
-                aoDigitarSinopse : function (sSinopseDigitada){
-                    return this.waitFor({
-                        id: "inputSinopse",
-                        viewName: sNomeDaTela,
-                        actions: new EnterText({
-                            text: sSinopseDigitada
-                        }),
-                        errorMessage: "inputSinopse não foi encontrado."
-                    });
-                },
-                aoDigitarNota : function (sNotaDigitada){
-                    return this.waitFor({
-                        id: "inputNota",
-                        viewName: sNomeDaTela,
-                        actions: new EnterText({
-                            text: sNotaDigitada
-                        }),
-                        errorMessage: "inputNota não foi encontrado."
-                    });
-                },
-                aoClicarNaLista: function(){
-                    return this.waitFor({
-                        id: "listaDeGeneros",
-                        viewName: sNomeDaTela,
-                        actions: new Press(),
-                        errorMessage: "Não foi encontrada a lista"
-                    })
-                }
-                ,
-                aoPressionarUmItem: function (sNome) {
-                    return this.waitFor({
-                        controlType: "sap.m.Label",
-                        viewName: sNomeDaTela,
-                        matchers:  new Properties({
-                            text: sNome
-                        }),
-                        actions: new Press(),
-                        errorMessage: "A lista não contém o gênero "
-                    });
-                },
-                aoSelecionarData: function(sDataDigitada){
-                    return this.waitFor({
-                        id: "inputDataLancamento",
-                        viewName: sNomeDaTela,
-                        actions: new EnterText({
-                            text: sDataDigitada,
-                            pressEnterKey: true
-                        }),
-                        errorMessage: "inputDataLancamento não foi encontrado"
-                    });
-                },
-                aoClicarNoSelectStatus: function(){
-                    return this.waitFor({
-                        id: "inputStatus",
-                        viewName: sNomeDaTela,
-                        actions: new Press(),
-                        errorMessage: "inputStatus não foi encontrado"
-                    })
-                },
-                aoSelecionarStatus: function(sStatus){
-                    return this.waitFor({
-                        controlType: "sap.ui.core.Item",
-                        matchers: 
-                            new PropertyStrictEquals ({
-                                name: "text",
-                                value: sStatus})
-                        ,
-                        actions: new Press(),
-                        errorMessage: "Status não foi encontrado"
-                    })
                 },
                 aoClicarEmSalvar: function(){
                     return this.waitFor({

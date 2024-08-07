@@ -1,7 +1,8 @@
 sap.ui.define([
 	"ui5/anime/app/common/ControleBase",
 	'sap/m/MessageBox',
-], function (ControleBase, MessageBox) {
+	"ui5/anime/app/common/HttpRequest"
+], function ( ControleBase, MessageBox, HttpRequest) {
 
 	const ROTA_PARA_LISTA = "lista";
 	const ROTA_ADICIONAR_ANIME = "cadastroAnime";
@@ -22,22 +23,30 @@ sap.ui.define([
 	const VALUE_STATE_ERROR = "Error";
 	const VALUE_STATE_NONE = "None";
 	const VALUE_STATE_NOME_OBRIGATORIO = "o campo nome é obrigatório";
-	const VALUE_STATE_SINOPSE_OBRIGATORIA = "o campo sinopse obrigatório";
+	const VALUE_STATE_SINOPSE_OBRIGATORIA = "o campo sinopse é obrigatório";
+	const VALUE_STATE_DATA_OBRIGATORIO = "o campo data lançamento é obrigatório";
 	const DATA_PADRAO_INICIAL = "24/07/2024";
 	const MESSAGEM_PRECISA_SELECIONAR_GENERO = "Precisa selecionar ao menos 1 gênero";
 	const CAMINHO_PARA_API_STATUS = "/api/anime/status";
 	const MESSAGEM_SUCESSO_CADASTRO = "Sucesso ao cadastrar o anime!";
 	const CAMINHO_PARA_API_ADICIONAR_ANIME = "/api/anime/adicionar";
 	const OPCAO_VOLTAR_PARA_LISTA_DE_ANIME = "Voltar a lista de anime";
+	const POST = 'POST';
 
 	return ControleBase.extend("ui5.anime.app.cadastroAnime.CadastroAnime", {
 		onInit: async function () {
 			const oRota = this.getOwnerComponent().getRouter();
-			oRota.getRoute(ROTA_ADICIONAR_ANIME);
-			this._get(CAMINHO_PARA_API_GENEROS, NOME_DO_MODELO_LISTA_DE_GENEROS);
-			this._get(CAMINHO_PARA_API_STATUS, NOME_DO_MODELO_DA_LISTA_DE_STATUS);
+			oRota.getRoute(ROTA_ADICIONAR_ANIME).attachMatched(this._aoCoincidirRota, this);
+			
 		},
-
+		_aoCoincidirRota: function(){
+            this._exibirEspera(async () => {
+                this._limparCampos();
+				this._modelo(await HttpRequest._request(CAMINHO_PARA_API_GENEROS),NOME_DO_MODELO_LISTA_DE_GENEROS);
+				this._modelo(await HttpRequest._request(CAMINHO_PARA_API_STATUS),NOME_DO_MODELO_DA_LISTA_DE_STATUS);
+            })
+        },
+	
 		_VerificarCampos: function () {
 			var verificacao = true;
 			const _nome = this.byId(ID_INPUT_NOME);
@@ -52,14 +61,21 @@ sap.ui.define([
 			}
 			const _nota = this.byId(ID_INPUT_NOTA);
 			if (_nota.getValueState() == VALUE_STATE_ERROR) verificacao = false;
+			
 			const _generos = this.byId(ID_DA_LISTA_DE_GENEROS);
 			if (_generos.getSelectedItems().length == 0) {
 				MessageBox.show(MESSAGEM_PRECISA_SELECIONAR_GENERO);
 				verificacao = false
 			}
-
+			const _dataLancamento = this.byId(ID_INPUT_DATA_LANCAMENTO);
+			if(_dataLancamento.getValue() == ""){
+				_dataLancamento.setValueState(VALUE_STATE_ERROR);
+				_dataLancamento.setValueStateText(VALUE_STATE_DATA_OBRIGATORIO);
+			}
+			
 			return verificacao;
 		},
+		
 
 		aoClicarEmSalvar: function () {
 			this._exibirEspera(async () => {
@@ -72,7 +88,8 @@ sap.ui.define([
 						statusDeExibicao: parseInt(this.byId(ID_INPUT_STATUS).getSelectedItem().getKey()),
 						idGeneros: this._preencherAListaDeGenerosSelecionados()
 					}
-					this._postAnime(CAMINHO_PARA_API_ADICIONAR_ANIME, anime);
+					await HttpRequest._request(CAMINHO_PARA_API_ADICIONAR_ANIME, POST, anime);
+					this._sucessoNoPost();
 				}
 			})
 			
@@ -83,24 +100,6 @@ sap.ui.define([
 				oEvent.getSource().setValueState(VALUE_STATE_NONE);
 			})
 			
-		},
-
-		_postAnime: async function (url, anime) {
-				const response = await fetch(url, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify(anime)
-				});
-				const data = await response.json();
-
-				if (response.ok) {
-					this._sucessoNoPost();
-				}
-				else {
-					this._falhaNaRequicaoPost(data);
-				}
 		},
 
 		_sucessoNoPost: function () {
@@ -115,30 +114,16 @@ sap.ui.define([
 				}
 			});
 		},
-		_falhaNaRequicaoPost: function (data) {
-			let detalhesDoErro = data.errors;
-			let arrayErrors = Object.keys(detalhesDoErro);
-			arrayErrors = arrayErrors.map(x => detalhesDoErro[x]);
-			detalhesDoErro = '\n';
-			for (var i = POSICAO_INICIAL_DA_LISTA; i < arrayErrors.length; i++) {
-				for (var j = POSICAO_INICIAL_DA_LISTA; j < arrayErrors[i].length; j++)
-					detalhesDoErro += arrayErrors[i][j] + '\n';
-			};
-			const mensagemErro = `
-				Título: ${data.title}
-				Status: ${data.status}
-				Detalhes: ${data.detail}
-				Erros: ${detalhesDoErro}
-			`;
-
-			MessageBox.error(`${FALHA_NA_REQUISIÇÃO}\n${mensagemErro}`);
-		},
-
-		_limparCampos: function () {
-			this.byId(ID_INPUT_NOME).setValue(undefined);
-			this.byId(ID_INPUT_SINOPSE).setValue(undefined);
-			this.byId(ID_INPUT_DATA_LANCAMENTO).setValue(DATA_PADRAO_INICIAL);
+		
+		_limparCampos: async function () {
+			this.byId(ID_INPUT_NOME).setValue("");
+			this.byId(ID_INPUT_NOME).setValueState(VALUE_STATE_NONE)
+			this.byId(ID_INPUT_SINOPSE).setValue("");
+			this.byId(ID_INPUT_SINOPSE).setValueState(VALUE_STATE_NONE)
+			this.byId(ID_INPUT_DATA_LANCAMENTO).setValue("");
+			this.byId(ID_INPUT_DATA_LANCAMENTO).setValueState(VALUE_STATE_NONE)
 			this.byId(ID_INPUT_NOTA).setValue(VALOR_INICIAL_DA_NOTA);
+			this.byId(ID_INPUT_NOTA).setValueState(VALUE_STATE_NONE)
 			this.byId(ID_INPUT_STATUS).setSelectedKey(KEY_EM_EXIBICAO);
 			var items = this.byId(ID_DA_LISTA_DE_GENEROS).getSelectedItems();
 			for (var i = POSICAO_INICIAL_DA_LISTA; i < items.length; i++) {

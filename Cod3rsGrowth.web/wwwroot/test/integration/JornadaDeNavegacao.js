@@ -2,7 +2,11 @@ sap.ui.define([
 	"sap/ui/test/Opa5",
 	"./arrangements/Startup",
 	"./ListaJornada",
-	"./CadastroAnimeJornada"
+	"./CadastroAnimeJornada",
+	"./DetalhesAnimeJornada",
+	"./ListaGenerosJornada",
+	"./CadastroGeneroJornada",
+	"./DetalhesGeneroJornada"
 ], function (Opa5, Startup) {
 	"use strict";
 

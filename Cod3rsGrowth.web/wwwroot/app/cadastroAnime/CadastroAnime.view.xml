@@ -10,19 +10,24 @@
     xmlns:sf="sap.ui.comp.smartfield"
     xmlns:si="sap.m.StepInput"
     xmlns:l = "sap.m.List">
-    <Page title="{i18n>TituloPaginaCadastroAnime}" class="sapUiResponsiveContentPadding"
+    <Page
+        id = "pagina" 
+        title="{i18n>TituloPaginaCadastroAnime}" 
+        class="sapUiResponsiveContentPadding"
         showNavButton="true"
         navButtonPress="aoClicarEmVoltar"
+        titleAlignment="Center"
+        bindingContexts="onInit"
     >
         <content>
             <layout:VerticalLayout width="100%" id = "layoutTela">
-                <Label text="Nome:" class= "lblCadastro" ></Label>
-                <Input placeholder="Digite o nome" width="25%" maxLength="40" id="inputNome" liveChange="aoDigitarNoInput"></Input>
-                <Label text="Sinopse:" class= "lblCadastro"></Label>
-                <TextArea width="50%" maxLength="400" placeholder="Digite a Sinopse" height="100px" id="inputSinopse" liveChange="aoDigitarNoInput"></TextArea>
-                <Label text="Nota:" class= "lblCadastro"></Label>
+                <Label text="{i18n>labelNome}" class= "lblCadastro" ></Label>
+                <Input placeholder="{i18n>placeholderNome}" width="25%" maxLength="40" id="inputNome" liveChange="aoDigitarNoInput"></Input>
+                <Label text="{i18n>labelSinopse}" class= "lblCadastro"></Label>
+                <TextArea width="50%" maxLength="400" placeholder="{i18n>placeholderSinopse}" height="100px" id="inputSinopse" liveChange="aoDigitarNoInput"></TextArea>
+                <Label text="{i18n>labelNota}" class= "lblCadastro"></Label>
                 <StepInput value ="1" min= "1" max = "10" step = "0.1" displayValuePrecision="1" width="3%" id="inputNota"></StepInput>
-                <Label text="Gênero:" class= "lblCadastro"></Label>
+                <Label text="{i18n>labelGeneros}" class= "lblCadastro"></Label>
                 <Panel height="230px" width="25%">
                     <List
                     id ="listaDeGeneros"
@@ -36,15 +41,17 @@
                         </CustomListItem> 
                 </List>
                 </Panel>
-                <Label text="Data de Lançamento:" class= "lblCadastro"></Label>
+                <Label text="{i18n>labelDataLancamento}" class= "lblCadastro"></Label>
                 <DatePicker
                     id="inputDataLancamento"
                     displayFormat="short"
                     valueFormat='yyyy-MM-ddT00:00:00'
                     value = ""
                     width="12%"               
-                    class= "filtroDataAnime"/>
-                <Label text="Status de Exibição:" class= "lblCadastro"></Label>
+                    class= "filtroDataAnime"
+                    liveChange="aoDigitarNoInput"
+                    />
+                <Label text="{i18n>labelStatusExibicao}" class= "lblCadastro"></Label>
                 <Select
                     id = "inputStatus"
                     forceSelection="false"
@@ -54,7 +61,7 @@
                     }">
                     <core:Item key="{status>id}" text="{status>descricao}" />
                 </Select>
-                <Button id="btnSalvar" text= "Salvar" width="5%" press= "aoClicarEmSalvar"></Button>
+                <Button id="btnSalvar" text= "{i18n>btnSalvar}" width="5%" press= "aoClicarEmSalvar" class = "sapMBtnInner"></Button>
             </layout:VerticalLayout>
         </content>
     </Page>

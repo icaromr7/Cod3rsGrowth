@@ -1,5 +1,5 @@
 
-.listaDeAnimes {
+.listaDeAnimes, .listaDeGeneros {
     width: 100%;
     border-radius: 12px;
     
@@ -11,7 +11,7 @@
         position: relative;
         border-radius: 12px 12px 0 0;
         overflow: hidden;
-        .tituloListaAnime {
+        .tituloListaAnime, .tituloListaGenero {
         position: absolute;
         z-index: 2;
         top: 50%;
@@ -21,13 +21,7 @@
         color: #fff;
         }     
     }
-    .sapMBtn{
-        background-color: #fff;
-        nav-left: auto;
-        border-radius: 10px;
-        padding-bottom: 40px;
-        height: 2rem;
-    }
+    
     .ListaCustomizada {
         background-color: #fff;
         border-radius: 0 0 12px 12px;
@@ -36,7 +30,7 @@
         row-gap: 8px;
     }
     
-    .vBoxAnime {
+    .vBoxAnime, .vBoxGenero {
         display: grid;
         grid-template-columns: 4.5fr 4.5fr 0fr;
         align-items: center;
@@ -56,7 +50,7 @@
     }
     
     
-    .nomeAnime {
+    .nomeAnime, .nomeGenero {
         color: #979cb0;
         font-weight: 600;
         font-size: 20px;
@@ -89,13 +83,13 @@
     font-family: 'Source Sans Pro', sans-serif;
     }
     
-    .listaDeAnimes {
+    .listaDeAnimes, .listaDeGeneros {
     box-shadow: 0 0 40px -10px rgba(0, 0, 0, .4);
     }
     .sapUiResponsiveContentPadding{
         background-image: url(image/background_page_inicial.jpg) !important;
     }
-    .lblCadastro{
+    .lblCadastro, .lblDetalhes{
         color: #fff;
         margin-top: 0.5rem;
     }

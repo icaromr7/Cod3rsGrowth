@@ -40,13 +40,48 @@ sap.ui.define([
 
 		//Actions
 		When.onPaginaListaAnime.aoClicarNoFiltroStatus();
-		When.onPaginaListaAnime.aoSelecionarStatus();
+		When.onPaginaListaAnime.aoSelecionarStatus("Concluído");
 
 		//Assertions
 		Then.onPaginaListaAnime.aListaTemDoisAnimes();
 
+	});
+	opaTest("Ao clicar no anime deve navegar para tela de detalhes", function (Given, When, Then) {
+		//Arrangaments
+		When.onPaginaListaAnime.aoClicarNoFiltroStatus();
+		When.onPaginaListaAnime.aoSelecionarStatus("Todos");
+        //Actions
+        When.onPaginaListaAnime.aoClicarEmUmAnime("One Piece");
+
+		// Assertions
+		Then.onPaginaDetalhesoAnime.deveNavegarParaTelaDeDetalhes();
 		// Cleanup
 		Then.iTeardownMyApp();
 	});
-	
+
+	opaTest("Ao clicar em cadastrar anime deve navegar para tela de cadastro", function (Given, When, Then) {
+		// Arrangements
+		Given.iStartMyApp();
+
+        //Actions
+        When.onPaginaListaAnime.aoApertarEmAdicionarAnime();
+
+		// Assertions
+		Then.onPaginaCadastroAnime.deveNavegarParaTelaDeCadastro();
+		// Cleanup
+		Then.iTeardownMyApp();
+	});
+	opaTest("Ao clicar em lista de gêneros deve navegar para tela de lista de gêneros", function (Given, When, Then) {
+		// Arrangements
+		Given.iStartMyApp();
+
+        //Actions
+        When.onPaginaListaAnime.aoApertarEmListaDeGeneros();
+
+		// Assertions
+		Then.onPaginaListaGeneros.deveNavegarParaTelaDeListaDeGeneros();
+
+		// Cleanup
+		Then.iTeardownMyApp();
+	})
 });
