@@ -10,7 +10,9 @@
     xmlns:sf="sap.ui.comp.smartfield"
     xmlns:si="sap.m.StepInput"
     xmlns:l = "sap.m.List">
-    <Page title="{i18n>TituloPaginaCadastroGenero}" class="sapUiResponsiveContentPadding"
+    <Page 
+        id= "pagina"
+        title="{i18n>TituloPaginaCadastroGenero}" class="sapUiResponsiveContentPadding"
         showNavButton="true"
         navButtonPress="aoClicarEmVoltar"
         titleAlignment="Center"

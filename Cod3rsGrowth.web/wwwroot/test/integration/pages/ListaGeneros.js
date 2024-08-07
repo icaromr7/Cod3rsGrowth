@@ -11,9 +11,18 @@ sap.ui.define([
     
 		var sNomeDaTela = "listaGeneros.ListaGeneros";
         var sListaId = "listaDeGeneros"
+        const sUrlLista = Opa5.getWindow().location.href;
         Opa5.createPageObjects({
                 onPaginaListaGeneros: {
                     actions:{
+                        aoClicarEmVoltar: function () {
+                            return this.waitFor({
+                                id: "pagina",
+                                viewName: sNomeDaTela,
+                                actions: new Press(),
+                                errorMessage: "Não foi possível encontrar o botão de voltar na página do objeto"
+                            });
+                        },
                         aoApertarEmMais(){
                             return this.waitFor({
                                 id: sListaId,
@@ -104,6 +113,17 @@ sap.ui.define([
                                 },
                                 errorMessage: "A lista não contém todos os items"
                             })
+                        },
+                        deveVoltarParaTelaAnterior: function(){
+                            const sUrlAtual = Opa5.getWindow().location.href;
+                            return this.waitFor({
+                                success: function() {
+                                    if (sUrlLista !== sUrlAtual) {
+                                        Opa5.assert.ok(true, "Falha ao navegar para página anterior.");
+                                    }
+                                },
+                                errorMessage: "Falha ao navegar para página anterior."
+                            });
                         }
                     }
                 }

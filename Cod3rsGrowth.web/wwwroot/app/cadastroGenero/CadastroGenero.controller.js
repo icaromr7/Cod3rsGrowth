@@ -22,8 +22,14 @@ sap.ui.define([
 
 		onInit: async function () {
 			const oRota = this.getOwnerComponent().getRouter();
-			oRota.getRoute(ROTA_ADICIONAR_GENERO);
+			oRota.getRoute(ROTA_ADICIONAR_GENERO).attachMatched(this._aoCoincidirRota, this);
 		},
+
+		_aoCoincidirRota: function(){
+            this._exibirEspera(async () => {
+                this._limparCampos();
+            })
+        },
 
 		_VerificarCampos: function () {
 			let verificacao = true;
@@ -75,6 +81,7 @@ sap.ui.define([
 
 		_limparCampos: function () {
 			this.byId(ID_INPUT_NOME).setValue(undefined);
+			this.byId(ID_INPUT_NOME).setValueState(VALUE_STATE_NONE);
 		},
 	});
 });

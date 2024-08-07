@@ -25,7 +25,6 @@ namespace Cod3rsGrowth.web.Controllers
         [HttpPost(ConstantesController.ADICIONAR)]
         public IActionResult Adicionar([FromBody] Anime anime)
         {
-            if (anime == null) { return BadRequest(); }
             int idAnime = _animeServico.Cadastrar(anime);
             anime.Id = idAnime;
             foreach (int id in anime.IdGeneros)

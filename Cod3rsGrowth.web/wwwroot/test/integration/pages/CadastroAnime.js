@@ -9,10 +9,19 @@ sap.ui.define([
     "use strict";
 
     var sNomeDaTela = "cadastroAnime.CadastroAnime";
+    const sUrlCadastro = Opa5.getWindow().location.href;
+
     Opa5.createPageObjects({
         onPaginaCadastroAnime : {
             actions: {
-
+                aoClicarEmVoltar: function () {
+                    return this.waitFor({
+                        id: "pagina",
+                        viewName: sNomeDaTela,
+                        actions: new Press(),
+                        errorMessage: "Não foi possível encontrar o botão de voltar na página do objeto"
+                    });
+                },
                 aoDigitarNome : function (sNomeDigitado){
                     return this.waitFor({
                         id: "inputNome",
@@ -136,7 +145,18 @@ sap.ui.define([
 						},
 						errorMessage: "Falhar ao clicar no botao Ok"
                     });
-				}
+				},
+                deveVoltarParaTelaAnterior: function(){
+                    const sUrlAtual = Opa5.getWindow().location.href;
+                    return this.waitFor({
+                        success: function() {
+                            if (sUrlCadastro !== sUrlAtual) {
+                                Opa5.assert.ok(true, "Falha ao navegar para página anterior.");
+                            }
+                        },
+                        errorMessage: "Falha ao navegar para página anterior."
+                    });
+                }
             }
         }
     });

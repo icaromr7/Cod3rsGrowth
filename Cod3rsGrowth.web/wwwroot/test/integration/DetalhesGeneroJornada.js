@@ -18,16 +18,13 @@ sap.ui.define([
 		Then.onPaginaDetalhesGenero.deveTerONomeDoItemSelecionado("Aventura");
         
 	});
-    opaTest("Ao clicar em voltar deve navegar para tela de lista", function (Given, When, Then) {
-
+    opaTest("Ao clicar em voltar deve navegar para tela anterior", function (Given, When, Then) {
         //Actions
         When.onPaginaDetalhesGenero.aoClicarEmVoltar();
 		// Assertions
-        Then.onPaginaListaGeneros.deveNavegarParaTelaDeListaDeGeneros();
-
-		// Cleanup
+        Then.onPaginaDetalhesGenero.deveVoltarParaTelaAnterior();
+        // Cleanup
 		Then.iTeardownMyApp();
-        
 	});   
 }
 );

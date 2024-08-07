@@ -6,12 +6,11 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout"
 	>
-	<Page title="{i18n>TituloPaginaInicial}" class="sapUiResponsiveContentPadding" titleAlignment="Center">	
+	<Page title="{i18n>listaDeAnimeTitulo}" class="sapUiResponsiveContentPadding" titleAlignment="Center">	
 		<content>
 				<List items = "{path: 'animes>/'}" class= "listaDeAnimes" id = "listaDeAnimes" growing="true" growingThreshold="10">
 					<headerToolbar >
 						<Toolbar class= "toolbar">
-							<Title text="{i18n>listaDeAnimeTitulo}" class="tituloListaAnime"/>
 							<ToolbarSpacer/>
 							<Button 
 								id= "btnListaDeGeneros" 

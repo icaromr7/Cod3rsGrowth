@@ -26,7 +26,10 @@ sap.ui.define([
 		},
 
 		_aoCoincidirRota: function(){
-			this._preencherLista();
+			this._exibirEspera(async () => {
+				this._filtrarPorRota();
+				this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API+_filtroNome),NOME_DO_MODELO_DA_LISTA_DE_GENEROS);
+			});
 		},
 
 		_filtrarPorRota: function () {
@@ -43,11 +46,6 @@ sap.ui.define([
 				_filtroNome = sNome;
 				this._adicionarParametrosNaRota();
 			});
-		},
-
-		_preencherLista: async function () {
-			this._filtrarPorRota();
-			this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API+_filtroNome),NOME_DO_MODELO_DA_LISTA_DE_GENEROS);
 		},
 
 		_adicionarParametrosNaRota: function () {

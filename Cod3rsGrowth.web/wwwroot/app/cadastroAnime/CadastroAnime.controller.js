@@ -1,8 +1,8 @@
 sap.ui.define([
-	"ui5/anime/app/common/HttpRequest",
 	"ui5/anime/app/common/ControleBase",
 	'sap/m/MessageBox',
-], function ( HttpRequest,ControleBase, MessageBox) {
+	"ui5/anime/app/common/HttpRequest"
+], function ( ControleBase, MessageBox, HttpRequest) {
 
 	const ROTA_PARA_LISTA = "lista";
 	const ROTA_ADICIONAR_ANIME = "cadastroAnime";
@@ -23,7 +23,8 @@ sap.ui.define([
 	const VALUE_STATE_ERROR = "Error";
 	const VALUE_STATE_NONE = "None";
 	const VALUE_STATE_NOME_OBRIGATORIO = "o campo nome é obrigatório";
-	const VALUE_STATE_SINOPSE_OBRIGATORIA = "o campo sinopse obrigatório";
+	const VALUE_STATE_SINOPSE_OBRIGATORIA = "o campo sinopse é obrigatório";
+	const VALUE_STATE_DATA_OBRIGATORIO = "o campo data lançamento é obrigatório";
 	const DATA_PADRAO_INICIAL = "24/07/2024";
 	const MESSAGEM_PRECISA_SELECIONAR_GENERO = "Precisa selecionar ao menos 1 gênero";
 	const CAMINHO_PARA_API_STATUS = "/api/anime/status";
@@ -33,14 +34,18 @@ sap.ui.define([
 	const POST = 'POST';
 
 	return ControleBase.extend("ui5.anime.app.cadastroAnime.CadastroAnime", {
-
 		onInit: async function () {
 			const oRota = this.getOwnerComponent().getRouter();
-			oRota.getRoute(ROTA_ADICIONAR_ANIME);
-			this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API_GENEROS), NOME_DO_MODELO_LISTA_DE_GENEROS);
-			this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API_STATUS),NOME_DO_MODELO_DA_LISTA_DE_STATUS);
+			oRota.getRoute(ROTA_ADICIONAR_ANIME).attachMatched(this._aoCoincidirRota, this);
 			
 		},
+		_aoCoincidirRota: function(){
+            this._exibirEspera(async () => {
+                this._limparCampos();
+				this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API_GENEROS),NOME_DO_MODELO_LISTA_DE_GENEROS);
+				this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API_STATUS),NOME_DO_MODELO_DA_LISTA_DE_STATUS);
+            })
+        },
 	
 		_VerificarCampos: function () {
 			var verificacao = true;
@@ -56,14 +61,21 @@ sap.ui.define([
 			}
 			const _nota = this.byId(ID_INPUT_NOTA);
 			if (_nota.getValueState() == VALUE_STATE_ERROR) verificacao = false;
+			
 			const _generos = this.byId(ID_DA_LISTA_DE_GENEROS);
 			if (_generos.getSelectedItems().length == 0) {
 				MessageBox.show(MESSAGEM_PRECISA_SELECIONAR_GENERO);
 				verificacao = false
 			}
-
+			const _dataLancamento = this.byId(ID_INPUT_DATA_LANCAMENTO);
+			if(_dataLancamento.getValue() == ""){
+				_dataLancamento.setValueState(VALUE_STATE_ERROR);
+				_dataLancamento.setValueStateText(VALUE_STATE_DATA_OBRIGATORIO);
+			}
+			
 			return verificacao;
 		},
+		
 
 		aoClicarEmSalvar: function () {
 			this._exibirEspera(async () => {
@@ -103,11 +115,15 @@ sap.ui.define([
 			});
 		},
 		
-		_limparCampos: function () {
+		_limparCampos: async function () {
 			this.byId(ID_INPUT_NOME).setValue(undefined);
+			this.byId(ID_INPUT_NOME).setValueState(VALUE_STATE_NONE)
 			this.byId(ID_INPUT_SINOPSE).setValue(undefined);
-			this.byId(ID_INPUT_DATA_LANCAMENTO).setValue(DATA_PADRAO_INICIAL);
+			this.byId(ID_INPUT_SINOPSE).setValueState(VALUE_STATE_NONE)
+			this.byId(ID_INPUT_DATA_LANCAMENTO).setValue(undefined);
+			this.byId(ID_INPUT_DATA_LANCAMENTO).setValueState(VALUE_STATE_NONE)
 			this.byId(ID_INPUT_NOTA).setValue(VALOR_INICIAL_DA_NOTA);
+			this.byId(ID_INPUT_NOTA).setValueState(VALUE_STATE_NONE)
 			this.byId(ID_INPUT_STATUS).setSelectedKey(KEY_EM_EXIBICAO);
 			var items = this.byId(ID_DA_LISTA_DE_GENEROS).getSelectedItems();
 			for (var i = POSICAO_INICIAL_DA_LISTA; i < items.length; i++) {

@@ -7,6 +7,7 @@ sap.ui.define([
 
     var sNomeDaTela = "detalhesGenero.DetalhesGenero";
     var sListaId = "listaDeGeneros"
+    const sUrlDetalhes = Opa5.getWindow().location.href;
     Opa5.createPageObjects({
         onPaginaDetalhesGenero : {
             actions: {
@@ -62,6 +63,17 @@ sap.ui.define([
                                 errorMessage: "O nome " + sNome + " não está sendo mostrado"
                             });
                         }
+                    });
+                },
+                deveVoltarParaTelaAnterior: function(){
+                    const sUrlAtual = Opa5.getWindow().location.href;
+                    return this.waitFor({
+                        success: function() {
+                            if (sUrlDetalhes !== sUrlAtual) {
+                                Opa5.assert.ok(true, "Falha ao navegar para página anterior.");
+                            }
+                        },
+                        errorMessage: "Falha ao navegar para página anterior."
                     });
                 }
             }

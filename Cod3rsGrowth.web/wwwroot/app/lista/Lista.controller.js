@@ -18,6 +18,8 @@ sap.ui.define([
 	const CAMINHO_PARA_API_STATUS = "/api/anime/status"
 	const NOME_DA_ROTA = "lista";
 	const ID_CAMPO_DE_BUSCA = "CampoDeBusca";
+	const ID_CAMPO_DE_STATUS = "selectStatus";
+	const ID_CAMPO_DE_DATA = "dpDataLancamento"
 	const PARAMETRO_VALUE = "value"
 	const PARAMETRO_SELECTED_ITEM = "selectedItem"
 	const NOME_DO_MODELO_DA_LISTA_DE_ANIME = "animes";
@@ -32,11 +34,15 @@ sap.ui.define([
 		onInit: async function () {
 			const aRota = this._getRota();
 			aRota.getRoute(NOME_DA_ROTA).attachPatternMatched(this._aoCoincidirRota, this);
-			this._modeloLista(await this._obterEPreencherSelectStatus(CAMINHO_PARA_API_STATUS), NOME_DO_MODELO_DA_LISTA_DE_STATUS);
+			
 		},
 
-		_aoCoincidirRota: function(){
-			this._preencherLista();
+		_aoCoincidirRota: async function(){
+			this._exibirEspera(async () => {
+				await this._obterEPreencherSelectStatus();
+				this._filtrarPorRota();
+				this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API+_filtro),NOME_DO_MODELO_DA_LISTA_DE_ANIME);
+			});
 		},
 
 		_filtrarPorRota: function () {
@@ -47,7 +53,7 @@ sap.ui.define([
 			_filtroData = _filtro.get(PARAMETRO_FILTRO_POR_DATA);
 			_filtroStatus = _filtro.get(PARAMETRO_FILTRO_POR_STATUS);
 			const CampoDeBusca = this.byId(ID_CAMPO_DE_BUSCA).setValue(_filtroNome);
-
+			this._adicionarParametrosNaRota();
 		},
 
 		aoFiltrarAnime: async function (oEvent) {
@@ -72,7 +78,7 @@ sap.ui.define([
 			});
 
 		},
-		_obterEPreencherSelectStatus: async function (url) {
+		_obterEPreencherSelectStatus: async function () {
 				let data = await HttpRequest._request(CAMINHO_PARA_API_STATUS);
 				var todos =
 				{
@@ -80,12 +86,13 @@ sap.ui.define([
 					descricao: "Todos"
 				}
 				data.push(todos);
-				return data;
+				this._modeloLista(await data, NOME_DO_MODELO_DA_LISTA_DE_STATUS);
 		},
 
-		_preencherLista: async function () {
-			this._filtrarPorRota();
-			this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API+_filtro),NOME_DO_MODELO_DA_LISTA_DE_ANIME);
+		_limparCampos: function(){
+			this.byId(ID_CAMPO_DE_BUSCA).setValue(undefined);
+			this.byId(ID_CAMPO_DE_STATUS).setSelectedKey(INDEX_STATUS_TODOS);
+			this.byId(ID_CAMPO_DE_DATA).setValue(undefined);
 		},
 
 		_adicionarParametrosNaRota: function () {

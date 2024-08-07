@@ -36,5 +36,19 @@ sap.ui.define([
         // Cleanup
 		Then.iTeardownMyApp();
 	});
+	opaTest("Ao clicar em voltar deve navegar para tela anterior", function (Given, When, Then) {
+        //Arrangements
+        Given.iStartMyApp({
+            hash: "genero/cadastro"
+        });
+        //Actions
+        When.onPaginaCadastroGenero.aoClicarEmVoltar();
+		// Assertions
+        Then.onPaginaCadastroGenero.deveVoltarParaTelaAnterior();
+
+        // Cleanup
+		Then.iTeardownMyApp();
+        
+	});
 }
 );

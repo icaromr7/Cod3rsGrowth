@@ -5,7 +5,9 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout"
 	>
-	<Page title="{i18n>TituloPaginaInicial}" 
+	<Page 
+		id = "pagina"
+		title="{i18n>listaDeGeneroTitulo}" 
 		class="sapUiResponsiveContentPadding"
 		showNavButton="true"
         navButtonPress="aoClicarEmVoltar" 
@@ -14,7 +16,6 @@
 				<List items = "{path: 'generos>/'}" class= "listaDeGeneros" id = "listaDeGeneros" growing="true" growingThreshold="10">
 					<headerToolbar >
 						<Toolbar class= "toolbar">
-							<Title text="{i18n>listaDeGeneroTitulo}" class="tituloListaGenero"/>
 							<ToolbarSpacer/>
 							<Button text="{i18n>btnAdicionarGenero}" press="aoClicarAdicionarGenero" id= "btnAdicionar"></Button>
 							<SearchField

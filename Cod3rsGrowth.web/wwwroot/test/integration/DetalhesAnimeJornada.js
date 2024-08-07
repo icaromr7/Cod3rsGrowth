@@ -22,16 +22,16 @@ sap.ui.define([
         Then.onPaginaDetalhesoAnime.deveTerASinopseDoItemSelecionado("Bom demais");
         Then.onPaginaDetalhesoAnime.aListaDeveMostrarTodosOsGenerosDoAnime(2);
 	});
-    opaTest("Ao clicar em voltar deve navegar para tela de lista", function (Given, When, Then) {
-
+    opaTest("Ao clicar em voltar deve navegar para tela anterior", function (Given, When, Then) {
+        
         //Actions
         When.onPaginaDetalhesoAnime.aoClicarEmVoltar();
 		// Assertions
-        Then.onPaginaListaAnime.deveNavegarParaTelaDeLista();
+        Then.onPaginaDetalhesoAnime.deveVoltarParaTelaAnterior();
 
         // Cleanup
 		Then.iTeardownMyApp();
         
-	});   
+	});  
 }
 );

@@ -10,10 +10,14 @@
     xmlns:sf="sap.ui.comp.smartfield"
     xmlns:si="sap.m.StepInput"
     xmlns:l = "sap.m.List">
-    <Page title="{i18n>TituloPaginaCadastroAnime}" class="sapUiResponsiveContentPadding"
+    <Page
+        id = "pagina" 
+        title="{i18n>TituloPaginaCadastroAnime}" 
+        class="sapUiResponsiveContentPadding"
         showNavButton="true"
         navButtonPress="aoClicarEmVoltar"
         titleAlignment="Center"
+        bindingContexts="onInit"
     >
         <content>
             <layout:VerticalLayout width="100%" id = "layoutTela">
@@ -44,7 +48,9 @@
                     valueFormat='yyyy-MM-ddT00:00:00'
                     value = ""
                     width="12%"               
-                    class= "filtroDataAnime"/>
+                    class= "filtroDataAnime"
+                    liveChange="aoDigitarNoInput"
+                    />
                 <Label text="{i18n>labelStatusExibicao}" class= "lblCadastro"></Label>
                 <Select
                     id = "inputStatus"
