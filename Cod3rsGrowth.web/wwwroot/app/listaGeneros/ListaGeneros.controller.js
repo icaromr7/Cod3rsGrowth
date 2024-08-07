@@ -16,6 +16,7 @@ sap.ui.define([
 	const ID_CAMPO_DE_BUSCA = "CampoDeBusca";
 	const NOME_DO_MODELO_DA_LISTA_DE_GENEROS = "generos";
 	const ROTA_DETALHES_GENERO = "detalhesGenero"
+	const ID = "id"
 
 	return ControleBase.extend("ui5.anime.app.listaGeneros.ListaGeneros", {
 		formatter: formatter,
@@ -28,7 +29,7 @@ sap.ui.define([
 		_aoCoincidirRota: function(){
 			this._exibirEspera(async () => {
 				this._filtrarPorRota();
-				this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API+_filtroNome),NOME_DO_MODELO_DA_LISTA_DE_GENEROS);
+				this._modelo(await HttpRequest._request(CAMINHO_PARA_API+_filtroNome),NOME_DO_MODELO_DA_LISTA_DE_GENEROS);
 			});
 		},
 
@@ -64,7 +65,7 @@ sap.ui.define([
 		
 		aoClicarNoGenero: function(oEvent){
 			this._exibirEspera(async () => {
-				let _idGenero = oEvent.getSource().getBindingContext(NOME_DO_MODELO_DA_LISTA_DE_GENEROS).getProperty("id");
+				let _idGenero = oEvent.getSource().getBindingContext(NOME_DO_MODELO_DA_LISTA_DE_GENEROS).getProperty(ID);
 				this._getRota().navTo(ROTA_DETALHES_GENERO,{
 					id : _idGenero
 				});

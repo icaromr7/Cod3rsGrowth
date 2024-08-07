@@ -42,8 +42,8 @@ sap.ui.define([
 		_aoCoincidirRota: function(){
             this._exibirEspera(async () => {
                 this._limparCampos();
-				this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API_GENEROS),NOME_DO_MODELO_LISTA_DE_GENEROS);
-				this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API_STATUS),NOME_DO_MODELO_DA_LISTA_DE_STATUS);
+				this._modelo(await HttpRequest._request(CAMINHO_PARA_API_GENEROS),NOME_DO_MODELO_LISTA_DE_GENEROS);
+				this._modelo(await HttpRequest._request(CAMINHO_PARA_API_STATUS),NOME_DO_MODELO_DA_LISTA_DE_STATUS);
             })
         },
 	

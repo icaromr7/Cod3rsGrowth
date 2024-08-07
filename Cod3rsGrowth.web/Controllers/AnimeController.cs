@@ -4,12 +4,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cod3rsGrowth.web.Controllers
 {
-    [Route(ConstantesController.ROTA_ANIME)]
+    [Route(ROTA_ANIME)]
     [ApiController]
     public class AnimeController : ControllerBase
     {
         private AnimeServico _animeServico;
         private AnimeGeneroServico _animeGeneroServico;
+
+        const string ADICIONAR = "adicionar";
+        const string ATUALIZAR = "atualizar";
+        const string DELETAR = "deletar/{id}";
+        const string ID = "{id}";
+        const string ROTA_ANIME = "api/anime";
+        const string STATUS = "status";
 
         public AnimeController(AnimeServico animeServico, AnimeGeneroServico animeGeneroServico)
         {
@@ -22,7 +29,7 @@ namespace Cod3rsGrowth.web.Controllers
             var animes = _animeServico.ObterTodos(filtro);
             return Ok(animes);
         }
-        [HttpPost(ConstantesController.ADICIONAR)]
+        [HttpPost(ADICIONAR)]
         public IActionResult Adicionar([FromBody] Anime anime)
         {
             int idAnime = _animeServico.Cadastrar(anime);
@@ -39,28 +46,28 @@ namespace Cod3rsGrowth.web.Controllers
             return Created($"anime/{anime.Id}", anime);
         }
         
-        [HttpGet(ConstantesController.ID)]
+        [HttpGet(ID)]
         public IActionResult ObterPorId(int id)
         {
             var anime = _animeServico.ObterPorId(id);
             if (anime == null) { return BadRequest(); }
             return Ok(anime);
         }
-        [HttpPut (ConstantesController.ATUALIZAR)]
+        [HttpPut (ATUALIZAR)]
         public IActionResult Atualizar([FromBody]Anime anime)
         {
             if (anime == null) { return BadRequest(); }
             _animeServico.Atualizar(anime);
             return Ok();
         }
-        [HttpDelete(ConstantesController.DELETAR)]
+        [HttpDelete(DELETAR)]
         public IActionResult Deletar(int id)
         {          
             _animeGeneroServico.DeletarPorAnime(id);
             _animeServico.Deletar(id);
             return Ok();          
         }
-        [HttpGet(ConstantesController.STATUS)]
+        [HttpGet(STATUS)]
         public IActionResult GetStatus()
         {
             var status = _animeServico.getDescricaoEnum();

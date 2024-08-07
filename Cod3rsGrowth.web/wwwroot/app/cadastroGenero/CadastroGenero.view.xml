@@ -25,7 +25,7 @@
                     id="inputNome" 
                     liveChange="aoDigitarNoInput"
                     ></Input>
-                <Button id="btnSalvar" text= "{i18n>btnSalvar}" width="5%" press= "aoClicarEmSalvar"></Button>
+                <Button id="btnSalvar" text= "{i18n>btnSalvar}" width="5%" press= "aoClicarEmSalvar" class = "sapMBtnInner"></Button>
             </layout:VerticalLayout>
         </content>
     </Page>

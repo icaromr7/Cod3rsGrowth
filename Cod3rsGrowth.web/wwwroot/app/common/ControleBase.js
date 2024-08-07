@@ -99,7 +99,7 @@ sap.ui.define([
             })
 
         },
-        _modeloLista: function (oData, oNomeModelo) {
+        _modelo: function (oData, oNomeModelo) {
             const oModel = new JSONModel(oData);
             this.getView().setModel(oModel, oNomeModelo);
         },

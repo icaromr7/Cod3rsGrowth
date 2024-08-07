@@ -1,4 +1,4 @@
-<mvc:View xmlns:smartmultiedit="sap.ui.comp.smartmultiedit" xmlns:macros="sap.fe.macros" 
+<mvc:View xmlns:tnt="sap.tnt" xmlns:smartmultiedit="sap.ui.comp.smartmultiedit" xmlns:macros="sap.fe.macros" 
     xmlns:layout="sap.ui.layout" 
     controllerName="ui5.anime.app.detalhesAnime.DetalhesAnime"
     displayBlock="true"
@@ -11,6 +11,7 @@
         showNavButton="true"
         navButtonPress="aoClicarEmVoltar"
         titleAlignment="Center"
+        
     >
     <content >
         <layout:VerticalLayout width="100%">

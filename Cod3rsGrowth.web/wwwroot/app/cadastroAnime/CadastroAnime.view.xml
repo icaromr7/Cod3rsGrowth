@@ -61,7 +61,7 @@
                     }">
                     <core:Item key="{status>id}" text="{status>descricao}" />
                 </Select>
-                <Button id="btnSalvar" text= "{i18n>btnSalvar}" width="5%" press= "aoClicarEmSalvar"></Button>
+                <Button id="btnSalvar" text= "{i18n>btnSalvar}" width="5%" press= "aoClicarEmSalvar" class = "sapMBtnInner"></Button>
             </layout:VerticalLayout>
         </content>
     </Page>

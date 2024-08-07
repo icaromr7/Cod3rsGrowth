@@ -5,13 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cod3rsGrowth.web.Controllers
 {
-    [Route(ConstantesController.ROTA_GENERO)]
+    [Route(ROTA_GENERO)]
     [ApiController]
     public class GeneroController : ControllerBase
     {
         private GeneroServico _generoServico;
         private AnimeGeneroServico _animeGeneroServico;
-
+        const string ADICIONAR = "adicionar";
+        const string ATUALIZAR = "atualizar";
+        const string DELETAR = "deletar/{id}";
+        const string ID = "{id}";
+        const string ROTA_GENERO = "api/genero";
+        const string ANIME_GENERO = "animeGenero/{id}";
 
         public GeneroController(GeneroServico generoServico, AnimeGeneroServico animeGeneroServico) { 
             _generoServico = generoServico;
@@ -23,21 +28,21 @@ namespace Cod3rsGrowth.web.Controllers
             var generos = _generoServico.ObterTodos(nome);
             return Ok(generos);
         }
-        [HttpPost(ConstantesController.ADICIONAR)]
+        [HttpPost(ADICIONAR)]
         public IActionResult Adicionar([FromBody] Genero genero)
         {
             int idGenero = _generoServico.Cadastrar(genero);
             genero.Id = idGenero;
             return Created($"genero/{genero.Id}", genero);
         }
-        [HttpGet(ConstantesController.ID)]
+        [HttpGet(ID)]
         public IActionResult ObterPorId(int id)
         {
             var genero = _generoServico.ObterPorId(id);
             if (genero == null) { return BadRequest(); }
             return Ok(genero);
         }
-        [HttpGet(ConstantesController.ANIME_GENERO)]
+        [HttpGet(ANIME_GENERO)]
         public IActionResult ObterGenerosPorIdAnime(int id)
         {
             List<AnimeGenero> listAnimeGenero = _animeGeneroServico.ObterTodos(id);
@@ -50,14 +55,14 @@ namespace Cod3rsGrowth.web.Controllers
             return Ok(listaGeneros);
         }
         
-    [HttpPut(ConstantesController.ATUALIZAR)]
+    [HttpPut(ATUALIZAR)]
         public IActionResult Atualizar([FromBody] Genero genero)
         {
             if (genero == null) { return BadRequest(); }
             _generoServico.Atualizar(genero);
             return Ok();
         }
-        [HttpDelete(ConstantesController.DELETAR)]
+        [HttpDelete(DELETAR)]
         public IActionResult Deletar([FromQuery]int id)
         {
             _animeGeneroServico.DeletarPorAnime(id);

@@ -27,6 +27,9 @@ sap.ui.define([
 	const ID_DA_LISTA_DE_ANIMES = "listaDeAnimes";
 	const INDEX_STATUS_TODOS = 0;
 	const ROTA_PARA_CADASTRO_ANIME = "cadastroAnime"
+	const ROTA_PARA_DETALHES_ANIME = "detalhesAnime";
+	const ROTA_PARA_LISTA_GENEROS = "listaGenero"
+	const ID = "id"
 
 	return ControleBase.extend("ui5.anime.app.lista.Lista", {
 		formatter: formatter,
@@ -41,7 +44,7 @@ sap.ui.define([
 			this._exibirEspera(async () => {
 				await this._obterEPreencherSelectStatus();
 				this._filtrarPorRota();
-				this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API+_filtro),NOME_DO_MODELO_DA_LISTA_DE_ANIME);
+				this._modelo(await HttpRequest._request(CAMINHO_PARA_API+_filtro),NOME_DO_MODELO_DA_LISTA_DE_ANIME);
 			});
 		},
 
@@ -86,7 +89,7 @@ sap.ui.define([
 					descricao: "Todos"
 				}
 				data.push(todos);
-				this._modeloLista(await data, NOME_DO_MODELO_DA_LISTA_DE_STATUS);
+				this._modelo(await data, NOME_DO_MODELO_DA_LISTA_DE_STATUS);
 		},
 
 		_limparCampos: function(){
@@ -120,15 +123,15 @@ sap.ui.define([
 
 		aoClicarNoAnime: function(oEvent){
 			this._exibirEspera(async () => {
-				let _idAnime = oEvent.getSource().getBindingContext(NOME_DO_MODELO_DA_LISTA_DE_ANIME).getProperty("id");
-				this._getRota().navTo("detalhesAnime",{
+				let _idAnime = oEvent.getSource().getBindingContext(NOME_DO_MODELO_DA_LISTA_DE_ANIME).getProperty(ID);
+				this._getRota().navTo(ROTA_PARA_DETALHES_ANIME,{
 					id : _idAnime
 				});
 			})
 		},
 		aoClicarEmListaDeGeneros: function(oEvent){
 			this._exibirEspera(async () => {
-				this._getRota().navTo("listaGenero");
+				this._getRota().navTo(ROTA_PARA_LISTA_GENEROS);
 			})
 		}
 	});

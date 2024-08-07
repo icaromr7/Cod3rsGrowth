@@ -16,7 +16,6 @@ sap.ui.define([
             return  fetch(url, options)               
                 .then(response => {
                     if (!response.ok) {
-                    console.log(response);
                         return Promise.reject(response);
                     };
                     return response;

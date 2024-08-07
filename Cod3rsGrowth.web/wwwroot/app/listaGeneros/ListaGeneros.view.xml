@@ -17,7 +17,7 @@
 					<headerToolbar >
 						<Toolbar class= "toolbar">
 							<ToolbarSpacer/>
-							<Button text="{i18n>btnAdicionarGenero}" press="aoClicarAdicionarGenero" id= "btnAdicionar"></Button>
+							<Button text="{i18n>btnAdicionarGenero}" press="aoClicarAdicionarGenero" id= "btnAdicionar" class = "sapMBtnInner"></Button>
 							<SearchField
 								id = "CampoDeBusca" 
 								width="30%" 

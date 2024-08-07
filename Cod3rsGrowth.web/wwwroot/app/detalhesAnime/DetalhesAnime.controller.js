@@ -27,8 +27,8 @@ sap.ui.define([
         
         _obterEDefinirDados : async function () {
             let obterParametro = this._getRota().getHashChanger().getHash().split("/");
-            this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API + obterParametro[POSICAO_ID_DO_ANIME]),NOME_DO_MODELO_DO_DETALHES_DO_ANIME);
-            this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API_GENEROS_DO_ANIME+ obterParametro[POSICAO_ID_DO_ANIME]),NOME_DO_MODELO_GENEROS_DO_ANIME);
+            this._modelo(await HttpRequest._request(CAMINHO_PARA_API + obterParametro[POSICAO_ID_DO_ANIME]),NOME_DO_MODELO_DO_DETALHES_DO_ANIME);
+            this._modelo(await HttpRequest._request(CAMINHO_PARA_API_GENEROS_DO_ANIME+ obterParametro[POSICAO_ID_DO_ANIME]),NOME_DO_MODELO_GENEROS_DO_ANIME);
 		},
 
 	});

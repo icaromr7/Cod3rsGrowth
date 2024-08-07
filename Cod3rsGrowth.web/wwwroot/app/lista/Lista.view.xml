@@ -13,13 +13,15 @@
 						<Toolbar class= "toolbar">
 							<ToolbarSpacer/>
 							<Button 
-								id= "btnListaDeGeneros" 
+								id= "btnListaDeGeneros"
+								class = "sapMBtnInner" 
 								text="{i18n>btnListaDeGeneros}" 
 								press = "aoClicarEmListaDeGeneros"
 							/>
 							<Button
 								id = "btnAdicionar"
 								text="{i18n>btnAdicionar}"
+								class = "sapMBtnInner"
 								press= "aoClicarEmAdicionarAnime"
 							/>
 							<Select

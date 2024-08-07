@@ -25,7 +25,7 @@ sap.ui.define([
         },
         _obterEDefinirDados : async function () {
             var obterParametro = this._getRota().getHashChanger().getHash().split("/");
-            this._modeloLista(await HttpRequest._request(CAMINHO_PARA_API + obterParametro[POSICAO_ID_DO_GENERO]),NOME_DO_MODELO_DO_DETALHES_DO_GENERO);
+            this._modelo(await HttpRequest._request(CAMINHO_PARA_API + obterParametro[POSICAO_ID_DO_GENERO]),NOME_DO_MODELO_DO_DETALHES_DO_GENERO);
 			
 		},
 	});
