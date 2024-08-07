@@ -80,7 +80,7 @@ sap.ui.define([
 		},
 
 		_limparCampos: function () {
-			this.byId(ID_INPUT_NOME).setValue(undefined);
+			this.byId(ID_INPUT_NOME).setValue("");
 			this.byId(ID_INPUT_NOME).setValueState(VALUE_STATE_NONE);
 		},
 	});

@@ -116,11 +116,11 @@ sap.ui.define([
 		},
 		
 		_limparCampos: async function () {
-			this.byId(ID_INPUT_NOME).setValue(undefined);
+			this.byId(ID_INPUT_NOME).setValue("");
 			this.byId(ID_INPUT_NOME).setValueState(VALUE_STATE_NONE)
-			this.byId(ID_INPUT_SINOPSE).setValue(undefined);
+			this.byId(ID_INPUT_SINOPSE).setValue("");
 			this.byId(ID_INPUT_SINOPSE).setValueState(VALUE_STATE_NONE)
-			this.byId(ID_INPUT_DATA_LANCAMENTO).setValue(undefined);
+			this.byId(ID_INPUT_DATA_LANCAMENTO).setValue("");
 			this.byId(ID_INPUT_DATA_LANCAMENTO).setValueState(VALUE_STATE_NONE)
 			this.byId(ID_INPUT_NOTA).setValue(VALOR_INICIAL_DA_NOTA);
 			this.byId(ID_INPUT_NOTA).setValueState(VALUE_STATE_NONE)
