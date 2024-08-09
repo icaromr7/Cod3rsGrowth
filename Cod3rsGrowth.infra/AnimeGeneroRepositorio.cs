@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.infra
         public AnimeGeneroRepositorio()
         {
             var appSettings = ConfigurationManager.AppSettings;
-            string result = appSettings[ConstantesDoRepositorio.CONNECTION_STRING];
+            string result = appSettings[ConnectionString.connectionString];
             dataConnection = new DataConnection(
                 new DataOptions()
                     .UseSqlServer(result));

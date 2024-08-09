@@ -10,7 +10,9 @@ sap.ui.define([
 	"use strict";
     
 		var sNomeDaTela = "listaGeneros.ListaGeneros";
+        var sNomeDaTelaDetalhe = "detalhesGenero.DetalhesGenero";
         var sListaId = "listaDeGeneros"
+        
         const sUrlLista = Opa5.getWindow().location.href;
         Opa5.createPageObjects({
                 onPaginaListaGeneros: {
@@ -63,9 +65,9 @@ sap.ui.define([
                         }
                     },
                     assertions:{
-                        deveNavegarParaTelaDeListaDeGeneros: function(){
+                        deveNavegarParaTelaDeDetalhesDeGeneros: function(){
                             return this.waitFor({
-                                viewName: sNomeDaTela,
+                                viewName: sNomeDaTelaDetalhe,
                                 success: function () {
                                     Opa5.assert.ok(true, "Sucesso ao navegar para tela de lista de gêneros");
                                 },

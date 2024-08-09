@@ -1,12 +1,26 @@
 sap.ui.define([
 	"sap/ui/test/opaQunit",
-	"./pages/Lista",
-	"./pages/ListaGeneros"
+	"./pages/ListaGeneros",
+	"./pages/Lista"
 ], (opaTest) => {
 	"use strict";
 
 	QUnit.module("Lista de gêneros");
+	
+	opaTest("Ao clicar em voltar deve navegar para tela anterior", function (Given, When, Then) {
+        //Arrangements
+        Given.iStartMyApp({
+            hash: "generos"
+        });
+        //Actions
+        When.onPaginaListaGeneros.aoClicarEmVoltar();
+		// Assertions
+        Then.onPaginaListaGeneros.deveVoltarParaTelaAnterior();
 
+        // Cleanup
+		Then.iTeardownMyApp();
+        
+	});
 	opaTest("Deve ser capaz de mostrar todos os itens",  function(Given, When, Then) {
 		//Arrangements
         Given.iStartMyApp({
@@ -55,19 +69,6 @@ sap.ui.define([
 		// Cleanup
 		Then.iTeardownMyApp();
 	});
-	opaTest("Ao clicar em voltar deve navegar para tela anterior", function (Given, When, Then) {
-        //Arrangements
-        Given.iStartMyApp({
-            hash: "generos"
-        });
-        //Actions
-        When.onPaginaListaGeneros.aoClicarEmVoltar();
-		// Assertions
-        Then.onPaginaListaGeneros.deveVoltarParaTelaAnterior();
-
-        // Cleanup
-		Then.iTeardownMyApp();
-        
-	});
+	
 	
 });

@@ -2,10 +2,9 @@ sap.ui.define([
 	'sap/ui/test/Opa5',
 	'sap/ui/test/actions/Press',
     'sap/ui/test/actions/EnterText',
-    'sap/ui/test/matchers/PropertyStrictEquals',
     'sap/ui/test/matchers/Properties',
     'sap/ui/test/matchers/Ancestor'
-], function (Opa5, Press, EnterText, PropertyStrictEquals ,Properties ,Ancestor) {
+], function (Opa5, Press, EnterText,Properties ,Ancestor) {
     "use strict";
 
     var sNomeDaTela = "cadastroGenero.CadastroGenero";
@@ -79,7 +78,7 @@ sap.ui.define([
                     return this.waitFor({
                         success: function() {
                             if (sUrlCadastro !== sUrlAtual) {
-                                Opa5.assert.ok(true, "Falha ao navegar para página anterior.");
+                                Opa5.assert.ok(true, "Sucesso ao navegar para página anterior.");
                             }
                         },
                         errorMessage: "Falha ao navegar para página anterior."

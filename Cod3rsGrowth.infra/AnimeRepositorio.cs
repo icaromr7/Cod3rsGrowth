@@ -2,7 +2,6 @@
 using LinqToDB;
 using LinqToDB.Data;
 using System.Configuration;
-using static Cod3rsGrowth.dominio.Anime;
 
 namespace Cod3rsGrowth.infra
 {
@@ -12,7 +11,7 @@ namespace Cod3rsGrowth.infra
         public AnimeRepositorio()
         {
             var appSettings = ConfigurationManager.AppSettings;
-            string result = appSettings[ConstantesDoRepositorio.CONNECTION_STRING];
+            string result = appSettings[ConnectionString.connectionString];
             dataConnection = new DataConnection(
                 new DataOptions()
                     .UseSqlServer(result));

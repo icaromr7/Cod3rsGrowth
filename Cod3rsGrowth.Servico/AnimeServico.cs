@@ -2,12 +2,6 @@
 using EnumsNET;
 using FluentValidation;
 using FluentValidation.Results;
-using LinqToDB.Data;
-using System;
-using System.ComponentModel;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Cryptography;
-using static Cod3rsGrowth.dominio.Anime;
 
 namespace Cod3rsGrowth.Servico
 {

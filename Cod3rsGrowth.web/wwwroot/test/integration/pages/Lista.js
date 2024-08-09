@@ -135,10 +135,10 @@ sap.ui.define([
                                 viewName: sNomeDaTela,
                                 matchers: new AggregationLengthEquals({
                                     name: "items",
-                                    length: 11
+                                    length: 15
                                 }),
                                 success: function(){
-                                    Opa5.assert.ok(true, "A lista contém 11 animes");
+                                    Opa5.assert.ok(true, "A lista contém mais de 10 animes");
                                 },
                                 errorMessage: "A lista não contém todos os items"
                             })

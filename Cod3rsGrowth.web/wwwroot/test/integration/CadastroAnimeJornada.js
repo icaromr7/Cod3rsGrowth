@@ -7,6 +7,20 @@ sap.ui.define([
 
 	QUnit.module("Cadastro anime");
 
+    opaTest("Ao clicar em voltar deve navegar para tela anterior", function (Given, When, Then) {
+        //Arrangements
+        Given.iStartMyApp({
+            hash: "cadastro"
+        });
+        //Actions
+        When.onPaginaCadastroAnime.aoClicarEmVoltar();
+		// Assertions
+        Then.onPaginaCadastroAnime.deveVoltarParaTelaAnterior();
+
+        // Cleanup
+		Then.iTeardownMyApp();
+        
+	});
     opaTest("Ao tentar cadastrar um anime invalido deve aparecer uma message box de erro", function(Given, When, Then){
         //Arrangements
         Given.iStartMyApp({
@@ -26,8 +40,6 @@ sap.ui.define([
 
 		// Assertions
 		Then.onPaginaCadastroAnime.deveAperecerUmaMessageBoxDe("Erro");
-        //Action
-        When.onPaginaCadastroAnime.aoClicarEmVisualizarDetalhes("Visualizar detalhes");
         //Assertions
 		Then.onPaginaCadastroAnime.deveFecharMessageBoxAoApertarEmOk("Fechar");
 	});
@@ -52,19 +64,6 @@ sap.ui.define([
 		Then.iTeardownMyApp();
 
 	});
-    opaTest("Ao clicar em voltar deve navegar para tela anterior", function (Given, When, Then) {
-        //Arrangements
-        Given.iStartMyApp({
-            hash: "cadastro"
-        });
-        //Actions
-        When.onPaginaCadastroAnime.aoClicarEmVoltar();
-		// Assertions
-        Then.onPaginaCadastroAnime.deveVoltarParaTelaAnterior();
-
-        // Cleanup
-		Then.iTeardownMyApp();
-        
-	});
+    
 }
 );

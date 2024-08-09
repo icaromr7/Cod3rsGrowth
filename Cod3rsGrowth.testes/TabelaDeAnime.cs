@@ -11,7 +11,7 @@ namespace Cod3rsGrowth.testes
     {
         private static List<Anime> instance = new List<Anime>();
         
-        public static List<Anime> Instance { get { return instance; } }
+        public static List<Anime> Instance { get { return instance;} }
         
     }
 }

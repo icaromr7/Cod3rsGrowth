@@ -59,7 +59,7 @@ sap.ui.define([
                             </ul>`;
                         }
                         MessageBox.error(`${mensagemErro}`, {
-                            title: "Error",
+                            title: "Erro",
                             id: "messageBox",
                             details: detalhesDoErro,
                             contentWidth: "auto",

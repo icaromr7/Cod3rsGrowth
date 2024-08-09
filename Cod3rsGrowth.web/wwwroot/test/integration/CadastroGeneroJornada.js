@@ -8,7 +8,20 @@ sap.ui.define([
 
 	QUnit.module("Cadastro gênero");
 
-    
+    opaTest("Ao clicar em voltar deve navegar para tela anterior", function (Given, When, Then) {
+        //Arrangements
+        Given.iStartMyApp({
+            hash: "genero/cadastro"
+        });
+        //Actions
+        When.onPaginaCadastroGenero.aoClicarEmVoltar();
+		// Assertions
+        Then.onPaginaCadastroGenero.deveVoltarParaTelaAnterior();
+
+        // Cleanup
+		Then.iTeardownMyApp();
+        
+	});
     opaTest("Ao tentar cadastrar um gêneroinvalido deve aparecer uma message box de erro", function(Given, When, Then){
 		// Arrangements
 		Given.iStartMyApp({
@@ -26,7 +39,7 @@ sap.ui.define([
     opaTest("Ao tentar cadastrar um gênero válido deve aparecer uma message box de êxito", function(Given, When, Then){
 
 		//Actions
-        When.onPaginaCadastroGenero.aoDigitarNome("Ninja");
+        When.onPaginaCadastroGenero.aoDigitarNome("Familia");
 		When.onPaginaCadastroGenero.aoClicarEmSalvar();
 
 		// Assertions
@@ -36,19 +49,6 @@ sap.ui.define([
         // Cleanup
 		Then.iTeardownMyApp();
 	});
-	opaTest("Ao clicar em voltar deve navegar para tela anterior", function (Given, When, Then) {
-        //Arrangements
-        Given.iStartMyApp({
-            hash: "genero/cadastro"
-        });
-        //Actions
-        When.onPaginaCadastroGenero.aoClicarEmVoltar();
-		// Assertions
-        Then.onPaginaCadastroGenero.deveVoltarParaTelaAnterior();
-
-        // Cleanup
-		Then.iTeardownMyApp();
-        
-	});
+	
 }
 );

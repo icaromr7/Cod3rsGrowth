@@ -10,7 +10,6 @@ sap.ui.define([
 
     var sNomeDaTela = "cadastroAnime.CadastroAnime";
     const sUrlCadastro = Opa5.getWindow().location.href;
-
     Opa5.createPageObjects({
         onPaginaCadastroAnime : {
             actions: {
