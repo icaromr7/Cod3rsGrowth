@@ -108,7 +108,7 @@
         "targets": {
           "lista": {
             "id": "lista",
-            "path": "ui5.anime.app.lista",
+            "path": "ui5.anime.app.anime",
             "name": "Lista",
             "level": 1
           },
@@ -120,31 +120,31 @@
           },
           "cadastroAnime":{
             "id": "cadastroAnime",
-            "path": "ui5.anime.app.cadastroAnime",
+            "path": "ui5.anime.app.anime",
             "name": "CadastroAnime",
             "level": 2
           },
           "detalhesAnime":{
             "id": "detalhesAnime",
-            "path": "ui5.anime.app.detalhesAnime",
+            "path": "ui5.anime.app.anime",
             "name": "DetalhesAnime",
             "level": 3
           },
           "listaGenero":{
             "id": "listaGenero",
-            "path":"ui5.anime.app.listaGeneros",
+            "path":"ui5.anime.app.genero",
             "name": "ListaGeneros",
             "level": 4
           },
           "cadastroGenero":{
             "id": "cadastroGenero",
-            "path":"ui5.anime.app.cadastroGenero",
+            "path":"ui5.anime.app.genero",
             "name": "CadastroGenero",
             "level": 5
           },
           "detalhesGenero":{
             "id": "detalhesGenero",
-            "path":"ui5.anime.app.detalhesGenero",
+            "path":"ui5.anime.app.genero",
             "name": "DetalhesGenero",
             "level": 6
           }

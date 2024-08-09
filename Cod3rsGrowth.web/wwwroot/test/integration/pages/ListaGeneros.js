@@ -9,11 +9,9 @@ sap.ui.define([
 ], function (Opa5, Properties, Press, EnterText, AggregationLengthEquals,Ancestor,PropertyStrictEquals) {
 	"use strict";
     
-		var sNomeDaTela = "listaGeneros.ListaGeneros";
-        var sNomeDaTelaDetalhe = "detalhesGenero.DetalhesGenero";
+		var sNomeDaTela = "genero.ListaGeneros";
         var sListaId = "listaDeGeneros"
         
-        const sUrlLista = Opa5.getWindow().location.href;
         Opa5.createPageObjects({
                 onPaginaListaGeneros: {
                     actions:{
@@ -65,7 +63,7 @@ sap.ui.define([
                         }
                     },
                     assertions:{
-                        deveNavegarParaTelaDeDetalhesDeGeneros: function(){
+                        aTelaListaDeGenerosFoiCarregadaCorretamente: function(){
                             return this.waitFor({
                                 viewName: sNomeDaTelaDetalhe,
                                 success: function () {
@@ -116,15 +114,17 @@ sap.ui.define([
                                 errorMessage: "A lista não contém todos os items"
                             })
                         },
-                        deveVoltarParaTelaAnterior: function(){
-                            const sUrlAtual = Opa5.getWindow().location.href;
+                        DeveSairDaTelaDeListaGenero: function(sTitulo){
                             return this.waitFor({
-                                success: function() {
-                                    if (sUrlLista !== sUrlAtual) {
-                                        Opa5.assert.ok(true, "Falha ao navegar para página anterior.");
+                                controlType: "sap.m.Page",
+                                matchers: {
+                                    PropertyStrictEquals: {
+                                        name: "tittle",
+                                        value: sTitulo
                                     }
                                 },
-                                errorMessage: "Falha ao navegar para página anterior."
+                                success: () => Opa5.assert.ok(false, "Sucesso ao sair da pagina de lista de gênero"),
+                                errorMessage: "Falha ao ao sair da pagina de lista de gênero"
                             });
                         }
                     }

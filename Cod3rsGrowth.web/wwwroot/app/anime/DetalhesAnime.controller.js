@@ -12,7 +12,7 @@ sap.ui.define([
     const NOME_DA_ROTA = "detalhesAnime";
     const POSICAO_ID_DO_ANIME = 1;
 	
-	return ControleBase.extend("ui5.anime.app.detalhesAnime.DetalhesAnime", {
+	return ControleBase.extend("ui5.anime.app.anime.DetalhesAnime", {
         formatter: formatter,
 
         onInit: function () {

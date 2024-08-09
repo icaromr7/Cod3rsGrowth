@@ -91,11 +91,9 @@ sap.ui.define([
                 oHistory = History.getInstance();
                 sPreviousHash = oHistory.getPreviousHash();
 
-                if (sPreviousHash !== undefined) {
-                    window.history.go(-1);
-                } else {
-                    this._getRota().navTo(ROTA_PARA_LISTA, {}, true);
-                }
+                
+                this._getRota().navTo(ROTA_PARA_LISTA, {}, true);
+                
             })
 
         },

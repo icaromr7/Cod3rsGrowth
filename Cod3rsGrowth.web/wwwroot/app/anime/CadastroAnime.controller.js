@@ -33,7 +33,7 @@ sap.ui.define([
 	const OPCAO_VOLTAR_PARA_LISTA_DE_ANIME = "Voltar a lista de anime";
 	const POST = 'POST';
 
-	return ControleBase.extend("ui5.anime.app.cadastroAnime.CadastroAnime", {
+	return ControleBase.extend("ui5.anime.app.anime.CadastroAnime", {
 		onInit: async function () {
 			const oRota = this.getOwnerComponent().getRouter();
 			oRota.getRoute(ROTA_ADICIONAR_ANIME).attachMatched(this._aoCoincidirRota, this);

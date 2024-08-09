@@ -9,15 +9,13 @@ using FluentValidation.AspNetCore;
 using System.Diagnostics;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 const string PERFIL_TESTE = "BancoDeDadosTeste";
-const string CONNECTION_STRING_TESTE = "ConnectionStringTeste";
-const int POSICAO_COMMAND_LINE_ARGS = 1;
 var builder = WebApplication.CreateBuilder(args);
 
 var appSettings = ConfigurationManager.AppSettings;
 
-if (Environment.GetCommandLineArgs()[POSICAO_COMMAND_LINE_ARGS] == PERFIL_TESTE)
-    ConnectionString.connectionString = CONNECTION_STRING_TESTE;
-string result = appSettings[ConnectionString.connectionString];
+var conectionString = args.FirstOrDefault() is PERFIL_TESTE ? ConstantesDoRepositorio.CONNECTION_STRING_TESTE : ConstantesDoRepositorio.CONNECTION_STRING;
+
+string result = appSettings[conectionString];
 builder.Services.AddFluentMigratorCore()
     .ConfigureRunner(rb => rb
         .AddSqlServer()

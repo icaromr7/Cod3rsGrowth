@@ -31,7 +31,7 @@ sap.ui.define([
 	const ROTA_PARA_LISTA_GENEROS = "listaGenero"
 	const ID = "id"
 
-	return ControleBase.extend("ui5.anime.app.lista.Lista", {
+	return ControleBase.extend("ui5.anime.app.anime.Lista", {
 		formatter: formatter,
 
 		onInit: async function () {
@@ -83,7 +83,7 @@ sap.ui.define([
 		},
 		_obterEPreencherSelectStatus: async function () {
 				let data = await HttpRequest._request(CAMINHO_PARA_API_STATUS);
-				var todos =
+				let todos =
 				{
 					id: 0,
 					descricao: "Todos"

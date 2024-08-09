@@ -34,7 +34,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "commandLineArgs": "BancoDeDadosTeste",
-      "launchUrl": "test/integration/opaTests.qunit.html",
+      "launchUrl": "",
       "applicationUrl": "https://localhost:7118;http://localhost:5101",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

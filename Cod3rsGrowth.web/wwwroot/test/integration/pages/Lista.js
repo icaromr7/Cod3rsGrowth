@@ -9,7 +9,7 @@ sap.ui.define([
 ], function (Opa5, Properties, Press,EnterText, AggregationLengthEquals,Ancestor,PropertyStrictEquals) {
 	"use strict";
     
-		var sNomeDaTela = "lista.Lista";
+		var sNomeDaTela = "anime.Lista";
         var sListaId = "listaDeAnimes"
         Opa5.createPageObjects({
                 onPaginaListaAnime: {
@@ -92,7 +92,7 @@ sap.ui.define([
                         }
                     },
                     assertions:{
-                        deveNavegarParaTelaDeLista: function(){
+                        aTelaListaDeAnimesFoiCarregadaCorretamente: function(){
                             return this.waitFor({
                                 viewName: sNomeDaTela,
                                 success: function () {

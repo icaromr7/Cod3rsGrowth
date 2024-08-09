@@ -18,7 +18,7 @@ sap.ui.define([
     const POSICAO_PRIMEIRA_LETRA = 0;
     const POSICAO_SEGUNDA_LETRA = 1;
 	const POST = 'POST';
-	return ControleBase.extend("ui5.anime.app.cadastroGenero.CadastroGenero", {
+	return ControleBase.extend("ui5.anime.app.genero.CadastroGenero", {
 
 		onInit: async function () {
 			const oRota = this.getOwnerComponent().getRouter();

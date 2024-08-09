@@ -10,7 +10,7 @@ sap.ui.define([
     const NOME_DA_ROTA = "detalhesGenero";
     const POSICAO_ID_DO_GENERO = 1;
 	
-	return ControleBase.extend("ui5.anime.app.detalhesGenero.DetalhesGenero", {
+	return ControleBase.extend("ui5.anime.app.genero.DetalhesGenero", {
         formatter: formatter,
 
         onInit: function () {

@@ -7,7 +7,14 @@ sap.ui.define([
 	"./ListaGenerosJornada",
 	"./CadastroGeneroJornada",
 	"./DetalhesGeneroJornada"
-], function (Opa5, Startup) {
+], function (Opa5, 
+	Startup,
+	ListaJornada,
+	CadastroAnimeJornada,
+	DetalhesAnimeJornada,
+	ListaGenerosJornada,
+	CadastroGeneroJornada,
+	DetalhesGeneroJornada) {
 	"use strict";
 
 	Opa5.extendConfig({

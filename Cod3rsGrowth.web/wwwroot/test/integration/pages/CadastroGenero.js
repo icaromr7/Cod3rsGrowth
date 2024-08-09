@@ -7,8 +7,7 @@ sap.ui.define([
 ], function (Opa5, Press, EnterText,Properties ,Ancestor) {
     "use strict";
 
-    var sNomeDaTela = "cadastroGenero.CadastroGenero";
-    const sUrlCadastro = Opa5.getWindow().location.href;
+    var sNomeDaTela = "genero.CadastroGenero";
     Opa5.createPageObjects({
         onPaginaCadastroGenero : {
             actions: {
@@ -40,7 +39,7 @@ sap.ui.define([
                 }
             },
             assertions:{
-                deveNavegarParaTelaDeCadastro: function(){
+                aTelaCadastroGeneroFoiCarregadaCorretamente: function(){
                     return this.waitFor({
                         viewName: sNomeDaTela,
                         success: function () {
@@ -73,15 +72,17 @@ sap.ui.define([
 						errorMessage: "Falhar ao clicar no botao Ok"
                     });
 				},
-                deveVoltarParaTelaAnterior: function(){
-                    const sUrlAtual = Opa5.getWindow().location.href;
+                DeveSairDaTelaDeCadastro: function(sTitulo){
                     return this.waitFor({
-                        success: function() {
-                            if (sUrlCadastro !== sUrlAtual) {
-                                Opa5.assert.ok(true, "Sucesso ao navegar para página anterior.");
+                        controlType: "sap.m.Page",
+                        matchers: {
+                            PropertyStrictEquals: {
+                                name: "tittle",
+                                value: sTitulo
                             }
                         },
-                        errorMessage: "Falha ao navegar para página anterior."
+                        success: () => Opa5.assert.ok(false, "Sucesso ao sair da pagina de cadastro"),
+                        errorMessage: "Falha ao ao sair da pagina de cadastro"
                     });
                 }
             }

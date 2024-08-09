@@ -1,6 +1,6 @@
 <mvc:View xmlns:smartmultiedit="sap.ui.comp.smartmultiedit" xmlns:macros="sap.fe.macros" 
     xmlns:layout="sap.ui.layout" 
-    controllerName="ui5.anime.app.detalhesGenero.DetalhesGenero"
+    controllerName="ui5.anime.app.genero.DetalhesGenero"
     displayBlock="true"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"

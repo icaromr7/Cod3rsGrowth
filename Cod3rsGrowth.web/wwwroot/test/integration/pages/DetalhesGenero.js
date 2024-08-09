@@ -5,9 +5,8 @@ sap.ui.define([
 ], function (Opa5, Properties, Press ) {
     "use strict";
 
-    var sNomeDaTela = "detalhesGenero.DetalhesGenero";
+    var sNomeDaTela = "genero.DetalhesGenero";
     var sListaId = "listaDeGeneros"
-    const sUrlDetalhes = Opa5.getWindow().location.href;
     Opa5.createPageObjects({
         onPaginaDetalhesGenero : {
             actions: {
@@ -21,7 +20,7 @@ sap.ui.define([
                 }
             },
             assertions:{
-                deveNavegarParaTelaDeDetalhes: function(){
+                aTelaDetalhesGeneroFoiCarregadaCorretamente: function(){
                     return this.waitFor({
                         viewName: sNomeDaTela,
                         success: function () {
@@ -65,15 +64,17 @@ sap.ui.define([
                         }
                     });
                 },
-                deveVoltarParaTelaAnterior: function(){
-                    const sUrlAtual = Opa5.getWindow().location.href;
+                DeveSairDaTelaDeDetalhes: function(sTitulo){
                     return this.waitFor({
-                        success: function() {
-                            if (sUrlDetalhes !== sUrlAtual) {
-                                Opa5.assert.ok(true, "Falha ao navegar para página anterior.");
+                        controlType: "sap.m.Page",
+                        matchers: {
+                            PropertyStrictEquals: {
+                                name: "tittle",
+                                value: sTitulo
                             }
                         },
-                        errorMessage: "Falha ao navegar para página anterior."
+                        success: () => Opa5.assert.ok(false, "Sucesso ao sair da pagina de detalhes"),
+                        errorMessage: "Falha ao ao sair da pagina de detalhes"
                     });
                 }
             }

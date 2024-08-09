@@ -8,8 +8,7 @@ sap.ui.define([
 ], function (Opa5, Press, EnterText, PropertyStrictEquals ,Properties ,Ancestor) {
     "use strict";
 
-    var sNomeDaTela = "cadastroAnime.CadastroAnime";
-    const sUrlCadastro = Opa5.getWindow().location.href;
+    var sNomeDaTela = "anime.CadastroAnime";
     Opa5.createPageObjects({
         onPaginaCadastroAnime : {
             actions: {
@@ -21,35 +20,24 @@ sap.ui.define([
                         errorMessage: "Não foi possível encontrar o botão de voltar na página do objeto"
                     });
                 },
-                aoDigitarNome : function (sNomeDigitado){
+                aoDigitarNoInput: function(chavei18n, stext){
                     return this.waitFor({
-                        id: "inputNome",
+                        id: chavei18n,
                         viewName: sNomeDaTela,
                         actions: new EnterText({
-                            text: sNomeDigitado
+                            text: stext
                         }),
-                        errorMessage: "inputNome não foi encontrado."
+                        errorMessage: `${chavei18n} não foi encontrado.`
                     });
                 },
-                aoDigitarSinopse : function (sSinopseDigitada){
-                    return this.waitFor({
-                        id: "inputSinopse",
-                        viewName: sNomeDaTela,
-                        actions: new EnterText({
-                            text: sSinopseDigitada
-                        }),
-                        errorMessage: "inputSinopse não foi encontrado."
-                    });
+                aoDigitarNome : function (chavei18n, stext){
+                    this.aoDigitarNoInput(chavei18n, stext);
                 },
-                aoDigitarNota : function (sNotaDigitada){
-                    return this.waitFor({
-                        id: "inputNota",
-                        viewName: sNomeDaTela,
-                        actions: new EnterText({
-                            text: sNotaDigitada
-                        }),
-                        errorMessage: "inputNota não foi encontrado."
-                    });
+                aoDigitarSinopse : function (chavei18n, stext){
+                    this.aoDigitarNoInput(chavei18n, stext);
+                },
+                aoDigitarNota : function (chavei18n, stext){
+                    this.aoDigitarNoInput(chavei18n, stext);
                 },
                 aoClicarNaLista: function(){
                     return this.waitFor({
@@ -112,12 +100,10 @@ sap.ui.define([
                 }
             },
             assertions:{
-                deveNavegarParaTelaDeCadastro: function(){
+                aTelaCadastroAnimeFoiCarregadaCorretamente: function(){
                     return this.waitFor({
                         viewName: sNomeDaTela,
-                        success: function () {
-                            Opa5.assert.ok(true, "Sucesso ao navegar para tela de cadastro");
-                        },
+                        success: () => Opa5.assert.ok(true, "Sucesso ao navegar para tela de cadastro"),
                         errorMessage: "Falha ao navegar a pagina de cadastro"
                     });
                 },
@@ -145,17 +131,20 @@ sap.ui.define([
 						errorMessage: "Falhar ao clicar no botao Ok"
                     });
 				},
-                deveVoltarParaTelaAnterior: function(){
-                    const sUrlAtual = Opa5.getWindow().location.href;
+                DeveSairDaTelaDeCadastro: function(sTitulo){
                     return this.waitFor({
-                        success: function() {
-                            if (sUrlCadastro !== sUrlAtual) {
-                                Opa5.assert.ok(true, "Falha ao navegar para página anterior.");
+                        controlType: "sap.m.Page",
+                        matchers: {
+                            PropertyStrictEquals: {
+                                name: "tittle",
+                                value: sTitulo
                             }
                         },
-                        errorMessage: "Falha ao navegar para página anterior."
+                        success: () => Opa5.assert.ok(false, "Sucesso ao sair da pagina de cadastro"),
+                        errorMessage: "Falha ao ao sair da pagina de cadastro"
                     });
                 }
+                
             }
         }
     });

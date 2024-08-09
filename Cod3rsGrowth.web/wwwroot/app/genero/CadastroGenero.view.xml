@@ -1,7 +1,7 @@
 <mvc:View xmlns:macros="sap.fe.macros" 
     xmlns:smartmultiedit="sap.ui.comp.smartmultiedit" 
     xmlns:layout="sap.ui.layout" 
-    controllerName="ui5.anime.app.cadastroGenero.CadastroGenero"
+    controllerName="ui5.anime.app.genero.CadastroGenero"
     displayBlock="true"
     xmlns="sap.m"
     xmlns:f= "sap.f"

@@ -1,7 +1,8 @@
 ﻿namespace Cod3rsGrowth.infra
 {
-    public sealed class ConnectionString
+    public sealed class ConstantesDoRepositorio
     {
-       public static string connectionString { get; set; } = "ConnectionString";
+       public const string CONNECTION_STRING = "ConnectionString";
+       public const string CONNECTION_STRING_TESTE = "ConnectionStringTeste";
     }
 }
