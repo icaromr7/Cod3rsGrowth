@@ -7,6 +7,7 @@ sap.ui.define([
     "use strict";
 
     const ROTA_PARA_LISTA = "lista";
+    const ROTA_PARA_LISTA_GEBERO = "listaGenero"
     const POSICAO_INICIAL_DA_LISTA = 0;
     const FALHA_NA_REQUISIÇÃO = "Ocorreu um ou mais erros na requisição";
     var sResponsivePaddingClasses = "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer";
@@ -84,19 +85,18 @@ sap.ui.define([
             return this.getOwnerComponent().getRouter();
         },
 
-        aoClicarEmVoltar: function () {
+        aoClicarEmVoltarParaListaAnime: function () {
             this._exibirEspera(async () => {
-                var oHistory, sPreviousHash;
-
-                oHistory = History.getInstance();
-                sPreviousHash = oHistory.getPreviousHash();
-
-                
-                this._getRota().navTo(ROTA_PARA_LISTA, {}, true);
-                
+                this._getRota().navTo(ROTA_PARA_LISTA);
             })
-
         },
+
+        aoClicarEmVoltarParaListaGenero: function () {
+            this._exibirEspera(async () => {
+                this._getRota().navTo(ROTA_PARA_LISTA_GEBERO);
+            })
+        },
+        
         _modelo: function (oData, oNomeModelo) {
             const oModel = new JSONModel(oData);
             this.getView().setModel(oModel, oNomeModelo);

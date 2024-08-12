@@ -1,7 +1,9 @@
 sap.ui.define([
 	"sap/ui/test/opaQunit",
-	"./pages/Lista"
-], (opaTest) => {
+	"./pages/Lista",
+	"./pages/DetalhesAnime",
+	"./pages/CadastroAnime"
+], (opaTest,Lista,DetalhesAnime,CadastroAnime) => {
 	"use strict";
 
 	QUnit.module("Lista de anime");
@@ -9,8 +11,8 @@ sap.ui.define([
         Given.iStartMyApp();
         
         Then
-            .onPaginaListaGeneros
-            .aTelaListaDeGenerosFoiCarregadaCorretamente();
+            .onPaginaListaAnime
+            .aTelaListaDeAnimesFoiCarregadaCorretamente();
     });
 	opaTest("Deve ser capaz de mostrar todos os itens",  function(Given, When, Then) {
 		When

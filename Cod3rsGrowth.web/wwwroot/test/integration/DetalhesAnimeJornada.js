@@ -1,8 +1,8 @@
 sap.ui.define([
 	"sap/ui/test/opaQunit",
     "./pages/DetalhesAnime",
-	"./pages/Lista"
-], (opaTest,DetalhesAnime, Lista) => {
+    "./pages/Lista"
+], (opaTest,DetalhesAnime,Lista) => {
 	"use strict";
 
 	QUnit.module("Detalhes anime");
@@ -13,13 +13,13 @@ sap.ui.define([
         });
         
         Then
-            .onPaginaDetalhesoAnime
+            .onPaginaDetalhesDoAnime
             .aTelaDetalhesAnimeFoiCarregadaCorretamente();
     });
 
     opaTest("Na tela deve conter as informações corretas do item clicado", function (Given, When, Then) {
         Then
-            .onPaginaDetalhesoAnime
+            .onPaginaDetalhesDoAnime
             .deveTerOIdDoItemSelecionado("1")
             .deveTerONomeDoItemSelecionado("One Piece")
             .deveTerANotaDoItemSelecionado("10")
@@ -27,17 +27,14 @@ sap.ui.define([
             .deveTerOStatusDeExibicaoDoItemSelecionado("Em Exibição")
             .deveTerASinopseDoItemSelecionado("Bom demais")
             .aListaDeveMostrarTodosOsGenerosDoAnime(2)
-		
-        Then
-            .iTeardownMyApp();
 	});
     opaTest("Ao clicar em voltar deve navegar para tela anterior", function (Given, When, Then) {
         When
-            .onPaginaDetalhesoAnime
+            .onPaginaDetalhesDoAnime
             .aoClicarEmVoltar();
         Then
-            .onPaginaDetalhesoAnime
-            .DeveSairDaTelaDeDetalhes("Detalhes do Anime");
+            .onPaginaListaAnime
+            .aTelaListaDeAnimesFoiCarregadaCorretamente();
         
         Then
             .iTeardownMyApp();

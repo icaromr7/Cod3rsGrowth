@@ -14,7 +14,7 @@
         id= "pagina"
         title="{i18n>TituloPaginaCadastroGenero}" class="sapUiResponsiveContentPadding"
         showNavButton="true"
-        navButtonPress="aoClicarEmVoltar"
+        navButtonPress="aoClicarEmVoltarParaListaGenero"
         titleAlignment="Center"
     >
         <content>

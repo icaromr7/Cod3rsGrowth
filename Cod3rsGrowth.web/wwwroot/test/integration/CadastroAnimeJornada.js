@@ -56,8 +56,8 @@ sap.ui.define([
             .onPaginaCadastroAnime
             .aoClicarEmVoltar();
         Then
-            .onPaginaCadastroAnime
-            .DeveSairDaTelaDeCadastro("Cadastro de Anime");
+            .onPaginaListaAnime
+            .aTelaListaDeAnimesFoiCarregadaCorretamente();
 
         Then.iTeardownMyApp();
     });

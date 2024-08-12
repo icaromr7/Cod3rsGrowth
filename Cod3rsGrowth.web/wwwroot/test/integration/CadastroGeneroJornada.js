@@ -48,9 +48,9 @@ sap.ui.define([
             .onPaginaCadastroGenero
             .aoClicarEmVoltar();
 
-        Then
-            .onPaginaCadastroGenero
-            .DeveSairDaTelaDeCadastro("Cadastro de Gênero");
+		Then
+            .onPaginaListaGeneros
+            .aTelaListaDeGenerosFoiCarregadaCorretamente();
 
         Then.iTeardownMyApp();
     });

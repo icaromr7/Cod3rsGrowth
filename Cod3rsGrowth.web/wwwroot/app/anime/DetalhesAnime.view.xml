@@ -9,7 +9,7 @@
     <Page title="{i18n>TituloPaginaDetalhesAnime}" class="sapUiResponsiveContentPadding"
         id = "pagina"
         showNavButton="true"
-        navButtonPress="aoClicarEmVoltar"
+        navButtonPress="aoClicarEmVoltarParaListaAnime"
         titleAlignment="Center"
         
     >

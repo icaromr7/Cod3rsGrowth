@@ -9,7 +9,7 @@ sap.ui.define([
     var sNomeDaTela = "anime.DetalhesAnime";
     var sListaId = "listaDeGeneros"
     Opa5.createPageObjects({
-        onPaginaDetalhesoAnime : {
+        onPaginaDetalhesDoAnime : {
             actions: {
                 aoClicarEmVoltar: function () {
                     return this.waitFor({

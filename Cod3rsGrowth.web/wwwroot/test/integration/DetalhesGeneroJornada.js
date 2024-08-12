@@ -3,7 +3,7 @@ sap.ui.define([
     "./pages/DetalhesGenero",
 	"./pages/ListaGeneros",
 	"./pages/Lista"
-], (opaTest) => {
+], (opaTest,DetalhesGenero,ListaGeneros,Lista) => {
 	"use strict";
 
 	QUnit.module("Detalhes gênero");
@@ -29,8 +29,8 @@ sap.ui.define([
             .onPaginaDetalhesGenero
             .aoClicarEmVoltar();
         Then
-            .onPaginaDetalhesGenero
-            .DeveSairDaTelaDeDetalhes("Detalhes do Gênero");
+            .onPaginaListaGeneros
+            .aTelaListaDeGenerosFoiCarregadaCorretamente();
         
         Then
             .iTeardownMyApp();

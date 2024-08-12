@@ -15,7 +15,7 @@
         title="{i18n>TituloPaginaCadastroAnime}" 
         class="sapUiResponsiveContentPadding"
         showNavButton="true"
-        navButtonPress="aoClicarEmVoltar"
+        navButtonPress="aoClicarEmVoltarParaListaAnime"
         titleAlignment="Center"
         bindingContexts="onInit"
     >

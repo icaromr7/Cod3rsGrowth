@@ -65,7 +65,7 @@ sap.ui.define([
                     assertions:{
                         aTelaListaDeGenerosFoiCarregadaCorretamente: function(){
                             return this.waitFor({
-                                viewName: sNomeDaTelaDetalhe,
+                                viewName: sNomeDaTela,
                                 success: function () {
                                     Opa5.assert.ok(true, "Sucesso ao navegar para tela de lista de gêneros");
                                 },

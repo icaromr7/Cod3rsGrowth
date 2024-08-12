@@ -10,7 +10,7 @@
 		title="{i18n>listaDeGeneroTitulo}" 
 		class="sapUiResponsiveContentPadding"
 		showNavButton="true"
-        navButtonPress="aoClicarEmVoltar" 
+        navButtonPress="aoClicarEmVoltarParaListaAnime" 
 		titleAlignment="Center">	
 		<content>
 				<List items = "{path: 'generos>/'}" class= "listaDeGeneros" id = "listaDeGeneros" growing="true" growingThreshold="10">

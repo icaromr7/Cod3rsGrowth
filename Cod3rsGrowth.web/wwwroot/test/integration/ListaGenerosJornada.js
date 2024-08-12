@@ -68,9 +68,9 @@ sap.ui.define([
         When
             .onPaginaListaGeneros
             .aoClicarEmVoltar();
-        Then
-            .onPaginaListaGeneros
-            .DeveSairDaTelaDeCadastro("Lista de Gêneros");
+		Then
+            .onPaginaListaAnime
+            .aTelaListaDeAnimesFoiCarregadaCorretamente();
 
         Then.iTeardownMyApp();
     });

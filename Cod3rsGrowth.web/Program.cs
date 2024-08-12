@@ -6,16 +6,15 @@ using Cod3rsGrowth.web;
 using FluentMigrator.Runner;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using System.Diagnostics;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 const string PERFIL_TESTE = "BancoDeDadosTeste";
 var builder = WebApplication.CreateBuilder(args);
 
 var appSettings = ConfigurationManager.AppSettings;
 
-var conectionString = args.FirstOrDefault() is PERFIL_TESTE ? ConstantesDoRepositorio.CONNECTION_STRING_TESTE : ConstantesDoRepositorio.CONNECTION_STRING;
+Connect.connectionString = args.FirstOrDefault() is PERFIL_TESTE ? ConstantesDoRepositorio.CONNECTION_STRING_TESTE : ConstantesDoRepositorio.CONNECTION_STRING;
 
-string result = appSettings[conectionString];
+string result = appSettings[Connect.connectionString];
 builder.Services.AddFluentMigratorCore()
     .ConfigureRunner(rb => rb
         .AddSqlServer()
