@@ -80,7 +80,7 @@
             "target": "lista"
           },
           {
-            "pattern": "cadastro",
+            "pattern": "anime/cadastro",
             "name": "cadastroAnime",
             "target": "cadastroAnime"
           },
@@ -103,6 +103,11 @@
             "pattern":"genero/{id}",
             "name": "detalhesGenero",
             "target": "detalhesGenero"
+          },
+          {
+            "pattern": "anime/editar/{id}",
+            "name": "editarAnime",
+            "target": "cadastroAnime"
           }
         ],
         "targets": {
