@@ -43,6 +43,12 @@ namespace Cod3rsGrowth.web.Controllers
         public IActionResult ObterPorId(int id)
         {
             var anime = _animeServico.ObterPorId(id);
+            var animeGeneros = _animeGeneroServico.ObterTodos(id);
+            anime.IdGeneros = new List<int>();
+            foreach (var item in animeGeneros)
+            {
+                anime.IdGeneros.Add(item.IdGenero);
+            }
             if (anime == null) { return BadRequest(); }
             return Ok(anime);
         }

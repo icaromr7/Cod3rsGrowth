@@ -80,9 +80,9 @@
             "target": "lista"
           },
           {
-            "pattern": "cadastro",
+            "pattern": "anime/cadastro",
             "name": "cadastroAnime",
-            "target": "cadastroAnime"
+            "target": "cadastroEditarAnime"
           },
           {
             "pattern": "anime/{id}",
@@ -103,6 +103,11 @@
             "pattern":"genero/{id}",
             "name": "detalhesGenero",
             "target": "detalhesGenero"
+          },
+          {
+            "pattern": "anime/editar/{id}",
+            "name": "editarAnime",
+            "target": "cadastroEditarAnime"
           }
         ],
         "targets": {
@@ -118,10 +123,10 @@
             "name": "NotFound",
             "transition": "show"
           },
-          "cadastroAnime":{
-            "id": "cadastroAnime",
+          "cadastroEditarAnime":{
+            "id": "cadastroEditarAnime",
             "path": "ui5.anime.app.anime",
-            "name": "CadastroAnime",
+            "name": "CadastroEditarAnime",
             "level": 2
           },
           "detalhesAnime":{

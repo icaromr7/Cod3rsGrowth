@@ -2,10 +2,11 @@ sap.ui.define([
 	"ui5/anime/app/common/ControleBase",
 	'sap/m/MessageBox',
 	"ui5/anime/app/common/HttpRequest"
-], function ( ControleBase, MessageBox, HttpRequest) {
+], function (ControleBase, MessageBox, HttpRequest) {
 
 	const ROTA_PARA_LISTA = "lista";
 	const ROTA_ADICIONAR_ANIME = "cadastroAnime";
+	const ROTA_EDITAR_ANIME = "editarAnime"
 	const NOME_DO_MODELO_LISTA_DE_GENEROS = "generos";
 	const NOME_DO_MODELO_DA_LISTA_DE_STATUS = "status";
 	const CAMINHO_PARA_API_GENEROS = "/api/genero";
@@ -19,34 +20,60 @@ sap.ui.define([
 	const VALOR_INICIAL_DA_NOTA = 1;
 	const POSICAO_INICIAL_DA_LISTA = 0;
 	const POSICAO_DO_ID = 1;
-	const FALHA_NA_REQUISIÇÃO = "Ocorreu um ou mais erros na requisição";
 	const VALUE_STATE_ERROR = "Error";
 	const VALUE_STATE_NONE = "None";
 	const VALUE_STATE_NOME_OBRIGATORIO = "o campo nome é obrigatório";
 	const VALUE_STATE_SINOPSE_OBRIGATORIA = "o campo sinopse é obrigatório";
 	const VALUE_STATE_DATA_OBRIGATORIO = "o campo data lançamento é obrigatório";
-	const DATA_PADRAO_INICIAL = "24/07/2024";
 	const MESSAGEM_PRECISA_SELECIONAR_GENERO = "Precisa selecionar ao menos 1 gênero";
 	const CAMINHO_PARA_API_STATUS = "/api/anime/status";
 	const MESSAGEM_SUCESSO_CADASTRO = "Sucesso ao cadastrar o anime!";
 	const CAMINHO_PARA_API_ADICIONAR_ANIME = "/api/anime/adicionar";
+	const CAMINHO_PARA_API_ANIME = "/api/anime/"
 	const OPCAO_VOLTAR_PARA_LISTA_DE_ANIME = "Voltar a lista de anime";
 	const POST = 'POST';
+	const PUT = 'PUT';
+	const POSICAO_CADASTRO_OU_EDITAR = 1;
+	const POSICAO_ID_DO_ANIME = 2;
+	const LABEL_ID = 'labelId'
+	const INPUT_ID = 'inputId'
 
-	return ControleBase.extend("ui5.anime.app.anime.CadastroAnime", {
-		onInit: async function () {
+	return ControleBase.extend("ui5.anime.app.anime.CadastroEditarAnime", {
+		onInit: function () {
 			const oRota = this.getOwnerComponent().getRouter();
 			oRota.getRoute(ROTA_ADICIONAR_ANIME).attachMatched(this._aoCoincidirRota, this);
-			
+			oRota.getRoute(ROTA_EDITAR_ANIME).attachMatched(this._aoCoincidirRota, this);
 		},
-		_aoCoincidirRota: function(){
-            this._exibirEspera(async () => {
-                this._limparCampos();
-				this._modelo(await HttpRequest._request(CAMINHO_PARA_API_GENEROS),NOME_DO_MODELO_LISTA_DE_GENEROS);
-				this._modelo(await HttpRequest._request(CAMINHO_PARA_API_STATUS),NOME_DO_MODELO_DA_LISTA_DE_STATUS);
-            })
-        },
-	
+		_aoCoincidirRota: function () {
+			this._exibirEspera(async () => {
+				this._limparCampos();
+				let obterParametro = this._getRota().getHashChanger().getHash().split('/');
+				this._modelo(await HttpRequest._request(CAMINHO_PARA_API_GENEROS), NOME_DO_MODELO_LISTA_DE_GENEROS);
+				this._modelo(await HttpRequest._request(CAMINHO_PARA_API_STATUS), NOME_DO_MODELO_DA_LISTA_DE_STATUS);
+				if (obterParametro[POSICAO_CADASTRO_OU_EDITAR] == 'editar') {
+					this.byId(LABEL_ID).setVisible(true);
+					this.byId(INPUT_ID).setVisible(true);
+					this._definirDados(obterParametro);
+				}
+			})
+		},
+		_definirDados: async function (obterParametro) {
+			var anime = await HttpRequest._request(CAMINHO_PARA_API_ANIME + obterParametro[POSICAO_ID_DO_ANIME]);
+			this.byId(INPUT_ID).setValue(anime.id);
+			this.byId(ID_INPUT_NOME).setValue(anime.nome);
+			this.byId(ID_INPUT_SINOPSE).setValue(anime.sinopse);
+			this.byId(ID_INPUT_NOTA).setValue(anime.nota);
+			this.byId(ID_INPUT_DATA_LANCAMENTO).setValue(anime.dataLancamento);
+			console.log(anime)
+			var items = this.byId(ID_DA_LISTA_DE_GENEROS).getItems();
+			for (var i = POSICAO_INICIAL_DA_LISTA; i < items.length; i++) {
+				for (var j = POSICAO_INICIAL_DA_LISTA; j < anime.idGeneros.length; j++) {
+					if (parseInt(items[i].mAggregations.content[POSICAO_DO_ID].mProperties.text) == anime.idGeneros[j]) {
+						this.byId(ID_DA_LISTA_DE_GENEROS).setSelectedItem(items[i], true);
+					}
+				}
+			}
+		},
 		_VerificarCampos: function () {
 			var verificacao = true;
 			const _nome = this.byId(ID_INPUT_NOME);
@@ -61,21 +88,20 @@ sap.ui.define([
 			}
 			const _nota = this.byId(ID_INPUT_NOTA);
 			if (_nota.getValueState() == VALUE_STATE_ERROR) verificacao = false;
-			
+
 			const _generos = this.byId(ID_DA_LISTA_DE_GENEROS);
 			if (_generos.getSelectedItems().length == 0) {
 				MessageBox.show(MESSAGEM_PRECISA_SELECIONAR_GENERO);
 				verificacao = false
 			}
 			const _dataLancamento = this.byId(ID_INPUT_DATA_LANCAMENTO);
-			if(_dataLancamento.getValue() == ""){
+			if (_dataLancamento.getValue() == "") {
 				_dataLancamento.setValueState(VALUE_STATE_ERROR);
 				_dataLancamento.setValueStateText(VALUE_STATE_DATA_OBRIGATORIO);
 			}
-			
+
 			return verificacao;
 		},
-		
 
 		aoClicarEmSalvar: function () {
 			this._exibirEspera(async () => {
@@ -92,14 +118,14 @@ sap.ui.define([
 					this._sucessoNoPost();
 				}
 			})
-			
+
 		},
 
 		aoDigitarNoInput: function (oEvent) {
 			this._exibirEspera(async () => {
 				oEvent.getSource().setValueState(VALUE_STATE_NONE);
 			})
-			
+
 		},
 
 		_sucessoNoPost: function () {
@@ -114,7 +140,7 @@ sap.ui.define([
 				}
 			});
 		},
-		
+
 		_limparCampos: async function () {
 			this.byId(ID_INPUT_NOME).setValue("");
 			this.byId(ID_INPUT_NOME).setValueState(VALUE_STATE_NONE)
