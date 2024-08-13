@@ -9,6 +9,8 @@ sap.ui.define([
 	const ROTA_EDITAR_ANIME = "editarAnime"
 	const NOME_DO_MODELO_LISTA_DE_GENEROS = "generos";
 	const NOME_DO_MODELO_DA_LISTA_DE_STATUS = "status";
+	const TITULO_CADASTRO = "Cadastro do Anime"
+	const TITULO_EDITAR = "Editar Anime"
 	const CAMINHO_PARA_API_GENEROS = "/api/genero";
 	const ID_DA_LISTA_DE_GENEROS = "listaDeGeneros";
 	const ID_INPUT_NOME = "inputNome";
@@ -27,17 +29,21 @@ sap.ui.define([
 	const VALUE_STATE_DATA_OBRIGATORIO = "o campo data lançamento é obrigatório";
 	const MESSAGEM_PRECISA_SELECIONAR_GENERO = "Precisa selecionar ao menos 1 gênero";
 	const CAMINHO_PARA_API_STATUS = "/api/anime/status";
-	const MESSAGEM_SUCESSO_CADASTRO = "Sucesso ao cadastrar o anime!";
+	const MENSAGEM_SUCESSO_CADASTRO = "Sucesso ao cadastrar o anime!";
+	const MENSAGEM_SUCESSO_EDITAR = "Sucesso ao editar o anime!"
 	const CAMINHO_PARA_API_ADICIONAR_ANIME = "/api/anime/adicionar";
+	const CAMINHO_PARA_API_EDITAR_ANIME = "/api/anime/atualizar"
 	const CAMINHO_PARA_API_ANIME = "/api/anime/"
 	const OPCAO_VOLTAR_PARA_LISTA_DE_ANIME = "Voltar a lista de anime";
 	const POST = 'POST';
 	const PUT = 'PUT';
 	const POSICAO_CADASTRO_OU_EDITAR = 1;
 	const POSICAO_ID_DO_ANIME = 2;
-	const LABEL_ID = 'labelId'
-	const INPUT_ID = 'inputId'
-
+	const LABEL_ID = 'labelId';
+	const INPUT_ID = 'inputId';
+	const HASH_EDITAR = 'editar';
+	const ID_DA_PAGINA = "pagina";
+	let parametros = '';
 	return ControleBase.extend("ui5.anime.app.anime.CadastroEditarAnime", {
 		onInit: function () {
 			const oRota = this.getOwnerComponent().getRouter();
@@ -47,30 +53,41 @@ sap.ui.define([
 		_aoCoincidirRota: function () {
 			this._exibirEspera(async () => {
 				this._limparCampos();
-				let obterParametro = this._getRota().getHashChanger().getHash().split('/');
+				parametros = this._getRota().getHashChanger().getHash().split('/');
 				this._modelo(await HttpRequest._request(CAMINHO_PARA_API_GENEROS), NOME_DO_MODELO_LISTA_DE_GENEROS);
 				this._modelo(await HttpRequest._request(CAMINHO_PARA_API_STATUS), NOME_DO_MODELO_DA_LISTA_DE_STATUS);
-				if (obterParametro[POSICAO_CADASTRO_OU_EDITAR] == 'editar') {
+				if (parametros[POSICAO_CADASTRO_OU_EDITAR] == HASH_EDITAR) {
+					this.byId(ID_DA_PAGINA).setTitle(TITULO_EDITAR);
 					this.byId(LABEL_ID).setVisible(true);
 					this.byId(INPUT_ID).setVisible(true);
-					this._definirDados(obterParametro);
+					this._definirDados();
+				}
+				else{
+					this.byId(ID_DA_PAGINA).setTitle(TITULO_CADASTRO);
+					this.byId(LABEL_ID).setVisible(false);
+					this.byId(INPUT_ID).setVisible(false);
 				}
 			})
 		},
-		_definirDados: async function (obterParametro) {
-			var anime = await HttpRequest._request(CAMINHO_PARA_API_ANIME + obterParametro[POSICAO_ID_DO_ANIME]);
+		_definirDados: async function () {
+			var anime = await HttpRequest._request(CAMINHO_PARA_API_ANIME + parametros[POSICAO_ID_DO_ANIME]);
 			this.byId(INPUT_ID).setValue(anime.id);
 			this.byId(ID_INPUT_NOME).setValue(anime.nome);
 			this.byId(ID_INPUT_SINOPSE).setValue(anime.sinopse);
 			this.byId(ID_INPUT_NOTA).setValue(anime.nota);
 			this.byId(ID_INPUT_DATA_LANCAMENTO).setValue(anime.dataLancamento);
-			console.log(anime)
-			var items = this.byId(ID_DA_LISTA_DE_GENEROS).getItems();
-			for (var i = POSICAO_INICIAL_DA_LISTA; i < items.length; i++) {
+			var generos = this.byId(ID_DA_LISTA_DE_GENEROS).getItems();
+			for (var i = POSICAO_INICIAL_DA_LISTA; i < generos.length; i++) {
 				for (var j = POSICAO_INICIAL_DA_LISTA; j < anime.idGeneros.length; j++) {
-					if (parseInt(items[i].mAggregations.content[POSICAO_DO_ID].mProperties.text) == anime.idGeneros[j]) {
-						this.byId(ID_DA_LISTA_DE_GENEROS).setSelectedItem(items[i], true);
+					if (parseInt(generos[i].mAggregations.content[POSICAO_DO_ID].mProperties.text) == anime.idGeneros[j]) {
+						this.byId(ID_DA_LISTA_DE_GENEROS).setSelectedItem(generos[i], true);
 					}
+				}
+			}
+			var status = this.byId(ID_INPUT_STATUS).getItems();
+			for (var i = POSICAO_INICIAL_DA_LISTA; i < status.length; i++) {
+				if(status[i].getText() == anime.statusDeExibicao){
+					this.byId(ID_INPUT_STATUS).setSelectedItem(status[i],true)
 				}
 			}
 		},
@@ -88,7 +105,6 @@ sap.ui.define([
 			}
 			const _nota = this.byId(ID_INPUT_NOTA);
 			if (_nota.getValueState() == VALUE_STATE_ERROR) verificacao = false;
-
 			const _generos = this.byId(ID_DA_LISTA_DE_GENEROS);
 			if (_generos.getSelectedItems().length == 0) {
 				MessageBox.show(MESSAGEM_PRECISA_SELECIONAR_GENERO);
@@ -99,10 +115,8 @@ sap.ui.define([
 				_dataLancamento.setValueState(VALUE_STATE_ERROR);
 				_dataLancamento.setValueStateText(VALUE_STATE_DATA_OBRIGATORIO);
 			}
-
 			return verificacao;
 		},
-
 		aoClicarEmSalvar: function () {
 			this._exibirEspera(async () => {
 				if (this._VerificarCampos()) {
@@ -114,8 +128,16 @@ sap.ui.define([
 						statusDeExibicao: parseInt(this.byId(ID_INPUT_STATUS).getSelectedItem().getKey()),
 						idGeneros: this._preencherAListaDeGenerosSelecionados()
 					}
-					await HttpRequest._request(CAMINHO_PARA_API_ADICIONAR_ANIME, POST, anime);
-					this._sucessoNoPost();
+					if (parametros[POSICAO_CADASTRO_OU_EDITAR] == HASH_EDITAR) {
+						anime.id = parseInt(this.byId(INPUT_ID).getValue());
+						await HttpRequest._request(CAMINHO_PARA_API_EDITAR_ANIME, PUT, anime);
+						this._sucessoNaRequisicao(MENSAGEM_SUCESSO_EDITAR);
+					}
+					else{
+						await HttpRequest._request(CAMINHO_PARA_API_ADICIONAR_ANIME, POST, anime);
+						this._sucessoNaRequisicao(MENSAGEM_SUCESSO_CADASTRO);
+					}
+					
 				}
 			})
 
@@ -128,8 +150,8 @@ sap.ui.define([
 
 		},
 
-		_sucessoNoPost: function () {
-			MessageBox.success(MESSAGEM_SUCESSO_CADASTRO, {
+		_sucessoNaRequisicao: function (msgSucesso) {
+			MessageBox.success(msgSucesso, {
 				actions: [OPCAO_VOLTAR_PARA_LISTA_DE_ANIME],
 				onClose: (sAcao) => {
 					if (sAcao === OPCAO_VOLTAR_PARA_LISTA_DE_ANIME) {

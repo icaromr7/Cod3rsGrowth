@@ -23,13 +23,13 @@
             <layout:VerticalLayout width="100%" id = "layoutTela">
                 <Label id= "labelId" text="ID:" visible="false" class= "sapThemeTextInverted"></Label>
                 <Input id="inputId" editable="false" visible="false" width="30%"></Input>
-                <Label text="{i18n>labelNome}" class= "lblCadastro" ></Label>
+                <Label text="{i18n>labelNome}" class= "sapThemeTextInverted" ></Label>
                 <Input placeholder="{i18n>placeholderNome}" width="25%" maxLength="40" id='inputNome' liveChange="aoDigitarNoInput"></Input>
-                <Label text="{i18n>labelSinopse}" class= "lblCadastro"></Label>
+                <Label text="{i18n>labelSinopse}" class= "sapThemeTextInverted"></Label>
                 <TextArea width="50%" maxLength="400" placeholder="{i18n>placeholderSinopse}" height="100px" id="inputSinopse" liveChange="aoDigitarNoInput"></TextArea>
-                <Label text="{i18n>labelNota}" class= "lblCadastro"></Label>
+                <Label text="{i18n>labelNota}" class= "sapThemeTextInverted"></Label>
                 <StepInput value ="1" min= "1" max = "10" step = "0.1" displayValuePrecision="1" width="3%" id="inputNota"></StepInput>
-                <Label text="{i18n>labelGeneros}" class= "lblCadastro"></Label>
+                <Label text="{i18n>labelGeneros}" class= "sapThemeTextInverted"></Label>
                 <Panel height="230px" width="25%">
                     <List
                     id ="listaDeGeneros"
@@ -43,7 +43,7 @@
                         </CustomListItem> 
                 </List>
                 </Panel>
-                <Label text="{i18n>labelDataLancamento}" class= "lblCadastro"></Label>
+                <Label text="{i18n>labelDataLancamento}" class= "sapThemeTextInverted"></Label>
                 <DatePicker
                     id="inputDataLancamento"
                     displayFormat="short"
@@ -53,7 +53,7 @@
                     class= "filtroDataAnime"
                     liveChange="aoDigitarNoInput"
                     />
-                <Label text="{i18n>labelStatusExibicao}" class= "lblCadastro"></Label>
+                <Label text="{i18n>labelStatusExibicao}" class= "sapThemeTextInverted"></Label>
                 <Select
                     id = "inputStatus"
                     forceSelection="false"

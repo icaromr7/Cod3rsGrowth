@@ -6,30 +6,62 @@ sap.ui.define([
 
 	const ROTA_PARA_LISTA_GENERO = "listaGenero";
 	const ROTA_ADICIONAR_GENERO = "cadastroGenero";
+	const ROTA_EDITAR_GENERO ="editarGenero"
 	const ID_INPUT_NOME = "inputNome";
 	const POSICAO_INICIAL_DA_LISTA = 0;
-	const FALHA_NA_REQUISIÇÃO = "Ocorreu um ou mais erros na requisição";
 	const VALUE_STATE_ERROR = "Error";
 	const VALUE_STATE_NONE = "None";
 	const VALUE_STATE_NOME_OBRIGATORIO = "o campo nome é obrigatório";
-	const MESSAGEM_SUCESSO_CADASTRO = "Sucesso ao cadastrar o gênero!";
+	const MENSAGEM_SUCESSO_CADASTRO = "Sucesso ao cadastrar o gênero!";
+	const MENSAGEM_SUCESSO_EDITAR = "Sucesso ao editar o gênero!";
 	const CAMINHO_PARA_API_ADICIONAR_GENERO = "/api/genero/adicionar";
+	const CAMINHO_PARA_API_EDITAR_GENERO = "/api/genero/atualizar";
+	const CAMINHO_PARA_API_GENERO = '/api/genero/'
 	const OPCAO_VOLTAR_PARA_LISTA_DE_GENEROS = "Voltar a lista de gêneros";
     const POSICAO_PRIMEIRA_LETRA = 0;
     const POSICAO_SEGUNDA_LETRA = 1;
 	const POST = 'POST';
-	return ControleBase.extend("ui5.anime.app.genero.CadastroGenero", {
+	const PUT = 'PUT';
+	const POSICAO_CADASTRO_OU_EDITAR = 1;
+	const POSICAO_ID_DO_GENERO = 2;
+	const LABEL_ID = 'labelId';
+	const INPUT_ID = 'inputId';
+	const HASH_EDITAR = 'editar';
+	const ID_PAGINA = "pagina";
+	const TITULO_CADASTRO = "Cadastro do Gênero"
+	const TITULO_EDITAR = "Editar Gênero"
+	let parametros = ''
+
+	return ControleBase.extend("ui5.anime.app.genero.CadastroEditarGenero", {
 
 		onInit: async function () {
 			const oRota = this.getOwnerComponent().getRouter();
 			oRota.getRoute(ROTA_ADICIONAR_GENERO).attachMatched(this._aoCoincidirRota, this);
+			oRota.getRoute(ROTA_EDITAR_GENERO).attachMatched(this._aoCoincidirRota, this);
 		},
 
 		_aoCoincidirRota: function(){
             this._exibirEspera(async () => {
                 this._limparCampos();
+				parametros = this._getRota().getHashChanger().getHash().split('/');
+				if (parametros[POSICAO_CADASTRO_OU_EDITAR] == HASH_EDITAR) {
+					this.byId(ID_PAGINA).setTitle(TITULO_EDITAR);
+					this.byId(LABEL_ID).setVisible(true);
+					this.byId(INPUT_ID).setVisible(true);
+					this._definirDados();
+				}
+				else{
+					this.byId(ID_PAGINA).setTitle(TITULO_CADASTRO);
+					this.byId(LABEL_ID).setVisible(false);
+					this.byId(INPUT_ID).setVisible(false);
+				}
             })
         },
+		_definirDados: async function () {
+			var genero = await HttpRequest._request(CAMINHO_PARA_API_GENERO + parametros[POSICAO_ID_DO_GENERO]);
+			this.byId(INPUT_ID).setValue(genero.id);
+			this.byId(ID_INPUT_NOME).setValue(genero.nome);
+		},
 
 		_VerificarCampos: function () {
 			let verificacao = true;
@@ -52,8 +84,14 @@ sap.ui.define([
 					let genero = {
 						nome: _nome.trim()
 					}
-					await HttpRequest._request(CAMINHO_PARA_API_ADICIONAR_GENERO, POST, genero);
-					this._sucessoNoPost();
+					if (parametros[POSICAO_CADASTRO_OU_EDITAR] == HASH_EDITAR) {
+						await HttpRequest._request(CAMINHO_PARA_API_EDITAR_GENERO, PUT, genero);
+						this._sucessoNaRequisicao(MENSAGEM_SUCESSO_EDITAR);
+					}
+					else{
+						await HttpRequest._request(CAMINHO_PARA_API_ADICIONAR_GENERO, POST, genero);
+						this._sucessoNaRequisicao(MENSAGEM_SUCESSO_CADASTRO);
+					}
 				}
 			})
 			
@@ -66,8 +104,8 @@ sap.ui.define([
 			
 		},
 
-		_sucessoNoPost: function () {
-			MessageBox.success(MESSAGEM_SUCESSO_CADASTRO, {
+		_sucessoNaRequisicao: function (msgSucesso) {
+			MessageBox.success(msgSucesso, {
 				actions: [OPCAO_VOLTAR_PARA_LISTA_DE_GENEROS],
 				onClose: (sAcao) => {
 					if (sAcao === OPCAO_VOLTAR_PARA_LISTA_DE_GENEROS) {

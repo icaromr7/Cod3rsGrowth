@@ -60,7 +60,7 @@
 										type: 'sap.ca.ui.model.type.Date',
 										formatOptions: {pattern: 'dd/MM/YYYY'}}"
 										class="dataAnime"/>
-								<Label text="{path: 'animes>statusDeExibicao', formatter: '.formatter.enum' }" class = "statusAnime"/>
+								<Label text="{path: 'animes>statusDeExibicao'}" class = "statusAnime"/>
 								
 							</VBox>						
 					</CustomListItem>

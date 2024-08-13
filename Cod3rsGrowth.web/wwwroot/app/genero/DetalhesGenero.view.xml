@@ -12,11 +12,16 @@
         navButtonPress="aoClicarEmVoltarParaListaGenero"
         titleAlignment="Center"
     >
+    <Toolbar design="Transparent">
+        <ToolbarSpacer/>
+            <Button text="Editar" class="sapMBtnInner" width="8%" press= "aoClicarEmEditar"></Button>
+            <Button text="Remover" class="sapMBtnInner" width="8%"></Button>
+    </Toolbar>
     <content >
         <layout:VerticalLayout width="100%">
-            <Label text="{i18n>labelId}" class= "lblDetalhes"></Label>
+            <Label text="{i18n>labelId}" class= "sapThemeTextInverted"></Label>
             <Input id= "inputId" editable="false" value="{path: 'genero>/id'}" width="3%" textAlign="Center"></Input>
-            <Label text="{i18n>labelNome}" class= "lblDetalhes"></Label>
+            <Label text="{i18n>labelNome}" class= "sapThemeTextInverted"></Label>
             <Input id= "inputNome" editable="false" value="{path: 'genero>/nome'}" width="20%"></Input>          
         </layout:VerticalLayout>
     </content>

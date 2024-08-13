@@ -97,7 +97,7 @@
           {
             "pattern": "genero/cadastro",
             "name": "cadastroGenero",
-            "target": "cadastroGenero"
+            "target": "cadastroEditarGenero"
           },
           {
             "pattern":"genero/{id}",
@@ -108,6 +108,11 @@
             "pattern": "anime/editar/{id}",
             "name": "editarAnime",
             "target": "cadastroEditarAnime"
+          },
+          {
+            "pattern": "genero/editar/{id}",
+            "name": "editarGenero",
+            "target": "cadastroEditarGenero"
           }
         ],
         "targets": {
@@ -141,10 +146,10 @@
             "name": "ListaGeneros",
             "level": 4
           },
-          "cadastroGenero":{
+          "cadastroEditarGenero":{
             "id": "cadastroGenero",
             "path":"ui5.anime.app.genero",
-            "name": "CadastroGenero",
+            "name": "CadastroEditarGenero",
             "level": 5
           },
           "detalhesGenero":{

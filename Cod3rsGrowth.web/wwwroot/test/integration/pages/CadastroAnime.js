@@ -8,7 +8,7 @@ sap.ui.define([
 ], function (Opa5, Press, EnterText, PropertyStrictEquals ,Properties ,Ancestor) {
     "use strict";
 
-    var sNomeDaTela = "anime.CadastroAnime";
+    var sNomeDaTela = "anime.CadastroEditarAnime";
     Opa5.createPageObjects({
         onPaginaCadastroAnime : {
             actions: {

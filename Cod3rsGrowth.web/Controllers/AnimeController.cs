@@ -55,7 +55,6 @@ namespace Cod3rsGrowth.web.Controllers
         [HttpPut ("atualizar")]
         public IActionResult Atualizar([FromBody]Anime anime)
         {
-            if (anime == null) { return BadRequest(); }
             _animeServico.Atualizar(anime);
             return Ok();
         }

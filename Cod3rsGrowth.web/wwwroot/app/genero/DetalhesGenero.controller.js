@@ -7,15 +7,17 @@ sap.ui.define([
 	"use strict";
     const NOME_DO_MODELO_DO_DETALHES_DO_GENERO = "genero";
     const CAMINHO_PARA_API = "/api/genero/";
-    const NOME_DA_ROTA = "detalhesGenero";
+    const NOME_DA_ROTA_DETALHES = "detalhesGenero";
+    const NOME_DA_ROTA_EDITAR = "editarGenero"
     const POSICAO_ID_DO_GENERO = 1;
+    const INPUT_ID = 'inputId'
 	
 	return ControleBase.extend("ui5.anime.app.genero.DetalhesGenero", {
         formatter: formatter,
 
         onInit: function () {
 			let oRouter = this._getRota();
-			oRouter.getRoute(NOME_DA_ROTA).attachMatched(this._aoCoincidirRota, this);
+			oRouter.getRoute(NOME_DA_ROTA_DETALHES).attachMatched(this._aoCoincidirRota, this);
 		},
         _aoCoincidirRota: function(){
             this._exibirEspera(async () => {               
@@ -26,8 +28,15 @@ sap.ui.define([
         _obterEDefinirDados : async function () {
             var obterParametro = this._getRota().getHashChanger().getHash().split("/");
             this._modelo(await HttpRequest._request(CAMINHO_PARA_API + obterParametro[POSICAO_ID_DO_GENERO]),NOME_DO_MODELO_DO_DETALHES_DO_GENERO);
-			
 		},
+        aoClicarEmEditar: function(){
+            this._exibirEspera(async () =>{
+                const aRota = this.getOwnerComponent().getRouter();
+				aRota.navTo(NOME_DA_ROTA_EDITAR,{
+                    id: this.byId(INPUT_ID).getValue()
+                });
+            })
+        }
 	});
 
 });
