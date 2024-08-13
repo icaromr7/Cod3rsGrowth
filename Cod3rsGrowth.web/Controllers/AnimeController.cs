@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cod3rsGrowth.web.Controllers
 {
-    [Route(ConstantesController.ROTA_ANIME)]
+    [Route("api/anime")]
     [ApiController]
     public class AnimeController : ControllerBase
     {
@@ -22,10 +22,9 @@ namespace Cod3rsGrowth.web.Controllers
             var animes = _animeServico.ObterTodos(filtro);
             return Ok(animes);
         }
-        [HttpPost(ConstantesController.ADICIONAR)]
+        [HttpPost("adicionar")]
         public IActionResult Adicionar([FromBody] Anime anime)
         {
-            if (anime == null) { return BadRequest(); }
             int idAnime = _animeServico.Cadastrar(anime);
             anime.Id = idAnime;
             foreach (int id in anime.IdGeneros)
@@ -38,22 +37,23 @@ namespace Cod3rsGrowth.web.Controllers
                 _animeGeneroServico.Cadastrar(animeGenero);
             }
             return Created($"anime/{anime.Id}", anime);
-        }     
-        [HttpGet(ConstantesController.ID)]
+        }
+        
+        [HttpGet("{id}")]
         public IActionResult ObterPorId(int id)
         {
             var anime = _animeServico.ObterPorId(id);
             if (anime == null) { return BadRequest(); }
             return Ok(anime);
         }
-        [HttpPut (ConstantesController.ATUALIZAR)]
+        [HttpPut ("atualizar")]
         public IActionResult Atualizar([FromBody]Anime anime)
         {
             if (anime == null) { return BadRequest(); }
             _animeServico.Atualizar(anime);
             return Ok();
         }
-        [HttpDelete(ConstantesController.DELETAR)]
+        [HttpDelete("deletar/{id}")]
         public IActionResult Deletar(int id)
         {          
             _animeGeneroServico.DeletarPorAnime(id);

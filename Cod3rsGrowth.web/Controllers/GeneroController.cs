@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cod3rsGrowth.web.Controllers
 {
-    [Route(ConstantesController.ROTA_GENERO)]
+    [Route("api/genero")]
     [ApiController]
     public class GeneroController : ControllerBase
     {
@@ -22,29 +22,41 @@ namespace Cod3rsGrowth.web.Controllers
             var generos = _generoServico.ObterTodos(nome);
             return Ok(generos);
         }
-        [HttpPost(ConstantesController.ADICIONAR)]
+        [HttpPost("adicionar")]
         public IActionResult Adicionar([FromBody] Genero genero)
         {
-            if (genero == null) { return BadRequest(); }
             int idGenero = _generoServico.Cadastrar(genero);
             genero.Id = idGenero;
             return Created($"genero/{genero.Id}", genero);
         }
-        [HttpGet(ConstantesController.ID)]
+        [HttpGet("{id}")]
         public IActionResult ObterPorId(int id)
         {
             var genero = _generoServico.ObterPorId(id);
             if (genero == null) { return BadRequest(); }
             return Ok(genero);
         }
-        [HttpPut(ConstantesController.ATUALIZAR)]
+        [HttpGet("animeGenero/{id}")]
+        public IActionResult ObterGenerosPorIdAnime(int id)
+        {
+            List<AnimeGenero> listAnimeGenero = _animeGeneroServico.ObterTodos(id);
+            var listaGeneros = new List<Genero>();
+            foreach(var item in listAnimeGenero)
+            {
+                var genero = _generoServico.ObterPorId(item.IdGenero);
+                listaGeneros.Add(genero);
+            }
+            return Ok(listaGeneros);
+        }
+        
+    [HttpPut("atualizar")]
         public IActionResult Atualizar([FromBody] Genero genero)
         {
             if (genero == null) { return BadRequest(); }
             _generoServico.Atualizar(genero);
             return Ok();
         }
-        [HttpDelete(ConstantesController.DELETAR)]
+        [HttpDelete("deletar/{id}")]
         public IActionResult Deletar([FromQuery]int id)
         {
             _animeGeneroServico.DeletarPorAnime(id);

@@ -29,6 +29,17 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    "httpsTeste": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "commandLineArgs": "BancoDeDadosTeste",
+      "launchUrl": "",
+      "applicationUrl": "https://localhost:7118;http://localhost:5101",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
