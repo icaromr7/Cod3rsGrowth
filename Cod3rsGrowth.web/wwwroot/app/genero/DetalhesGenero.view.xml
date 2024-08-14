@@ -14,7 +14,7 @@
     >
     <Toolbar design="Transparent">
         <ToolbarSpacer/>
-            <Button text="Editar" class="sapMBtnInner" width="8%" press= "aoClicarEmEditar"></Button>
+            <Button text="Editar" class="sapMBtnInner" width="8%" press= "aoClicarEmEditar" id="btnEditar"></Button>
             <Button text="Remover" class="sapMBtnInner" width="8%"></Button>
     </Toolbar>
     <content >

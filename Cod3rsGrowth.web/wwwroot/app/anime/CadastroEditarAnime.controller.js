@@ -104,6 +104,7 @@ sap.ui.define([
 				_sinopse.setValueStateText(VALUE_STATE_SINOPSE_OBRIGATORIA);
 			}
 			const _nota = this.byId(ID_INPUT_NOTA);
+			console.log(_nota.getValue());
 			if (_nota.getValueState() == VALUE_STATE_ERROR) verificacao = false;
 			const _generos = this.byId(ID_DA_LISTA_DE_GENEROS);
 			if (_generos.getSelectedItems().length == 0) {

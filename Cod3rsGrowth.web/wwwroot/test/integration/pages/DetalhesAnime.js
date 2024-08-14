@@ -18,6 +18,14 @@ sap.ui.define([
                         actions: new Press(),
                         errorMessage: "Não foi possível encontrar o botão de voltar na página do objeto"
                     });
+                },
+                aoClicarEmEditar: function(){
+                    return this.waitFor({
+                        id: "btnEditar",
+                        viewName: sNomeDaTela,
+                        actions: new Press(),
+                        errorMessage: "Não foi possível pressionar o botão de editar."
+                    })
                 }
             },
             assertions:{
@@ -47,7 +55,6 @@ sap.ui.define([
                         }
                     });
                 },
-
                 deveTerONomeDoItemSelecionado: function(sNome){
                     return this.waitFor({
                         success: function () {

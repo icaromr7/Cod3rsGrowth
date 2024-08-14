@@ -8,7 +8,7 @@ sap.ui.define([
     QUnit.module("Cadastro anime");
     opaTest("Deve está na tela de cadastro anime", function (Given, When, Then) {
         Given.iStartMyApp({
-            hash: "cadastro"
+            hash: "anime/cadastro"
         });
         
         Then
@@ -18,9 +18,9 @@ sap.ui.define([
     opaTest("Ao tentar cadastrar um anime invalido deve aparecer uma message box de erro", function (Given, When, Then) {
         When
             .onPaginaCadastroAnime
-            .aoDigitarNome(`${i18n>anime.nome}`,"Teste")
-            .aoDigitarSinopse(`${i18n>anime.sinopse}`,"Teste")
-            .aoDigitarNota(`${i18n>anime.nota}`,2)
+            .aoDigitarNome(`$inputNome`,"Teste")
+            .aoDigitarSinopse(`inputSinopse`,"Teste")
+            .aoDigitarNota(`inputNota`,2)
             .aoClicarNaLista()
             .aoPressionarUmItem("Aventura")
             .aoSelecionarData("20/07/2024")
@@ -35,9 +35,9 @@ sap.ui.define([
     opaTest("Ao tentar cadastrar um anime válido deve aparecer uma message box de êxito", function (Given, When, Then) {
         When
             .onPaginaCadastroAnime
-            .aoDigitarNome(`${i18n>anime.nome}`,"Teste")
-            .aoDigitarSinopse(`${i18n>anime.sinopse}`,"Teste")
-            .aoDigitarNota(`${i18n>anime.nota}`,2)
+            .aoDigitarNome(`inputNome`,"Teste")
+            .aoDigitarSinopse(`inputSinopse`,"Teste")
+            .aoDigitarNota(`$inputNota`,2)
             .aoClicarNaLista()
             .aoPressionarUmItem("Drama")
             .aoSelecionarData("20/11/2024")
@@ -51,7 +51,9 @@ sap.ui.define([
         
     });
     opaTest("Ao clicar em voltar deve navegar para tela anterior", function (Given, When, Then) {
-        
+        When
+            .onPaginaListaAnime
+            .aoApertarEmAdicionarAnime();
         When
             .onPaginaCadastroAnime
             .aoClicarEmVoltar();

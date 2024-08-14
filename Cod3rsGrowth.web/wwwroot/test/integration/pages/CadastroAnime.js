@@ -20,24 +20,35 @@ sap.ui.define([
                         errorMessage: "Não foi possível encontrar o botão de voltar na página do objeto"
                     });
                 },
-                aoDigitarNoInput: function(chavei18n, stext){
+                aoDigitarNome : function (sNomeDigitado){
                     return this.waitFor({
-                        id: chavei18n,
+                        id: "inputNome",
                         viewName: sNomeDaTela,
                         actions: new EnterText({
-                            text: stext
+                            text: sNomeDigitado
                         }),
-                        errorMessage: `${chavei18n} não foi encontrado.`
+                        errorMessage: "inputNome não foi encontrado."
                     });
                 },
-                aoDigitarNome : function (chavei18n, stext){
-                    this.aoDigitarNoInput(chavei18n, stext);
+                aoDigitarSinopse : function (sSinopseDigitada){
+                    return this.waitFor({
+                        id: "inputSinopse",
+                        viewName: sNomeDaTela,
+                        actions: new EnterText({
+                            text: sSinopseDigitada
+                        }),
+                        errorMessage: "inputSinopse não foi encontrado."
+                    });
                 },
-                aoDigitarSinopse : function (chavei18n, stext){
-                    this.aoDigitarNoInput(chavei18n, stext);
-                },
-                aoDigitarNota : function (chavei18n, stext){
-                    this.aoDigitarNoInput(chavei18n, stext);
+                aoDigitarNota : function (sNotaDigitada){
+                    return this.waitFor({
+                        id: "inputNota",
+                        viewName: sNomeDaTela,
+                        actions: new EnterText({
+                            text: sNotaDigitada
+                        }),
+                        errorMessage: "inputNota não foi encontrado."
+                    });
                 },
                 aoClicarNaLista: function(){
                     return this.waitFor({
