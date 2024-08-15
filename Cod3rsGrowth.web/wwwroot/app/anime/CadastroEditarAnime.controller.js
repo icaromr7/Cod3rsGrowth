@@ -8,9 +8,10 @@ sap.ui.define([
 	const ROTA_ADICIONAR_ANIME = "cadastroAnime";
 	const ROTA_EDITAR_ANIME = "editarAnime"
 	const NOME_DO_MODELO_LISTA_DE_GENEROS = "generos";
+	const NOME_DO_MODELO_ANIME = "anime"
+	const TITULO_CADASTRO = "TituloPaginaCadastroAnime";
+	const TITULO_EDITAR = "TituloPaginaEditarAnime"
 	const NOME_DO_MODELO_DA_LISTA_DE_STATUS = "status";
-	const TITULO_CADASTRO = "Cadastro do Anime"
-	const TITULO_EDITAR = "Editar Anime"
 	const CAMINHO_PARA_API_GENEROS = "/api/genero";
 	const ID_DA_LISTA_DE_GENEROS = "listaDeGeneros";
 	const ID_INPUT_NOME = "inputNome";
@@ -24,17 +25,17 @@ sap.ui.define([
 	const POSICAO_DO_ID = 1;
 	const VALUE_STATE_ERROR = "Error";
 	const VALUE_STATE_NONE = "None";
-	const VALUE_STATE_NOME_OBRIGATORIO = "o campo nome é obrigatório";
-	const VALUE_STATE_SINOPSE_OBRIGATORIA = "o campo sinopse é obrigatório";
-	const VALUE_STATE_DATA_OBRIGATORIO = "o campo data lançamento é obrigatório";
-	const MESSAGEM_PRECISA_SELECIONAR_GENERO = "Precisa selecionar ao menos 1 gênero";
+	const VALUE_STATE_NOME_OBRIGATORIO = "ValueStateNomeObrigatorio";
+	const VALUE_STATE_SINOPSE_OBRIGATORIA = "ValueStateSinopseObrigatoria";
+	const VALUE_STATE_DATA_OBRIGATORIO = "ValueStateDataObrigatorio";
+	const MENSAGEM_PRECISA_SELECIONAR_GENERO = "MensagemPrecisaSelecionarGenero";
 	const CAMINHO_PARA_API_STATUS = "/api/anime/status";
-	const MENSAGEM_SUCESSO_CADASTRO = "Sucesso ao cadastrar o anime!";
-	const MENSAGEM_SUCESSO_EDITAR = "Sucesso ao editar o anime!"
+	const MENSAGEM_SUCESSO_CADASTRO = "mensagemSucessoCadastrarAnime";
+	const MENSAGEM_SUCESSO_EDITAR = "mensagemSucessoEditarAnime"
 	const CAMINHO_PARA_API_ADICIONAR_ANIME = "/api/anime/adicionar";
 	const CAMINHO_PARA_API_EDITAR_ANIME = "/api/anime/atualizar"
 	const CAMINHO_PARA_API_ANIME = "/api/anime/"
-	const OPCAO_VOLTAR_PARA_LISTA_DE_ANIME = "Voltar a lista de anime";
+	const OPCAO_VOLTAR_PARA_LISTA_DE_ANIME = "voltarAListaAnime";
 	const POST = 'POST';
 	const PUT = 'PUT';
 	const POSICAO_CADASTRO_OU_EDITAR = 1;
@@ -44,6 +45,7 @@ sap.ui.define([
 	const HASH_EDITAR = 'editar';
 	const ID_DA_PAGINA = "pagina";
 	let parametros = '';
+	let i18n ='';
 	return ControleBase.extend("ui5.anime.app.anime.CadastroEditarAnime", {
 		onInit: function () {
 			const oRota = this.getOwnerComponent().getRouter();
@@ -53,17 +55,18 @@ sap.ui.define([
 		_aoCoincidirRota: function () {
 			this._exibirEspera(async () => {
 				this._limparCampos();
+				i18n = this.getView().getModel("i18n").getResourceBundle();
 				parametros = this._getRota().getHashChanger().getHash().split('/');
 				this._modelo(await HttpRequest._request(CAMINHO_PARA_API_GENEROS), NOME_DO_MODELO_LISTA_DE_GENEROS);
 				this._modelo(await HttpRequest._request(CAMINHO_PARA_API_STATUS), NOME_DO_MODELO_DA_LISTA_DE_STATUS);
 				if (parametros[POSICAO_CADASTRO_OU_EDITAR] == HASH_EDITAR) {
-					this.byId(ID_DA_PAGINA).setTitle(TITULO_EDITAR);
+					this.byId(ID_DA_PAGINA).setTitle(i18n.getText(TITULO_EDITAR));
 					this.byId(LABEL_ID).setVisible(true);
 					this.byId(INPUT_ID).setVisible(true);
 					this._definirDados();
 				}
 				else{
-					this.byId(ID_DA_PAGINA).setTitle(TITULO_CADASTRO);
+					this.byId(ID_DA_PAGINA).setTitle(i18n.getText(TITULO_CADASTRO));
 					this.byId(LABEL_ID).setVisible(false);
 					this.byId(INPUT_ID).setVisible(false);
 				}
@@ -71,11 +74,7 @@ sap.ui.define([
 		},
 		_definirDados: async function () {
 			var anime = await HttpRequest._request(CAMINHO_PARA_API_ANIME + parametros[POSICAO_ID_DO_ANIME]);
-			this.byId(INPUT_ID).setValue(anime.id);
-			this.byId(ID_INPUT_NOME).setValue(anime.nome);
-			this.byId(ID_INPUT_SINOPSE).setValue(anime.sinopse);
-			this.byId(ID_INPUT_NOTA).setValue(anime.nota);
-			this.byId(ID_INPUT_DATA_LANCAMENTO).setValue(anime.dataLancamento);
+			this._modelo (await anime, NOME_DO_MODELO_ANIME);
 			var generos = this.byId(ID_DA_LISTA_DE_GENEROS).getItems();
 			for (var i = POSICAO_INICIAL_DA_LISTA; i < generos.length; i++) {
 				for (var j = POSICAO_INICIAL_DA_LISTA; j < anime.idGeneros.length; j++) {
@@ -96,25 +95,24 @@ sap.ui.define([
 			const _nome = this.byId(ID_INPUT_NOME);
 			if (_nome.getValue() == "") {
 				_nome.setValueState(VALUE_STATE_ERROR);
-				_nome.setValueStateText(VALUE_STATE_NOME_OBRIGATORIO);
+				_nome.setValueStateText(i18n.getText(VALUE_STATE_NOME_OBRIGATORIO));
 			}
 			const _sinopse = this.byId(ID_INPUT_SINOPSE);
 			if (_sinopse.getValue() == "") {
 				_sinopse.setValueState(VALUE_STATE_ERROR);
-				_sinopse.setValueStateText(VALUE_STATE_SINOPSE_OBRIGATORIA);
+				_sinopse.setValueStateText(i18n.getText(VALUE_STATE_SINOPSE_OBRIGATORIA));
 			}
 			const _nota = this.byId(ID_INPUT_NOTA);
-			console.log(_nota.getValue());
 			if (_nota.getValueState() == VALUE_STATE_ERROR) verificacao = false;
 			const _generos = this.byId(ID_DA_LISTA_DE_GENEROS);
 			if (_generos.getSelectedItems().length == 0) {
-				MessageBox.show(MESSAGEM_PRECISA_SELECIONAR_GENERO);
+				MessageBox.show(i18n.getText(MENSAGEM_PRECISA_SELECIONAR_GENERO));
 				verificacao = false
 			}
 			const _dataLancamento = this.byId(ID_INPUT_DATA_LANCAMENTO);
 			if (_dataLancamento.getValue() == "") {
 				_dataLancamento.setValueState(VALUE_STATE_ERROR);
-				_dataLancamento.setValueStateText(VALUE_STATE_DATA_OBRIGATORIO);
+				_dataLancamento.setValueStateText(i18n.getText(VALUE_STATE_DATA_OBRIGATORIO));
 			}
 			return verificacao;
 		},
@@ -132,11 +130,11 @@ sap.ui.define([
 					if (parametros[POSICAO_CADASTRO_OU_EDITAR] == HASH_EDITAR) {
 						anime.id = parseInt(this.byId(INPUT_ID).getValue());
 						await HttpRequest._request(CAMINHO_PARA_API_EDITAR_ANIME, PUT, anime);
-						this._sucessoNaRequisicao(MENSAGEM_SUCESSO_EDITAR);
+						this._sucessoNaRequisicao(i18n.getText(MENSAGEM_SUCESSO_EDITAR));
 					}
 					else{
 						await HttpRequest._request(CAMINHO_PARA_API_ADICIONAR_ANIME, POST, anime);
-						this._sucessoNaRequisicao(MENSAGEM_SUCESSO_CADASTRO);
+						this._sucessoNaRequisicao(i18n.getText(MENSAGEM_SUCESSO_CADASTRO));
 					}
 					
 				}
@@ -153,9 +151,9 @@ sap.ui.define([
 
 		_sucessoNaRequisicao: function (msgSucesso) {
 			MessageBox.success(msgSucesso, {
-				actions: [OPCAO_VOLTAR_PARA_LISTA_DE_ANIME],
+				actions: [i18n.getText(OPCAO_VOLTAR_PARA_LISTA_DE_ANIME)],
 				onClose: (sAcao) => {
-					if (sAcao === OPCAO_VOLTAR_PARA_LISTA_DE_ANIME) {
+					if (sAcao === i18n.getText(OPCAO_VOLTAR_PARA_LISTA_DE_ANIME)) {
 						this._limparCampos();
 						const aRota = this.getOwnerComponent().getRouter();
 						aRota.navTo(ROTA_PARA_LISTA);

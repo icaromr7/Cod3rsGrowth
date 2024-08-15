@@ -21,12 +21,13 @@
         <content>
             <layout:VerticalLayout width="100%" id = "layoutTela">
                 <Label id= "labelId" text="ID:" visible="false" class= "sapThemeTextInverted"></Label>
-                <Input id="inputId" editable="false" visible="false" width="30%"></Input>
+                <Input id="inputId" editable="false" visible="false" width="30%" value="{path: 'genero>/id'}"></Input>
                 <Label text="{i18n>labelNome}" class= "sapThemeTextInverted" ></Label>
                 <Input placeholder="{i18n>placeholderNome}" 
                     width="25%" maxLength="40" 
                     id="inputNome" 
                     liveChange="aoDigitarNoInput"
+                    value="{path: 'genero>/nome'}"
                     ></Input>
                 <Button id="btnSalvar" text= "{i18n>btnSalvar}" width="5%" press= "aoClicarEmSalvar" class = "sapMBtnInner"></Button>
             </layout:VerticalLayout>

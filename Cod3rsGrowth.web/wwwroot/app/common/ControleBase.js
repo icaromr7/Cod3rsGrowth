@@ -9,7 +9,7 @@ sap.ui.define([
     const ROTA_PARA_LISTA = "lista";
     const ROTA_PARA_LISTA_GEBERO = "listaGenero"
     const POSICAO_INICIAL_DA_LISTA = 0;
-    const FALHA_NA_REQUISIÇÃO = "Ocorreu um ou mais erros na requisição";
+    const FALHA_NA_REQUISIÇÃO = "falhaNaRequisicao";
     var sResponsivePaddingClasses = "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer";
 
     return Controller.extend("ui5.codersgrowth.app.common.ControleBase", {
@@ -70,7 +70,8 @@ sap.ui.define([
                     })
                 }
                 else {
-                    return MessageBox.error(FALHA_NA_REQUISIÇÃO + erro.message, {
+                    let i18n = this.getView().getModel("i18n").getResourceBundle();
+                    return MessageBox.error(i18n.getText(FALHA_NA_REQUISIÇÃO) + erro.message, {
                         details: erro.stack,
                         contentWidth: "25%",
                     });

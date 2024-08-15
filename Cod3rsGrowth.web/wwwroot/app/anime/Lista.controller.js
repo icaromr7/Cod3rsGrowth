@@ -24,7 +24,6 @@ sap.ui.define([
 	const PARAMETRO_SELECTED_ITEM = "selectedItem"
 	const NOME_DO_MODELO_DA_LISTA_DE_ANIME = "animes";
 	const NOME_DO_MODELO_DA_LISTA_DE_STATUS = "status"
-	const ID_DA_LISTA_DE_ANIMES = "listaDeAnimes";
 	const INDEX_STATUS_TODOS = 0;
 	const ROTA_PARA_CADASTRO_ANIME = "cadastroAnime"
 	const ROTA_PARA_DETALHES_ANIME = "detalhesAnime";
