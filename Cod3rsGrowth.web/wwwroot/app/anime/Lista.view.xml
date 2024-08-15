@@ -6,11 +6,11 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout"
 	>
-	<Page title="{i18n>listaDeAnimeTitulo}" class="sapUiResponsiveContentPadding" titleAlignment="Center">	
+	<Page title="{i18n>listaDeAnimeTitulo}" class="pagina sapUiResponsiveContentPadding" titleAlignment="Center">	
 		<content>
 				<List items = "{path: 'animes>/'}" class= "listaDeAnimes" id = "listaDeAnimes" growing="true" growingThreshold="10">
 					<headerToolbar >
-						<Toolbar class= "toolbar">
+						<Toolbar design="Transparent">
 							<ToolbarSpacer/>
 							<Button 
 								id= "btnListaDeGeneros"
@@ -42,7 +42,7 @@
 								valueFormat='yyyy-MM-dd HH:mm:ss.000'
 								width="12%"
 								value= ""
-								class= "filtroDataAnime"/>							
+								/>							
 							<SearchField
 								id = "CampoDeBusca" 
 								width="30%" 
@@ -51,18 +51,35 @@
 							/>
 						</Toolbar>
 					</headerToolbar>
-					<CustomListItem id = "listaDosAnimes" class = "ListaCustomizada" type="Navigation" press="aoClicarNoAnime" 
-				>						
-							<VBox class="vBoxAnime" >
-								<Label text="{animes>nome}" class = "nomeAnime"/>
-									<Label text="{
-										path: 'animes>dataLancamento',
-										type: 'sap.ca.ui.model.type.Date',
-										formatOptions: {pattern: 'dd/MM/YYYY'}}"
-										class="dataAnime"/>
-								<Label text="{path: 'animes>statusDeExibicao'}" class = "statusAnime"/>
-								
-							</VBox>						
+					<CustomListItem 
+						id = "listaDosAnimes" 
+						class = "sapUiTinyMarginTopBottom" 
+						type="Navigation" 
+						press="aoClicarNoAnime"
+						>
+						<HBox class= "sapUiResponsiveMargin">
+							<VBox  width="30%">
+								<Label 
+								text="{animes>nome}" 
+								class = "nomeAnime sapUiLargeMarginEnd sapUiTinyMarginBegin"
+								design="Bold"/>
+							</VBox>
+							<VBox width="43%" alignItems="Center">
+								<Label text="{
+									path: 'animes>dataLancamento',
+									type: 'sap.ca.ui.model.type.Date',
+									formatOptions: {pattern: 'dd/MM/YYYY'}}"
+									class="dataAnime sapUiLargeMarginBegin sapUiLargeMarginEnd"
+									design="Bold"
+									/>
+							</VBox>
+							<VBox width="27%" alignItems="End">
+								<Label text="{path: 'animes>statusDeExibicao'}" 
+									class = "statusAnime sapUiLargeMarginBegin  sapUiTinyMarginEnd"
+									design="Bold"
+									/>
+							</VBox>
+						</HBox>			
 					</CustomListItem>
 				</List>
 		</content>
