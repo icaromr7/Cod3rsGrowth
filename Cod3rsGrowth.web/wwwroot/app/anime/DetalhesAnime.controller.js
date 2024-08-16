@@ -10,7 +10,9 @@ sap.ui.define([
     const CAMINHO_PARA_API = "/api/anime/";
     const CAMINHO_PARA_API_GENEROS_DO_ANIME = "/api/genero/animeGenero/"
     const NOME_DA_ROTA = "detalhesAnime";
+    const NOME_DA_ROTA_EDITAR = "editarAnime"
     const POSICAO_ID_DO_ANIME = 1;
+    const INPUT_ID = 'inputId'
 	
 	return ControleBase.extend("ui5.anime.app.anime.DetalhesAnime", {
         formatter: formatter,
@@ -31,6 +33,14 @@ sap.ui.define([
             this._modelo(await HttpRequest._request(CAMINHO_PARA_API_GENEROS_DO_ANIME+ obterParametro[POSICAO_ID_DO_ANIME]),NOME_DO_MODELO_GENEROS_DO_ANIME);
 		},
 
+        aoClicarEmEditar: function(){
+            this._exibirEspera(async () =>{
+                const aRota = this.getOwnerComponent().getRouter();
+				aRota.navTo(NOME_DA_ROTA_EDITAR,{
+                    id: this.byId(INPUT_ID).getValue()
+                });
+            })
+        }
 	});
 
 });

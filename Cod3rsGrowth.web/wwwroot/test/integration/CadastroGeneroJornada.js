@@ -16,7 +16,6 @@ sap.ui.define([
             .onPaginaCadastroGenero
             .aTelaCadastroGeneroFoiCarregadaCorretamente();
     });
-
     opaTest("Ao tentar cadastrar um gênero invalido deve aparecer uma message box de erro", function(Given, When, Then){
 		
         When
@@ -30,12 +29,10 @@ sap.ui.define([
 			.deveFecharMessageBoxAoApertarEmOk("Fechar");
 	});
     opaTest("Ao tentar cadastrar um gênero válido deve aparecer uma message box de êxito", function(Given, When, Then){
-
         When
 			.onPaginaCadastroGenero
 			.aoDigitarNome("Familia")
 			.aoClicarEmSalvar();
-
 		Then
 			.onPaginaCadastroGenero
 			.deveAperecerUmaMessageBoxDe("Êxito")
@@ -47,11 +44,10 @@ sap.ui.define([
         When
             .onPaginaCadastroGenero
             .aoClicarEmVoltar();
-
 		Then
             .onPaginaListaGeneros
             .aTelaListaDeGenerosFoiCarregadaCorretamente();
-
+			
         Then.iTeardownMyApp();
     });
 	

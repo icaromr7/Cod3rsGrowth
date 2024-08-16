@@ -3,6 +3,7 @@ using Cod3rsGrowth.dominio.Migracoes;
 using Cod3rsGrowth.infra;
 using Cod3rsGrowth.Servico;
 using Cod3rsGrowth.web;
+using Cod3rsGrowth.web.Servico;
 using FluentMigrator.Runner;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -22,7 +23,7 @@ builder.Services.AddFluentMigratorCore()
         .ScanIn(typeof(_20240605085700_CriarTabelas).Assembly).For.Migrations())
     .AddLogging(lb => lb.AddFluentMigratorConsole());
 
-builder.Services.AddMvc().AddJsonOptions(x => { x.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter()); });
+builder.Services.AddMvc().AddJsonOptions(x => { x.JsonSerializerOptions.Converters.Add(new ConverterEnum<Anime.Status>()); });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDirectoryBrowser();
 builder.Services.AddSwaggerGen();

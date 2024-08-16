@@ -4,13 +4,14 @@ sap.ui.define([
     'sap/ui/test/actions/EnterText',
     'sap/ui/test/matchers/PropertyStrictEquals',
     'sap/ui/test/matchers/Properties',
-    'sap/ui/test/matchers/Ancestor'
-], function (Opa5, Press, EnterText, PropertyStrictEquals ,Properties ,Ancestor) {
+    'sap/ui/test/matchers/Ancestor',
+    'sap/ui/test/matchers/AggregationLengthEquals'
+], function (Opa5, Press, EnterText, PropertyStrictEquals ,Properties ,Ancestor,AggregationLengthEquals) {
     "use strict";
 
     var sNomeDaTela = "anime.CadastroEditarAnime";
     Opa5.createPageObjects({
-        onPaginaCadastroAnime : {
+        onPaginaEditarAnime : {
             actions: {
                 aoClicarEmVoltar: function () {
                     return this.waitFor({
@@ -67,7 +68,7 @@ sap.ui.define([
                             text: sNome
                         }),
                         actions: new Press(),
-                        errorMessage: "A lista não contém o gênero "
+                        errorMessage: "A lista não contém o gênero"
                     });
                 },
                 aoSelecionarData: function(sDataDigitada){
@@ -111,11 +112,11 @@ sap.ui.define([
                 }
             },
             assertions:{
-                aTelaCadastroAnimeFoiCarregadaCorretamente: function(){
+                aTelaEditarAnimeFoiCarregadaCorretamente: function(){
                     return this.waitFor({
                         viewName: sNomeDaTela,
-                        success: () => Opa5.assert.ok(true, "Sucesso ao navegar para tela de cadastro"),
-                        errorMessage: "Falha ao navegar a pagina de cadastro"
+                        success: () => Opa5.assert.ok(true, "Sucesso ao navegar para tela de edição"),
+                        errorMessage: "Falha ao navegar a pagina de edição"
                     });
                 },
                 deveAperecerUmaMessageBoxDe: function(sTitulo){
@@ -142,7 +143,20 @@ sap.ui.define([
 						errorMessage: "Falhar ao clicar no botao Ok"
                     });
 				},
-                DeveSairDaTelaDeCadastro: function(sTitulo){
+                deveTerOIdDoItemSelecionado: function(sId){
+                    return this.waitFor({
+                                id: "inputId",
+                                viewName: sNomeDaTela,
+                                matchers: new Properties({
+                                    value: sId
+                                }),
+                                success: function () {
+                                    Opa5.assert.ok(true, "Sucesso ao carregar o id");
+                                },
+                                errorMessage: "O id " + sId + " não está sendo mostrado"
+                    });
+                },
+                DeveSairDaTelaDeEditar: function(sTitulo){
                     return this.waitFor({
                         controlType: "sap.m.Page",
                         matchers: {
@@ -151,8 +165,8 @@ sap.ui.define([
                                 value: sTitulo
                             }
                         },
-                        success: () => Opa5.assert.ok(false, "Sucesso ao sair da pagina de cadastro"),
-                        errorMessage: "Falha ao ao sair da pagina de cadastro"
+                        success: () => Opa5.assert.ok(false, "Sucesso ao sair da pagina de edição"),
+                        errorMessage: "Falha ao ao sair da pagina de edição"
                     });
                 }
                 

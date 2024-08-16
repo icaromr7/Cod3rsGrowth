@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Servico\ConverterEnum.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentMigrator" Version="5.2.0" />
     <PackageReference Include="FluentMigrator.Runner" Version="5.2.0" />
     <PackageReference Include="FluentValidation" Version="11.9.2" />

@@ -24,7 +24,20 @@ sap.ui.define([
 			.deveTerONomeDoItemSelecionado("Aventura");
         
 	});
+    opaTest("Ao clicar em editar deve navegar para tela de edição", function (Given, When, Then) {
+        When
+            .onPaginaDetalhesGenero
+            .aoClicarEmEditar();
+        Then
+            .onPaginaEditarGenero
+            .aTelaEditarGeneroFoiCarregadaCorretamente();
+        Then
+            .iTeardownMyApp();
+    });
 	opaTest("Ao clicar em voltar deve navegar para tela anterior", function (Given, When, Then) {
+        Given.iStartMyApp({
+			hash: "genero/2"
+		});
         When
             .onPaginaDetalhesGenero
             .aoClicarEmVoltar();

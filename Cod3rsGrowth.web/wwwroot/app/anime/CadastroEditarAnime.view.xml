@@ -1,7 +1,7 @@
 <mvc:View xmlns:macros="sap.fe.macros" 
     xmlns:smartmultiedit="sap.ui.comp.smartmultiedit" 
     xmlns:layout="sap.ui.layout" 
-    controllerName="ui5.anime.app.anime.CadastroAnime"
+    controllerName="ui5.anime.app.anime.CadastroEditarAnime"
     displayBlock="true"
     xmlns="sap.m"
     xmlns:f= "sap.f"
@@ -21,13 +21,15 @@
     >
         <content>
             <layout:VerticalLayout width="100%" id = "layoutTela">
-                <Label text="{i18n>labelNome}" class= "lblCadastro" ></Label>
-                <Input placeholder="{i18n>placeholderNome}" width="25%" maxLength="40" id="{i18n>anime.nome}" liveChange="aoDigitarNoInput"></Input>
-                <Label text="{i18n>labelSinopse}" class= "lblCadastro"></Label>
-                <TextArea width="50%" maxLength="400" placeholder="{i18n>placeholderSinopse}" height="100px" id="{i18n>anime.sinopse}" liveChange="aoDigitarNoInput"></TextArea>
-                <Label text="{i18n>labelNota}" class= "lblCadastro"></Label>
-                <StepInput value ="1" min= "1" max = "10" step = "0.1" displayValuePrecision="1" width="3%" id="{i18n>anime.nota}"></StepInput>
-                <Label text="{i18n>labelGeneros}" class= "lblCadastro"></Label>
+                <Label id= "labelId" text="ID:" visible="false" class= "sapThemeTextInverted"></Label>
+                <Input id="inputId" editable="false" visible="false" width="30%" value = '{path: "anime>/id"}'></Input>
+                <Label text="{i18n>labelNome}" class= "sapThemeTextInverted" ></Label>
+                <Input placeholder="{i18n>placeholderNome}" width="25%" maxLength="40" id='inputNome' liveChange="aoDigitarNoInput" value = "{path:'anime>/nome'}"></Input>
+                <Label text="{i18n>labelSinopse}" class= "sapThemeTextInverted"></Label>
+                <TextArea width="50%" maxLength="400" placeholder="{i18n>placeholderSinopse}" height="100px" id="inputSinopse" liveChange="aoDigitarNoInput" value = "{path:'anime>/sinopse'}"></TextArea>
+                <Label text="{i18n>labelNota}" class= "sapThemeTextInverted"></Label>
+                <StepInput value = "{path:'anime>/nota'}" min= "1" max = "10" step = "0.1" displayValuePrecision="1" width="3%" id="inputNota" ></StepInput>
+                <Label text="{i18n>labelGeneros}" class= "sapThemeTextInverted"></Label>
                 <Panel height="230px" width="25%">
                     <List
                     id ="listaDeGeneros"
@@ -41,19 +43,19 @@
                         </CustomListItem> 
                 </List>
                 </Panel>
-                <Label text="{i18n>labelDataLancamento}" class= "lblCadastro"></Label>
+                <Label text="{i18n>labelDataLancamento}" class= "sapThemeTextInverted"></Label>
                 <DatePicker
-                    id="{i18n>anime.dataLancamento}"
+                    id="inputDataLancamento"
                     displayFormat="short"
                     valueFormat='yyyy-MM-ddT00:00:00'
-                    value = ""
+                    value = "{path:'anime>/dataLancamento'}"
                     width="12%"               
                     class= "filtroDataAnime"
                     liveChange="aoDigitarNoInput"
                     />
-                <Label text="{i18n>labelStatusExibicao}" class= "lblCadastro"></Label>
+                <Label text="{i18n>labelStatusExibicao}" class= "sapThemeTextInverted"></Label>
                 <Select
-                    id = "{i18n>anime.status}"
+                    id = "inputStatus"
                     forceSelection="false"
                     selectedKey="1"
                     items="{

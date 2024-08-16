@@ -7,7 +7,7 @@ sap.ui.define([
 ], function (Opa5, Press, EnterText,Properties ,Ancestor) {
     "use strict";
 
-    var sNomeDaTela = "genero.CadastroGenero";
+    var sNomeDaTela = "genero.CadastroEditarGenero";
     Opa5.createPageObjects({
         onPaginaCadastroGenero : {
             actions: {

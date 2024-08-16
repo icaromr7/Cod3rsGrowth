@@ -1,14 +1,15 @@
 sap.ui.define([
 	'sap/ui/test/Opa5',
+	'sap/ui/test/actions/Press',
+    'sap/ui/test/actions/EnterText',
     'sap/ui/test/matchers/Properties',
-    'sap/ui/test/actions/Press'
-], function (Opa5, Properties, Press ) {
+    'sap/ui/test/matchers/Ancestor'
+], function (Opa5, Press, EnterText,Properties ,Ancestor) {
     "use strict";
 
-    var sNomeDaTela = "genero.DetalhesGenero";
-    var sListaId = "listaDeGeneros"
+    var sNomeDaTela = "genero.CadastroEditarGenero";
     Opa5.createPageObjects({
-        onPaginaDetalhesGenero : {
+        onPaginaEditarGenero : {
             actions: {
                 aoClicarEmVoltar: function () {
                     return this.waitFor({
@@ -18,26 +19,35 @@ sap.ui.define([
                         errorMessage: "Não foi possível encontrar o botão de voltar na página do objeto"
                     });
                 },
-                aoClicarEmEditar: function(){
+                aoDigitarNome : function (sNomeDigitado){
                     return this.waitFor({
-                        id: "btnEditar",
+                        id: "inputNome",
+                        viewName: sNomeDaTela,
+                        actions: new EnterText({
+                            text: sNomeDigitado
+                        }),
+                        errorMessage: "inputNome não foi encontrado."
+                    });
+                },
+                aoClicarEmSalvar: function(){
+                    return this.waitFor({
+                        id: "btnSalvar",
                         viewName: sNomeDaTela,
                         actions: new Press(),
-                        errorMessage: "Não foi possível pressionar o botão de editar."
+                        errorMessage: "Botão de salvar não foi encontrado"
                     })
                 }
             },
             assertions:{
-                aTelaDetalhesGeneroFoiCarregadaCorretamente: function(){
+                aTelaEditarGeneroFoiCarregadaCorretamente: function(){
                     return this.waitFor({
                         viewName: sNomeDaTela,
                         success: function () {
-                            Opa5.assert.ok(true, "Sucesso ao navegar para tela de detalhes");
+                            Opa5.assert.ok(true, "Sucesso ao navegar para tela de edição");
                         },
-                        errorMessage: "Falha ao navegar a pagina de detalhes"
+                        errorMessage: "Falha ao navegar a pagina de edição"
                     });
-                },
-                deveTerOIdDoItemSelecionado: function(sId){
+                },deveTerOIdDoItemSelecionado: function(sId){
                     return this.waitFor({
                         success: function () {
                             return this.waitFor({
@@ -54,7 +64,6 @@ sap.ui.define([
                         }
                     });
                 },
-
                 deveTerONomeDoItemSelecionado: function(sNome){
                     return this.waitFor({
                         success: function () {
@@ -72,7 +81,31 @@ sap.ui.define([
                         }
                     });
                 },
-                DeveSairDaTelaDeDetalhes: function(sTitulo){
+                deveAperecerUmaMessageBoxDe: function(sTitulo){
+					return this.waitFor({
+						controlType: "sap.m.Dialog",
+						matchers: new Properties({ title: sTitulo}),
+						success: function () {
+							Opa5.assert.ok("A MessageBox apareceu");
+						},
+						errorMessage: "A MessageBox não apareceu"
+					});
+				},
+                deveFecharMessageBoxAoApertarEmOk: function(sTextoBotao){
+					return this.waitFor({
+						controlType: "sap.m.Button",
+						matchers: [
+							new Properties({ text: sTextoBotao }),
+							new Ancestor(Opa5.getContext().dialog, false) 
+						],
+						actions: new Press(),
+						success: function () {
+							Opa5.assert.ok(true, "Sucesso ao clicar no botao Ok");
+						},
+						errorMessage: "Falhar ao clicar no botao Ok"
+                    });
+				},
+                DeveSairDaTelaDeEdicao: function(sTitulo){
                     return this.waitFor({
                         controlType: "sap.m.Page",
                         matchers: {
@@ -81,8 +114,8 @@ sap.ui.define([
                                 value: sTitulo
                             }
                         },
-                        success: () => Opa5.assert.ok(false, "Sucesso ao sair da pagina de detalhes"),
-                        errorMessage: "Falha ao ao sair da pagina de detalhes"
+                        success: () => Opa5.assert.ok(false, "Sucesso ao sair da pagina de edição"),
+                        errorMessage: "Falha ao ao sair da pagina de edição"
                     });
                 }
             }

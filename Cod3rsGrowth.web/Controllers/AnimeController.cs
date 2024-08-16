@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.dominio;
 using Cod3rsGrowth.Servico;
+using Cod3rsGrowth.web.Servico;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cod3rsGrowth.web.Controllers
@@ -10,6 +11,7 @@ namespace Cod3rsGrowth.web.Controllers
     {
         private AnimeServico _animeServico;
         private AnimeGeneroServico _animeGeneroServico;
+        const int POSICAO_INICIAL_NA_LISTA = 0;
 
         public AnimeController(AnimeServico animeServico, AnimeGeneroServico animeGeneroServico)
         {
@@ -43,14 +45,27 @@ namespace Cod3rsGrowth.web.Controllers
         public IActionResult ObterPorId(int id)
         {
             var anime = _animeServico.ObterPorId(id);
+            var animeGeneros = _animeGeneroServico.ObterTodos(id);
+            anime.IdGeneros = new List<int>();
+            foreach (var item in animeGeneros)
+            {
+                anime.IdGeneros.Add(item.IdGenero);
+            }
             if (anime == null) { return BadRequest(); }
             return Ok(anime);
         }
         [HttpPut ("atualizar")]
         public IActionResult Atualizar([FromBody]Anime anime)
         {
-            if (anime == null) { return BadRequest(); }
             _animeServico.Atualizar(anime);
+            var animeGeneros = _animeGeneroServico.ObterTodos(anime.Id);
+            var generosAntigos = new List<int>();
+            foreach (var item in animeGeneros)
+            {
+                generosAntigos.Add(item.IdGenero);
+            }
+            MetodosAuxiliares.ExcluirRelacaoAnimeGenero(anime, generosAntigos, _animeGeneroServico);
+            MetodosAuxiliares.AdicionarRelacaoAnimeGenero(anime, generosAntigos, _animeGeneroServico);
             return Ok();
         }
         [HttpDelete("deletar/{id}")]
@@ -66,6 +81,7 @@ namespace Cod3rsGrowth.web.Controllers
             var status = _animeServico.getDescricaoEnum();
             return Ok(status);
         }
+        
     }
 
 }

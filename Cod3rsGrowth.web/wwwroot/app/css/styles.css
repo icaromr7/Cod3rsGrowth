@@ -89,7 +89,3 @@
     .sapUiResponsiveContentPadding{
         background-image: url(image/background_page_inicial.jpg) !important;
     }
-    .lblCadastro, .lblDetalhes{
-        color: #fff;
-        margin-top: 0.5rem;
-    }

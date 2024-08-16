@@ -1,7 +1,7 @@
 <mvc:View xmlns:macros="sap.fe.macros" 
     xmlns:smartmultiedit="sap.ui.comp.smartmultiedit" 
     xmlns:layout="sap.ui.layout" 
-    controllerName="ui5.anime.app.genero.CadastroGenero"
+    controllerName="ui5.anime.app.genero.CadastroEditarGenero"
     displayBlock="true"
     xmlns="sap.m"
     xmlns:f= "sap.f"
@@ -17,13 +17,17 @@
         navButtonPress="aoClicarEmVoltarParaListaGenero"
         titleAlignment="Center"
     >
+    
         <content>
             <layout:VerticalLayout width="100%" id = "layoutTela">
-                <Label text="{i18n>labelNome}" class= "lblCadastro" ></Label>
+                <Label id= "labelId" text="ID:" visible="false" class= "sapThemeTextInverted"></Label>
+                <Input id="inputId" editable="false" visible="false" width="30%" value="{path: 'genero>/id'}"></Input>
+                <Label text="{i18n>labelNome}" class= "sapThemeTextInverted" ></Label>
                 <Input placeholder="{i18n>placeholderNome}" 
                     width="25%" maxLength="40" 
                     id="inputNome" 
                     liveChange="aoDigitarNoInput"
+                    value="{path: 'genero>/nome'}"
                     ></Input>
                 <Button id="btnSalvar" text= "{i18n>btnSalvar}" width="5%" press= "aoClicarEmSalvar" class = "sapMBtnInner"></Button>
             </layout:VerticalLayout>
