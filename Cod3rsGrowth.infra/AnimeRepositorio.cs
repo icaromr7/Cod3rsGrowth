@@ -20,11 +20,13 @@ namespace Cod3rsGrowth.infra
         public void Atualizar(Anime anime)
         {
             dataConnection.Update(anime);
+            dataConnection.Close();
         }
 
         public int Cadastrar(Anime anime)
         {
             int idAnime = dataConnection.InsertWithInt32Identity(anime);
+            dataConnection.Close();
             return idAnime;
         }
 
@@ -33,12 +35,13 @@ namespace Cod3rsGrowth.infra
             dataConnection.GetTable<Anime>()
                 .Where(anime => anime.Id == id)
                 .Delete();
+            dataConnection.Close();
         }
         public Anime ObterPorId(int id)
         {
             var anime = dataConnection.GetTable<Anime>()
-
                 .FirstOrDefault(anime => anime.Id == id);
+            dataConnection.Close();
             return anime;
         }
 
@@ -61,7 +64,7 @@ namespace Cod3rsGrowth.infra
                     listaAnimes = listaAnimes.Where(anime => anime.Nome.Contains(filtro.Nome));
                 }
             }
-            
+            dataConnection.Close();
             return listaAnimes.ToList();
         }
     }

@@ -24,11 +24,13 @@ namespace Cod3rsGrowth.infra
         public void Atualizar(AnimeGenero animeGenero)
         {
             dataConnection.Update(animeGenero);
+            dataConnection.Close();
         }
 
         public void Cadastrar(AnimeGenero animeGenero)
         {
             dataConnection.Insert(animeGenero);
+            dataConnection.Close();
         }
         public void Deletar(List<AnimeGenero> animeGeneros)
         {         
@@ -44,6 +46,7 @@ namespace Cod3rsGrowth.infra
             }
             if(animeGeneros.Any())
             dataConnection.Execute(sqlQuery);
+            dataConnection.Close();
         }
 
         public void DeletarPorAnime(int idAnime)
@@ -51,6 +54,7 @@ namespace Cod3rsGrowth.infra
             dataConnection.GetTable<AnimeGenero>()
                 .Where(animeGenero => animeGenero.IdAnime == idAnime)
                 .Delete();
+            dataConnection.Close();
         }
 
         public void DeletarPorGenero(int idGenero)
@@ -58,25 +62,29 @@ namespace Cod3rsGrowth.infra
             dataConnection.GetTable<AnimeGenero>()
                 .Where(animeGenero => animeGenero.IdGenero == idGenero)
                 .Delete();
+            dataConnection.Close();
         }
 
         public AnimeGenero ObterPorId(int idAnime)
         {
             var animeGeneros = dataConnection.GetTable<AnimeGenero>()
-                .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime);         
+                .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime);
+            dataConnection.Close();
             return animeGeneros.ToList().First();
         }
 
         public List<AnimeGenero> ObterTodos(int? idAnime = ID_DEFAULT)
         {
             var animeGeneros = dataConnection.GetTable<AnimeGenero>()
-                .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime); ;
+                .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime);
+            dataConnection.Close();
             return animeGeneros.ToList();
         }
 
         public List<AnimeGenero> ObterTodos()
         {
             var animeGeneros = dataConnection.GetTable<AnimeGenero>();
+            dataConnection.Close();
             return animeGeneros.ToList();
         }
     }
