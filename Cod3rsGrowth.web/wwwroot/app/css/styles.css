@@ -1,22 +1,20 @@
-
-.listaDeAnimes, .listaDeGeneros { 
-    .nomeAnime, .nomeGenero {
-        color: #979cb0;
-        font-weight: 600;
-        font-size: 20px;
-    }
-    
-    .dataAnime{
-        font-weight: 600;
-        font-size: 20px;
-    }
-    
-    .statusAnime {
-        color: #35d8ac;
-        font-weight: 700;
-        font-size: 20px;
-    }
-    } 
+    /* 
+    .listaDeAnimes, .listaDeGeneros { 
+        .nomeAnime, .nomeGenero {
+            font-weight: 600;
+            font-size: 20px;
+        }
+        
+        .dataAnime{
+            font-weight: 600;
+            font-size: 20px;
+        }
+        
+        .statusAnime {
+            font-weight: 700;
+            font-size: 20px;
+        }
+        }  */
     .sapUiResponsiveContentPadding{
         background-image: url(image/background_page_inicial.jpg) !important;
     }
