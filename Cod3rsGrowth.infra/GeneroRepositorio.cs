@@ -20,13 +20,11 @@ namespace Cod3rsGrowth.infra
         public void Atualizar(Genero genero)
         {
             dataConnection.Update(genero);
-            dataConnection.Close();
         }
 
         public int Cadastrar(Genero genero)
         {
             int idGenero = dataConnection.InsertWithInt32Identity(genero);
-            dataConnection.Close();
             return idGenero;
         }
 
@@ -35,14 +33,12 @@ namespace Cod3rsGrowth.infra
             dataConnection.GetTable<Genero>()
                 .Where(genero => genero.Id == id)
                 .Delete();
-            dataConnection.Close();
         }
 
         public Genero ObterPorId(int id)
         {
             var genero = dataConnection.GetTable<Genero>()
                 .FirstOrDefault(genero => genero.Id == id);
-            dataConnection.Close();
             return genero;
         }
 
@@ -55,7 +51,6 @@ namespace Cod3rsGrowth.infra
             {
                 listaGeneros = listaGeneros.Where(genero => genero.Nome.Contains(nome));
             }
-            dataConnection.Close();
             return listaGeneros.ToList();
         }
     }

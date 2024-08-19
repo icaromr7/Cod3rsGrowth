@@ -2,9 +2,6 @@
 using LinqToDB;
 using LinqToDB.Data;
 using System.Configuration;
-using System.Linq;
-using static LinqToDB.Reflection.Methods.LinqToDB;
-using static LinqToDB.Sql;
 
 namespace Cod3rsGrowth.infra
 {
@@ -24,13 +21,11 @@ namespace Cod3rsGrowth.infra
         public void Atualizar(AnimeGenero animeGenero)
         {
             dataConnection.Update(animeGenero);
-            dataConnection.Close();
         }
 
         public void Cadastrar(AnimeGenero animeGenero)
         {
             dataConnection.Insert(animeGenero);
-            dataConnection.Close();
         }
         public void Deletar(List<AnimeGenero> animeGeneros)
         {         
@@ -46,7 +41,6 @@ namespace Cod3rsGrowth.infra
             }
             if(animeGeneros.Any())
             dataConnection.Execute(sqlQuery);
-            dataConnection.Close();
         }
 
         public void DeletarPorAnime(int idAnime)
@@ -54,7 +48,6 @@ namespace Cod3rsGrowth.infra
             dataConnection.GetTable<AnimeGenero>()
                 .Where(animeGenero => animeGenero.IdAnime == idAnime)
                 .Delete();
-            dataConnection.Close();
         }
 
         public void DeletarPorGenero(int idGenero)
@@ -62,7 +55,6 @@ namespace Cod3rsGrowth.infra
             dataConnection.GetTable<AnimeGenero>()
                 .Where(animeGenero => animeGenero.IdGenero == idGenero)
                 .Delete();
-            dataConnection.Close();
         }
 
         public AnimeGenero ObterPorId(int idAnime)
@@ -77,14 +69,12 @@ namespace Cod3rsGrowth.infra
         {
             var animeGeneros = dataConnection.GetTable<AnimeGenero>()
                 .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime);
-            dataConnection.Close();
             return animeGeneros.ToList();
         }
 
         public List<AnimeGenero> ObterTodos()
         {
             var animeGeneros = dataConnection.GetTable<AnimeGenero>();
-            dataConnection.Close();
             return animeGeneros.ToList();
         }
     }

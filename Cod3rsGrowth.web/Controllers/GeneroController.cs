@@ -57,7 +57,7 @@ namespace Cod3rsGrowth.web.Controllers
             return Ok();
         }
         [HttpDelete("deletar/{id}")]
-        public IActionResult Deletar(int id)
+        public IActionResult Deletar([FromRoute]int id)
         {
             _animeGeneroServico.DeletarPorGenero(id);
             _generoServico.Deletar(id);
