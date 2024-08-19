@@ -9,7 +9,7 @@
 		<content>
 				<List items = "{path: 'animes>/'}" class= "listaDeAnimes" id = "listaDeAnimes" growing="true" growingThreshold="10">
 					<headerToolbar >
-						<Toolbar design="Transparent">
+						<Toolbar design="Solid" class="sapUiResponsiveMargin" >
 							<ToolbarSpacer/>
 							<Button 
 								id= "btnListaDeGeneros"
@@ -60,8 +60,8 @@
 							<VBox  width="30%">
 								<ObjectStatus 
 								text="{animes>nome}" 
-								class = "nomeAnime sapUiLargeMarginEnd sapUiTinyMarginBegin"
-								state="Indication08"
+								class = "sapUiLargeMarginEnd sapUiTinyMarginBegin sapThemeFont"
+								state="None"
 								/>
 							</VBox>
 							<VBox width="43%" alignItems="Center">
@@ -70,14 +70,17 @@
 									path: 'animes>dataLancamento',
 									type: 'sap.ca.ui.model.type.Date',
 									formatOptions: {pattern: 'dd/MM/YYYY'}}"
-									class="sapUiLargeMarginBegin sapUiLargeMarginEnd"
+									class="sapUiLargeMarginBegin sapUiLargeMarginEnd sapThemeFont"
 									state="Error"
 									/>
 							</VBox>
 							<VBox width="27%" alignItems="End">
 								<ObjectStatus 
 									text="{path: 'animes>statusDeExibicao'}" 
-									class = "sapUiLargeMarginBegin  sapUiTinyMarginEnd"
+									class = "sapUiLargeMarginBegin sapUiTinyMarginEnd sapThemeFont"
+									state="{= ${animes>statusDeExibicao} === 'Previsto'? 'Warning': 
+											${animes>statusDeExibicao} === 'Em Exibição' ? 'Success': 'Information'
+											}"
 									/>
 							</VBox>
 						</HBox>			

@@ -85,7 +85,7 @@ sap.ui.define([
         _getRota: function () {
             return this.getOwnerComponent().getRouter();
         },
-
+        
         aoClicarEmVoltarParaListaAnime: function () {
             this._exibirEspera(async () => {
                 this._getRota().navTo(ROTA_PARA_LISTA);
