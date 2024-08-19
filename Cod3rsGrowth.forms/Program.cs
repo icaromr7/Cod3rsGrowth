@@ -29,7 +29,7 @@ namespace Cod3rsGrowth.forms
         private static ServiceProvider CreateServices()
         {
             var appSettings = ConfigurationManager.AppSettings;
-            string result = appSettings[ConstantesDoRepositorio.CONNECTION_STRING];
+            string result = appSettings[Connect.connectionString];
             return new ServiceCollection()
                 .AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb

@@ -26,10 +26,12 @@
 							/>
 						</Toolbar>
 					</headerToolbar>
-					<CustomListItem id = "listaDosGeneros" class = "sapUiTinyMarginTopBottom" type="Navigation" press="aoClicarNoGenero" >						
+					<CustomListItem id = "listaDosGeneros" class = "sapUiTinyMarginTopBottom" type="Navigation" press="aoClicarNoGenero" >
+						<HBox class= "sapUiResponsiveMargin">						
 							<VBox class="vBoxGenero" width="30%">
 								<ObjectStatus text="{generos>nome}" class="sapUiLargeMarginEnd sapUiTinyMarginBegin sapThemeFont" />
-			                </VBox>						
+			                </VBox>
+						</HBox>							
 					</CustomListItem>
 				</List>
 		</content>
