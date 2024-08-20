@@ -2,8 +2,9 @@ sap.ui.define([
 	'sap/ui/test/Opa5',
     'sap/ui/test/matchers/Properties',
     'sap/ui/test/matchers/AggregationLengthEquals',
-    'sap/ui/test/actions/Press'
-], function (Opa5, Properties, AggregationLengthEquals, Press ) {
+    'sap/ui/test/actions/Press',
+    'sap/ui/test/matchers/Ancestor'
+], function (Opa5, Properties, AggregationLengthEquals, Press,Ancestor ) {
     "use strict";
 
     var sNomeDaTela = "anime.DetalhesAnime";
@@ -25,6 +26,14 @@ sap.ui.define([
                         viewName: sNomeDaTela,
                         actions: new Press(),
                         errorMessage: "Não foi possível pressionar o botão de editar."
+                    })
+                },
+                aoClicarEmRemover: function(){
+                    return this.waitFor({
+                        id: "btnRemover",
+                        viewName: sNomeDaTela,
+                        actions: new Press(),
+                        errorMessage: "Não foi possível pressionar o botão de remover."
                     })
                 }
             },
@@ -166,7 +175,31 @@ sap.ui.define([
                         success: () => Opa5.assert.ok(false, "Sucesso ao sair da pagina de detalhes"),
                         errorMessage: "Falha ao ao sair da pagina de detalhes"
                     });
-                }
+                },
+                deveAperecerUmaMessageBoxDe: function(sTitulo){
+					return this.waitFor({
+						controlType: "sap.m.Dialog",
+						matchers: new Properties({ title: sTitulo}),
+						success: function () {
+							Opa5.assert.ok("A MessageBox apareceu");
+						},
+						errorMessage: "A MessageBox não apareceu"
+					});
+				},
+                deveFecharMessageBoxAoApertarEmOk: function(sTextoBotao){
+					return this.waitFor({
+						controlType: "sap.m.Button",
+						matchers: [
+							new Properties({ text: sTextoBotao }),
+							new Ancestor(Opa5.getContext().dialog, false) 
+						],
+						actions: new Press(),
+						success: function () {
+							Opa5.assert.ok(true, "Sucesso ao clicar no botao Ok");
+						},
+						errorMessage: "Falhar ao clicar no botao Ok"
+                    });
+				}
             }
         }
     });

@@ -9,7 +9,7 @@ sap.ui.define([
 	QUnit.module("Detalhes gênero");
 	opaTest("Deve está na tela de detalhes gênero", function (Given, When, Then) {
         Given.iStartMyApp({
-			hash: "genero/2"
+			hash: "genero/36"
 		});
 
         Then
@@ -20,8 +20,8 @@ sap.ui.define([
 		
         Then
 			.onPaginaDetalhesGenero
-			.deveTerOIdDoItemSelecionado("2")
-			.deveTerONomeDoItemSelecionado("Aventura");
+			.deveTerOIdDoItemSelecionado("36")
+			.deveTerONomeDoItemSelecionado("Ninja");
         
 	});
     opaTest("Ao clicar em editar deve navegar para tela de edição", function (Given, When, Then) {
@@ -36,7 +36,7 @@ sap.ui.define([
     });
 	opaTest("Ao clicar em voltar deve navegar para tela anterior", function (Given, When, Then) {
         Given.iStartMyApp({
-			hash: "genero/2"
+			hash: "genero/36"
 		});
         When
             .onPaginaDetalhesGenero
@@ -45,6 +45,29 @@ sap.ui.define([
             .onPaginaListaGeneros
             .aTelaListaDeGenerosFoiCarregadaCorretamente();
         
+        Then
+            .iTeardownMyApp();
+    });
+    opaTest("Ao clicar em não deve fechar a mensagem box", function (Given, When, Then) {
+        Given.iStartMyApp({
+            hash: "genero/36"
+        });
+        When
+            .onPaginaDetalhesDoAnime
+            .aoClicarEmRemover();
+        Then
+            .onPaginaDetalhesDoAnime
+            .deveAperecerUmaMessageBoxDe("Confirmação")
+            .deveFecharMessageBoxAoApertarEmOk("Não");
+    });
+    opaTest("Ao clicar em sim deve fechar a mensagem box", function (Given, When, Then) {       
+        When
+            .onPaginaDetalhesDoAnime
+            .aoClicarEmRemover();
+        Then
+            .onPaginaDetalhesDoAnime
+            .deveAperecerUmaMessageBoxDe("Confirmação")
+            .deveFecharMessageBoxAoApertarEmOk("Sim");
         Then
             .iTeardownMyApp();
     });

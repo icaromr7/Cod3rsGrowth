@@ -2,9 +2,6 @@
 using LinqToDB;
 using LinqToDB.Data;
 using System.Configuration;
-using System.Linq;
-using static LinqToDB.Reflection.Methods.LinqToDB;
-using static LinqToDB.Sql;
 
 namespace Cod3rsGrowth.infra
 {
@@ -63,14 +60,15 @@ namespace Cod3rsGrowth.infra
         public AnimeGenero ObterPorId(int idAnime)
         {
             var animeGeneros = dataConnection.GetTable<AnimeGenero>()
-                .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime);         
+                .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime);
+            dataConnection.Close();
             return animeGeneros.ToList().First();
         }
 
         public List<AnimeGenero> ObterTodos(int? idAnime = ID_DEFAULT)
         {
             var animeGeneros = dataConnection.GetTable<AnimeGenero>()
-                .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime); ;
+                .Where(AnimeGenero => AnimeGenero.IdAnime == idAnime);
             return animeGeneros.ToList();
         }
 

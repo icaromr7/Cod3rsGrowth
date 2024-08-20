@@ -37,7 +37,6 @@ namespace Cod3rsGrowth.infra
         public Anime ObterPorId(int id)
         {
             var anime = dataConnection.GetTable<Anime>()
-
                 .FirstOrDefault(anime => anime.Id == id);
             return anime;
         }
@@ -61,7 +60,6 @@ namespace Cod3rsGrowth.infra
                     listaAnimes = listaAnimes.Where(anime => anime.Nome.Contains(filtro.Nome));
                 }
             }
-            
             return listaAnimes.ToList();
         }
     }
