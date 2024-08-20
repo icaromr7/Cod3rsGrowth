@@ -178,8 +178,7 @@ namespace Cod3rsGrowth.forms
         }
         private void PreencherComboBoxStatus()
         {
-            var status = _animeServico.getDescricaoEnum;
-            cbStatusDeExibicao.DataSource = status;
+            cbStatusDeExibicao.DataSource = new List<string>() { "Todos", "EmExibição", "Previsto", "Concluído" };
         }
         private void AoClicarEmUmItemNoDataGrid(object sender, DataGridViewCellMouseEventArgs e)
         {
