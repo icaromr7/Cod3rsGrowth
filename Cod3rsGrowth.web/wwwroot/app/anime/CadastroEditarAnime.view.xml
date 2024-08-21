@@ -21,16 +21,16 @@
     >
         <content>
             <layout:VerticalLayout width="100%" id = "layoutTela">
-                <Label id= "labelId" text="ID:" visible="false" class= "sapThemeTextInverted"></Label>
-                <Input id="inputId" editable="false" visible="false" width="30%" value = '{path: "anime>/id"}'></Input>
-                <Label text="{i18n>labelNome}" class= "sapThemeTextInverted" ></Label>
-                <Input placeholder="{i18n>placeholderNome}" width="25%" maxLength="40" id='inputNome' liveChange="aoDigitarNoInput" value = "{path:'anime>/nome'}"></Input>
-                <Label text="{i18n>labelSinopse}" class= "sapThemeTextInverted"></Label>
-                <TextArea width="50%" maxLength="400" placeholder="{i18n>placeholderSinopse}" height="100px" id="inputSinopse" liveChange="aoDigitarNoInput" value = "{path:'anime>/sinopse'}"></TextArea>
-                <Label text="{i18n>labelNota}" class= "sapThemeTextInverted"></Label>
-                <StepInput value = "{path:'anime>/nota'}" min= "1" max = "10" step = "0.1" displayValuePrecision="1" width="3%" id="inputNota" ></StepInput>
-                <Label text="{i18n>labelGeneros}" class= "sapThemeTextInverted"></Label>
-                <Panel height="230px" width="25%">
+                <Label id= "labelId" text="ID:" visible="false" ></Label>
+                <Input id="inputId" editable="false" visible="false" width="30%" value = '{path: "anime>/id"}' class="sapUiTinyMarginTopBottom"></Input>
+                <Label text="{i18n>labelNome}"  ></Label>
+                <Input placeholder="{i18n>placeholderNome}" width="30%" maxLength="40" id='inputNome' liveChange="aoDigitarNoInput" value = "{path:'anime>/nome'}" class="sapUiTinyMarginTopBottom"></Input>
+                <Label text="{i18n>labelSinopse}" ></Label>
+                <TextArea width="30%" maxLength="400" placeholder="{i18n>placeholderSinopse}" height="100px" id="inputSinopse" liveChange="aoDigitarNoInput" value = "{path:'anime>/sinopse'}" class="sapUiTinyMarginTopBottom"></TextArea>
+                <Label text="{i18n>labelNota}" ></Label>
+                <StepInput value = "{path:'anime>/nota'}" min= "1" max = "10" step = "0.1" displayValuePrecision="1" width="30%" id="inputNota" class="sapUiTinyMarginTopBottom"></StepInput>
+                <Label text="{i18n>labelGeneros}" ></Label>
+                <Panel height="230px" width="30%" class="sapUiTinyMarginTopBottom">
                     <List
                     id ="listaDeGeneros"
                     items= "{path: 'generos>/'}"
@@ -43,24 +43,26 @@
                         </CustomListItem> 
                 </List>
                 </Panel>
-                <Label text="{i18n>labelDataLancamento}" class= "sapThemeTextInverted"></Label>
+                <Label text="{i18n>labelDataLancamento}" ></Label>
                 <DatePicker
                     id="inputDataLancamento"
                     displayFormat="short"
                     valueFormat='yyyy-MM-ddT00:00:00'
                     value = "{path:'anime>/dataLancamento'}"
-                    width="12%"               
-                    class= "filtroDataAnime"
+                    width="30%"               
+                    class="sapUiTinyMarginTopBottom"
                     liveChange="aoDigitarNoInput"
                     />
-                <Label text="{i18n>labelStatusExibicao}" class= "sapThemeTextInverted"></Label>
+                <Label text="{i18n>labelStatusExibicao}" ></Label>
                 <Select
                     id = "inputStatus"
                     forceSelection="false"
+                    width="30%"
                     selectedKey="1"
                     items="{
                         path: 'status>/'
-                    }">
+                    }"
+                    class="sapUiTinyMarginTopBottom">
                     <core:Item key="{status>id}" text="{status>descricao}" />
                 </Select>
                 <Button id="btnSalvar" text= "{i18n>btnSalvar}" width="5%" press= "aoClicarEmSalvar" class = "sapMBtnInner"></Button>

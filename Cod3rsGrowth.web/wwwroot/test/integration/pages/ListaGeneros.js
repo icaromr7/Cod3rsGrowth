@@ -52,7 +52,7 @@ sap.ui.define([
                         },                      
                         aoClicarEmUmGenero: function(sNome){
                             return this.waitFor({
-                                controlType: "sap.m.Label",
+                                controlType: "sap.m.ObjectStatus",
                                 viewName: sNomeDaTela,
                                 matchers:  new Properties({
                                     text: sNome

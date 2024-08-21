@@ -15,7 +15,7 @@
 		<content>
 				<List items = "{path: 'generos>/'}" class= "listaDeGeneros" id = "listaDeGeneros" growing="true" growingThreshold="10">
 					<headerToolbar >
-						<Toolbar class= "toolbar">
+						<Toolbar class="sapUiResponsiveMargin">
 							<ToolbarSpacer/>
 							<Button text="{i18n>btnAdicionarGenero}" press="aoClicarAdicionarGenero" id= "btnAdicionar" class = "sapMBtnInner"></Button>
 							<SearchField
@@ -26,10 +26,12 @@
 							/>
 						</Toolbar>
 					</headerToolbar>
-					<CustomListItem id = "listaDosGeneros" class = "ListaCustomizada" type="Navigation" press="aoClicarNoGenero" >						
-							<VBox class="vBoxGenero" >
-								<Label text="{generos>nome}" class = "nomeGenero" />
-			                </VBox>						
+					<CustomListItem id = "listaDosGeneros" class = "sapUiTinyMarginTopBottom" type="Navigation" press="aoClicarNoGenero" >
+						<HBox class= "sapUiResponsiveMargin">						
+							<VBox class="vBoxGenero" width="30%">
+								<ObjectStatus text="{generos>nome}" class="sapUiLargeMarginEnd sapUiTinyMarginBegin sapThemeFont" />
+			                </VBox>
+						</HBox>							
 					</CustomListItem>
 				</List>
 		</content>

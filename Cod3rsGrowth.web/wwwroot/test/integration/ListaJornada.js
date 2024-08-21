@@ -56,10 +56,10 @@ sap.ui.define([
 			.aoSelecionarStatus("Todos")
 			.aoClicarEmUmAnime("One Piece");
 		Then
-			.onPaginaDetalhesoAnime
-			.deveTerADataLancamentoDoItemSelecionado();
+			.onPaginaDetalhesDoAnime
+			.aTelaDetalhesAnimeFoiCarregadaCorretamente();
 		When
-			.onPaginaDetalhesoAnime
+			.onPaginaDetalhesDoAnime
 			.aoClicarEmVoltar();
 	});
 	opaTest("Ao clicar em cadastrar anime deve navegar para tela de cadastro", function (Given, When, Then) {

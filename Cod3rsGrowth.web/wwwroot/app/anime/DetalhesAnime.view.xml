@@ -19,26 +19,26 @@
     </Toolbar>
     <content >
         <layout:VerticalLayout width="100%">
-            <Label text="{i18n>labelId}" class= "sapThemeTextInverted"></Label>
+            <Label text="{i18n>labelId}" ></Label>
             <Input id= "inputId" 
-                editable="false" value="{path: 'anime>/id'}" width="3%" textAlign="Center" ></Input>
-            <Label text="{i18n>labelNome}" class= "sapThemeTextInverted"></Label>
+                editable="false" value="{path: 'anime>/id'}" width="30%" class="sapUiTinyMarginTopBottom"></Input>
+            <Label text="{i18n>labelNome}" ></Label>
             <Input id= "inputNome" 
-                editable="false" value="{path: 'anime>/nome'}" width="30%" ></Input>
-            <Label text="{i18n>labelNota}" class= "sapThemeTextInverted" ></Label>
+                editable="false" value="{path: 'anime>/nome'}" width="30%" class="sapUiTinyMarginTopBottom"></Input>
+            <Label text="{i18n>labelNota}"  ></Label>
             <Input id= "inputNota" 
-                editable="false" value="{path: 'anime>/nota'}" width="3%" textAlign="Center" ></Input>
-            <Label text="{i18n>labelDataLancamento}" class= "sapThemeTextInverted"></Label>
+                editable="false" value="{path: 'anime>/nota'}" width="30%"  class="sapUiTinyMarginTopBottom"></Input>
+            <Label text="{i18n>labelDataLancamento}" ></Label>
             <Input id= "inputDataLancamento" 
-                editable="false" value="{path: 'anime>/dataLancamento', type: 'sap.ca.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/YYYY'}}" width="10%" textAlign="Center"></Input>
-            <Label text="{i18n>labelStatusExibicao}" class= "sapThemeTextInverted"></Label>
+                editable="false" value="{path: 'anime>/dataLancamento', type: 'sap.ca.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/YYYY'}}" width="30%" class="sapUiTinyMarginTopBottom"></Input>
+            <Label text="{i18n>labelStatusExibicao}" ></Label>
             <Input id= "inputStatusExibicao" 
-                editable="false" value="{path: 'anime>/statusDeExibicao', formatter: '.formatter.enum'}" width="10%" textAlign="Center"></Input>
-            <Label text="{i18n>labelSinopse}" class= "sapThemeTextInverted"></Label>
+                editable="false" value="{path: 'anime>/statusDeExibicao', formatter: '.formatter.enum'}" width="30%" class="sapUiTinyMarginTopBottom"></Input>
+            <Label text="{i18n>labelSinopse}" ></Label>
             <TextArea id= "inputSinopse" 
-                value="{path: 'anime>/sinopse'}" editable="false" width="50%" height="100px"></TextArea>
-            <Label text="{i18n>labelGeneros}" class= "sapThemeTextInverted"></Label>          
-            <Panel width="25%">
+                value="{path: 'anime>/sinopse'}" editable="false" width="30%" height="100px" class="sapUiTinyMarginTopBottom"></TextArea>
+            <Label text="{i18n>labelGeneros}" ></Label>          
+            <Panel width="30%" class="sapUiTinyMarginTopBottom">
                 <List
                 id ="listaDeGeneros"
                 items= "{path: 'generos>/'}"
