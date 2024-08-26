@@ -3,7 +3,7 @@ using LinqToDB;
 using LinqToDB.Data;
 using System.Configuration;
 
-namespace Cod3rsGrowth.infra
+namespace Cod3rsGrowth.Infra
 {
     public class AnimeRepositorio : IAnimeRepositorio
     {

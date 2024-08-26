@@ -9,7 +9,7 @@
 		<content>
 				<List items = "{path: 'animes>/'}" class= "listaDeAnimes" id = "listaDeAnimes" growing="true" growingThreshold="10">
 					<headerToolbar >
-						<Toolbar design="Solid" class="sapUiResponsiveMargin" >
+						<Toolbar design="Solid" >
 							<ToolbarSpacer/>
 							<Button 
 								id= "btnListaDeGeneros"

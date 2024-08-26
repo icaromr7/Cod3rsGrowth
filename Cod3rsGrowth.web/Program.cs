@@ -1,6 +1,6 @@
 using Cod3rsGrowth.dominio;
 using Cod3rsGrowth.dominio.Migracoes;
-using Cod3rsGrowth.infra;
+using Cod3rsGrowth.Infra;
 using Cod3rsGrowth.Servico;
 using Cod3rsGrowth.web;
 using Cod3rsGrowth.web.Servico;

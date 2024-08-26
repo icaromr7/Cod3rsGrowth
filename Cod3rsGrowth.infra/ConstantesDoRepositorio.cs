@@ -1,4 +1,4 @@
-﻿namespace Cod3rsGrowth.infra
+﻿namespace Cod3rsGrowth.Infra
 {
     public class ConstantesDoRepositorio
     {

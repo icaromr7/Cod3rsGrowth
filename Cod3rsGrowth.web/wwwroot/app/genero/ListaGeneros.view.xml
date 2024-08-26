@@ -15,7 +15,7 @@
 		<content>
 				<List items = "{path: 'generos>/'}" class= "listaDeGeneros" id = "listaDeGeneros" growing="true" growingThreshold="10">
 					<headerToolbar >
-						<Toolbar class="sapUiResponsiveMargin">
+						<Toolbar design="Solid">
 							<ToolbarSpacer/>
 							<Button text="{i18n>btnAdicionarGenero}" press="aoClicarAdicionarGenero" id= "btnAdicionar" class = "sapMBtnInner"></Button>
 							<SearchField

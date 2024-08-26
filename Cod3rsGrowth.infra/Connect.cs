@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cod3rsGrowth.infra
+namespace Cod3rsGrowth.Infra
 {
     public sealed class Connect
     {

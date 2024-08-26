@@ -1,5 +1,5 @@
 ﻿using Cod3rsGrowth.dominio;
-using Cod3rsGrowth.infra;
+using Cod3rsGrowth.Infra;
 using Cod3rsGrowth.Servico;
 using FluentValidation;
 using LinqToDB;
